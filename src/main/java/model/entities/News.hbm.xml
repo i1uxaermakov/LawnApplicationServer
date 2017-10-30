@@ -1,0 +1,18 @@
+<hibernate-mapping package="model.entities">
+
+    <class name="News" table="News">
+        <id name="newsId" column="NEWS_ID">
+            <generator class="native"/>
+        </id>
+        <property name="title"/>
+        <property name="whenAdded"/>
+
+        <set name="events" table="PERSON_EVENT">
+            <key column="PERSON_ID"/>
+            <many-to-many column="EVENT_ID" class="Event"/>
+        </set>
+
+    </class>
+
+
+</hibernate-mapping>
