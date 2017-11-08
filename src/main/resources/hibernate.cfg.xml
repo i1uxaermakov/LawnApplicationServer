@@ -16,7 +16,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
-        <mapping resource="model/entities/News.hbm.xml"/>
+        <mapping resource="model/entities/mappings/News.hbm.xml"/>
         <mapping resource="com/Person.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

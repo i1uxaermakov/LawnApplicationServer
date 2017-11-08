@@ -1,16 +1,20 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-public class News {
+public class News implements Serializable{
     private Long newsId;
     private String title;
+    private Long whoAddedId;
     private Date whenAdded;
     private String text;
-    private Set attachedPhotos;
-    private Set attachedFiles;
+    private Photo photo;
+    private Set attachedFiles = new HashSet();
     private Integer urgency;
+
 
     public News() {}
 
@@ -46,14 +50,6 @@ public class News {
         this.text = text;
     }
 
-    public Set getAttachedPhotos() {
-        return attachedPhotos;
-    }
-
-    public void setAttachedPhotos(Set attachedPhotos) {
-        this.attachedPhotos = attachedPhotos;
-    }
-
     public Set getAttachedFiles() {
         return attachedFiles;
     }
@@ -68,5 +64,18 @@ public class News {
 
     public void setUrgency(Integer urgency) {
         this.urgency = urgency;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "newsId=" + newsId +
+                ", title='" + title + '\'' +
+                ", whenAdded=" + whenAdded +
+                ", text='" + text + '\'' +
+                ", attachedPhotos=" + attachedPhotos +
+                ", attachedFiles=" + attachedFiles +
+                ", urgency=" + urgency +
+                '}';
     }
 }

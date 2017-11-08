@@ -1,5 +1,8 @@
 package controller;
 
+import model.NewsService;
+import model.security.Validator;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -14,11 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet(urlPatterns = {"/UploadServlet"},
+@WebServlet(urlPatterns = {"/LawnServlet"},
         initParams = {@WebInitParam(name="file-upload",value="/Users/ilya_ermakov/Additional/")})
 public class Servlet extends HttpServlet {
 
 //    Logger logger = new Logger(HttpServlet.class);
+    NewsService newsService = NewsService.getNewsService();
+    Validator validator = Validator.getValidator();
 
     @Override
     public void init() throws ServletException {
@@ -30,6 +35,8 @@ public class Servlet extends HttpServlet {
         response.setContentType("text/html");
         java.io.PrintWriter out = response.getWriter();
         out.println("hi! go on!");
+
+
     }
 
     @Override

@@ -2,7 +2,12 @@ package model.security;
 
 public class Validator {
 
-    Validator validator = new Validator();
+    private static Validator validator = new Validator();
+
+    public static Validator getValidator() {
+        return validator;
+    }
+
 
 
 }
