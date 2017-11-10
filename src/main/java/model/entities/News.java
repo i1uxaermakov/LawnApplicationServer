@@ -8,7 +8,7 @@ import java.util.Set;
 public class News implements Serializable{
     private Long newsId;
     private String title;
-    private Long whoAddedId;
+    private Long whoAdded;
     private Date whenAdded;
     private String text;
     private Photo photo;

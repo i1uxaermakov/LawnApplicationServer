@@ -1,14 +1,19 @@
 package model.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class File {
     private Long fileId;
     private String fileName;
     private Long fileSize;
     private String fileLocation;
+    private String fileAddedBy;
 
+    public String getFileAddedBy() {
+        return fileAddedBy;
+    }
+
+    public void setFileAddedBy(String fileAddedBy) {
+        this.fileAddedBy = fileAddedBy;
+    }
 
     public Long getFileId() {
         return fileId;
@@ -42,22 +47,4 @@ public class File {
         this.fileLocation = fileLocation;
     }
 
-    public Long getNewsIdThatFileIsAttachedTo() {
-        return newsIdThatFileIsAttachedTo;
-    }
-
-    public void setNewsIdThatFileIsAttachedTo(Long newsIdThatFileIsAttachedTo) {
-        this.newsIdThatFileIsAttachedTo = newsIdThatFileIsAttachedTo;
-    }
-
-    @Override
-    public String toString() {
-        return "File{" +
-                "fileId=" + fileId +
-                ", fileName='" + fileName + '\'' +
-                ", fileSize=" + fileSize +
-                ", fileLocation='" + fileLocation + '\'' +
-                ", newsIdThatFileIsAttachedTo=" + newsIdThatFileIsAttachedTo +
-                '}';
-    }
 }

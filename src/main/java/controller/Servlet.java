@@ -1,12 +1,9 @@
 package controller;
 
-import model.NewsService;
+import model.services.NewsService;
 import model.security.Validator;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -14,8 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
 
 @WebServlet(urlPatterns = {"/LawnServlet"},
         initParams = {@WebInitParam(name="file-upload",value="/Users/ilya_ermakov/Additional/")})
@@ -27,7 +22,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-
+        //TODO
     }
 
     @Override
