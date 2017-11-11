@@ -1,0 +1,40 @@
+<hibernate-mapping package="model.entities">
+
+    <class name="model.entities.Article" table="NEWS">
+        <id name="id" column="article_id">
+            <generator class="native"/>
+        </id>
+        <property name="title"/>
+        <property name="extract" />
+        <property name="text"/>
+        <property name="urgency"/>
+        <property name="authorId"/>
+        <property name="publishDate"/>
+        <property name="photoId"/>
+
+        <!--<set name="attachedFiles" table="">-->
+            <!--<key column="NEWS_ID"/>-->
+            <!--<many-to-many column="FILE_ID" class="File"/>-->
+        <!--</set>-->
+
+    </class>
+
+
+</hibernate-mapping>
+
+
+        private Long id;
+        private String title;
+        private String extract;
+        private Long authorId;
+        private Date publishDate;
+        private String text;
+        private Photo photoId;
+        //    private Set attachedFiles = new HashSet();
+        private Integer urgency;
+
+
+<!--<set name="participants" table="PERSON_EVENT" inverse="true">-->
+<!--<key column="EVENT_ID"/>-->
+<!--<many-to-many column="PERSON_ID" class="Person"/>-->
+<!--</set>-->

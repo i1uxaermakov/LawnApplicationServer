@@ -1,50 +1,49 @@
 package model.entities;
 
 public class File {
-    private Long fileId;
-    private String fileName;
-    private Long fileSize;
-    private String fileLocation;
-    private String fileAddedBy;
+    private Long id;
+    private String name;
+    private Long size;
+    private String location;
+    private String author;
 
-    public String getFileAddedBy() {
-        return fileAddedBy;
+    public Long getId() {
+        return id;
     }
 
-    public void setFileAddedBy(String fileAddedBy) {
-        this.fileAddedBy = fileAddedBy;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getFileId() {
-        return fileId;
+    public String getName() {
+        return name;
     }
 
-    public void setFileId(Long fileId) {
-        this.fileId = fileId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFileName() {
-        return fileName;
+    public Long getSize() {
+        return size;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setSize(Long size) {
+        this.size = size;
     }
 
-    public Long getFileSize() {
-        return fileSize;
+    public String getLocation() {
+        return location;
     }
 
-    public void setFileSize(Long fileSize) {
-        this.fileSize = fileSize;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getFileLocation() {
-        return fileLocation;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setFileLocation(String fileLocation) {
-        this.fileLocation = fileLocation;
+    public void setAuthor(String author) {
+        this.author = author;
     }
-
 }
