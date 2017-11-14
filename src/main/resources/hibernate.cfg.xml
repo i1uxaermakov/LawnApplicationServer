@@ -25,7 +25,7 @@
         <property name="hibernate.c3p0.unreturnedConnectionTimeout">60</property>
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
-        <mapping resource="model/entities/mappings/Article.hbm.xml"/>
+        <mapping resource="mappings/Article.hbm.xml"/>
         <!--<mapping resource="com/Person.hbm.xml"/>-->
     </session-factory>
 </hibernate-configuration>

@@ -1,15 +1,12 @@
 package controller;
 
-import model.DAO.ArticleDAO;
 import model.DAO.DAOImpl.ArticleDAOImpl;
-import model.entities.Article;
-import model.security.Validator;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ArticlesServlet extends HttpServlet {
 
     private ArticleDAOImpl articleDAO;
+    //TODO парсер в JSON
 
     @Override
     public void init() throws ServletException {
@@ -31,6 +29,16 @@ public class ArticlesServlet extends HttpServlet {
         response.setContentType("text/html");
         java.io.PrintWriter out = response.getWriter();
         out.println("hi! go on! artiles servlet");
+
+//        if (request.getHeader("Purpose") == "extracts") {
+//            try {
+//                Set extracts = (Set) articleDAO.getArticlesExtracts();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+//        request.getRequestDispatcher("WEB-INF/another-hello.html").forward(request,response);
     }
 
     @Override

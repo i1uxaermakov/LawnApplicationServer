@@ -1,7 +1,5 @@
 package controller;
 
-import model.security.Validator;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;

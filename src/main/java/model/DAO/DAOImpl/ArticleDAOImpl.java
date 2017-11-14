@@ -1,8 +1,11 @@
 package model.DAO.DAOImpl;
 
 import model.DAO.ArticleDAO;
+import model.DAO.HibernateUtil;
 import model.entities.Article;
 import model.entities.Author;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -10,14 +13,15 @@ import java.util.Collection;
 
 public class ArticleDAOImpl implements ArticleDAO {
 
-//    DataSource
+    private static ArticleDAOImpl articleDAO;
+    private static SessionFactory sessionFactory;
 
-    private static ArticleDAOImpl articleDAO = null;
+    static {
+        articleDAO = new ArticleDAOImpl();
+        sessionFactory = HibernateUtil.getSessionFactory();
+    }
 
     public static ArticleDAOImpl getArticleDAO() {
-        if (articleDAO == null) {
-            articleDAO = new ArticleDAOImpl();
-        }
         return articleDAO;
     }
 
@@ -28,8 +32,6 @@ public class ArticleDAOImpl implements ArticleDAO {
     public void updateArticle(Long article_id, Article article) throws SQLException {
 
     }
-
-//    System
 
     public Article getArticleById(Long article_id) throws SQLException {
         return null;
@@ -50,6 +52,17 @@ public class ArticleDAOImpl implements ArticleDAO {
 
     public Collection getArticlesExtracts() throws SQLException {
         return null;
+        //Session session = null;
+//        try(Session session = sessionFactory.openSession()) {
+//
+//
+//        }
+//        catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+
+
         //TODO сделать получение новостей на главную страницу
 
     }

@@ -13,5 +13,6 @@ public interface ArticleDAO {
     public Collection getAllArticles() throws SQLException;
     public void deleteArticle(Article article) throws SQLException;
     public Collection getArticlesByAuthor(Author author) throws SQLException;
+    public Collection getArticlesExtracts() throws SQLException;
 //    public Collection getBussesByRoute(Route route) throws SQLException;
 }

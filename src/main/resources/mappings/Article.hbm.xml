@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model.entities">
 
     <class name="model.entities.Article" table="NEWS">
@@ -18,23 +20,4 @@
         <!--</set>-->
 
     </class>
-
-
 </hibernate-mapping>
-
-
-        private Long id;
-        private String title;
-        private String extract;
-        private Long authorId;
-        private Date publishDate;
-        private String text;
-        private Photo photoId;
-        //    private Set attachedFiles = new HashSet();
-        private Integer urgency;
-
-
-<!--<set name="participants" table="PERSON_EVENT" inverse="true">-->
-<!--<key column="EVENT_ID"/>-->
-<!--<many-to-many column="PERSON_ID" class="Person"/>-->
-<!--</set>-->
