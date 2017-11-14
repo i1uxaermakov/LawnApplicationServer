@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/NewsServlet/*, /NewsServlet"},
-        initParams = {@WebInitParam(name="file-upload",value="/Users/ilya_ermakov/Additional/")})
-public class NewsServlet extends HttpServlet {
+//@WebServlet(urlPatterns = {"/ArticlesServlet/*, /ArticlesServlet"},
+//        initParams = {@WebInitParam(name="file-upload",value="/Users/ilya_ermakov/Additional/")})
+public class ArticlesServlet extends HttpServlet {
 
-    private ArticleDAO articleDAO = new ArticleDAOImpl();
+    private ArticleDAOImpl articleDAO;
 
     @Override
     public void init() throws ServletException {
-
+        articleDAO = ArticleDAOImpl.getArticleDAO();
     }
 
 
@@ -30,7 +30,7 @@ public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         java.io.PrintWriter out = response.getWriter();
-        out.println("hi! go on!");
+        out.println("hi! go on! artiles servlet");
     }
 
     @Override

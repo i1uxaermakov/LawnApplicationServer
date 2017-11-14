@@ -1,6 +1,5 @@
 package controller;
 
-import model.services.NewsService;
 import model.security.Validator;
 
 import java.io.IOException;

@@ -10,5 +10,14 @@
         </session-timeout>
     </session-config>
 
+    <servlet>
+        <servlet-name>ArticlesServlet</servlet-name>
+        <servlet-class>controller.ArticlesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArticlesServlet</servlet-name>
+        <url-pattern>/ArticlesServlet/*</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
