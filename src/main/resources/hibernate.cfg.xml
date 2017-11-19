@@ -23,6 +23,8 @@
         <property name="hibernate.connection.provider_class">
             org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
         <property name="hibernate.c3p0.unreturnedConnectionTimeout">60</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <!--<property name="hibernate.connection.autocommit">false</property>-->
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
         <mapping resource="mappings/Article.hbm.xml"/>

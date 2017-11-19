@@ -12,7 +12,7 @@ public class Article implements Serializable {
     private Long authorId;
     private Date publishDate;
     private String text;
-    private Photo photoId;
+    private Long photoId;
 //    private Set attachedFiles = new HashSet();
     private Integer urgency;
 
@@ -66,11 +66,11 @@ public class Article implements Serializable {
         this.text = text;
     }
 
-    public Photo getPhotoId() {
+    public Long getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(Photo photoId) {
+    public void setPhotoId(Long photoId) {
         this.photoId = photoId;
     }
 
@@ -80,5 +80,19 @@ public class Article implements Serializable {
 
     public void setUrgency(Integer urgency) {
         this.urgency = urgency;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", extract='" + extract + '\'' +
+                ", authorId=" + authorId +
+                ", publishDate=" + publishDate +
+                ", text='" + text + '\'' +
+                ", photoId=" + photoId +
+                ", urgency=" + urgency +
+                '}';
     }
 }

@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 public interface ArticleDAO {
-    public void addArticle(Article article) throws SQLException;
-    public void updateArticle(Long article_id, Article article) throws SQLException;
-    public Article getArticleById(Long article_id) throws SQLException;
-    public Collection getAllArticles() throws SQLException;
-    public void deleteArticle(Article article) throws SQLException;
-    public Collection getArticlesByAuthor(Author author) throws SQLException;
-    public Collection getArticlesExtracts() throws SQLException;
+    void addArticle(Article article) throws SQLException;
+    void updateArticle(Long article_id, Article article) throws SQLException;
+    Article getArticleById(Long article_id) throws SQLException;
+    Collection getAllArticles() throws SQLException;
+    void deleteArticle(Article article) throws SQLException;
+    Collection getArticlesByAuthor(Author author) throws SQLException;
+    Collection getArticlesExtracts() throws SQLException;
 //    public Collection getBussesByRoute(Route route) throws SQLException;
 }

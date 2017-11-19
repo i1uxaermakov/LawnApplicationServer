@@ -4,26 +4,22 @@ import model.DAO.ArticleDAO;
 import model.DAO.HibernateUtil;
 import model.entities.Article;
 import model.entities.Author;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 public class ArticleDAOImpl implements ArticleDAO {
 
-    private static ArticleDAOImpl articleDAO;
-    private static SessionFactory sessionFactory;
-
-    static {
-        articleDAO = new ArticleDAOImpl();
-        sessionFactory = HibernateUtil.getSessionFactory();
-    }
-
-    public static ArticleDAOImpl getArticleDAO() {
-        return articleDAO;
-    }
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public void addArticle(Article article) throws SQLException {
 
@@ -51,19 +47,24 @@ public class ArticleDAOImpl implements ArticleDAO {
     }
 
     public Collection getArticlesExtracts() throws SQLException {
+//        List<Article> result = null;
+//        Session session = sessionFactory.openSession();
+//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//        CriteriaQuery<Article> criteriaQuery = criteriaBuilder.createQuery(Article.class);
+//        criteriaQuery.from(Article.class);
+//        result = session.createQuery(criteriaQuery).getResultList();
+//        session.close();
+//        return result;
+//        //TODO сделать получение новостей на главную страницу
+
+        try(Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            transaction.commit();
+        }
+        catch (Exception e) {
+
+        }
         return null;
-        //Session session = null;
-//        try(Session session = sessionFactory.openSession()) {
-//
-//
-//        }
-//        catch (SQLException e)
-//        {
-//            e.printStackTrace();
-//        }
-
-
-        //TODO сделать получение новостей на главную страницу
-
     }
 }
