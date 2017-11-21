@@ -10,14 +10,52 @@
         </session-timeout>
     </session-config>
 
+    <!--Main servlet, through which all requests pass-->
     <servlet>
-        <servlet-name>ArticlesServlet</servlet-name>
-        <servlet-class>controller.ArticlesServlet</servlet-class>
+        <servlet-name>ControllerServlet</servlet-name>
+        <servlet-class>controller.ControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ArticlesServlet</servlet-name>
-        <url-pattern>/ArticlesServlet/*</url-pattern>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>EducationSphereServlet</servlet-name>
+        <servlet-class>controller.EducationSphereServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EducationSphereServlet</servlet-name>
+        <url-pattern>/EducationSphereServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SocialSphereServlet</servlet-name>
+        <servlet-class>controller.SocialSphereServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SocialSphereServlet</servlet-name>
+        <url-pattern>/SocialSphereServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SportSphereServlet</servlet-name>
+        <servlet-class>controller.SportSphereServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SportSphereServlet</servlet-name>
+        <url-pattern>/SportSphereServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>NewsServlet</servlet-name>
+        <servlet-class>controller.NewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewsServlet</servlet-name>
+        <url-pattern>/NewsServlet/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Article implements Serializable {
+public class NewsItem implements Serializable {
     private Long id;
     private String title;
     private String extract;
@@ -13,10 +13,13 @@ public class Article implements Serializable {
     private Date publishDate;
     private String text;
     private Long photoId;
+    private String sphere;
+    private Integer urgency;//edu,social,sport
 //    private Set attachedFiles = new HashSet();
-    private Integer urgency;
 
-    public Article() {}
+
+
+    public NewsItem() {}
 
     public Long getId() {
         return id;
@@ -82,9 +85,17 @@ public class Article implements Serializable {
         this.urgency = urgency;
     }
 
+    public String getSphere() {
+        return sphere;
+    }
+
+    public void setSphere(String sphere) {
+        this.sphere = sphere;
+    }
+
     @Override
     public String toString() {
-        return "Article{" +
+        return "NewsItem{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", extract='" + extract + '\'' +
@@ -92,6 +103,7 @@ public class Article implements Serializable {
                 ", publishDate=" + publishDate +
                 ", text='" + text + '\'' +
                 ", photoId=" + photoId +
+                ", sphere='" + sphere + '\'' +
                 ", urgency=" + urgency +
                 '}';
     }

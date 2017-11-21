@@ -7,8 +7,11 @@ public class SessionController {
     private static SessionController sessionControler;
     private Set activeSessions = new HashSet();
 
-
     public static SessionController getSessionController() {
         return sessionControler;
+    }
+
+    public void addSession(AppSession session) {
+        activeSessions.add(session);
     }
 }

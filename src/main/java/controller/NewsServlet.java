@@ -1,18 +1,22 @@
 package controller;
 
-import model.DAO.DAOImpl.ArticleDAOImpl;
+import model.DAO.DAOImpl.NewsDAOImpl;
+import model.entities.NewsItem;
+
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet(urlPatterns = {"/ArticlesServlet/*, /ArticlesServlet"},
+//@WebServlet(urlPatterns = {"/NewsServlet/*, /NewsServlet"},
 //        initParams = {@WebInitParam(name="file-upload",value="/Users/ilya_ermakov/Additional/")})
-public class ArticlesServlet extends HttpServlet {
+public class NewsServlet extends HttpServlet {
 
-    //private ArticleDAOImpl articleDAO;
+    //private NewsDAOImpl articleDAO;
     //TODO парсер в JSON
 
     @Override
@@ -20,27 +24,25 @@ public class ArticlesServlet extends HttpServlet {
 
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");//application/json
         java.io.PrintWriter out = response.getWriter();
         out.println("hi! go on! artiles servlet");
 
-        ArticleDAOImpl articleDAO = new ArticleDAOImpl();
+        NewsDAOImpl NewsDAO = new NewsDAOImpl();
 
+        try {
+            List<NewsItem> articles = (List) NewsDAO.getNewsItemsExtracts();
+            for(NewsItem article: articles) {
+                out.println(article.toString());
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-//        try {
-//            List<Article> articles = (List) articleDAO.getArticlesExtracts();
-//
-//            for(Article article: articles) {
-//                out.println(article.toString());
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-
+//        Expression
 //        request.getRequestDispatcher("WEB-INF/another-hello.html").forward(request,response);
     }
 
