@@ -13,6 +13,11 @@ public interface NewsDAO {
     Collection getAllNewsItems() throws SQLException;
     void deleteNewsItem(NewsItem newsItem) throws SQLException;
     Collection getNewsItemsByAuthor(Author author) throws SQLException;
-    Collection getNewsItemsExtracts() throws SQLException;
-//    public Collection getBussesByRoute(Route route) throws SQLException;
+    Collection getNewsItemsExtractsForMainPage() throws SQLException;
+
+    Collection getNewsItemsExtractsOfEducationSphere() throws SQLException;
+    Collection getNewsItemsExtractsOfSportSphere() throws SQLException;
+    Collection getNewsItemsExtractsOfSocialSphere() throws SQLException;
+
+    Integer getTotalQuantityOfNewsItems() throws SQLException;
 }

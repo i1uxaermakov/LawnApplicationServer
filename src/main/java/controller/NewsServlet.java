@@ -18,6 +18,7 @@ public class NewsServlet extends HttpServlet {
 
     //private NewsDAOImpl articleDAO;
     //TODO парсер в JSON
+    //don't need this servlet anymore
 
     @Override
     public void init() throws ServletException {
@@ -33,7 +34,7 @@ public class NewsServlet extends HttpServlet {
         NewsDAOImpl NewsDAO = new NewsDAOImpl();
 
         try {
-            List<NewsItem> articles = (List) NewsDAO.getNewsItemsExtracts();
+            List<NewsItem> articles = (List) NewsDAO.getNewsItemsExtractsForMainPage();
             for(NewsItem article: articles) {
                 out.println(article.toString());
             }

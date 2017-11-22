@@ -1,4 +1,4 @@
-package model.condition;
+package controller.condition;
 
 import java.util.Date;
 import java.util.Set;

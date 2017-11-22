@@ -27,7 +27,7 @@
         <!--<property name="hibernate.connection.autocommit">false</property>-->
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
-        <mapping resource="mappings/Article.hbm.xml"/>
+        <mapping resource="mappings/NewsItem.hbm.xml"/>
         <!--<mapping resource="com/Person.hbm.xml"/>-->
     </session-factory>
 </hibernate-configuration>

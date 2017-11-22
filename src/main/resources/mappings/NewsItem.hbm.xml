@@ -3,7 +3,7 @@
 <hibernate-mapping package="model.entities">
 
     <class name="NewsItem" table="NEWS">
-        <id name="id" column="article_id">
+        <id name="id" column="newsItem_id">
             <generator class="native"/>
         </id>
         <property name="title"/>
