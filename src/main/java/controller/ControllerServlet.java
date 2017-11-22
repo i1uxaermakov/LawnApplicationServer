@@ -45,6 +45,7 @@ public class ControllerServlet extends HttpServlet{
                 briefNewsItemList = (List<BriefNewsItem>) newsDAO.getNewsItemsExtractsForMainPage();
             } catch (SQLException e) {
                 e.printStackTrace();
+                //TODO exceptions handling
             }
 
             printWriter.println("BRIEFNEWSITEMSLIST" + "\n");
