@@ -1,5 +1,7 @@
 package model.entities;
 
+import com.sun.tools.corba.se.idl.StringGen;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -7,26 +9,36 @@ import java.util.Set;
 
 public class User implements Serializable {
     private Long userId;
-    private Long lyceumId;
+    private String lyceumId;
+    private String password;
     private String firstName;
     private String lastName;
     private Date lastLoginDate;
-    private Set privileges = new HashSet();
+//    private Set privileges = new HashSet();
 
-    public User() {}
 
-    public Long getUserId() { return userId; }
+    public Long getUserId() {
+        return userId;
+    }
 
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Long getLyceumId() {
+    public String getLyceumId() {
         return lyceumId;
     }
 
-    public void setLyceumId(Long lyceumId) {
+    public void setLyceumId(String lyceumId) {
         this.lyceumId = lyceumId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -51,25 +63,5 @@ public class User implements Serializable {
 
     public void setLastLoginDate(Date lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
-    }
-
-    public Set getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(Set privileges) {
-        this.privileges = privileges;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", lyceumId=" + lyceumId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", lastLoginDate=" + lastLoginDate +
-                ", privileges=" + privileges +
-                '}';
     }
 }

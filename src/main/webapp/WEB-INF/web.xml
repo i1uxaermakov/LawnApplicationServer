@@ -10,24 +10,17 @@
         </session-timeout>
     </session-config>
 
-    <!--Main servlet, through which all requests pass-->
-    <servlet>
-        <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>controller.ControllerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>
-
-
+    <welcome-file-list>
+        <welcome-file>MainPageServlet</welcome-file>
+    </welcome-file-list>
+    
     <servlet>
         <servlet-name>EducationSphereServlet</servlet-name>
         <servlet-class>controller.EducationSphereServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EducationSphereServlet</servlet-name>
-        <url-pattern>/EducationSphereServlet</url-pattern>
+        <url-pattern>/education/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -36,7 +29,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SocialSphereServlet</servlet-name>
-        <url-pattern>/SocialSphereServlet</url-pattern>
+        <url-pattern>/social/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -45,7 +38,27 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SportSphereServlet</servlet-name>
-        <url-pattern>/SportSphereServlet</url-pattern>
+        <url-pattern>/sport/*</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>MainPageServlet</servlet-name>
+        <servlet-class>controller.MainPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainPageServlet</servlet-name>
+        <url-pattern>/MainPageServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>SignInServlet</servlet-name>
+        <servlet-class>controller.security.SignInServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignInServlet</servlet-name>
+        <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
 

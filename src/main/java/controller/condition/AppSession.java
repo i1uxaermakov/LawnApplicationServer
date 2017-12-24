@@ -4,23 +4,23 @@ import java.util.Date;
 import java.util.Set;
 
 public class AppSession {
-    private Long sessionId;
+    private String sessionId;
     private Long userId;
     private Set privileges;
-    private Date lastActiveTime;
+    private Long lastActiveTime;
 
-    public AppSession(Long sessionId, Long userId, Set privileges, Date lastActiveTime) {
+    public AppSession(String sessionId, Long userId, Set privileges, Long lastActiveTime) {
         this.sessionId = sessionId;
         this.userId = userId;
         this.privileges = privileges;
         this.lastActiveTime = lastActiveTime;
     }
 
-    public Long getSessionId() {
+    public String getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(Long sessionId) {
+    public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 
@@ -40,11 +40,11 @@ public class AppSession {
         this.privileges = privileges;
     }
 
-    public Date getLastActiveTime() {
+    public Long getLastActiveTime() {
         return lastActiveTime;
     }
 
-    public void setLastActiveTime(Date lastActiveTime) {
+    public void setLastActiveTime(Long lastActiveTime) {
         this.lastActiveTime = lastActiveTime;
     }
 }
