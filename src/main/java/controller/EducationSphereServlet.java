@@ -28,6 +28,9 @@ public class EducationSphereServlet extends HttpServlet {
         System.out.println(path);
         path = path.replace("/education", "");
 
+
+//        lawn.com/education/news/64376
+
         if(path.equals("/") || path.equals("")) {
             //TODO Education Main Page
         }

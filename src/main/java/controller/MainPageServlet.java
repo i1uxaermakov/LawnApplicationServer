@@ -2,6 +2,7 @@ package controller;
 
 import model.DAO.DAOImpl.NewsDAOImpl;
 import model.entities.wrappers.BriefNewsItem;
+import view.MainPageViewer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +51,7 @@ public class MainPageServlet extends HttpServlet{
             e.printStackTrace();
             //TODO exceptions handling
         }
+
 
         printWriter.println("BRIEFNEWSITEMSLIST" + "\n");
         for(BriefNewsItem briefNewsItem: briefNewsItemList) {

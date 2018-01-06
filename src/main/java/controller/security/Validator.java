@@ -7,10 +7,12 @@ import controller.condition.SessionController;
 import model.DAO.DAOImpl.UserDAOImpl;
 import model.DAO.UserDAO;
 import model.entities.wrappers.UserLoginInfo;
+import org.hibernate.Session;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 //import java.time.LocalDateTime;
 import java.util.Random;
@@ -27,6 +29,8 @@ public class Validator {
     }
 
     void checkUserSignInInfo(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession(true);
 
         Cookie[] cookies = null;
         cookies = request.getCookies();
@@ -56,14 +60,14 @@ public class Validator {
 
             if(userLoginInfo.getPassword().equals(password)) {
                 SessionController sessionController = SessionController.getSessionController();
-                long integer = (new Random()).nextInt(10000);
-                AppSession session = new AppSession(
-                        request.getSession().getId(),
+                AppSession appSession = new AppSession(
+                        session.getId(),
                         userLoginInfo.getUserId(),
                         null,
                         System.currentTimeMillis());
-                sessionController.addSession(session);
-                //                        (int)(new Random()).nextInt(10000),
+                sessionController.addSession(appSession);
+
+                response.addCookie(new Cookie("ss_id", session.getId()));
             }
             else {
                 response.setStatus(401);
