@@ -1,8 +1,11 @@
 package model.entities;
 
+import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @StaticMetamodel( User.class )
 public class User_ {
@@ -10,8 +13,9 @@ public class User_ {
     public static volatile SingularAttribute<User, String> lyceumId;
     public static volatile SingularAttribute<User, String> password;
     public static volatile SingularAttribute<User, String> firstName;
+    public static volatile SetAttribute<User, String> privileges;
     public static volatile SingularAttribute<User, String> lastName;
-    public static volatile SingularAttribute<User, Date> lastLoginDate;
+    public static volatile SingularAttribute<User, Timestamp> lastLoginDate;
 }
 
 

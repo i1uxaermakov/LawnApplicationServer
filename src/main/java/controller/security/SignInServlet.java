@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SignInServlet extends HttpServlet {
-    Validator validator = new Validator();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        validator.checkUserSignInInfo(req,resp);
+        Validator validator = new Validator();
+        if(validator.checkUserSignInInfo(req,resp)) {
+            resp.getWriter().println("YES");
+        }
+        else {
+            resp.getWriter().println("NO");
+        }
     }
 
 }

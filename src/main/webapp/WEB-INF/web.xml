@@ -61,5 +61,16 @@
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
+    <!--jsp-->
+    <servlet>
+        <servlet-name>myjsp</servlet-name>
+        <jsp-file>/WEB-INF/MainPageVisualizer.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>myjsp</servlet-name>
+        <url-pattern>/myjsp</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

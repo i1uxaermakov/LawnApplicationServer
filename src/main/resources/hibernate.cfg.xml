@@ -13,6 +13,7 @@
         <!--validate/create/update/create-drop-->
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
 
         <property name="hibernate.c3p0.min_size">10</property>
@@ -28,6 +29,6 @@
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
         <mapping resource="mappings/NewsItem.hbm.xml"/>
-        <!--<mapping resource="com/Person.hbm.xml"/>-->
+        <mapping resource="mappings/User.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

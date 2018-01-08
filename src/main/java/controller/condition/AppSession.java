@@ -1,5 +1,6 @@
 package controller.condition;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -7,9 +8,9 @@ public class AppSession {
     private String sessionId;
     private Long userId;
     private Set privileges;
-    private Long lastActiveTime;
+    private Timestamp lastActiveTime;
 
-    public AppSession(String sessionId, Long userId, Set privileges, Long lastActiveTime) {
+    public AppSession(String sessionId, Long userId, Set privileges, Timestamp lastActiveTime) {
         this.sessionId = sessionId;
         this.userId = userId;
         this.privileges = privileges;
@@ -40,11 +41,11 @@ public class AppSession {
         this.privileges = privileges;
     }
 
-    public Long getLastActiveTime() {
+    public Timestamp getLastActiveTime() {
         return lastActiveTime;
     }
 
-    public void setLastActiveTime(Long lastActiveTime) {
+    public void setLastActiveTime(Timestamp lastActiveTime) {
         this.lastActiveTime = lastActiveTime;
     }
 }

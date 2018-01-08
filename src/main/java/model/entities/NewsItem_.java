@@ -11,7 +11,7 @@ public class NewsItem_ {
     public static volatile SingularAttribute<NewsItem, String> extract;
     public static volatile SingularAttribute<NewsItem, Long> authorId;
     public static volatile SingularAttribute<NewsItem, Date> publishDate;
-    public static volatile SingularAttribute<NewsItem, String> text;
+    public static volatile SingularAttribute<NewsItem, String> newsItemtext;
     public static volatile SingularAttribute<NewsItem, Long> photoId;
     public static volatile SingularAttribute<NewsItem, String> sphere;
     public static volatile SingularAttribute<NewsItem, Integer> urgency;

@@ -4,11 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SessionController {
-    private static SessionController sessionControler;
+    private static SessionController sessionController;
     private Set activeSessions = new HashSet();
 
+    static {
+        sessionController = new SessionController();
+    }
+
     public static SessionController getSessionController() {
-        return sessionControler;
+        return sessionController;
     }
 
     public void addSession(AppSession session) {

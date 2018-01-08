@@ -32,7 +32,8 @@ public class UserDAOImpl implements UserDAO {
                         UserLoginInfo.class,
                         userRoot.get(User_.userId),
                         userRoot.get(User_.lyceumId),
-                        userRoot.get(User_.password)
+                        userRoot.get(User_.password),
+                        userRoot.get(User_.privileges)
                 )
         );
         criteriaQuery.where(criteriaBuilder.equal(userRoot.get(User_.lyceumId), lyceumId));
@@ -40,10 +41,12 @@ public class UserDAOImpl implements UserDAO {
         List<UserLoginInfo> userLoginInfoList = session.createQuery(criteriaQuery).getResultList();
         transaction.commit();
         session.close();
-        if (userLoginInfoList.isEmpty()) {
+        if (userLoginInfoList==null || userLoginInfoList.isEmpty()) {
+            System.out.println("nulldao");
             return null;
         }
         else {
+            System.out.println("founddao");
             return userLoginInfoList.get(0);
         }
     }

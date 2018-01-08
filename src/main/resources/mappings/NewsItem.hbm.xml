@@ -2,13 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model.entities">
 
-    <class name="NewsItem" table="NEWS">
+    <class name="NewsItem" table="News">
         <id name="id" column="newsItem_id">
             <generator class="native"/>
         </id>
         <property name="title"/>
         <property name="extract" />
-        <property name="text"/>
+        <property name="newsItemText"/>
         <property name="urgency"/>
         <property name="authorId"/>
         <property name="publishDate"/>

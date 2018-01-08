@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MainPageServlet extends HttpServlet{
+public class MainPageServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
@@ -42,6 +42,7 @@ public class MainPageServlet extends HttpServlet{
 //    }
         //TODO getting information from DB and representing it (MAIN PAGE)
 
+
         List<BriefNewsItem> briefNewsItemList = null;
         NewsDAOImpl newsDAO = new NewsDAOImpl();
         PrintWriter printWriter = resp.getWriter();
@@ -51,12 +52,15 @@ public class MainPageServlet extends HttpServlet{
             e.printStackTrace();
             //TODO exceptions handling
         }
+        req.setAttribute("briefNewsItemList", briefNewsItemList);
 
+        getServletContext().getRequestDispatcher("/myjsp").forward(req,resp);
 
-        printWriter.println("BRIEFNEWSITEMSLIST" + "\n");
-        for(BriefNewsItem briefNewsItem: briefNewsItemList) {
-            printWriter.println(briefNewsItem.toString() + "\n\n");
-        }
+        //resp.sendRedirect("/myjsp");
+//        printWriter.println("BRIEFNEWSITEMSLIST" + "\n");
+//        for(BriefNewsItem briefNewsItem: briefNewsItemList) {
+//            printWriter.println(briefNewsItem.toString() + "\n\n");
+//        }
 
 
 

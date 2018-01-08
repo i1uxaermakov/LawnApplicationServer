@@ -11,15 +11,19 @@ public class NewsItem implements Serializable {
     private String extract;
     private Long authorId;
     private Date publishDate;
-    private String text;
+    private String newsItemText;
     private Long photoId;
     private String sphere;
     private Integer urgency;//edu,social,sport
 //    private Set attachedFiles = new HashSet();
 
 
+    public NewsItem() {
+    }
 
-    public NewsItem() {}
+    public NewsItem(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -61,12 +65,12 @@ public class NewsItem implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public String getText() {
-        return text;
+    public String getNewsItemText() {
+        return newsItemText;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setNewsItemText(String newsItemText) {
+        this.newsItemText = newsItemText;
     }
 
     public Long getPhotoId() {
@@ -77,20 +81,20 @@ public class NewsItem implements Serializable {
         this.photoId = photoId;
     }
 
-    public Integer getUrgency() {
-        return urgency;
-    }
-
-    public void setUrgency(Integer urgency) {
-        this.urgency = urgency;
-    }
-
     public String getSphere() {
         return sphere;
     }
 
     public void setSphere(String sphere) {
         this.sphere = sphere;
+    }
+
+    public Integer getUrgency() {
+        return urgency;
+    }
+
+    public void setUrgency(Integer urgency) {
+        this.urgency = urgency;
     }
 
     @Override
@@ -101,7 +105,7 @@ public class NewsItem implements Serializable {
                 ", extract='" + extract + '\'' +
                 ", authorId=" + authorId +
                 ", publishDate=" + publishDate +
-                ", text='" + text + '\'' +
+                ", newsItemText='" + newsItemText + '\'' +
                 ", photoId=" + photoId +
                 ", sphere='" + sphere + '\'' +
                 ", urgency=" + urgency +
