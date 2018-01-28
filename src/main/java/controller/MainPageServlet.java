@@ -1,10 +1,16 @@
 package controller;
 
+import controller.condition.SessionController;
 import model.DAO.DAOImpl.NewsDAOImpl;
+import model.DAO.HibernateUtil;
+import model.entities.User;
 import model.entities.wrappers.BriefNewsItem;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import view.MainPageViewer;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,19 +48,47 @@ public class MainPageServlet extends HttpServlet {
 //    }
         //TODO getting information from DB and representing it (MAIN PAGE)
 
-
-        List<BriefNewsItem> briefNewsItemList = null;
-        NewsDAOImpl newsDAO = new NewsDAOImpl();
         PrintWriter printWriter = resp.getWriter();
-        try {
-            briefNewsItemList = (List<BriefNewsItem>) newsDAO.getNewsItemsExtracts("mainpage", 10);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            //TODO exceptions handling
-        }
-        req.setAttribute("briefNewsItemList", briefNewsItemList);
 
-        getServletContext().getRequestDispatcher("/myjsp").forward(req,resp);
+
+//        List<BriefNewsItem> briefNewsItemList = null;
+//        NewsDAOImpl newsDAO = new NewsDAOImpl();
+//
+//        try {
+//            briefNewsItemList = (List<BriefNewsItem>) newsDAO.getNewsItemsExtracts("all", 10);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            //TODO exceptions handling
+//        }
+//        req.setAttribute("briefNewsItemList", briefNewsItemList);
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx =  session.beginTransaction();
+
+        User user = (User) session.load(User.class, new Long(1));
+        printWriter.println(user.toString());
+        printWriter.println(req.getSession(true).getId());
+        printWriter.println(req.getSession().getLastAccessedTime());
+
+        SessionController sessionController = SessionController.getSessionController();
+
+
+        if(sessionController.get(req.getSession().getId()) != null) {
+            printWriter.println("Authorised");
+        }
+        else {
+            printWriter.println("unauthorised");
+        }
+
+        tx.commit();
+        session.close();
+
+        printWriter.println();
+
+
+        //getServletContext().getRequestDispatcher("/myjsp").forward(req,resp);
+
+
 
         //resp.sendRedirect("/myjsp");
 //        printWriter.println("BRIEFNEWSITEMSLIST" + "\n");

@@ -36,52 +36,7 @@ public class EducationSphereServlet extends HttpServlet {
         }
         else if(path.startsWith("/news")) {
             path = path.replace("/news", "");
-            NewsDAOImpl newsDAO = new NewsDAOImpl();
 
-            if(path.equals("") || path.equals("/") ) {
-                List<BriefNewsItem> briefNewsItemList = null;
-                try {
-                    briefNewsItemList = (List<BriefNewsItem>) newsDAO.
-                            getNewsItemsExtracts("education", 20);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                PrintWriter printWriter = resp.getWriter();
-                for(BriefNewsItem briefNewsItem: briefNewsItemList) {
-                    printWriter.println(briefNewsItem.toString());
-                }
-
-                if(req.getHeader("ExpectedType").equals("JSON")) {
-
-                }
-            }
-            else {
-                path = path.replace("/","");
-                if(StringUtils.isNumeric(path)) {
-                    Long news_id = new Long(path);
-                    NewsItem newsItem = null;
-                    try {
-                        newsItem = newsDAO.getNewsItemById(news_id, "education");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                    if(!(newsItem == null)) {
-                        resp.getWriter().println(newsItem.toString());
-                    }
-                    else {
-                        resp.getWriter().println("404 NOT FOUND");
-                        //TODO 404
-                    }
-                }
-                else {
-                    //TODO 404
-                    resp.getWriter().println("404 NOT FOUND");
-                }
-
-
-
-            }
         }
         else if(path.startsWith("/homework")) {
             //TODO handouts - homework

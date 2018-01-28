@@ -7,7 +7,7 @@
             <generator class="native"/>
         </id>
 
-        <set name = "privileges" table="UserPrivileges" lazy="false">
+        <set name = "privileges" table="UserPrivileges" fetch="join" >
             <!--cascade="all"-->
             <key column = "user_id"/>
             <!--<one-to-many class="java.lang.String"/>-->

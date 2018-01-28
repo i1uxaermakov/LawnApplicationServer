@@ -32,28 +32,11 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public NewsItem getNewsItemById(Long newsItem_id, String sphere) throws SQLException {
-        Session session = sessionFactory.openSession();
+    public NewsItem getNewsItemById(Session session, Long news_id) throws SQLException {
         Transaction transaction = session.beginTransaction();
-
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
-        Root<NewsItem> newsItemRoot = criteriaQuery.from(NewsItem.class);
-        criteriaQuery.select(newsItemRoot);
-        criteriaQuery.where(criteriaBuilder.and(
-                criteriaBuilder.equal(newsItemRoot.get(NewsItem_.id), newsItem_id)),
-                criteriaBuilder.equal(newsItemRoot.get(NewsItem_.sphere),sphere)
-        );
-
-        List<NewsItem> newsItemList = session.createQuery(criteriaQuery).getResultList();
+        NewsItem newsItem = session.get(NewsItem.class,news_id);
         transaction.commit();
-        session.close();
-        if(newsItemList.isEmpty()) {
-            return null;
-        }
-        else {
-            return newsItemList.get(0);
-        }
+        return newsItem;
     }
 
     @Override
@@ -152,7 +135,7 @@ public class NewsDAOImpl implements NewsDAO {
         );
 
         criteriaQuery.orderBy(criteriaBuilder.desc(newsItemRoot.get("id")));
-        if(purpose.equals("mainpage")) {
+        if(purpose.equals("all")) {
             criteriaQuery.where(criteriaBuilder.le(newsItemRoot.get(NewsItem_.id), getTotalQuantityOfNewsItems()));
         }
         else {

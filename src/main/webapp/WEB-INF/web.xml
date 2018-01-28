@@ -40,6 +40,15 @@
         <servlet-name>SportSphereServlet</servlet-name>
         <url-pattern>/sport/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>NewsServlet</servlet-name>
+        <servlet-class>controller.NewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewsServlet</servlet-name>
+        <url-pattern>/news/*</url-pattern>
+    </servlet-mapping>
 
 
     <servlet>
@@ -64,7 +73,7 @@
     <!--jsp-->
     <servlet>
         <servlet-name>myjsp</servlet-name>
-        <jsp-file>/WEB-INF/MainPageVisualizer.jsp</jsp-file>
+            <jsp-file>/WEB-INF/MainPageVisualizer.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>

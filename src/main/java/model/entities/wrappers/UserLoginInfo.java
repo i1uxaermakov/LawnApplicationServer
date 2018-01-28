@@ -7,16 +7,8 @@ public class UserLoginInfo {
     private Long userId;
     private String lyceumId;
     private String password;
-    private Set<String> privileges = new HashSet<String>(0);
 
     public UserLoginInfo() {
-    }
-
-    public UserLoginInfo(Long userId, String lyceumId, String password, Set privileges) {
-        this.userId = userId;
-        this.lyceumId = lyceumId;
-        this.password = password;
-        this.privileges = privileges;
     }
 
     public UserLoginInfo(Long userId, String lyceumId, String password) {
@@ -49,13 +41,6 @@ public class UserLoginInfo {
         this.password = password;
     }
 
-    public Set getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(Set privileges) {
-        this.privileges = privileges;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -66,8 +51,7 @@ public class UserLoginInfo {
 
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (lyceumId != null ? !lyceumId.equals(that.lyceumId) : that.lyceumId != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        return privileges != null ? privileges.equals(that.privileges) : that.privileges == null;
+        return password != null ? password.equals(that.password) : that.password == null;
     }
 
     @Override
@@ -75,7 +59,6 @@ public class UserLoginInfo {
         int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (lyceumId != null ? lyceumId.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (privileges != null ? privileges.hashCode() : 0);
         return result;
     }
 
@@ -85,7 +68,6 @@ public class UserLoginInfo {
                 "userId=" + userId +
                 ", lyceumId='" + lyceumId + '\'' +
                 ", password='" + password + '\'' +
-                ", privileges=" + privileges +
                 '}';
     }
 }

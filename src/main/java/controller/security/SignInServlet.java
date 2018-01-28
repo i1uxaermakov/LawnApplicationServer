@@ -1,5 +1,7 @@
 package controller.security;
 
+import controller.condition.SessionController;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,7 @@ public class SignInServlet extends HttpServlet {
         Validator validator = new Validator();
         if(validator.checkUserSignInInfo(req,resp)) {
             resp.getWriter().println("YES");
+//            resp.getWriter().println((new SessionController().get(req.getSession().getId())).toString());
         }
         else {
             resp.getWriter().println("NO");
