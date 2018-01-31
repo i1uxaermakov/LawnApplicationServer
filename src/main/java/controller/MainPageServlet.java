@@ -1,16 +1,15 @@
 package controller;
 
-import controller.condition.SessionController;
+import model.DAO.AlbumDAO;
+import model.DAO.DAOImpl.AlbumDAOImpl;
 import model.DAO.DAOImpl.NewsDAOImpl;
 import model.DAO.HibernateUtil;
-import model.entities.User;
+import model.DAO.NewsDAO;
+import model.entities.wrappers.BriefAlbum;
 import model.entities.wrappers.BriefNewsItem;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import view.MainPageViewer;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,60 +27,68 @@ public class MainPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-//        String path = req.getRequestURI();
-//        req.setAttribute("requestedURI", path);
-//        System.out.println(path + " controller");
-//        if(path.startsWith("/education")) {
-//            req.getRequestDispatcher("/EducationSphereServlet").forward(req,resp);
-//        }
-//        else if(path.startsWith("/social")) {
-//            req.getRequestDispatcher("/SocialSphereServlet").forward(req,resp);
-//        }
-//        else if(path.startsWith("/sport")) {
-//            req.getRequestDispatcher("/SportSphereServlet").forward(req,resp);
-//        }
-//        else if(path.startsWith("/news")) {
-//
-//        }
-//        else {
-//    }
-        //TODO getting information from DB and representing it (MAIN PAGE)
-
         PrintWriter printWriter = resp.getWriter();
 
 
-//        List<BriefNewsItem> briefNewsItemList = null;
-//        NewsDAOImpl newsDAO = new NewsDAOImpl();
-//
-//        try {
-//            briefNewsItemList = (List<BriefNewsItem>) newsDAO.getNewsItemsExtracts("all", 10);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            //TODO exceptions handling
-//        }
-//        req.setAttribute("briefNewsItemList", briefNewsItemList);
 
+        List<BriefAlbum> briefAlbumList = null;
+        List<BriefNewsItem> briefNewsItemList = null;
+        NewsDAO newsDAO = new NewsDAOImpl();
+        AlbumDAO albumDAO = new AlbumDAOImpl();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx =  session.beginTransaction();
-
-        User user = (User) session.load(User.class, new Long(1));
-        printWriter.println(user.toString());
-        printWriter.println(req.getSession(true).getId());
-        printWriter.println(req.getSession().getLastAccessedTime());
-
-        SessionController sessionController = SessionController.getSessionController();
-
-
-        if(sessionController.get(req.getSession().getId()) != null) {
-            printWriter.println("Authorised");
+        try {
+            briefNewsItemList = (List<BriefNewsItem>) newsDAO.getBriefNewsItems(session, 10);
+            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, 4);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //TODO exceptions handling
         }
-        else {
-            printWriter.println("unauthorised");
-        }
-
-        tx.commit();
         session.close();
+
+        req.setAttribute("briefNewsItemList", briefNewsItemList);
+        req.setAttribute("briefAlbumList", briefAlbumList);
+
+//        printWriter.println("<html> <body>");
+//        for (BriefNewsItem briefNewsItem: briefNewsItemList) {
+////            printWriter.println(briefNewsItem.toString());
+//            printWriter.println("<t1> <a href=\"/news/"+ briefNewsItem.getId() +"\">"+ briefNewsItem.getTitle() + "</a></t1><br>");
+//            printWriter.println(briefNewsItem.getExtract()+"<br>");
+//            printWriter.println("<br>");
+//        }
+//
+//        printWriter.println("<br>");
+//        printWriter.println("##############");
+//        printWriter.println("<br>");
+//
+//        for (BriefAlbum briefAlbum: briefAlbumList) {
+////            printWriter.println(briefAlbum.toString());
+//            printWriter.println("<t1> " + briefAlbum.getName() +
+//                    "</t1> <br>");
+//            printWriter.println("<img src=\"" + briefAlbum.getMainPhotoLocation() +
+//                    "\"><br><br>");
+//        }
+//
+//        printWriter.println("</body> </html>");
+
+//        Transaction tx =  session.beginTransaction();
+//
+//        User user = (User) session.load(User.class, new Long(1));
+//        printWriter.println(user.toString());
+//        printWriter.println(req.getSession(true).getId());
+//        printWriter.println(req.getSession().getLastAccessedTime());
+//
+//        SessionController sessionController = SessionController.getSessionController();
+//
+//
+//        if(sessionController.get(req.getSession().getId()) != null) {
+//            printWriter.println("Authorised");
+//        }
+//        else {
+//            printWriter.println("unauthorised");
+//        }
+//
+//        tx.commit();
+//        session.close();
 
         printWriter.println();
 

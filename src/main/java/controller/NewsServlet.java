@@ -33,7 +33,7 @@ public class NewsServlet extends HttpServlet{
             List<BriefNewsItem> briefNewsItemList = null;
             try {
                 briefNewsItemList = (List<BriefNewsItem>) newsDAO.
-                        getNewsItemsExtracts(purpose, 20);
+                        getBriefNewsItems(session, 20);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

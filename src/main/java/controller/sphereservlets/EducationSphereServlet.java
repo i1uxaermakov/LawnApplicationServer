@@ -1,4 +1,4 @@
-package controller;
+package controller.sphereservlets;
 
 import model.DAO.DAOImpl.NewsDAOImpl;
 import model.entities.NewsItem;
@@ -33,10 +33,6 @@ public class EducationSphereServlet extends HttpServlet {
 
         if(path.equals("/") || path.equals("")) {
             //TODO Education Main Page
-        }
-        else if(path.startsWith("/news")) {
-            path = path.replace("/news", "");
-
         }
         else if(path.startsWith("/homework")) {
             //TODO handouts - homework

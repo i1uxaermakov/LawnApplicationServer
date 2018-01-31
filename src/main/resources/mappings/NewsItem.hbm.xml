@@ -13,7 +13,6 @@
         <property name="authorId"/>
         <property name="publishDate"/>
         <property name="photoId"/>
-        <property name="sphere"/>
 
         <!--<set name="attachedFiles" table="">-->
             <!--<key column="NEWS_ID"/>-->

@@ -8,16 +8,14 @@ public class BriefNewsItem {
     private String extract;
     private Date publishDate;
     private Long photoId;
-    private String sphere;
     private Integer urgency;
 
-    public BriefNewsItem(Long id, String title, String extract, Date publishDate, Long photoId, String sphere, Integer urgency) {
+    public BriefNewsItem(Long id, String title, String extract, Date publishDate, Long photoId, Integer urgency) {
         this.id = id;
         this.title = title;
         this.extract = extract;
         this.publishDate = publishDate;
         this.photoId = photoId;
-        this.sphere = sphere;
         this.urgency = urgency;
     }
 
@@ -48,20 +46,20 @@ public class BriefNewsItem {
         this.extract = extract;
     }
 
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
+
     public Long getPhotoId() {
         return photoId;
     }
 
     public void setPhotoId(Long photoId) {
         this.photoId = photoId;
-    }
-
-    public String getSphere() {
-        return sphere;
-    }
-
-    public void setSphere(String sphere) {
-        this.sphere = sphere;
     }
 
     public Integer getUrgency() {
@@ -72,14 +70,6 @@ public class BriefNewsItem {
         this.urgency = urgency;
     }
 
-    public Date getPublishDate() {
-        return publishDate;
-    }
-
-    public void setPublishDate(Date publishDate) {
-        this.publishDate = publishDate;
-    }
-
     @Override
     public String toString() {
         return "BriefNewsItem{" +
@@ -88,7 +78,6 @@ public class BriefNewsItem {
                 ", extract='" + extract + '\'' +
                 ", publishDate=" + publishDate +
                 ", photoId=" + photoId +
-                ", sphere='" + sphere + '\'' +
                 ", urgency=" + urgency +
                 '}';
     }

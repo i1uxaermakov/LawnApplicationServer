@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model.entities">
+
+    <class name="Album" table="Albums">
+        <id name="albumId" column="album_id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="description"/>
+        <property name="eventDate"/>
+        <property name="mainPhotoLocation"/>
+        <property name="publishDate"/>
+
+        <set name="albumPhotos" table="AlbumPhotos" fetch="join">
+            <key column="album_id"></key>
+            <composite-element class="model.entities.Photo">
+                <property name="photoName" not-null="true"/>
+                <property name="photoLocation" not-null="true"/>
+                <property name="publishDate" type="timestamp"/>
+                <property name="authorId"/>
+            </composite-element>
+        </set>
+
+
+        <!--<set name="attachedFiles" table="">-->
+        <!--<key column="NEWS_ID"/>-->
+        <!--<many-to-many column="FILE_ID" class="File"/>-->
+        <!--</set>-->
+
+    </class>
+</hibernate-mapping>

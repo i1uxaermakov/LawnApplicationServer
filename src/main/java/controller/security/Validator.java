@@ -27,9 +27,6 @@ public class Validator {
 
         HttpSession httpSession = request.getSession(true);
 
-//        Cookie[] cookies = null;
-//        cookies = request.getCookies();
-
         Enumeration parameterNames = request.getParameterNames();
         String lyceumId = null, password = null;
         while(parameterNames.hasMoreElements()) {
@@ -62,16 +59,22 @@ public class Validator {
             }
             else {
                 if (userLoginInfo.getPassword().equals(password)) {
+                    User user = null;
+
                     Transaction transaction = session.beginTransaction();
-                    User user = session.load(User.class, userLoginInfo.getUserId());
+                    user = session.load(User.class, userLoginInfo.getUserId());
+                    transaction.commit();
+                    session.close();
+
+                    if(user==null) {
+                        response.setStatus(500);
+                        return false;
+                    }
                     AppSession appSession = new AppSession(
                             user,
                             new Timestamp(System.currentTimeMillis())
                     );
                     sessionController.addSession(httpSession.getId(), appSession);
-
-                    System.out.println(appSession.toString());
-                    session.close();
                     return true;
                 } else {
                     response.setStatus(401);

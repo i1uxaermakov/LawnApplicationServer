@@ -8,17 +8,16 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 public interface NewsDAO {
-    void addNewsItem(NewsItem newsItem) throws SQLException;
-    void updateNewsItem(Long newsItem_id, NewsItem newsItem) throws SQLException;
+    void addNewsItem(Session session, NewsItem newsItem) throws SQLException;
+    void updateNewsItem(Session session, Long newsItem_id, NewsItem newsItem) throws SQLException;
     NewsItem getNewsItemById(Session session, Long news_id) throws SQLException;
-    Collection getAllNewsItems() throws SQLException;
-    void deleteNewsItem(NewsItem newsItem) throws SQLException;
-    Collection getNewsItemsByAuthor(Author author) throws SQLException;
+    void deleteNewsItem(Session session, NewsItem newsItem) throws SQLException;
+    Collection getNewsItemsByAuthor(Session session, Author author) throws SQLException;
 //    Collection getNewsItemsExtractsForMainPage() throws SQLException;
 
-    Collection getNewsItemsExtracts(String purpose, int maxResults) throws SQLException;
+    Collection getBriefNewsItems(Session session, int maxResults) throws SQLException;
 
 //    Collection getNewsItemsExtractsForSphere(String sphere) throws SQLException;
 
-    Integer getTotalQuantityOfNewsItems() throws SQLException;
+    Integer getTotalQuantityOfNewsItems(Session session) throws SQLException;
 }

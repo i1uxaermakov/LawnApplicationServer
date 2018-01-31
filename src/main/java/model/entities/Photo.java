@@ -1,21 +1,14 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.security.Timestamp;
 import java.util.Set;
 
 public class Photo implements Serializable {
-    private Long photoId;
     private String photoName;
     private String photoLocation;
-    private Long photoCategoryOrEventId;
-
-    public Long getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(Long photoId) {
-        this.photoId = photoId;
-    }
+    private Timestamp publishDate;
+    private Long authorId;
 
     public String getPhotoName() {
         return photoName;
@@ -33,21 +26,19 @@ public class Photo implements Serializable {
         this.photoLocation = photoLocation;
     }
 
-    public Long getPhotoCategoryOrEventId() {
-        return photoCategoryOrEventId;
+    public Timestamp getPublishDate() {
+        return publishDate;
     }
 
-    public void setPhotoCategoryOrEventId(Long photoCategoryOrEventId) {
-        this.photoCategoryOrEventId = photoCategoryOrEventId;
+    public void setPublishDate(Timestamp publishDate) {
+        this.publishDate = publishDate;
     }
 
-    @Override
-    public String toString() {
-        return "Photo{" +
-                "photoId=" + photoId +
-                ", photoName='" + photoName + '\'' +
-                ", photoLocation='" + photoLocation + '\'' +
-                ", photoCategoryOrEventId=" + photoCategoryOrEventId +
-                '}';
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 }

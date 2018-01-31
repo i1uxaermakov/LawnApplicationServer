@@ -13,7 +13,6 @@ public class NewsItem implements Serializable {
     private Date publishDate;
     private String newsItemText;
     private Long photoId;
-    private String sphere;
     private Integer urgency;//edu,social,sport
 //    private Set attachedFiles = new HashSet();
 
@@ -81,14 +80,6 @@ public class NewsItem implements Serializable {
         this.photoId = photoId;
     }
 
-    public String getSphere() {
-        return sphere;
-    }
-
-    public void setSphere(String sphere) {
-        this.sphere = sphere;
-    }
-
     public Integer getUrgency() {
         return urgency;
     }
@@ -107,7 +98,6 @@ public class NewsItem implements Serializable {
                 ", publishDate=" + publishDate +
                 ", newsItemText='" + newsItemText + '\'' +
                 ", photoId=" + photoId +
-                ", sphere='" + sphere + '\'' +
                 ", urgency=" + urgency +
                 '}';
     }

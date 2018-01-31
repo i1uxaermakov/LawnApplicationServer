@@ -63,6 +63,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public UserLoginInfo getUserSignInfoByLyceumId(Session session, String lyceumId) throws SQLException {
 
+        List<UserLoginInfo> userLoginInfoList = null;
         Transaction transaction = session.beginTransaction();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -77,7 +78,7 @@ public class UserDAOImpl implements UserDAO {
                 )
         );
         criteriaQuery.where(criteriaBuilder.equal(userRoot.get(User_.lyceumId), lyceumId));
-        List<UserLoginInfo> userLoginInfoList = session.createQuery(criteriaQuery).getResultList();
+        userLoginInfoList = session.createQuery(criteriaQuery).getResultList();
 
         transaction.commit();
 

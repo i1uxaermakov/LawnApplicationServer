@@ -1,6 +1,5 @@
 package model.entities;
 
-import com.sun.tools.corba.se.idl.StringGen;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

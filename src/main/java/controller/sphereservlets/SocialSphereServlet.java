@@ -1,4 +1,4 @@
-package controller;
+package controller.sphereservlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -6,10 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class SportSphereServlet extends HttpServlet {
-
+public class SocialSphereServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().println("sport");
+        resp.getWriter().println("social");
     }
 }

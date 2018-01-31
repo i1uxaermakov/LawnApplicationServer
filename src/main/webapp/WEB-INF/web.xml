@@ -16,7 +16,7 @@
     
     <servlet>
         <servlet-name>EducationSphereServlet</servlet-name>
-        <servlet-class>controller.EducationSphereServlet</servlet-class>
+        <servlet-class>controller.sphereservlets.EducationSphereServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EducationSphereServlet</servlet-name>
@@ -25,7 +25,7 @@
 
     <servlet>
         <servlet-name>SocialSphereServlet</servlet-name>
-        <servlet-class>controller.SocialSphereServlet</servlet-class>
+        <servlet-class>controller.sphereservlets.SocialSphereServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SocialSphereServlet</servlet-name>
@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>SportSphereServlet</servlet-name>
-        <servlet-class>controller.SportSphereServlet</servlet-class>
+        <servlet-class>controller.sphereservlets.SportSphereServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SportSphereServlet</servlet-name>
@@ -69,6 +69,26 @@
         <servlet-name>SignInServlet</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>controller.ImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AlbumsServlet</servlet-name>
+        <servlet-class>controller.AlbumsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AlbumsServlet</servlet-name>
+        <url-pattern>/albums/*</url-pattern>
+    </servlet-mapping>
+    
 
     <!--jsp-->
     <servlet>
@@ -81,5 +101,16 @@
         <url-pattern>/myjsp</url-pattern>
     </servlet-mapping>
 
+
+    <!--error pages-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/shiiiiit.html</location>
+    </error-page>
+
+    <!--<error-page>-->
+        <!--<error-code>500</error-code>-->
+        <!--<location>/shiiiiit.html</location>-->
+    <!--</error-page>-->
 
 </web-app>
