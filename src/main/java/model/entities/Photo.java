@@ -9,6 +9,7 @@ public class Photo implements Serializable {
     private String photoLocation;
     private Timestamp publishDate;
     private Long authorId;
+//    likes
 
     public String getPhotoName() {
         return photoName;

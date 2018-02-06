@@ -1,6 +1,6 @@
 package model.entities;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,9 +8,10 @@ public class Album {
     private Long albumId;
     private String name;
     private String description;
-    private Timestamp publishDate;
-    private Timestamp eventDate;
+    private Date publishDate;
+    private Date eventDate;
     private String mainPhotoLocation;
+//    private String addedBy;
     private Set<Photo> albumPhotos = new HashSet<>();
 
     public Long getAlbumId() {
@@ -37,19 +38,19 @@ public class Album {
         this.description = description;
     }
 
-    public Timestamp getPublishDate() {
+    public Date getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Timestamp publishDate) {
+    public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
     }
 
-    public Timestamp getEventDate() {
+    public Date getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Timestamp eventDate) {
+    public void setEventDate(Date eventDate) {
         this.eventDate = eventDate;
     }
 

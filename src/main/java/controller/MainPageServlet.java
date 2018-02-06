@@ -2,20 +2,27 @@ package controller;
 
 import model.DAO.AlbumDAO;
 import model.DAO.DAOImpl.AlbumDAOImpl;
-import model.DAO.DAOImpl.NewsDAOImpl;
+import model.DAO.DAOImpl.EventDAOImpl;
+import model.DAO.DAOImpl.PostDAOImpl;
+import model.DAO.EventDAO;
 import model.DAO.HibernateUtil;
-import model.DAO.NewsDAO;
+import model.DAO.PostDAO;
+import model.entities.Event;
+import model.entities.Post;
 import model.entities.wrappers.BriefAlbum;
-import model.entities.wrappers.BriefNewsItem;
+import model.entities.wrappers.BriefEvent;
 import org.hibernate.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class MainPageServlet extends HttpServlet {
@@ -27,26 +34,37 @@ public class MainPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-16");
         PrintWriter printWriter = resp.getWriter();
 
-
-
         List<BriefAlbum> briefAlbumList = null;
-        List<BriefNewsItem> briefNewsItemList = null;
-        NewsDAO newsDAO = new NewsDAOImpl();
+        List<Post> postList = null;
+        List<BriefEvent> briefEventList = null;
+
         AlbumDAO albumDAO = new AlbumDAOImpl();
+        PostDAO postDAO = new PostDAOImpl();
+        EventDAO eventDAO = new EventDAOImpl();
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            briefNewsItemList = (List<BriefNewsItem>) newsDAO.getBriefNewsItems(session, 10);
-            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, 4);
+            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, new Date(), 4);
+            postList = (List<Post>) postDAO.getPosts(session, new Date(), 15);
+            briefEventList = (List<BriefEvent>) eventDAO.getBriefEvents(session, new Date(), 4);
         } catch (SQLException e) {
             e.printStackTrace();
             //TODO exceptions handling
         }
+
         session.close();
 
-        req.setAttribute("briefNewsItemList", briefNewsItemList);
+        //req.setAttribute("briefNewsItemList", briefNewsItemList);
         req.setAttribute("briefAlbumList", briefAlbumList);
+
+
+        for(Post post: postList) {
+            printWriter.println(post.toString());
+            //System.out.println(post.toString());
+        }
 
 //        printWriter.println("<html> <body>");
 //        for (BriefNewsItem briefNewsItem: briefNewsItemList) {
@@ -89,8 +107,6 @@ public class MainPageServlet extends HttpServlet {
 //
 //        tx.commit();
 //        session.close();
-
-        printWriter.println();
 
 
         //getServletContext().getRequestDispatcher("/myjsp").forward(req,resp);

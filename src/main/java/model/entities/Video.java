@@ -1,4 +1,4 @@
 package model.entities;
 
-public class Author {
+public class Video {
 }

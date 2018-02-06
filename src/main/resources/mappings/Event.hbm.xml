@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model.entities">
+
+    <class name="Event" table="Events">
+        <id name="id" column="event_id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="description"/>
+        <property name="eventDate"/>
+        <property name="venue"/>
+        <property name="hasPassed"/>
+        <property name="addedBy"/>
+        <property name="eventPhotoLocation"/>
+
+        <!--tags-->
+        <!--files вместо заявок сделать регистрацию на гугл формах-->
+
+    </class>
+</hibernate-mapping>
+
+        <!--private Long id;-->
+        <!--private String name;-->
+        <!--private String description;-->
+        <!--private Date eventDate;-->
+        <!--private String venue;-->
+        <!--private boolean hasPassed = false;-->
+        <!--private String addedBy;-->

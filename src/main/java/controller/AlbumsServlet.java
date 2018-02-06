@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class AlbumsServlet extends HttpServlet {
@@ -19,7 +21,12 @@ public class AlbumsServlet extends HttpServlet {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         AlbumDAO albumDAO = new AlbumDAOImpl();
-        List<BriefAlbum> briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, 9);
+        List<BriefAlbum> briefAlbumList = null;
+        try {
+            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, new Date(), 9);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         for(BriefAlbum briefAlbum: briefAlbumList) {
 

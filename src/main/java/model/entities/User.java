@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String lastName;
     private Long course;
     private String group;
-    private Timestamp lastLoginDate;
+    private Date lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
 
 
@@ -78,11 +78,11 @@ public class User implements Serializable {
         this.group = group;
     }
 
-    public Timestamp getLastLoginDate() {
+    public Date getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Timestamp lastLoginDate) {
+    public void setLastLoginDate(Date lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 

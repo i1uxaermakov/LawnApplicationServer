@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model.entities">
+
+    <class name="Post" table="Posts">
+        <id name="id" column="post_id">
+            <generator class="native"/>
+        </id>
+        <property name="authorName"/>
+        <property name="organizationName"/>
+        <property name="title"/>
+        <property name="postText"/>
+        <property name="description"/>
+        <property name="publishDate"/>
+        <property name="status"/>
+
+        <!--фотки можно загрузить при визуализации, изза возможности поста быть слишком большим по тексту-->
+        <set name="tags" table="PostsTags" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="post_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.Tag">
+                <column name="tag_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
+        <!--<set name="attachedFiles" table="">-->
+        <!--<key column="NEWS_ID"/>-->
+        <!--<many-to-many column="FILE_ID" class="File"/>-->
+        <!--</set>-->
+
+    </class>
+</hibernate-mapping>

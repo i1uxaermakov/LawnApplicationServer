@@ -22,11 +22,5 @@
             </composite-element>
         </set>
 
-
-        <!--<set name="attachedFiles" table="">-->
-        <!--<key column="NEWS_ID"/>-->
-        <!--<many-to-many column="FILE_ID" class="File"/>-->
-        <!--</set>-->
-
     </class>
 </hibernate-mapping>

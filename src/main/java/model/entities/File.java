@@ -1,11 +1,17 @@
 package model.entities;
 
+import java.util.Date;
+
 public class File {
     private Long id;
     private String name;
     private Long size;
     private String location;
     private String author;
+    private Date publishDate;
+
+    public File() {
+    }
 
     public Long getId() {
         return id;
@@ -45,5 +51,13 @@ public class File {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
     }
 }

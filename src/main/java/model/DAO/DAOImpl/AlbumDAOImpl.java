@@ -11,11 +11,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class AlbumDAOImpl implements AlbumDAO {
     @Override
-    public Collection getBriefAlbums(Session session, int maxResults) {
+    public Collection getBriefAlbums(Session session, Date date, int maxResults) {
         List<BriefAlbum> briefAlbumList = null;
         Transaction transaction = session.beginTransaction();
 
@@ -31,7 +32,8 @@ public class AlbumDAOImpl implements AlbumDAO {
                         albumRoot.get(Album_.mainPhotoLocation)
                 )
         );
-        criteriaQuery.orderBy(criteriaBuilder.desc(albumRoot.get(Album_.albumId)));
+        criteriaQuery.where(criteriaBuilder.lessThan(albumRoot.get(Album_.publishDate),date));
+        criteriaQuery.orderBy(criteriaBuilder.desc(albumRoot.get(Album_.publishDate)));
         briefAlbumList = session.createQuery(criteriaQuery).setMaxResults(maxResults).getResultList();
 
         transaction.commit();
