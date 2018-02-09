@@ -13,7 +13,18 @@
     <welcome-file-list>
         <welcome-file>MainPageServlet</welcome-file>
     </welcome-file-list>
-    
+
+    <servlet>
+        <servlet-name>vis</servlet-name>
+        <jsp-file>/MainPageSliderVisualizer.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>vis</servlet-name>
+        <url-pattern>/MainPageSliderVisualizer.jsp</url-pattern>
+    </servlet-mapping>
+
+
+
     <servlet>
         <servlet-name>EducationSphereServlet</servlet-name>
         <servlet-class>controller.EducationServlet</servlet-class>
@@ -73,22 +84,13 @@
     
 
     <!--jsp-->
-    <servlet>
-        <servlet-name>myjsp</servlet-name>
-            <jsp-file>/WEB-INF/MainPageVisualizer.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>myjsp</servlet-name>
-        <url-pattern>/myjsp</url-pattern>
-    </servlet-mapping>
 
 
     <!--error pages-->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/shiiiiit.html</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/shiiiiit.html</location>-->
+    <!--</error-page>-->
 
     <!--<error-page>-->
         <!--<error-code>500</error-code>-->

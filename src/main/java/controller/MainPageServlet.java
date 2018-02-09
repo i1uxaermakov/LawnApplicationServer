@@ -34,51 +34,40 @@ public class MainPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-16");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
         PrintWriter printWriter = resp.getWriter();
 
-        List<BriefAlbum> briefAlbumList = null;
+        //List<BriefAlbum> briefAlbumList = null;
         List<Post> postList = null;
-        List<BriefEvent> briefEventList = null;
+        //List<BriefEvent> briefEventList = null;
 
-        AlbumDAO albumDAO = new AlbumDAOImpl();
+        //AlbumDAO albumDAO = new AlbumDAOImpl();
         PostDAO postDAO = new PostDAOImpl();
-        EventDAO eventDAO = new EventDAOImpl();
+        //EventDAO eventDAO = new EventDAOImpl();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, new Date(), 4);
+            //briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, new Date(), 4);
             postList = (List<Post>) postDAO.getPosts(session, new Date(), 15);
-            briefEventList = (List<BriefEvent>) eventDAO.getBriefEvents(session, new Date(), 4);
+            //briefEventList = (List<BriefEvent>) eventDAO.getBriefEvents(session, new Date(), 4);
         } catch (SQLException e) {
             e.printStackTrace();
             //TODO exceptions handling
         }
-
-        session.close();
+//
+//        session.close();
 
         //req.setAttribute("briefNewsItemList", briefNewsItemList);
         //req.setAttribute("briefAlbumList", briefAlbumList);
-
-        printWriter.println("Albums");
-        for(BriefAlbum album: briefAlbumList) {
-            printWriter.println(album.toString());
-        }
-
-        printWriter.println();
-
-        printWriter.println("Events");
-        for(BriefEvent event: briefEventList) {
-            printWriter.println(event.toString());
-        }
-
-        printWriter.println();
-
-        printWriter.println("Posts");
-        for(Post post: postList) {
-            printWriter.println(post.toString());
-            //System.out.println(post.toString());
-        }
+        req.setAttribute("postList", postList);
+//
+        req.getRequestDispatcher("MainPageSliderVisualizer.jsp").forward(req,resp);
+//
+//        for(Post post: postList) {
+//            printWriter.println(post.toString());
+//            //System.out.println(post.toString());
+//        }
 
 //        printWriter.println("<html> <body>");
 //        for (BriefNewsItem briefNewsItem: briefNewsItemList) {

@@ -13,7 +13,7 @@
         <!--<property name="dialect">org.hibernate.dialect.MySQLDialect</property>-->
         <!-- DB schema will be updated if needed -->
         <!--validate/create/update/create-drop-->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">validate</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
