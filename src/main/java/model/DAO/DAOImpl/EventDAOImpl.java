@@ -30,7 +30,7 @@ public class EventDAOImpl implements EventDAO {
                         eventRoot.get(Event_.id),
                         eventRoot.get(Event_.name),
                         eventRoot.get(Event_.eventDate),
-                        eventRoot.get(Event_.mainPhotoLocation)
+                        eventRoot.get(Event_.eventPhotoLocation)
                 )
         );
 

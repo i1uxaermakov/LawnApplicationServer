@@ -1,6 +1,5 @@
 package controller;
 
-import model.DAO.DAOImpl.NewsDAOImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

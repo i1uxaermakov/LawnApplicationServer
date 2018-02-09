@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model.entities">
+
+    <class name="Photo" table="Photos">
+        <id name="id" column="photo_id">
+            <generator class="native"/>
+        </id>
+
+        <property name="photoName"/>
+        <property name="photoLocation"/>
+        <property name="authorId"/>
+        <property name="publishDate"/>
+    </class>
+</hibernate-mapping>
+
+        <!--private Long id;-->
+        <!--private String name;-->
+        <!--private String description;-->
+        <!--private Date eventDate;-->
+        <!--private String venue;-->
+        <!--private boolean hasPassed = false;-->
+        <!--private String addedBy;-->

@@ -58,9 +58,23 @@ public class MainPageServlet extends HttpServlet {
         session.close();
 
         //req.setAttribute("briefNewsItemList", briefNewsItemList);
-        req.setAttribute("briefAlbumList", briefAlbumList);
+        //req.setAttribute("briefAlbumList", briefAlbumList);
 
+        printWriter.println("Albums");
+        for(BriefAlbum album: briefAlbumList) {
+            printWriter.println(album.toString());
+        }
 
+        printWriter.println();
+
+        printWriter.println("Events");
+        for(BriefEvent event: briefEventList) {
+            printWriter.println(event.toString());
+        }
+
+        printWriter.println();
+
+        printWriter.println("Posts");
         for(Post post: postList) {
             printWriter.println(post.toString());
             //System.out.println(post.toString());

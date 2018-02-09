@@ -13,13 +13,8 @@
         <property name="publishDate"/>
 
         <set name="albumPhotos" table="AlbumPhotos" fetch="join">
-            <key column="album_id"></key>
-            <composite-element class="model.entities.Photo">
-                <property name="photoName" not-null="true"/>
-                <property name="photoLocation" not-null="true"/>
-                <property name="publishDate" type="timestamp"/>
-                <property name="authorId"/>
-            </composite-element>
+            <key column="album_id"/>
+            <many-to-many class="model.entities.Photo"/>
         </set>
 
     </class>

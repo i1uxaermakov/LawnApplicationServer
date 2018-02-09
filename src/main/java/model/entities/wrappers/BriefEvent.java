@@ -6,13 +6,13 @@ public class BriefEvent {
     private Long id;
     private String name;
     private Date eventDate;
-    private String mainPhotoLocation;
+    private String eventPhotoLocation;
 
     public BriefEvent(Long id, String name, Date eventDate, String mainPhotoLocation) {
         this.id = id;
         this.name = name;
         this.eventDate = eventDate;
-        this.mainPhotoLocation = mainPhotoLocation;
+        this.eventPhotoLocation = mainPhotoLocation;
     }
 
     public BriefEvent() {
@@ -42,11 +42,21 @@ public class BriefEvent {
         this.eventDate = eventDate;
     }
 
-    public String getMainPhotoLocation() {
-        return mainPhotoLocation;
+    public String getEventPhotoLocation() {
+        return eventPhotoLocation;
     }
 
-    public void setMainPhotoLocation(String mainPhotoLocation) {
-        this.mainPhotoLocation = mainPhotoLocation;
+    public void setEventPhotoLocation(String eventPhotoLocation) {
+        this.eventPhotoLocation = eventPhotoLocation;
+    }
+
+    @Override
+    public String toString() {
+        return "BriefEvent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", eventDate=" + eventDate +
+                ", mainPhotoLocation='" + eventPhotoLocation + '\'' +
+                '}';
     }
 }
