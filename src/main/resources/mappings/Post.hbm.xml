@@ -24,10 +24,20 @@
             </many-to-many>
         </set>
 
-        <!--<set name="attachedFiles" table="">-->
-        <!--<key column="NEWS_ID"/>-->
-        <!--<many-to-many column="FILE_ID" class="File"/>-->
-        <!--</set>-->
+        <set name="photos" table="PostPhotos" fetch="join">
+            <key column="post_id"/>
+            <many-to-many class="model.entities.Photo"/>
+        </set>
 
+        <set name="files" table="PostFiles" fetch="join">
+            <key column="post_id"/>
+            <many-to-many class="model.entities.File"/>
+        </set>
+
+        <set name="videos" table="PostVideos" fetch="join">
+            <key column="post_id"/>
+            <many-to-many class="model.entities.Video"/>
+        </set>
+        
     </class>
 </hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model.entities">
+
+    <class name="File" table="Files">
+        <id name="id" column="file_id">
+            <generator class="native"/>
+        </id>
+        
+        <property name="name"/>
+        <property name="author"/>
+        <property name="location"/>
+        <property name="size"/>
+        <property name="publishDate"/>
+        
+    </class>
+</hibernate-mapping>
+
+<!--private Long id;
+    private String name;
+    private Long size;
+    private String location;
+    private String author;
+    private Date publishDate;-->

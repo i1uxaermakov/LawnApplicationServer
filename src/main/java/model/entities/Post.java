@@ -13,9 +13,9 @@ public class Post implements Serializable {
     private String postText;
     private String description;
     private String status;
-//    private Set<Photo> photos;
-//    private Set<Video> videos;
-//    private Set<File> files;
+    private Set<Photo> photos;
+    private Set<Video> videos;
+    private Set<File> files;
     private Set<Tag> tags;
 
     public Post() {
@@ -77,31 +77,6 @@ public class Post implements Serializable {
         this.description = description;
     }
 
-    //    public Set<Photo> getPhotos() {
-//        return photos;
-//    }
-//
-//    public void setPhotos(Set<Photo> photos) {
-//        this.photos = photos;
-//    }
-//
-//    public Set<Video> getVideos() {
-//        return videos;
-//    }
-//
-//    public void setVideos(Set<Video> videos) {
-//        this.videos = videos;
-//    }
-//
-//    public Set<File> getFiles() {
-//        return files;
-//    }
-//
-//    public void setFiles(Set<File> files) {
-//        this.files = files;
-//    }
-
-
     public String getStatus() {
         return status;
     }
@@ -118,5 +93,27 @@ public class Post implements Serializable {
         this.tags = tags;
     }
 
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
 
+    public void setPhotos(Set<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Set<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(Set<File> files) {
+        this.files = files;
+    }
+
+    public Set<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Set<Video> videos) {
+        this.videos = videos;
+    }
 }

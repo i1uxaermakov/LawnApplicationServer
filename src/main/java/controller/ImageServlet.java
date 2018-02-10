@@ -17,20 +17,26 @@ public class ImageServlet extends HttpServlet {
         String requestURI = req.getRequestURI();
         requestURI = requestURI.replace("/image", "");
 
-        File image = new File(pathBeginning + requestURI);
+        if(requestURI.equals("")) {
+            resp.setContentType("text/html");
+            resp.getWriter().println("image");
+        }
+        else {
+            File image = new File(pathBeginning + requestURI);
 //        System.out.println("/Users/ilya_ermakov/Desktop" +reqPath);
 
-        resp.setContentType("image/png");
-        resp.setContentLength((int)image.length());
+            resp.setContentType("image/png");
+            resp.setContentLength((int) image.length());
 
-        FileInputStream fileInputStream = new FileInputStream(image);
-        OutputStream outputStream = resp.getOutputStream();
-        byte[] buf = new byte[1024];
-        int len = 0;
-        while((len = fileInputStream.read(buf)) >= 0) {
-            outputStream.write(buf);
+            FileInputStream fileInputStream = new FileInputStream(image);
+            OutputStream outputStream = resp.getOutputStream();
+            byte[] buf = new byte[1024];
+            int len = 0;
+            while ((len = fileInputStream.read(buf)) >= 0) {
+                outputStream.write(buf);
+            }
+            fileInputStream.close();
+            outputStream.close();
         }
-        fileInputStream.close();
-        outputStream.close();
     }
 }
