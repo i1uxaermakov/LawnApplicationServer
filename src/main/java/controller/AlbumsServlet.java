@@ -23,7 +23,7 @@ public class AlbumsServlet extends HttpServlet {
         AlbumDAO albumDAO = new AlbumDAOImpl();
         List<BriefAlbum> briefAlbumList = null;
         try {
-            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, new Date(), 9);
+            briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(new Date(), 9);
         } catch (SQLException e) {
             e.printStackTrace();
         }

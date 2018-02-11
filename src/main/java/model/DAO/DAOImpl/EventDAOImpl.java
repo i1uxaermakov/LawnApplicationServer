@@ -1,10 +1,12 @@
 package model.DAO.DAOImpl;
 
 import model.DAO.EventDAO;
+import model.DAO.HibernateUtil;
 import model.entities.Event;
 import model.entities.Event_;
 import model.entities.wrappers.BriefEvent;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,8 +18,10 @@ import java.util.Date;
 import java.util.List;
 
 public class EventDAOImpl implements EventDAO {
+    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
-    public Collection getBriefEvents(Session session, Date date, int maxResults) {
+    public Collection getBriefEvents(Date date, int maxResults) {
+        Session session = sessionFactory.getCurrentSession();
         List<BriefEvent> briefEventList = null;
         Transaction transaction = session.beginTransaction();
 
@@ -48,7 +52,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public Event getEventById(Session session, int event_id) {
+    public Event getEventById(int event_id) {
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Event event = session.load(Event.class, event_id);
         transaction.commit();

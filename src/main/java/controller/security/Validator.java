@@ -49,7 +49,7 @@ public class Validator {
             Session session = HibernateUtil.getSessionFactory().openSession();
 
             try {
-                userLoginInfo = userDAO.getUserSignInfoByLyceumId(session, lyceumId);
+                userLoginInfo = userDAO.getUserSignInfoByLyceumId(lyceumId);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

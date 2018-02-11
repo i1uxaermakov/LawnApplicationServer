@@ -1,10 +1,12 @@
 package model.DAO.DAOImpl;
 
 import model.DAO.AlbumDAO;
+import model.DAO.HibernateUtil;
 import model.entities.Album;
 import model.entities.Album_;
 import model.entities.wrappers.BriefAlbum;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,8 +17,10 @@ import java.util.Date;
 import java.util.List;
 
 public class AlbumDAOImpl implements AlbumDAO {
+    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
-    public Collection getBriefAlbums(Session session, Date date, int maxResults) {
+    public Collection getBriefAlbums(Date date, int maxResults) {
+        Session session = sessionFactory.getCurrentSession();
         List<BriefAlbum> briefAlbumList = null;
         Transaction transaction = session.beginTransaction();
 
@@ -41,7 +45,8 @@ public class AlbumDAOImpl implements AlbumDAO {
     }
 
     @Override
-    public Album getAlbumById(Session session, Long albumId) {
+    public Album getAlbumById(Long albumId) {
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Album album = session.load(Album.class, albumId);
         transaction.commit();

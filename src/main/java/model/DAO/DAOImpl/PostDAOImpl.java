@@ -1,9 +1,11 @@
 package model.DAO.DAOImpl;
 
+import model.DAO.HibernateUtil;
 import model.DAO.PostDAO;
 import model.entities.Post;
 import model.entities.Post_;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,8 +17,11 @@ import java.util.Date;
 import java.util.List;
 
 public class PostDAOImpl implements PostDAO {
+    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     @Override
-    public Post getPostById(Session session, Long post_id) throws SQLException {
+    public Post getPostById(Long post_id) throws SQLException {
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Post post = session.load(Post.class, post_id);
         transaction.commit();
@@ -24,7 +29,9 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public Collection getPosts(Session session, Date date, int maxResults) throws SQLException {
+    public Collection getPosts(Date date, int maxResults) throws SQLException {
+
+        Session session = sessionFactory.getCurrentSession();
         List<Post> postList = null;
         Transaction transaction = session.beginTransaction();
 

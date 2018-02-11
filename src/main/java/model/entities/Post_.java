@@ -9,13 +9,16 @@ import java.util.Date;
 public class Post_ {
     public static volatile SingularAttribute<Post,Long> id;
     public static volatile SingularAttribute<Post,String> authorName;
-    public static volatile SingularAttribute<Post,String> organizationMame;
+    public static volatile SingularAttribute<Post,String> organizationName;
     public static volatile SingularAttribute<Post,Date> publishDate;
     public static volatile SingularAttribute<Post,String> title;
     public static volatile SingularAttribute<Post,String> postText;
     public static volatile SingularAttribute<Post,Long> description;
     public static volatile SingularAttribute<Post,String> status;
     public static volatile SetAttribute<Post,Tag> tags;
+    public static volatile SetAttribute<Post,Photo> photos;
+    public static volatile SetAttribute<Post,Video> videos;
+    public static volatile SetAttribute<Post,File> files;
 }
 
 /*

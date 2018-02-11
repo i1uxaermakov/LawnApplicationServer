@@ -8,6 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 
 public interface EventDAO {
-    Collection getBriefEvents(Session session, Date date, int maxResults) throws SQLException;
-    Event getEventById(Session session, int event_id);
+    Collection getBriefEvents(Date date, int maxResults) throws SQLException;
+    Event getEventById(int event_id);
 }

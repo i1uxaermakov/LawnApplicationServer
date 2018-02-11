@@ -24,20 +24,32 @@
             </many-to-many>
         </set>
 
-        <set name="photos" table="PostPhotos" fetch="join">
-            <key column="post_id"/>
-            <many-to-many class="model.entities.Photo"/>
+        <set name="photos" table="PostPhotos" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="post_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.Photo">
+                <column name="photo_id" not-null="true"/>
+            </many-to-many>
         </set>
 
-        <set name="files" table="PostFiles" fetch="join">
-            <key column="post_id"/>
-            <many-to-many class="model.entities.File"/>
+        <set name="files" table="PostFiles" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="post_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.File">
+                <column name="file_id" not-null="true"/>
+            </many-to-many>
         </set>
 
-        <set name="videos" table="PostVideos" fetch="join">
-            <key column="post_id"/>
-            <many-to-many class="model.entities.Video"/>
+        <set name="videos" table="PostVideos" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="post_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.Video">
+                <column name="video_id" not-null="true"/>
+            </many-to-many>
         </set>
-        
+
     </class>
 </hibernate-mapping>

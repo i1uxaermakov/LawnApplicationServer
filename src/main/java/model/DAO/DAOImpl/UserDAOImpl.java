@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
+    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 //    @Override
 //    public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException {
@@ -61,8 +62,8 @@ public class UserDAOImpl implements UserDAO {
 //    }
 
     @Override
-    public UserLoginInfo getUserSignInfoByLyceumId(Session session, String lyceumId) throws SQLException {
-
+    public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException {
+        Session session = sessionFactory.getCurrentSession();
         List<UserLoginInfo> userLoginInfoList = null;
         Transaction transaction = session.beginTransaction();
 

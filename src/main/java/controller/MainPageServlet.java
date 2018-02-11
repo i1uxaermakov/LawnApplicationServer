@@ -44,12 +44,13 @@ public class MainPageServlet extends HttpServlet {
 
         //AlbumDAO albumDAO = new AlbumDAOImpl();
         PostDAO postDAO = new PostDAOImpl();
+        System.out.println("request");
         //EventDAO eventDAO = new EventDAOImpl();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             //briefAlbumList = (List<BriefAlbum>) albumDAO.getBriefAlbums(session, new Date(), 4);
-            postList = (List<Post>) postDAO.getPosts(session, new Date(), 15);
+            postList = (List<Post>) postDAO.getPosts(new Date(), 15);
             //briefEventList = (List<BriefEvent>) eventDAO.getBriefEvents(session, new Date(), 4);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,7 +110,8 @@ public class MainPageServlet extends HttpServlet {
 //        }
 //
 //        tx.commit();
-//        session.close();
+        session.close();
+        System.out.println("close session");
 
 
         //getServletContext().getRequestDispatcher("/myjsp").forward(req,resp);

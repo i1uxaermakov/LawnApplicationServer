@@ -16,14 +16,14 @@ public class URLRewritingFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String requestedURI = request.getRequestURI();
-        if(requestedURI.endsWith("/")) {
+        System.out.println(requestedURI);
+        if(requestedURI.length()!=1 && requestedURI.endsWith("/")) {
             requestedURI = requestedURI.substring(0, requestedURI.length()-1);
             response.sendRedirect(requestedURI);
         }
         else {
             filterChain.doFilter(servletRequest,servletResponse);
         }
-
     }
 
     @Override

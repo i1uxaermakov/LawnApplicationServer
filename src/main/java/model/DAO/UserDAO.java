@@ -7,6 +7,6 @@ import org.hibernate.Session;
 import java.sql.SQLException;
 
 public interface UserDAO {
-    UserLoginInfo getUserSignInfoByLyceumId(Session session, String lyceumId) throws SQLException;
+    UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException;
 //    User getUserByLyceumId(String lyceumId) throws SQLException;
 }

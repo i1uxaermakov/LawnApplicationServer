@@ -8,6 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 
 public interface AlbumDAO {
-    Collection getBriefAlbums(Session session, Date date, int maxResults) throws SQLException;
-    Album getAlbumById(Session session, Long albumId) throws SQLException;
+    Collection getBriefAlbums(Date date, int maxResults) throws SQLException;
+    Album getAlbumById(Long albumId) throws SQLException;
 }
