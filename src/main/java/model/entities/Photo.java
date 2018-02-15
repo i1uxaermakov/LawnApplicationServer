@@ -78,4 +78,15 @@ public class Photo implements Serializable {
         result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", photoName='" + photoName + '\'' +
+                ", photoLocation='" + photoLocation + '\'' +
+                ", publishDate=" + publishDate +
+                ", authorId=" + authorId +
+                '}';
+    }
 }

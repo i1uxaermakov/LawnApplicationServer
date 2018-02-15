@@ -24,4 +24,8 @@ public class SessionController {
     public AppSession get(String ss_id) {
         return activeSessions.get(ss_id);
     }
+
+    public boolean isAuthorised(String ss_id) {
+        return activeSessions.containsKey(ss_id);
+    }
 }

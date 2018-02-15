@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class EventDAOImpl implements EventDAO {
-    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
     public Collection getBriefEvents(Date date, int maxResults) {
         Session session = sessionFactory.getCurrentSession();

@@ -1,4 +1,4 @@
-package controller;
+package controller.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +15,15 @@ public class URLRewritingFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+
         String requestedURI = request.getRequestURI();
-        System.out.println(requestedURI);
+//        System.out.println(requestedURI);
         if(requestedURI.length()!=1 && requestedURI.endsWith("/")) {
             requestedURI = requestedURI.substring(0, requestedURI.length()-1);
             response.sendRedirect(requestedURI);
         }
         else {
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

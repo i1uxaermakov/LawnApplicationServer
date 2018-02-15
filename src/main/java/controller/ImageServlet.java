@@ -1,5 +1,6 @@
 package controller;
 
+import javax.jnlp.FileSaveService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,25 +12,26 @@ import java.io.OutputStream;
 
 public class ImageServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String pathBeginning = "/Users/ilya_ermakov/Desktop/image";
-        String requestURI = req.getRequestURI();
-        requestURI = requestURI.replace("/image", "");
+        String requestURI = request.getPathInfo();
+        //requestURI = requestURI.replace("/image", "");
+
 
         if(requestURI.equals("")) {
-            resp.setContentType("text/html");
-            resp.getWriter().println("image");
+            response.setContentType("text/html");
+            response.getWriter().println("image");
         }
         else {
             File image = new File(pathBeginning + requestURI);
 //        System.out.println("/Users/ilya_ermakov/Desktop" +reqPath);
 
-            resp.setContentType("image/png");
-            resp.setContentLength((int) image.length());
+            response.setContentType("image/png");
+            response.setContentLength((int) image.length());
 
             FileInputStream fileInputStream = new FileInputStream(image);
-            OutputStream outputStream = resp.getOutputStream();
+            OutputStream outputStream = response.getOutputStream();
             byte[] buf = new byte[1024];
             int len = 0;
             while ((len = fileInputStream.read(buf)) >= 0) {
@@ -37,6 +39,8 @@ public class ImageServlet extends HttpServlet {
             }
             fileInputStream.close();
             outputStream.close();
+
+
         }
     }
 }

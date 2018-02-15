@@ -26,6 +26,7 @@ public class Validator {
     boolean checkUserSignInInfo(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession httpSession = request.getSession(true);
+        
 
         Enumeration parameterNames = request.getParameterNames();
         String lyceumId = null, password = null;
@@ -62,7 +63,7 @@ public class Validator {
                     User user = null;
 
                     Transaction transaction = session.beginTransaction();
-                    user = session.load(User.class, userLoginInfo.getUserId());
+                    user = session.get(User.class, userLoginInfo.getUserId());
                     transaction.commit();
                     session.close();
 

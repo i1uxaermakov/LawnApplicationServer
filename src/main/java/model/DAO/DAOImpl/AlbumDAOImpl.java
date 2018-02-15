@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AlbumDAOImpl implements AlbumDAO {
-    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
     public Collection getBriefAlbums(Date date, int maxResults) {
         Session session = sessionFactory.getCurrentSession();
@@ -46,9 +46,10 @@ public class AlbumDAOImpl implements AlbumDAO {
 
     @Override
     public Album getAlbumById(Long albumId) {
+        Album album = null;
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Album album = session.load(Album.class, albumId);
+        album = session.get(Album.class, albumId);
         transaction.commit();
         return album;
     }

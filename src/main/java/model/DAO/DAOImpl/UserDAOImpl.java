@@ -14,52 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
-    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-//    @Override
-//    public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException {
-//        Session session = sessionFactory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(UserLoginInfo.class);
-//        Root<User> userRoot = criteriaQuery.from(User.class);
-//        SetJoin<User, String> privilegeNode = criteriaQuery.from(User.class).join(User_.privileges);
-//        criteriaQuery.select(
-//                criteriaBuilder.construct(
-//                        UserLoginInfo.class,
-//                        privilegeNode.get(User_.userId),
-//                        privilegeNode.get(User_.lyceumId),
-//                        privilegeNode.get(User_.password),
-//                        privilegeNode.get(User_.privileges)
-//                )
-//        );
-//        criteriaQuery.where(criteriaBuilder.equal(userRoot.get(User_.lyceumId), lyceumId));
-//
-//        List<UserLoginInfo> userLoginInfoList = session.createQuery(criteriaQuery).getResultList();
-//        transaction.commit();
-//        session.close();
-//        if (userLoginInfoList==null || userLoginInfoList.isEmpty()) {
-//            System.out.println("nulldao");
-//            return null;
-//        }
-//        else {
-//            System.out.println("founddao");
-//            return userLoginInfoList.get(0);
-//        }
-//    }
-
-
-//    @Override
-//    public User getUserByLyceumId(String lyceumId) throws SQLException {
-//        Session session = sessionFactory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(User.class);
-//
-//        return null;
-//    }
+    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException {
@@ -84,13 +39,18 @@ public class UserDAOImpl implements UserDAO {
         transaction.commit();
 
         if (userLoginInfoList == null || userLoginInfoList.isEmpty()) {
-//            System.out.println("nulldao");
             return null;
         } else {
-//            System.out.println("founddao");
             return userLoginInfoList.get(0);
         }
     }
 
-
+    @Override
+    public User getUserById(Long userId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        User user = session.get(User.class, userId);
+        transaction.commit();
+        return user;
+    }
 }

@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PostDAOImpl implements PostDAO {
-    static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public Post getPostById(Long post_id) throws SQLException {
