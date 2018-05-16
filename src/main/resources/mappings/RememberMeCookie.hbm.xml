@@ -6,7 +6,7 @@
         <id name="id" column="cookie_id">
             <generator class="native"/>
         </id>
-        <property name="cookieValue"/>
+        <property name="cookieValue" length="2000"/>
         <property name="userId"/>
 
     </class>

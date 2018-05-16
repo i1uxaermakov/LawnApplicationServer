@@ -7,26 +7,29 @@
             <generator class="native"/>
         </id>
 
-        <set name = "privileges" table="UserPrivileges" fetch="join" >
+        <set name="privileges" table="UserPrivileges" fetch="join" >
             <!--cascade="all"-->
             <key column = "user_id"/>
             <!--<one-to-many class="java.lang.String"/>-->
             <element column="privilege" type="string"/>
         </set>
 
-        <property name = "lyceumId" column = "lyceum_id" type = "string"/>
-        <property name = "password" column = "password" type = "string"/>
-        <property name = "firstName" column = "first_name" type = "string"/>
-        <property name = "lastName" column = "last_name" type = "string"/>
+        <set name="organizations" table="UserOrganizations" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="user_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.Organization">
+                <column name="organization_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
+        <property name = "lyceumId" column = "lyceum_id" length="50"/>
+        <property name = "password" column = "password" type = "string" length="50"/>
+        <property name = "firstName" column = "first_name" type = "string" length="50"/>
+        <property name = "lastName" column = "last_name" type = "string" length="50"/>
         <property name = "lastLoginDate" column = "last_login_date" type = "timestamp"/>
+        <property name = "groupId" column="group_id"/>
+        <property name="groupName" column="group_name"/>
 
     </class>
 </hibernate-mapping>
-
-        <!--private Long userId;-->
-        <!--private String lyceumId;-->
-        <!--private String password;-->
-        <!--private String firstName;-->
-        <!--private String lastName;-->
-        <!--private Date lastLoginDate;-->
-        <!--private Set privileges;-->

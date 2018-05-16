@@ -1,5 +1,6 @@
 package model.DAO.DAOImpl;
 
+import com.sun.org.apache.regexp.internal.RE;
 import model.DAO.HibernateUtil;
 import model.DAO.RememberMeCookieDAO;
 import model.entities.RememberMeCookie;
@@ -37,6 +38,27 @@ public class RememberMeCookieDAOImpl implements RememberMeCookieDAO {
             return null;
         } else {
             return rememberMeCookieList.get(0).getUserId();
+        }
+    }
+
+    @Override
+    public RememberMeCookie getRememberMeCookieByUserId(Long userId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(RememberMeCookie.class);
+        Root<RememberMeCookieDAO> rememberMeCookieDAORoot = criteriaQuery.from(RememberMeCookie.class);
+
+        criteriaQuery.where(criteriaBuilder.equal(rememberMeCookieDAORoot.get("userId"), userId));
+
+        List<RememberMeCookie> rememberMeCookieList = session.createQuery(criteriaQuery).getResultList();
+        transaction.commit();
+        if(!(rememberMeCookieList==null || rememberMeCookieList.isEmpty())) {
+            return null;
+        }
+        else {
+            return rememberMeCookieList.get(0);
         }
     }
 }

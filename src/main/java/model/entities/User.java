@@ -2,7 +2,6 @@ package model.entities;
 
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,11 +12,11 @@ public class User implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
-    private Long course;
-    private String group;
+    private Long groupId;
+    private String groupName;
     private Date lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
-
+    private Set<Organization> organizations = new HashSet<>(0);
 
     public User() {
     }
@@ -62,20 +61,12 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public Long getCourse() {
-        return course;
+    public Long getGroupId() {
+        return groupId;
     }
 
-    public void setCourse(Long course) {
-        this.course = course;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public Date getLastLoginDate() {
@@ -92,5 +83,21 @@ public class User implements Serializable {
 
     public void setPrivileges(Set<String> privileges) {
         this.privileges = privileges;
+    }
+
+    public Set<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public void setOrganizations(Set<Organization> organizations) {
+        this.organizations = organizations;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 }

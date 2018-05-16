@@ -6,10 +6,10 @@
         <id name="albumId" column="album_id">
             <generator class="native"/>
         </id>
-        <property name="name"/>
-        <property name="description"/>
+        <property name="name" length="2000"/>
+        <property name="description" length="15000"/>
         <property name="eventDate"/>
-        <property name="mainPhotoLocation"/>
+        <property name="mainPhotoLocation" length="2000"/>
         <property name="publishDate"/>
 
         <set name="albumPhotos" table="AlbumPhotos" fetch="join" lazy="false" inverse="true" cascade="all">

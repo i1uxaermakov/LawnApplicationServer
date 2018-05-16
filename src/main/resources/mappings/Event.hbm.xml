@@ -6,13 +6,15 @@
         <id name="id" column="event_id">
             <generator class="native"/>
         </id>
-        <property name="name"/>
-        <property name="description"/>
+        <property name="name" length="2000"/>
+        <property name="description">
+            <column name="description" sql-type="text"></column>
+        </property>
         <property name="eventDate"/>
-        <property name="venue"/>
+        <property name="venue" length="2000"/>
         <property name="hasPassed"/>
-        <property name="addedBy"/>
-        <property name="eventPhotoLocation"/>
+        <property name="addedBy" length="2000"/>
+        <property name="eventPhotoLocation" length="2000"/>
 
         <!--tags-->
         <!--files вместо заявок сделать регистрацию на гугл формах-->

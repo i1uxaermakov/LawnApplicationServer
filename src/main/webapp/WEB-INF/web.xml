@@ -6,17 +6,34 @@
 
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
+
+    <jsp-config>
+        <jsp-property-group id="defaultUtf8Encoder">
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
 
     <welcome-file-list>
         <welcome-file>MainPageServlet</welcome-file>
     </welcome-file-list>
 
     <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>filters.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
         <filter-name>URLRewritingFilter</filter-name>
-        <filter-class>controller.filters.URLRewritingFilter</filter-class>
+        <filter-class>filters.URLRewritingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>URLRewritingFilter</filter-name>
@@ -26,7 +43,7 @@
 
     <filter>
         <filter-name>AuthorisationFilter</filter-name>
-        <filter-class>controller.filters.AuthorisationFilter</filter-class>
+        <filter-class>filters.AuthorisationFilter</filter-class>
         <init-param>
             <param-name>CookieName</param-name>
             <param-value>petrmylyubimiypetr</param-value>
@@ -35,6 +52,18 @@
     <filter-mapping>
         <filter-name>AuthorisationFilter</filter-name>
         <url-pattern>/*</url-pattern>
+
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>IfAuthorisedFilter</filter-name>
+        <filter-class>filters.IfAuthorisedFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>IfAuthorisedFilter</filter-name>
+        <!--<url-pattern>/add/*</url-pattern>-->
+        <url-pattern>/edu/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
@@ -47,21 +76,29 @@
         <servlet-name>vis</servlet-name>
         <url-pattern>/MainPageSliderVisualizer.jsp</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+        <servlet-name>AddPostJSP</servlet-name>
+        <jsp-file>/AddPostJSP.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPostJSP</servlet-name>
+        <url-pattern>/AddPostJSP.jsp</url-pattern>
+    </servlet-mapping>
 
 
     <servlet>
         <servlet-name>EducationSphereServlet</servlet-name>
-        <servlet-class>controller.EducationServlet</servlet-class>
+        <servlet-class>sections.education.EducationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EducationSphereServlet</servlet-name>
-        <url-pattern>/education/*</url-pattern>
+        <url-pattern>/sections.education/*</url-pattern>
     </servlet-mapping>
     
     <servlet>
         <servlet-name>NewsServlet</servlet-name>
-        <servlet-class>controller.PostsServlet</servlet-class>
+        <servlet-class>sections.feed.posts.PostsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewsServlet</servlet-name>
@@ -71,7 +108,7 @@
 
     <servlet>
         <servlet-name>MainPageServlet</servlet-name>
-        <servlet-class>controller.MainPageServlet</servlet-class>
+        <servlet-class>MainPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainPageServlet</servlet-name>
@@ -81,55 +118,92 @@
     
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
-        <servlet-class>controller.security.SignInServlet</servlet-class>
+        <servlet-class>security.SignInServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignInServlet</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
-    
-    
+
     <servlet>
-        <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>controller.ImageServlet</servlet-class>
+        <servlet-name>SignOutServlet</servlet-name>
+        <servlet-class>security.SignOutServlet</servlet-class>
+        <init-param>
+            <param-name>CookieName</param-name>
+            <param-value>petrmylyubimiypetr</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ImageServlet</servlet-name>
-        <url-pattern>/image/*</url-pattern>
+        <servlet-name>SignOutServlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
     </servlet-mapping>
+    
+    <!--<servlet>-->
+        <!--<servlet-name>ImageServlet</servlet-name>-->
+        <!--<servlet-class>ImageServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ImageServlet</servlet-name>-->
+        <!--<url-pattern>/image/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>AlbumsServlet</servlet-name>
-        <servlet-class>controller.AlbumsServlet</servlet-class>
+        <servlet-class>sections.mediaarchive.AlbumsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AlbumsServlet</servlet-name>
         <url-pattern>/albums/*</url-pattern>
     </servlet-mapping>
     
-    <servlet>
-        <servlet-name>FileDownloadingServlet</servlet-name>
-        <servlet-class>controller.FileDownloadingServlet</servlet-class>
-        <init-param>
-            <param-name>fileUploadingRoot</param-name>
-            <param-value>/Users/ilya_ermakov/Desktop/image</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>FileDownloadingServlet</servlet-name>
-        <url-pattern>/file/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>FileDownloadingServlet</servlet-name>-->
+        <!--<servlet-class>controller.FileDownloadingServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>fileUploadingRoot</param-name>-->
+            <!--<param-value>/Users/ilya_ermakov/Desktop/image</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>FileDownloadingServlet</servlet-name>-->
+        <!--<url-pattern>/file/*</url-pattern>-->
+    <!--</servlet-mapping>-->
     
     <servlet>
         <servlet-name>AddPostServlet</servlet-name>
-        <servlet-class>controller.addition.AddPostServlet</servlet-class>
+        <servlet-class>sections.feed.posts.AddPostServlet</servlet-class>
+        <init-param>
+            <param-name>pathBeginningForPostFiles</param-name>
+            <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
+        </init-param>
+        <init-param>
+            <param-name>pathBeginningForPostPhotos</param-name>
+            <param-value>/Users/ilya_ermakov/Desktop/photos/posts</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddPostServlet</servlet-name>
-        <url-pattern>/addPost</url-pattern>
+        <url-pattern>/add/post/*</url-pattern>
     </servlet-mapping>
     <!--jsp-->
 
+    <servlet>
+        <servlet-name>JSP</servlet-name>
+        <jsp-file>/JSPTemp.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSP</servlet-name>
+        <url-pattern>/JSPTemp.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HW</servlet-name>
+        <servlet-class>sections.education.homework.HomeworkServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HW</servlet-name>
+        <url-pattern>/hw</url-pattern>
+    </servlet-mapping>
 
     <!--error pages-->
     <!--<error-page>-->

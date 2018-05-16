@@ -7,9 +7,11 @@
             <generator class="native"/>
         </id>
 
-        <property name="photoName"/>
-        <property name="photoLocation"/>
-        <property name="authorId"/>
+        <property name="photoName" length="2000"/>
+        <property name="photoLocationBIG" length="2000"/>
+        <property name="photoLocationMEDIUM" length="2000"/>
+        <property name="photoLocationSMALL" length="2000"/>
+        <property name="author"/>
         <property name="publishDate"/>
     </class>
 </hibernate-mapping>

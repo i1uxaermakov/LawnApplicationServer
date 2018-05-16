@@ -7,9 +7,9 @@
             <generator class="native"/>
         </id>
         
-        <property name="name"/>
-        <property name="author"/>
-        <property name="location"/>
+        <property name="name" length="2000"/>
+        <property name="author" length="2000"/>
+        <property name="location" length="2000"/>
         <property name="size"/>
         <property name="publishDate"/>
         

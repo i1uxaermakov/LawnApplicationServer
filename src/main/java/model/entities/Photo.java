@@ -2,16 +2,18 @@ package model.entities;
 
 import java.io.Serializable;
 import java.security.Timestamp;
+import java.sql.Date;
 import java.util.Set;
 
 public class Photo implements Serializable {
     private Long id;
     private String photoName;
-    private String photoLocation;
-    private Timestamp publishDate;
-    private Long authorId;
+    private String photoLocationBIG;
+    private String photoLocationMEDIUM;
+    private String photoLocationSMALL;
+    private Date publishDate;
+    private String author;
 //    likes
-
 
     public Photo() {
     }
@@ -32,28 +34,44 @@ public class Photo implements Serializable {
         this.photoName = photoName;
     }
 
-    public String getPhotoLocation() {
-        return photoLocation;
+    public String getPhotoLocationBIG() {
+        return photoLocationBIG;
     }
 
-    public void setPhotoLocation(String photoLocation) {
-        this.photoLocation = photoLocation;
+    public void setPhotoLocationBIG(String photoLocationBIG) {
+        this.photoLocationBIG = photoLocationBIG;
     }
 
-    public Timestamp getPublishDate() {
+    public String getPhotoLocationMEDIUM() {
+        return photoLocationMEDIUM;
+    }
+
+    public void setPhotoLocationMEDIUM(String photoLocationMEDIUM) {
+        this.photoLocationMEDIUM = photoLocationMEDIUM;
+    }
+
+    public String getPhotoLocationSMALL() {
+        return photoLocationSMALL;
+    }
+
+    public void setPhotoLocationSMALL(String photoLocationSMALL) {
+        this.photoLocationSMALL = photoLocationSMALL;
+    }
+
+    public Date getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Timestamp publishDate) {
+    public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
@@ -63,19 +81,27 @@ public class Photo implements Serializable {
 
         Photo photo = (Photo) o;
 
+        if (id != null ? !id.equals(photo.id) : photo.id != null) return false;
         if (photoName != null ? !photoName.equals(photo.photoName) : photo.photoName != null) return false;
-        if (photoLocation != null ? !photoLocation.equals(photo.photoLocation) : photo.photoLocation != null)
+        if (photoLocationBIG != null ? !photoLocationBIG.equals(photo.photoLocationBIG) : photo.photoLocationBIG != null)
+            return false;
+        if (photoLocationMEDIUM != null ? !photoLocationMEDIUM.equals(photo.photoLocationMEDIUM) : photo.photoLocationMEDIUM != null)
+            return false;
+        if (photoLocationSMALL != null ? !photoLocationSMALL.equals(photo.photoLocationSMALL) : photo.photoLocationSMALL != null)
             return false;
         if (publishDate != null ? !publishDate.equals(photo.publishDate) : photo.publishDate != null) return false;
-        return authorId != null ? authorId.equals(photo.authorId) : photo.authorId == null;
+        return author != null ? author.equals(photo.author) : photo.author == null;
     }
 
     @Override
     public int hashCode() {
-        int result = photoName != null ? photoName.hashCode() : 0;
-        result = 31 * result + (photoLocation != null ? photoLocation.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (photoName != null ? photoName.hashCode() : 0);
+        result = 31 * result + (photoLocationBIG != null ? photoLocationBIG.hashCode() : 0);
+        result = 31 * result + (photoLocationMEDIUM != null ? photoLocationMEDIUM.hashCode() : 0);
+        result = 31 * result + (photoLocationSMALL != null ? photoLocationSMALL.hashCode() : 0);
         result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
-        result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
     }
 
@@ -84,9 +110,11 @@ public class Photo implements Serializable {
         return "Photo{" +
                 "id=" + id +
                 ", photoName='" + photoName + '\'' +
-                ", photoLocation='" + photoLocation + '\'' +
+                ", photoLocationBIG='" + photoLocationBIG + '\'' +
+                ", photoLocationMEDIUM='" + photoLocationMEDIUM + '\'' +
+                ", photoLocationSMALL='" + photoLocationSMALL + '\'' +
                 ", publishDate=" + publishDate +
-                ", authorId=" + authorId +
+                ", author='" + author + '\'' +
                 '}';
     }
 }

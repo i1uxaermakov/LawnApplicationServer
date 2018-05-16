@@ -12,8 +12,10 @@
         <!--<property name=""/>-->
         <!--<property name="dialect">org.hibernate.dialect.MySQLDialect</property>-->
         <!-- DB schema will be updated if needed -->
+
         <!--validate/create/update/create-drop-->
-        <!--<property name="hbm2ddl.auto">validate</property>-->
+        <property name="hbm2ddl.auto">create</property>
+
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
@@ -24,6 +26,7 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
         <property name="hibernate.connection.characterSetResults">UTF-8</property>
+        <property name="hibernate.connection.autocommit">false</property>
 
         <property name="hibernate.c3p0.min_size">10</property>
         <property name="hibernate.c3p0.max_size">20</property>
@@ -40,11 +43,12 @@
         <mapping resource="mappings/User.hbm.xml"/>
         <mapping resource="mappings/Album.hbm.xml"/>
         <mapping resource="mappings/Post.hbm.xml"/>
-        <mapping resource="mappings/Tag.hbm.xml"/>
         <mapping resource="mappings/Event.hbm.xml"/>
         <mapping resource="mappings/Photo.hbm.xml"/>
         <mapping resource="mappings/File.hbm.xml"/>
         <mapping resource="mappings/Video.hbm.xml"/>
         <mapping resource="mappings/RememberMeCookie.hbm.xml"/>
+        <mapping resource="mappings/Organization.hbm.xml"/>
+        <mapping resource="mappings/HomeworkItem.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

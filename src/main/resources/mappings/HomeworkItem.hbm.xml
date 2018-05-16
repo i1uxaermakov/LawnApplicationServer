@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="sections.education.entities">
+
+    <class name="sections.education.entities.HomeworkItem" table="HomeworkItems">
+        <id name="id" column="hw_id">
+            <generator class="native"/>
+        </id>
+        <property name="teacherId"/>
+        <property name="teacherName"/>
+        <property name="groupId"/>
+        <property name="subjectId"/>
+        <property name="subjectName"/>
+        <property name="description" length="15000">
+            <column name="description" sql-type="text"></column>
+        </property>
+        <property name="publishDate"/>
+        <property name="deadlineDate"/>
+        <property name="albumId"/>
+        <property name="albumPhotosNumber"/>
+
+        <!--фотки можно загрузить при визуализации, изза возможности поста быть слишком большим по тексту-->
+
+        <set name="photos" table="HWPhotos" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="hw_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.Photo">
+                <column name="photo_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
+        <set name="files" table="HWFiles" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="hw_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.entities.File">
+                <column name="file_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

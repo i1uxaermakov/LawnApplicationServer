@@ -8,6 +8,6 @@ import java.sql.SQLException;
 
 public interface UserDAO {
     UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException;
-    User getUserById(Long userId);
+    User getUserById(Long userId) throws SQLException;
 //    User getUserByLyceumId(String lyceumId) throws SQLException;
 }
