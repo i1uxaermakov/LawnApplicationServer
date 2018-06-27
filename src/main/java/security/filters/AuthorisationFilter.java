@@ -41,6 +41,7 @@ public class AuthorisationFilter implements Filter {
             Cookie[] cookies = request.getCookies();
             if(cookies!=null) {
                 for (Cookie cookie : cookies) {
+//                    System.out.println(cookie.getName());
                     if (cookie.getName().equals(cookieName)) {
                         cookieValue = cookie.getValue();
                     }
@@ -57,7 +58,7 @@ public class AuthorisationFilter implements Filter {
                 }
 
                 if(cookieOwner != null) {
-                    Transaction transaction = session.getTransaction();
+                    Transaction transaction = session.beginTransaction();
                     User user = session.get(User.class, cookieOwner);
                     transaction.commit();
 

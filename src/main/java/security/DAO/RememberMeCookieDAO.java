@@ -50,10 +50,11 @@ public class RememberMeCookieDAO {
 
         List<RememberMeCookie> rememberMeCookieList = session.createQuery(criteriaQuery).getResultList();
         transaction.commit();
-        if(!(rememberMeCookieList==null || rememberMeCookieList.isEmpty())) {
+        if((rememberMeCookieList==null || rememberMeCookieList.isEmpty())) {
             return null;
         }
         else {
+            System.out.println(rememberMeCookieList.get(0).toString());
             return rememberMeCookieList.get(0);
         }
     }

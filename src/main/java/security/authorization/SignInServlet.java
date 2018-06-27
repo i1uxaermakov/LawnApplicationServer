@@ -91,7 +91,7 @@ public class SignInServlet extends HttpServlet {
 
                     RememberMeCookie rememberMeCookie = new RememberMeCookie(user.getUserId(), httpSession.getId());
                     Cookie cookie = new Cookie(rememberMeCookieName, httpSession.getId());
-                    cookie.setMaxAge(60*5);
+                    cookie.setMaxAge(60*60);
                     response.addCookie(cookie);
                     Transaction transactionCookie = session.beginTransaction();
                     session.persist(rememberMeCookie);

@@ -40,10 +40,12 @@ public class SignOutServlet extends HttpServlet {
                 RememberMeCookieDAO rememberMeCookieDAO = new RememberMeCookieDAO();
                 Session session = HibernateUtil.getSessionFactory().openSession();
 
-                RememberMeCookie rememberMeCookie = rememberMeCookieDAO.getRememberMeCookieByUserId(user.getUserId());
                 Transaction transaction = session.beginTransaction();
-                session.delete(rememberMeCookie);
+                RememberMeCookie rememberMeCookie = rememberMeCookieDAO.getRememberMeCookieByUserId(user.getUserId());
                 transaction.commit();
+                Transaction transactionDelete = session.beginTransaction();
+                session.delete(rememberMeCookie);
+                transactionDelete.commit();
 
                 session.close();
             }

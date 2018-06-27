@@ -45,7 +45,7 @@
         <filter-name>AuthorisationFilter</filter-name>
         <filter-class>security.filters.AuthorisationFilter</filter-class>
         <init-param>
-            <param-name>CookieName</param-name>
+            <param-name>RememberMeCookieName</param-name>
             <param-value>petrmylyubimiypetr</param-value>
         </init-param>
     </filter>

@@ -38,4 +38,13 @@ public class RememberMeCookie implements Serializable {
     public void setCookieValue(String cookieValue) {
         this.cookieValue = cookieValue;
     }
+
+    @Override
+    public String toString() {
+        return "RememberMeCookie{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", cookieValue='" + cookieValue + '\'' +
+                '}';
+    }
 }
