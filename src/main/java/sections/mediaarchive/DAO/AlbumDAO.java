@@ -1,4 +1,4 @@
-package sections.mediaarchive;
+package sections.mediaarchive.DAO;
 
 import model.DAO.HibernateUtil;
 import model.entities.Album;
@@ -11,14 +11,15 @@ import org.hibernate.Transaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class AlbumDAOImpl {
+public class AlbumDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public Collection getBriefAlbums(Date date, int maxResults) {
+    public Collection getBriefAlbums(Date date, int maxResults) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         List<BriefAlbum> briefAlbumList = null;
         Transaction transaction = session.beginTransaction();
@@ -43,7 +44,7 @@ public class AlbumDAOImpl {
         return briefAlbumList;
     }
 
-    public Album getAlbumById(Long albumId) {
+    public Album getAlbumById(Long albumId) throws SQLException {
         Album album = null;
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();

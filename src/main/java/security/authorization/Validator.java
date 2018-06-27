@@ -1,4 +1,4 @@
-package security;
+package security.authorization;
 
 import model.DAO.DAOImpl.UserDAOImpl;
 import model.DAO.HibernateUtil;

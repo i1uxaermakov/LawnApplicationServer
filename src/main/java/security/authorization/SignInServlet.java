@@ -1,4 +1,4 @@
-package security;
+package security.authorization;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +22,10 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Validator validator = new Validator();
         if(validator.checkUserSignInInfo(req,resp)) {
+            req.getRequestDispatcher("/").forward(req, resp);
         }
         else {
+            resp.setStatus(400);
         }
     }
 

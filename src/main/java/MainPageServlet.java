@@ -1,8 +1,7 @@
-import sections.mediaarchive.AlbumDAOImpl;
+import sections.mediaarchive.DAO.AlbumDAO;
 import sections.feed.events.EventDAO;
-import sections.feed.posts.model.DAO.DAOImpl.PostDAOImpl;
-import model.DAO.HibernateUtil;
 import sections.feed.posts.model.DAO.PostDAO;
+import model.DAO.HibernateUtil;
 import sections.feed.posts.model.entities.Post;
 import model.entities.wrappers.BriefAlbum;
 import model.entities.wrappers.BriefEvent;
@@ -34,9 +33,9 @@ public class MainPageServlet extends HttpServlet {
         List<Post> postList = null;
         List<BriefEvent> briefEventList = null;
 
-        AlbumDAO albumDAO = (AlbumDAO) new AlbumDAOImpl();
-        PostDAO postDAO = new PostDAOImpl();
-        model.DAO.EventDAO eventDAO = new EventDAO();
+        AlbumDAO albumDAO = (AlbumDAO) new AlbumDAO();
+        PostDAO postDAO = new PostDAO();
+        EventDAO eventDAO = new EventDAO();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

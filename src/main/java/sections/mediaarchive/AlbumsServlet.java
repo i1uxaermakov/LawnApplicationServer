@@ -5,6 +5,7 @@ import model.entities.Album;
 import model.entities.wrappers.BriefAlbum;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
+import sections.mediaarchive.DAO.AlbumDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +41,7 @@ public class AlbumsServlet extends HttpServlet {
     }
 
     public void showAlbums() {
-        AlbumDAO albumDAO = new AlbumDAOImpl();
+        AlbumDAO albumDAO = new AlbumDAO();
         Date date = new Date(System.currentTimeMillis());
         try {
             List<BriefAlbum> briefAlbums = (List<BriefAlbum>) albumDAO.getBriefAlbums(date, 15);
@@ -58,7 +59,7 @@ public class AlbumsServlet extends HttpServlet {
 
 
     public void showAlbumById(String pathInfo) {
-        AlbumDAO albumDAO = new AlbumDAOImpl();
+        AlbumDAO albumDAO = new AlbumDAO();
         Album album = null;
         try {
             album = albumDAO.getAlbumById(new Long(pathInfo));

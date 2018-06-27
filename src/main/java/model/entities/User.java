@@ -69,6 +69,14 @@ public class User implements Serializable {
         this.groupId = groupId;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
     public Date getLastLoginDate() {
         return lastLoginDate;
     }
@@ -91,13 +99,5 @@ public class User implements Serializable {
 
     public void setOrganizations(Set<Organization> organizations) {
         this.organizations = organizations;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
     }
 }

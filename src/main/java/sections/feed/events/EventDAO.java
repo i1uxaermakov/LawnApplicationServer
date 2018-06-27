@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -19,7 +20,7 @@ import java.util.List;
 public class EventDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public Collection getBriefEvents(Date date, int maxResults) {
+    public Collection getBriefEvents(Date date, int maxResults) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         List<BriefEvent> briefEventList = null;
         Transaction transaction = session.beginTransaction();
@@ -51,7 +52,7 @@ public class EventDAO {
     }
 
 
-    public Event getEventById(int event_id) {
+    public Event getEventById(int event_id) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Event event = session.load(Event.class, event_id);

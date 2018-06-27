@@ -11,12 +11,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class HomeworkItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public List<HomeworkItem> getHomeworkItems(Date lastSavedHWDate, Long groupId) {
+    public List<HomeworkItem> getHomeworkItems(Date lastSavedHWDate, Long groupId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         List<HomeworkItem> homeworkItemList = null;
         Transaction transaction = session.beginTransaction();
@@ -25,15 +26,17 @@ public class HomeworkItemDAO {
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
         Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
 
-        criteriaQuery.where(criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate));
-        criteriaQuery.where(criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId));
+        criteriaQuery.where(criteriaBuilder.and(
+                            criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate),
+                            criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId)));
+
         homeworkItemList = session.createQuery(criteriaQuery).getResultList();
 
         transaction.commit();
         return homeworkItemList;
     }
 
-    public List<HomeworkItem> getHomeworkItemsBySubject(Date lastSavedHWDate, Long groupId, Long subjectId) {
+    public List<HomeworkItem> getHomeworkItemsBySubject(Date lastSavedHWDate, Long groupId, Long subjectId) throws SQLException{
         Session session = sessionFactory.getCurrentSession();
         List<HomeworkItem> homeworkItemList = null;
         Transaction transaction = session.beginTransaction();
@@ -42,9 +45,11 @@ public class HomeworkItemDAO {
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
         Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
 
-        criteriaQuery.where(criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate));
-        criteriaQuery.where(criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId));
-        criteriaQuery.where(criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId));
+        criteriaQuery.where(criteriaBuilder.and(
+                criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate),
+                criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId),
+                criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId)));
+
         homeworkItemList = session.createQuery(criteriaQuery).getResultList();
 
         transaction.commit();

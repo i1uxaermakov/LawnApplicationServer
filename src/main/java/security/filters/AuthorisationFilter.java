@@ -1,8 +1,7 @@
-package filters;
+package security.filters;
 
-import model.DAO.DAOImpl.RememberMeCookieDAOImpl;
+import security.DAO.RememberMeCookieDAO;
 import model.DAO.HibernateUtil;
-import model.DAO.RememberMeCookieDAO;
 import model.entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +27,7 @@ public class AuthorisationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         cookieName = filterConfig.getInitParameter("CookieName");
-        rememberMeCookieDAO = new RememberMeCookieDAOImpl();
+        rememberMeCookieDAO = new RememberMeCookieDAO();
         sessionFactory = HibernateUtil.getSessionFactory();
     }
 

@@ -1,4 +1,4 @@
-package filters.privilegechecking;
+package security.filters.privilegechecking;
 
 import model.entities.User;
 

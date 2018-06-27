@@ -33,33 +33,4 @@ public class RememberMeCookie implements Serializable {
     public void setCookieValue(String cookieValue) {
         this.cookieValue = cookieValue;
     }
-
-    @Override
-    public String toString() {
-        return "RememberMeCookie{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", cookieValue='" + cookieValue + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RememberMeCookie that = (RememberMeCookie) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        return cookieValue != null ? cookieValue.equals(that.cookieValue) : that.cookieValue == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (cookieValue != null ? cookieValue.hashCode() : 0);
-        return result;
-    }
 }

@@ -1,5 +1,3 @@
-package controller;
-
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,6 +16,7 @@ public class FileDownloadingServlet extends HttpServlet {
         String pathBeginning = getInitParameter("fileUploadingRoot");
         String requestPath = request.getPathInfo();
 
+        /*
         // reads input file from an absolute path
         File downloadFile = new File(pathBeginning + requestPath);
         FileInputStream inStream = new FileInputStream(downloadFile);
@@ -53,6 +52,7 @@ public class FileDownloadingServlet extends HttpServlet {
 
         inStream.close();
         outStream.close();
+        */
     }
 
 

@@ -1,11 +1,10 @@
-package filters;
+package security.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class URLRewritingFilter implements Filter {
+public class IfAuthorisedFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -14,12 +13,8 @@ public class URLRewritingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-        String requestedURI = request.getRequestURI();
-        if(requestedURI.length()!=1 && requestedURI.endsWith("/")) {
-            requestedURI = requestedURI.substring(0, requestedURI.length()-1);
-            response.sendRedirect(requestedURI);
+        if(!((new Boolean(true)).equals(request.getSession(false).getAttribute("Authorised")))) {
+            request.getRequestDispatcher("/signin").forward(servletRequest,servletResponse);
         }
         else {
             filterChain.doFilter(servletRequest, servletResponse);

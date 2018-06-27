@@ -51,14 +51,4 @@ public class BriefAlbum implements Serializable{
     public void setMainPhotoLocation(String mainPhotoLocation) {
         this.mainPhotoLocation = mainPhotoLocation;
     }
-
-    @Override
-    public String toString() {
-        return "BriefAlbum{" +
-                "albumId=" + albumId +
-                ", name='" + name + '\'' +
-                ", eventDate=" + eventDate +
-                ", mainPhotoLocation='" + mainPhotoLocation + '\'' +
-                '}';
-    }
 }

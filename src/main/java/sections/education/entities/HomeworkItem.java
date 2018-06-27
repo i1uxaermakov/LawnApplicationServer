@@ -4,7 +4,6 @@ import model.entities.File;
 import model.entities.Photo;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 
 public class HomeworkItem {
@@ -22,6 +21,9 @@ public class HomeworkItem {
 
     private Set<File> files;
     private Set<Photo> photos;
+
+    public HomeworkItem() {
+    }
 
     public Long getId() {
         return id;

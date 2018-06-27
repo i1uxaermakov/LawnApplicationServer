@@ -1,12 +1,11 @@
-package security;
+package security.authorization;
 
-import model.DAO.DAOImpl.RememberMeCookieDAOImpl;
 import model.DAO.HibernateUtil;
-import model.DAO.RememberMeCookieDAO;
 import model.entities.RememberMeCookie;
 import model.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import security.DAO.RememberMeCookieDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -30,7 +29,7 @@ public class SignOutServlet extends HttpServlet {
             }
 
             if(cookieValue!=null) {
-                RememberMeCookieDAO rememberMeCookieDAO = new RememberMeCookieDAOImpl();
+                RememberMeCookieDAO rememberMeCookieDAO = new RememberMeCookieDAO();
                 Session session = HibernateUtil.getSessionFactory().openSession();
 
                 RememberMeCookie rememberMeCookie = rememberMeCookieDAO.getRememberMeCookieByUserId(user.getUserId());

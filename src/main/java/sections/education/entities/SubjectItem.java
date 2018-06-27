@@ -1,14 +1,20 @@
 package sections.education.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SubjectItem {
     private Long id;
     private String name;
-    private Long weekDay;
-    private Long order;
     private Long groupId;
+    private String groupName;
     private Long teacherId;
     private String teacherName;
     private String lectureHall;
+    private Set<DayLecture> whenIsSubject= new HashSet<>(0);
+
+    public SubjectItem() {
+    }
 
     public Long getId() {
         return id;
@@ -24,22 +30,6 @@ public class SubjectItem {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getWeekDay() {
-        return weekDay;
-    }
-
-    public void setWeekDay(Long weekDay) {
-        this.weekDay = weekDay;
-    }
-
-    public Long getOrder() {
-        return order;
-    }
-
-    public void setOrder(Long order) {
-        this.order = order;
     }
 
     public Long getGroupId() {
@@ -72,5 +62,21 @@ public class SubjectItem {
 
     public void setLectureHall(String lectureHall) {
         this.lectureHall = lectureHall;
+    }
+
+    public Set<DayLecture> getWhenIsSubject() {
+        return whenIsSubject;
+    }
+
+    public void setWhenIsSubject(Set<DayLecture> whenIsSubject) {
+        this.whenIsSubject = whenIsSubject;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 }

@@ -41,33 +41,4 @@ public class UserLoginInfo {
         this.password = password;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserLoginInfo that = (UserLoginInfo) o;
-
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (lyceumId != null ? !lyceumId.equals(that.lyceumId) : that.lyceumId != null) return false;
-        return password != null ? password.equals(that.password) : that.password == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + (lyceumId != null ? lyceumId.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "UserLoginInfo{" +
-                "userId=" + userId +
-                ", lyceumId='" + lyceumId + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

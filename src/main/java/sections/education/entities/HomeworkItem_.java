@@ -6,7 +6,7 @@ import model.entities.Photo;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import java.util.Date;
+import java.sql.Date;
 
 @StaticMetamodel( HomeworkItem.class )
 public class HomeworkItem_ {

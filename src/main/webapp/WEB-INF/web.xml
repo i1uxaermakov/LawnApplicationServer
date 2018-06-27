@@ -23,7 +23,7 @@
 
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>filters.CharacterEncodingFilter</filter-class>
+        <filter-class>security.filters.CharacterEncodingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -33,7 +33,7 @@
 
     <filter>
         <filter-name>URLRewritingFilter</filter-name>
-        <filter-class>filters.URLRewritingFilter</filter-class>
+        <filter-class>security.filters.URLRewritingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>URLRewritingFilter</filter-name>
@@ -43,7 +43,7 @@
 
     <filter>
         <filter-name>AuthorisationFilter</filter-name>
-        <filter-class>filters.AuthorisationFilter</filter-class>
+        <filter-class>security.filters.AuthorisationFilter</filter-class>
         <init-param>
             <param-name>CookieName</param-name>
             <param-value>petrmylyubimiypetr</param-value>
@@ -58,7 +58,7 @@
 
     <filter>
         <filter-name>IfAuthorisedFilter</filter-name>
-        <filter-class>filters.IfAuthorisedFilter</filter-class>
+        <filter-class>security.filters.IfAuthorisedFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>IfAuthorisedFilter</filter-name>
@@ -118,7 +118,7 @@
     
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
-        <servlet-class>security.SignInServlet</servlet-class>
+        <servlet-class>security.authorization.SignInServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignInServlet</servlet-name>
@@ -127,7 +127,7 @@
 
     <servlet>
         <servlet-name>SignOutServlet</servlet-name>
-        <servlet-class>security.SignOutServlet</servlet-class>
+        <servlet-class>security.authorization.SignOutServlet</servlet-class>
         <init-param>
             <param-name>CookieName</param-name>
             <param-value>petrmylyubimiypetr</param-value>
@@ -203,6 +203,15 @@
     <servlet-mapping>
         <servlet-name>HW</servlet-name>
         <url-pattern>/hw</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Schedule</servlet-name>
+        <servlet-class>sections.education.schedule.ScheduleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Schedule</servlet-name>
+        <url-pattern>/sc</url-pattern>
     </servlet-mapping>
 
     <!--error pages-->

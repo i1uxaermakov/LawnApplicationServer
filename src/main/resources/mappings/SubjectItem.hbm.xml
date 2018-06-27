@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="sections.education.entities">
+
+    <class name="sections.education.entities.SubjectItem" table="SubjectItems">
+        <id name="id" column="subject_id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="teacherId"/>
+        <property name="teacherName"/>
+        <property name="groupId"/>
+        <property name="lectureHall"/>
+        <property name="groupName"/>
+
+        <set name="whenIsSubject" table="Subject_DayLecture" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="subject_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="sections.education.entities.DayLecture">
+                <column name="daylecture_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>
+<!--private Long id;
+    private String name;
+    private Long groupId;
+    private Long teacherId;
+    private String teacherName;
+    private String lectureHall;-->

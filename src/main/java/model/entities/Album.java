@@ -12,7 +12,7 @@ public class Album {
     private Date eventDate;
     private String mainPhotoLocation;
 //    private String addedBy;
-    private Set<Photo> albumPhotos = new HashSet<>();
+    private Set<Photo> albumPhotos = new HashSet<>(0);
 
     public Long getAlbumId() {
         return albumId;
@@ -68,18 +68,5 @@ public class Album {
 
     public void setAlbumPhotos(Set<Photo> albumPhotos) {
         this.albumPhotos = albumPhotos;
-    }
-
-    @Override
-    public String   toString() {
-        return "Album{" +
-                "albumId=" + albumId +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", publishDate=" + publishDate +
-                ", eventDate=" + eventDate +
-                ", mainPhotoLocation='" + mainPhotoLocation + '\'' +
-                ", albumPhotos=" + albumPhotos +
-                '}';
     }
 }
