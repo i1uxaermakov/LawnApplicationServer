@@ -1,0 +1,21 @@
+.communities{
+    background: #fff;
+    padding-bottom: 20px;
+    margin-bottom: 3px;
+}
+.communities:hover{
+    background: #efefef;
+}
+.communities img{
+    border-radius: 50%;
+    margin-top: 30px;
+}
+.telegram{
+    font-size: 25px;
+}
+.telegram span{
+    padding-bottom: 10px;
+}
+.telegram:hover, .telegram:active:focus, .telegram:focus{
+    color: #fff;
+}

@@ -10,6 +10,7 @@ public class IfAuthorisedFilter implements Filter {
 
     }
 
+    //If an unauthorised user tries to access private data, he will be redirected to /signin
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;

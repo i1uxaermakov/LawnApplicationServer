@@ -1,0 +1,61 @@
+.mainsection{
+	margin-top: 55px;
+	padding-top: 15px;
+	background: white;
+}
+.albumwrapper:hover h3{
+	background: #efefef;
+	transition: ease .5s;
+}
+.albumwrapper:hover img{
+	opacity: .8;
+	/*transition: ease .5s;*/
+}
+.albumwrapper:hover{
+	cursor: pointer;
+}
+.albumwrapper img{
+	width: 100%;
+}
+h3{
+	padding-top: 8px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	margin: 0;
+	margin-bottom: 5px;
+	line-height: 1;
+}
+.albumwrapper:nth-child(odd){
+	padding-right: 7.5px;
+	padding-left: 7.5px;
+
+}
+.albumwrapper:nth-child(even){
+	padding-left: 7.5px;
+	padding-right: 7.5px;
+
+}
+.mainsection .row{
+	padding-left: 7.5px;
+	padding-right: 7.5px;
+
+}
+
+.mainsection h3 span{
+font-size: 18px;
+color: #888;
+}
+.mainsection h2{
+	font-size: 45px;
+	padding-left: 10px;
+	margin-top: 0;
+	/*font-weight: 400;*/
+	color: #69a03c;
+	border-bottom:1px solid #efefef;
+}
+a{
+    color: unset;
+}
+a:hover{
+    color: unset;
+}

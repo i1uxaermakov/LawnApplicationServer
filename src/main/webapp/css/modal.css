@@ -1,0 +1,23 @@
+.modal-header{
+	padding-bottom: 0;
+}
+.modal-title{
+	font-weight: 600;
+	font-size: 1.5em;
+	height: 26px;
+}
+.modal-misc-info{
+	line-height: 13px;
+	font-size: 15px;
+	color: #868686;
+}
+.modal-body{
+	overflow: auto;
+}
+.modal-venue{
+	display: block;
+}
+.modal-body img{
+	padding-right: 0;
+	padding-left: 0;
+}

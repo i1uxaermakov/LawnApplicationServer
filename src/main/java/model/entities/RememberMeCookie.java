@@ -10,6 +10,11 @@ public class RememberMeCookie implements Serializable {
     public RememberMeCookie() {
     }
 
+    public RememberMeCookie(Long userId, String cookieValue) {
+        this.userId = userId;
+        this.cookieValue = cookieValue;
+    }
+
     public Long getId() {
         return id;
     }

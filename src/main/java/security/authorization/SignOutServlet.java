@@ -12,17 +12,25 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 public class SignOutServlet extends HttpServlet {
+    String rememberMeCookieName;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        rememberMeCookieName = getInitParameter("RememberMeCookieName");
+    }
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String cookieName = getInitParameter("CookieName");
         HttpSession httpSession = req.getSession(false);
         if(httpSession != null && (new Boolean(true)).equals(httpSession.getAttribute("Authorised"))) {
             User user = (User) httpSession.getAttribute("User");
             Cookie[] cookies = req.getCookies();
             String cookieValue = null;
             for(Cookie cookie: cookies) {
-                if(cookie.getName().equals(cookieName)) {
+                if(cookie.getName().equals(rememberMeCookieName)) {
                     cookieValue = cookie.getValue();
                     cookie.setMaxAge(0);
                 }

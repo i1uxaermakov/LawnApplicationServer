@@ -17,9 +17,9 @@
         </jsp-property-group>
     </jsp-config>
 
-    <welcome-file-list>
-        <welcome-file>MainPageServlet</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>MainPageServlet</welcome-file>-->
+    <!--</welcome-file-list>-->
 
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -119,6 +119,10 @@
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
         <servlet-class>security.authorization.SignInServlet</servlet-class>
+        <init-param>
+            <param-name>RememberMeCookieName</param-name>
+            <param-value>petrmylyubimiypetr</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignInServlet</servlet-name>
@@ -129,7 +133,7 @@
         <servlet-name>SignOutServlet</servlet-name>
         <servlet-class>security.authorization.SignOutServlet</servlet-class>
         <init-param>
-            <param-name>CookieName</param-name>
+            <param-name>RememberMeCookieName</param-name>
             <param-value>petrmylyubimiypetr</param-value>
         </init-param>
     </servlet>

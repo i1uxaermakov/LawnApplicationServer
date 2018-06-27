@@ -1,0 +1,47 @@
+.news {
+    background: #fff;
+    padding: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 2px;
+    /*box-shadow: 1px 3px 4px #8fb87c;*/
+    font-weight: 400;
+}
+
+.likes{
+    display: flex;
+    /*justify-content: flex-end;*/
+    padding-right: 12px;
+    margin-top: 5px;
+    border-top: 1px solid #e7e8ec;
+    height: 40px;
+}
+.likes button{
+    color: #69a03c;
+    padding: 0;
+    background: #fff;
+}
+.likes button:last-child{
+    margin-left: 10px;
+}
+.likes .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+    outline: none;
+    color: #69a03c;
+}
+.ellipse{
+position: absolute;
+right: 0;
+cursor: pointer;
+top: 8px;
+color: #68a03cb3;
+}
+.ellipse li{
+    font-size: 20px;
+}
+.newsbegin{
+    position: relative;
+}
+@media (min-width: 767px) {
+    .pswp__bg{
+    opacity: .8!important;
+}
+}

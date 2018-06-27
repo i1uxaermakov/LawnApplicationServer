@@ -1,0 +1,67 @@
+.my-gallery {
+  width: 100%;
+  float: left;
+  padding: 12px;	
+  padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+.my-gallery img {
+  width: 100%;
+  height: auto;
+}
+.my-gallery figure {
+  display: block;
+  float: left;
+  /*margin: 0 5px 5px 0;*/
+}
+.my-gallery figcaption {
+  display: none;
+}
+.pswp__bg{
+  background-color: black;
+}  
+.threephotosrow figure.firstphoto{
+width: 66.66666666666666%;
+height: 100%;
+}
+.threephotosrow figure{
+width: 47%;
+}
+.threephotosrow  img
+{
+padding: 1px;
+}
+
+.twophotosrow figure{
+  width: 50%;
+  padding: 1px;
+}
+/*.onephotorow figure .wrapper{
+    height: 400px;
+    width: 600px;
+    overflow: hidden;
+    position: relative;
+}
+.wrapper img{
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+*/.onephotorow{
+
+}
+.blurphotorow figure{
+  width: 50%;
+  padding: 3px
+}
+ 
+#bgimage{
+  background: url(../imgs/ava.jpg);    
+  height: 342px;
+  width: 342px;
+  background-attachment: center;
+}

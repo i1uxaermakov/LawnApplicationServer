@@ -26,7 +26,7 @@ public class AuthorisationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        cookieName = filterConfig.getInitParameter("CookieName");
+        cookieName = filterConfig.getInitParameter("RememberMeCookieName");
         rememberMeCookieDAO = new RememberMeCookieDAO();
         sessionFactory = HibernateUtil.getSessionFactory();
     }

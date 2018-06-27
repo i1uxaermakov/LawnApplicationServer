@@ -1,0 +1,42 @@
+.photostream{
+	margin-top: 50px;
+	padding: 0;
+}
+
+
+.photocol{
+	background-color: white;
+	padding: 10px 25px 10px 25px;
+}
+.imagesingal{
+	padding: 10px;
+}
+@media only screen and (max-width: 600px) {
+
+	 .imagesingal{
+	padding: 1px !important;
+}
+	.photostream{
+	    margin-top: 45px;
+	}
+	.photocol{
+		padding: 0 20px;
+	}
+
+
+}
+.oblojka{
+	border-radius: 50%;
+	padding: 10px;
+}
+.numberofphotos {
+	float:right;
+	color:  grey;
+	line-height: 16px;
+}
+.my-gallery figcaption {
+    display: none;
+}
+.my-gallery figure img{
+	    width: 100%;
+}
