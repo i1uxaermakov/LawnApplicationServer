@@ -37,7 +37,7 @@ public class ScheduleServlet extends HttpServlet {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
+//        trying to understand merge process
         mapResp.put("scheduleList", subjectItemList);
 
         ObjectMapper objectMapper = new ObjectMapper();
