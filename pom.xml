@@ -64,6 +64,13 @@
             <version>2.7.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/catalina -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>catalina</artifactId>
+            <version>6.0.26</version>
+            <scope>provided</scope>
+        </dependency>
 
 
 
