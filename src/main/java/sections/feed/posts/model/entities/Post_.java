@@ -1,8 +1,7 @@
 package sections.feed.posts.model.entities;
 
+import sections.mediaarchive.Album;
 import model.entities.File;
-import model.entities.Photo;
-import model.entities.Video;
 
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -13,17 +12,30 @@ import java.util.Date;
 public class Post_ {
     public static volatile SingularAttribute<Post,Long> id;
     public static volatile SingularAttribute<Post,String> authorName;
+    public static volatile SingularAttribute<Post,Long> authorId;
     public static volatile SingularAttribute<Post,String> organizationName;
     public static volatile SingularAttribute<Post,Date> publishDate;
-    public static volatile SingularAttribute<Post,String> title;
-    public static volatile SingularAttribute<Post,String> postText;
-    public static volatile SingularAttribute<Post,Long> description;
+    public static volatile SingularAttribute<Post,String> postContent;
+//    public static volatile SingularAttribute<Post,Long> description;
     public static volatile SingularAttribute<Post,String> status;
-    public static volatile SetAttribute<Post,Photo> photos;
-    public static volatile SetAttribute<Post,Video> videos;
+//    public static volatile SetAttribute<Post,Photo> photos;
+//    public static volatile SetAttribute<Post,Video> videos;
     public static volatile SetAttribute<Post,File> files;
+    public static volatile SingularAttribute<Post,Album> album;
 }
 
+
+/*    private Long id;
+    private Long authorId;
+    private String authorName;
+    private String organizationName;
+    private Date publishDate;
+    private String postContent;
+//    private String postExcerpt;
+    @JsonIgnore
+    private String status;
+    private Set<File> files;
+    private Album album;*/
 /*
     private Long id;
     private String authorName;

@@ -1,5 +1,6 @@
 package sections.education.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import model.entities.File;
 import model.entities.Photo;
 
@@ -7,8 +8,11 @@ import java.sql.Date;
 import java.util.Set;
 
 public class HomeworkItem {
+    @JsonIgnore
     private Long id;
+    @JsonIgnore
     private Long teacherId;
+    @JsonIgnore
     private Long groupId;
     private Long subjectId;
     private String subjectName;

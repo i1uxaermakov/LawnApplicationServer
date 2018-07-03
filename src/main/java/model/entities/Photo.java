@@ -74,4 +74,16 @@ public class Photo implements Serializable {
         this.author = author;
     }
 
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", photoName='" + photoName + '\'' +
+                ", photoLocationBIG='" + photoLocationBIG + '\'' +
+                ", photoLocationMEDIUM='" + photoLocationMEDIUM + '\'' +
+                ", photoLocationSMALL='" + photoLocationSMALL + '\'' +
+                ", publishDate=" + publishDate +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }

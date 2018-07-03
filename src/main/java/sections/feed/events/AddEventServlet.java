@@ -54,14 +54,14 @@ public class AddEventServlet extends HttpServlet {
 
         session.persist(event);
 
-        Part filePart = req.getPart("photo");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();// MSIE fix.
-        String filePath = pathBeginningForEventPhotos + "/" + event.getId() + fileName;
-        FileInputStream fileContent = (FileInputStream) filePart.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-        fileManager.writeFileFromInputStreamToOutputStream(fileContent, fileOutputStream);
-
-        event.setEventPhotoLocation(filePath);
+//        Part filePart = req.getPart("photo");
+//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();// MSIE fix.
+//        String filePath = pathBeginningForEventPhotos + "/" + event.getId() + fileName;
+//        FileInputStream fileContent = (FileInputStream) filePart.getInputStream();
+//        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+//        fileManager.writeFileFromInputStreamToOutputStream(fileContent, fileOutputStream);
+//
+//        event.setEventPhotoLocation(filePath);
         session.close();
     }
 }

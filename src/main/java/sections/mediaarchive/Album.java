@@ -1,4 +1,6 @@
-package model.entities;
+package sections.mediaarchive;
+
+import model.entities.Photo;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,9 +11,8 @@ public class Album {
     private String name;
     private String description;
     private Date publishDate;
-    private Date eventDate;
     private String mainPhotoLocation;
-//    private String addedBy;
+    private String author;
     private Set<Photo> albumPhotos = new HashSet<>(0);
 
     public Long getAlbumId() {
@@ -46,14 +47,6 @@ public class Album {
         this.publishDate = publishDate;
     }
 
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
     public String getMainPhotoLocation() {
         return mainPhotoLocation;
     }
@@ -68,5 +61,13 @@ public class Album {
 
     public void setAlbumPhotos(Set<Photo> albumPhotos) {
         this.albumPhotos = albumPhotos;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

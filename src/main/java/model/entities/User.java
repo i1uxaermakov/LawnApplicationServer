@@ -18,7 +18,6 @@ public class User implements Serializable {
     private Set<String> privileges = new HashSet<>(0);
     private Set<Organization> organizations = new HashSet<>(0);
 
-    //new commit on 29.06.2018
     public User() {
     }
 

@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model.entities">
 
-    <class name="Album" table="Albums">
+    <class name="sections.mediaarchive.Album" table="Albums">
         <id name="albumId" column="album_id">
             <generator class="native"/>
         </id>
         <property name="name" length="2000"/>
         <property name="description" length="15000"/>
-        <property name="eventDate"/>
         <property name="mainPhotoLocation" length="2000"/>
         <property name="publishDate"/>
+        <property name="author"/>
 
         <set name="albumPhotos" table="AlbumPhotos" fetch="join" lazy="false" inverse="true" cascade="all">
             <key>
@@ -24,3 +24,11 @@
 
     </class>
 </hibernate-mapping>
+
+<!--private Long albumId;
+    private String name;
+    private String description;
+    private Date publishDate;
+    private String mainPhotoLocation;
+    private String author;
+    private Set<Photo> albumPhotos = new HashSet<>(0);-->

@@ -1,35 +1,36 @@
 package sections.feed.posts.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import sections.mediaarchive.Album;
 import model.entities.File;
-import model.entities.Photo;
-import model.entities.Video;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 public class Post implements Serializable {
-    private Long id;
+    private Long postId;
+    private Long authorId;
     private String authorName;
     private String organizationName;
     private Date publishDate;
-    private String title;
-    private String postText;
-    private String description;
+    private String postContent;
+//    private String postExcerpt;
+    @JsonIgnore
     private String status;
-    private Set<Photo> photos;
-    private Set<Video> videos;
     private Set<File> files;
+    private PostAlbum album;
 
     public Post() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     public String getAuthorName() {
@@ -56,28 +57,12 @@ public class Post implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPostContent() {
+        return postContent;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPostText() {
-        return postText;
-    }
-
-    public void setPostText(String postText) {
-        this.postText = postText;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPostContent(String postText) {
+        this.postContent = postText;
     }
 
     public String getStatus() {
@@ -88,14 +73,6 @@ public class Post implements Serializable {
         this.status = status;
     }
 
-    public Set<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<Photo> photos) {
-        this.photos = photos;
-    }
-
     public Set<File> getFiles() {
         return files;
     }
@@ -104,11 +81,43 @@ public class Post implements Serializable {
         this.files = files;
     }
 
-    public Set<Video> getVideos() {
-        return videos;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setVideos(Set<Video> videos) {
-        this.videos = videos;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+//    public String getPostExcerpt() {
+//        return postExcerpt;
+//    }
+//
+//    public void setPostExcerpt(String postExcerpt) {
+//        this.postExcerpt = postExcerpt;
+//    }
+
+
+    public PostAlbum getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(PostAlbum album) {
+        this.album = album;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", authorId=" + authorId +
+                ", authorName='" + authorName + '\'' +
+                ", organizationName='" + organizationName + '\'' +
+                ", publishDate=" + publishDate +
+                ", postContent='" + postContent + '\'' +
+                ", status='" + status + '\'' +
+                ", files=" + files +
+                ", album=" + album +
+                '}';
     }
 }

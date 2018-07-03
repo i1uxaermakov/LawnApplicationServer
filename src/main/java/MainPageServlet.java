@@ -3,7 +3,7 @@ import sections.feed.events.EventDAO;
 import sections.feed.posts.model.DAO.PostDAO;
 import model.DAO.HibernateUtil;
 import sections.feed.posts.model.entities.Post;
-import model.entities.wrappers.BriefAlbum;
+import sections.mediaarchive.BriefAlbum;
 import model.entities.wrappers.BriefEvent;
 import org.hibernate.Session;
 

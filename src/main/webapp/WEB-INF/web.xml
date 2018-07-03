@@ -21,6 +21,7 @@
         <!--<welcome-file>MainPageServlet</welcome-file>-->
     <!--</welcome-file-list>-->
 
+    <!--filters-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>security.filters.CharacterEncodingFilter</filter-class>
@@ -66,25 +67,16 @@
         <url-pattern>/edu/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
-
-
-    <servlet>
-        <servlet-name>vis</servlet-name>
-        <jsp-file>/MainPageSliderVisualizer.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>vis</servlet-name>
-        <url-pattern>/MainPageSliderVisualizer.jsp</url-pattern>
-    </servlet-mapping>
+    <!--end filters-->
     
-    <servlet>
-        <servlet-name>AddPostJSP</servlet-name>
-        <jsp-file>/AddPostJSP.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddPostJSP</servlet-name>
-        <url-pattern>/AddPostJSP.jsp</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>AddPostJSP</servlet-name>-->
+        <!--<jsp-file>/AddPostJSP.jsp</jsp-file>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddPostJSP</servlet-name>-->
+        <!--<url-pattern>/AddPostJSP.jsp</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
     <servlet>
@@ -96,14 +88,27 @@
         <url-pattern>/sections.education/*</url-pattern>
     </servlet-mapping>
     
+
+
     <servlet>
-        <servlet-name>NewsServlet</servlet-name>
-        <servlet-class>sections.feed.posts.PostsServlet</servlet-class>
+        <servlet-name>MultiplePostsServlet</servlet-name>
+        <servlet-class>sections.feed.posts.MultiplePostsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>NewsServlet</servlet-name>
-        <url-pattern>/news/*</url-pattern>
+        <servlet-name>MultiplePostsServlet</servlet-name>
+        <url-pattern>/posts</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SinglePostServlet</servlet-name>
+        <servlet-class>sections.feed.posts.SinglePostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SinglePostServlet</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
+
+
 
 
     <servlet>

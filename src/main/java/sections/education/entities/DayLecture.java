@@ -1,6 +1,9 @@
 package sections.education.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class DayLecture {
+    @JsonIgnore
     private Long id;
     private Long day;
     private Long lectureOrder;

@@ -1,9 +1,9 @@
 package sections.mediaarchive.DAO;
 
 import model.DAO.HibernateUtil;
-import model.entities.Album;
-import model.entities.Album_;
-import model.entities.wrappers.BriefAlbum;
+import sections.mediaarchive.Album;
+import sections.mediaarchive.Album_;
+import sections.mediaarchive.BriefAlbum;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -32,7 +32,6 @@ public class AlbumDAO {
                         BriefAlbum.class,
                         albumRoot.get(Album_.albumId),
                         albumRoot.get(Album_.name),
-                        albumRoot.get(Album_.eventDate),
                         albumRoot.get(Album_.mainPhotoLocation)
                 )
         );

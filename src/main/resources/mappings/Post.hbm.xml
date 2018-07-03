@@ -3,29 +3,18 @@
 <hibernate-mapping package="model.entities">
 
     <class name="sections.feed.posts.model.entities.Post" table="Posts">
-        <id name="id" column="post_id">
-            <generator class="native"/>
+        <id name="postId" column="post_id">
+            <generator class="identity" />
         </id>
+        <property name="authorId"/>
         <property name="authorName"/>
         <property name="organizationName" length="2000"/>
-        <property name="title" length="2000"/>
-        <property name="postText" length="15000">
-            <column name="postText" sql-type="text"></column>
+        <property name="postContent" length="15000">
+            <column name="postContent" sql-type="text"></column>
         </property>
-        <property name="description" length="2000"/>
+        <!--<property name="postExcerpt" length="500"/>-->
         <property name="publishDate"/>
         <property name="status" length="20"/>
-
-        <!--фотки можно загрузить при визуализации, изза возможности поста быть слишком большим по тексту-->
-
-        <set name="photos" table="PostPhotos" fetch="join" lazy="false" inverse="true" cascade="all">
-            <key>
-                <column name="post_id" not-null="true"/>
-            </key>
-            <many-to-many entity-name="model.entities.Photo">
-                <column name="photo_id" not-null="true"/>
-            </many-to-many>
-        </set>
 
         <set name="files" table="PostFiles" fetch="join" lazy="false" inverse="true" cascade="all">
             <key>
@@ -36,14 +25,38 @@
             </many-to-many>
         </set>
 
-        <set name="videos" table="PostVideos" fetch="join" lazy="false" inverse="true" cascade="all">
-            <key>
-                <column name="post_id" not-null="true"/>
-            </key>
-            <many-to-many entity-name="model.entities.Video">
-                <column name="video_id" not-null="true"/>
-            </many-to-many>
-        </set>
+        <one-to-one name="album" class="sections.feed.posts.model.entities.PostAlbum" cascade="all"/>
 
+        <!--<set name="videos" table="PostVideos" fetch="join" lazy="false" inverse="true" cascade="all">-->
+            <!--<key>-->
+                <!--<column name="post_id" not-null="true"/>-->
+            <!--</key>-->
+            <!--<many-to-many entity-name="model.entities.Video">-->
+                <!--<column name="video_id" not-null="true"/>-->
+            <!--</many-to-many>-->
+        <!--</set>-->
+
+        <!--фотки можно загрузить при визуализации, изза возможности поста быть слишком большим по тексту-->
+
+        <!--<set name="photos" table="PostPhotos" fetch="join" lazy="false" inverse="true" cascade="all">-->
+        <!--<key>-->
+        <!--<column name="post_id" not-null="true"/>-->
+        <!--</key>-->
+        <!--<many-to-many entity-name="model.entities.Photo">-->
+        <!--<column name="photo_id" not-null="true"/>-->
+        <!--</many-to-many>-->
+        <!--</set>-->
+
+        <!--
+    private Long id;
+    private Long authorId;
+    private String authorName;
+    private String organizationName;
+    private Date publishDate;
+    private String postContent;
+    private String postExcerpt;
+    private String status;
+    private Set<File> files;
+    private Long albumId;-->
     </class>
 </hibernate-mapping>

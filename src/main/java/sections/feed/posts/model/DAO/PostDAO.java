@@ -21,7 +21,7 @@ public class PostDAO {
     public Post getPostById(Long post_id) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Post post = session.load(Post.class, post_id);
+        Post post = session.get(Post.class, post_id);
         transaction.commit();
         return post;
     }

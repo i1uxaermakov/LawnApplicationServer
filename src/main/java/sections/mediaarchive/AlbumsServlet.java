@@ -1,8 +1,6 @@
 package sections.mediaarchive;
 
 import model.DAO.HibernateUtil;
-import model.entities.Album;
-import model.entities.wrappers.BriefAlbum;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.mediaarchive.DAO.AlbumDAO;

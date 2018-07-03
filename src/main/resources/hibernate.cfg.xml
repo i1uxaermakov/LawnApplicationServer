@@ -50,6 +50,8 @@
         <mapping resource="mappings/RememberMeCookie.hbm.xml"/>
         <mapping resource="mappings/Organization.hbm.xml"/>
 
+        <mapping resource="mappings/PostAlbum.hbm.xml"/>
+
         <!--EDUCATION-->
         <mapping resource="mappings/HomeworkItem.hbm.xml"/>
         <mapping resource="mappings/DayLecture.hbm.xml"/>

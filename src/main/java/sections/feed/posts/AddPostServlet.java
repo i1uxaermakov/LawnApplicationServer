@@ -56,8 +56,8 @@ public class AddPostServlet extends HttpServlet {
             }
         }
 
-        post.setPostText(req.getParameter("postText"));
-        post.setTitle(req.getParameter("title"));
+        post.setPostContent(req.getParameter("postText"));
+//        post.setTitle(req.getParameter("title"));
         post.setPublishDate(date);
 //        if(req.getParameter("description")==null) {
 //            post.setDescription(post.getPostText().substring(0,300));
@@ -78,28 +78,28 @@ public class AddPostServlet extends HttpServlet {
         transaction.commit();
 
         // Retrieves <input type="file" name="file" multiple="true">
-        List<Part> fileParts = req.getParts().stream().filter(part -> "files".equals(part.getName())).collect(Collectors.toList());
-        Set<File> fileSet = new HashSet<>(0);
-        for (Part filePart : fileParts) {
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-            String filePath = pathBeginningForPostFiles + "/" + post.getId().toString() + "/" + fileName;
-
-            InputStream fileContent = filePart.getInputStream();
-            OutputStream outputStream = new FileOutputStream(filePath);
-            fileManager.writeFileFromInputStreamToOutputStream(fileContent, outputStream);
-
-            fileContent.close();
-            outputStream.flush();
-            outputStream.close();
-
-            File file = new File();
-            file.setAuthor(author);
-            file.setName(fileName);
-            file.setPublishDate(date);
-            file.setLocation(filePath);
-            fileSet.add(file);
-        }
-        post.setFiles(fileSet);
+//        List<Part> fileParts = req.getParts().stream().filter(part -> "files".equals(part.getName())).collect(Collectors.toList());
+//        Set<File> fileSet = new HashSet<>(0);
+//        for (Part filePart : fileParts) {
+//            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+//            String filePath = pathBeginningForPostFiles + "/" + post.getId().toString() + "/" + fileName;
+//
+//            InputStream fileContent = filePart.getInputStream();
+//            OutputStream outputStream = new FileOutputStream(filePath);
+//            fileManager.writeFileFromInputStreamToOutputStream(fileContent, outputStream);
+//
+//            fileContent.close();
+//            outputStream.flush();
+//            outputStream.close();
+//
+//            File file = new File();
+//            file.setAuthor(author);
+//            file.setName(fileName);
+//            file.setPublishDate(date);
+//            file.setLocation(filePath);
+//            fileSet.add(file);
+//        }
+//        post.setFiles(fileSet);
 
 //        List<Part> photoParts = req.getParts().stream().filter(part -> "photos".equals(part.getName())).collect(Collectors.toList());
 //        Set<Photo> photoSet = new HashSet<>(0);
