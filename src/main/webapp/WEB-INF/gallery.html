@@ -8,14 +8,14 @@
     <title>Lawn</title>
 
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/main.css" rel="stylesheet" >
-    <link href="../css/swiper.min.css" rel="stylesheet" >
-    <link href="../css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/posts-template.css">
-    <link rel="stylesheet" href="../css/photoswipe.css">
-    <link rel="stylesheet" href="../css/default-skin/default-skin.css">
-    <link rel="stylesheet" href="../css/photogallery.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" >
+    <link href="css/swiper.min.css" rel="stylesheet" >
+    <link href="css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/posts-template.css">
+    <link rel="stylesheet" href="css/photoswipe.css">
+    <link rel="stylesheet" href="css/default-skin/default-skin.css">
+    <link rel="stylesheet" href="css/photogallery.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,41 +43,54 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img src="http://localhost:8080/" alt="">
-                    <a class="navbar-brand" href="../index.html">LAWN</a>
-                    <a class="myacc visible-xs" href="Account"><i class="fas fa-user-circle"></i></a>
+                    <a class="navbar-brand" href="index.html">LAWN</a>
+                    <a class="myacc visible-xs" href="login.html">
+                    <i class="fas fa-user-circle"></i>    
+                    </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="nav navbar-nav navbar-right container-fluid">
-                        <li class="active">
-                            <a data-toggle="tabs" href="../index.html">
+                        <li class="">
+                            <a data-toggle="tabs" href="index.html">
                             <i class="fas fa-home"></i>
                             Home</a>
                         </li>
                         <li class="">
-                            <a data-toggle="tabs" href="../edu.html">
+                            <a data-toggle="tabs" href="edu_schedule.html">
                             <i class="fas fa-graduation-cap"></i>
                             Education</a>
                         </li>
                         <li class="">
                             <a data-toggle="tabs" href="community.html">
                             <i class="fas fa-users"></i>
-                            Community
-                            </a>
+                            Community</a>
                         </li>
-                        <li class="">
+                        <li class="active">
                             <a data-toggle="tabs" href="album.html">
                             <i class="fas fa-images"></i>
-                            Album
-                            </a>
+                            Album</a>
                         </li>
                         <li class="hidden-xs">
-                            <a data-toggle="tabs" href="http://localhost:8080/#">
-                             <i class="fas fa-user-circle"></i>
-                              Sign In
-                            </a>
+                            <a data-toggle="tabs" href="login.html">
+                            <i class="fas fa-user-circle"></i>
+                            Sign In</a>
                         </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <i class="fas fa-cog"></i>
+                             Settings
+                             <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">My account</a></li>
+                              <li><a href="#">My organizations</a></li>
+                              <li><a href="#">Liked posts</a></li>
+                              <li><a href="#">My posts</a></li>
+                              <li><a href="#">Tickets</a></li>
+                              <li><a href="#">Add</a></li>
+                              <li><a href="#">FAQ</a></li>
+                             </ul>
+                         </li>
                     </ul>
                 </div>
             </div>
@@ -87,7 +100,7 @@
  <section class="photostream container-fluid">
     <div class="photocol col-sm-8 col-sm-offset-2">
            <div class="begingallery row">
-                <img src="../imgs/gallery/photo_2018-05-09_21-54-37.jpg" alt="" class="oblojka col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                <img src="imgs/gallery/photo_2018-05-09_21-54-37.jpg" alt="" class="oblojka col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                 <div class="description col-sm-8 col-xs-12">
                     <h2>Basketball Championship</h2>
                     <div class="misc">
@@ -100,74 +113,74 @@
         <div class="row">
           <div class="my-gallery" itemscope itemtype="">
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/1.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/1.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/1.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/1.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 1</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/2.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/2.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/2.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/2.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 2</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/3.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/3.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/3.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/3.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 3</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/4.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/4.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/4.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/4.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 4</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/5.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/5.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/5.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/5.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 5</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/6.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/6.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/6.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/6.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 332</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/7.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/7.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/7.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/7.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 3342</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/8.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/8.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/8.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/8.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 3532523523</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/9.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/9.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/9.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/9.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 353223452</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/10.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/10.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/10.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/10.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 325331255213</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/11.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/11.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/11.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/11.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 213523152123</figcaption>
               </figure>
               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-xs-4 imagesingal">
-                  <a href="../imgs/g/12.jpg" itemprop="contentUrl" data-size="640x640">
-                          <img src="../imgs/g/12.jpg" itemprop="thumbnail" alt="Image description" />
+                  <a href="imgs/g/12.jpg" itemprop="contentUrl" data-size="640x640">
+                          <img src="imgs/g/12.jpg" itemprop="thumbnail" alt="Image description" />
                   </a>
                   <figcaption itemprop="caption description">Image caption 33513255232525253523253523253235</figcaption>
               </figure>
@@ -214,18 +227,18 @@
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../css/jquery.min.js"></script>
-    <script src="../css/swiper.min.js"></script>
+    <script src="css/jquery.min.js"></script>
+    <script src="css/swiper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../css/bootstrap.min.js" type="text/javascript"></script>
+    <script src="css/bootstrap.min.js" type="text/javascript"></script>
     <!-- <script src="slick/slick.min.js"></script>    -->
-    <script src="../css/main.js" type="text/javascript"></script>
+    <script src="css/main.js" type="text/javascript"></script>
 
      <!-- Core JS file -->
-    <script src="../css/photoswipe.min.js"></script>
+    <script src="css/photoswipe.min.js"></script>
 
     <!-- UI JS file -->
-    <script src="../css/photoswipe-ui-default.min.js"></script>
+    <script src="css/photoswipe-ui-default.min.js"></script>
 </body>
 
 </html>
