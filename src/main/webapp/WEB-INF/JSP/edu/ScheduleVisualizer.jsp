@@ -26,7 +26,7 @@
         int cnt = 0;
         for(int i=1; i<7; i++) { %>
             <div class="block row">
-                <div class="container-fluid date firstdate1"><%=simpleDateFormat.format(c.getTime())%></div>
+                <div class="container-fluid date <%=(i==1)?"firstdate1":"firstdate"%>"><%=simpleDateFormat.format(c.getTime())%></div>
                 <div class="explanation col-xs-12"><%
                 for (int j=cnt; j<dayLectureList.size(); j++,cnt++) {
                     DayLecture dayLecture = dayLectureList.get(j);
