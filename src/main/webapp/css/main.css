@@ -664,3 +664,7 @@ color: #69a03c;
 li.dropdown{
     cursor: pointer;
 }
+todays_date{
+    border-top: 2px solid #ec7106;
+    border-bottom: 2px solid #ec7106;
+}

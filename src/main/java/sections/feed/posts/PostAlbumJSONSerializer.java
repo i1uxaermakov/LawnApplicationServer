@@ -7,6 +7,7 @@ import sections.feed.posts.entities.PostAlbum;
 
 import java.io.IOException;
 
+@Deprecated
 public class PostAlbumJSONSerializer extends StdSerializer<PostAlbum> {
     public PostAlbumJSONSerializer(Class<PostAlbum> t) {
         super(t);
