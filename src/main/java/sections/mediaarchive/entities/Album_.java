@@ -1,4 +1,4 @@
-package sections.mediaarchive;
+package sections.mediaarchive.entities;
 
 import model.entities.Photo;
 
@@ -6,7 +6,6 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @StaticMetamodel( Album.class )
 public class Album_ {

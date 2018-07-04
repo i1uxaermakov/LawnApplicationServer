@@ -1,10 +1,10 @@
 import sections.mediaarchive.DAO.AlbumDAO;
 import sections.feed.events.EventDAO;
-import sections.feed.posts.model.DAO.PostDAO;
+import sections.feed.posts.DAO.PostDAO;
 import model.DAO.HibernateUtil;
-import sections.feed.posts.model.entities.Post;
-import sections.mediaarchive.BriefAlbum;
-import model.entities.wrappers.BriefEvent;
+import sections.feed.posts.entities.Post;
+import sections.mediaarchive.entities.BriefAlbum;
+import sections.feed.events.entities.BriefEvent;
 import org.hibernate.Session;
 
 import javax.servlet.ServletException;
@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+@Deprecated
 public class MainPageServlet extends HttpServlet {
 
     @Override

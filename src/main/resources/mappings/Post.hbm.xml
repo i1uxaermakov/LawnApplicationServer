@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model.entities">
 
-    <class name="sections.feed.posts.model.entities.Post" table="Posts">
+    <class name="sections.feed.posts.entities.Post" table="Posts">
         <id name="postId" column="post_id">
             <generator class="identity" />
         </id>
@@ -25,7 +25,7 @@
             </many-to-many>
         </set>
 
-        <one-to-one name="album" class="sections.feed.posts.model.entities.PostAlbum" cascade="all"/>
+        <one-to-one name="album" class="sections.feed.posts.entities.PostAlbum" cascade="all"/>
 
         <!--<set name="videos" table="PostVideos" fetch="join" lazy="false" inverse="true" cascade="all">-->
             <!--<key>-->

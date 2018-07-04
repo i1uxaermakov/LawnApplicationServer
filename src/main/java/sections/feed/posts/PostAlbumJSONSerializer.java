@@ -3,7 +3,7 @@ package sections.feed.posts;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import sections.feed.posts.model.entities.PostAlbum;
+import sections.feed.posts.entities.PostAlbum;
 
 import java.io.IOException;
 

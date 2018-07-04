@@ -11,11 +11,10 @@ import com.fasterxml.jackson.databind.ser.PropertyWriter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import model.DAO.HibernateUtil;
-import sections.feed.posts.model.entities.PostAlbum;
-import sections.mediaarchive.Album;
+import sections.feed.posts.entities.PostAlbum;
 import org.hibernate.Session;
-import sections.feed.posts.model.DAO.PostDAO;
-import sections.feed.posts.model.entities.Post;
+import sections.feed.posts.DAO.PostDAO;
+import sections.feed.posts.entities.Post;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +32,7 @@ public class MultiplePostsServlet extends HttpServlet{
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         PostDAO postDAO = new PostDAO();
         List<Post> postList = new ArrayList<>(0);
-        String lastSavedDate = req.getParameter("lsd");
+        String lastSavedDate = req.getParameter("lcd"); //last child's date
 
         if(lastSavedDate==null || !isValidDate(lastSavedDate)) {
             try {
@@ -55,43 +54,18 @@ public class MultiplePostsServlet extends HttpServlet{
         }
         hibSession.close();
 
-        PropertyFilter postAlbumFilter = new SimpleBeanPropertyFilter() {
-            @Override
-            public void serializeAsField
-                    (Object pojo, JsonGenerator jgen, SerializerProvider provider, PropertyWriter writer)
-                    throws Exception {
-                if (include(writer)) {
-                    if (!writer.getName().equals("album")) {
-                        writer.serializeAsField(pojo, jgen, provider);
-                        return;
-                    }
-                    PostAlbum album = ((Post) pojo).getAlbum();
-                    if (album.getAlbumPhotos().size() < 4) {
-                        writer.serializeAsField(pojo, jgen, provider);
-                    }
-                } else if (!jgen.canOmitFields()) { // since 2.3
-                    writer.serializeAsOmittedField(pojo, jgen, provider);
-                }
-            }
-            @Override
-            protected boolean include(BeanPropertyWriter writer) {
-                return true;
-            }
-            @Override
-            protected boolean include(PropertyWriter writer) {
-                return true;
-            }
-        };
-        FilterProvider filters = new SimpleFilterProvider().addFilter("PostAlbumFilter", postAlbumFilter);
-        Map<String,Object> mapResp = new HashMap<>();
-        mapResp.put("posts", postList);
+//        Map<String,Object> mapResp = new HashMap<>();
+//        mapResp.put("posts", postList);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        resp.setContentType("text/html");
+//        resp.getWriter().println(objectMapper.writeValueAsString(mapResp));
+//        System.out.println(objectMapper.writeValueAsString(mapResp));
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        resp.setContentType("text/html");
-        resp.getWriter().println(objectMapper.writer(filters).writeValueAsString(mapResp));
-        System.out.println(objectMapper.writer(filters).writeValueAsString(mapResp));
-
+//          todo posts jsp visualization
+//          todo будем делать укороченную версию или нет
+        //  todo каким то образом различать первичный запрос на страницу и запрос на дополнительный контент - сделаем жто через хэдер
     }
 
     public static boolean isValidDate(String inDate) {

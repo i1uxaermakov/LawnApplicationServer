@@ -1,9 +1,9 @@
 package sections.mediaarchive.DAO;
 
 import model.DAO.HibernateUtil;
-import sections.mediaarchive.Album;
-import sections.mediaarchive.Album_;
-import sections.mediaarchive.BriefAlbum;
+import sections.mediaarchive.entities.Album;
+import sections.mediaarchive.entities.Album_;
+import sections.mediaarchive.entities.BriefAlbum;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -32,7 +32,8 @@ public class AlbumDAO {
                         BriefAlbum.class,
                         albumRoot.get(Album_.albumId),
                         albumRoot.get(Album_.name),
-                        albumRoot.get(Album_.mainPhotoLocation)
+                        albumRoot.get(Album_.mainPhotoLocation),
+                        albumRoot.get(Album_.publishDate)
                 )
         );
         criteriaQuery.where(criteriaBuilder.lessThan(albumRoot.get(Album_.publishDate),date));

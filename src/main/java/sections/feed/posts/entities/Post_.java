@@ -1,6 +1,6 @@
-package sections.feed.posts.model.entities;
+package sections.feed.posts.entities;
 
-import sections.mediaarchive.Album;
+import sections.mediaarchive.entities.Album;
 import model.entities.File;
 
 import javax.persistence.metamodel.SetAttribute;

@@ -1,4 +1,4 @@
-package model.entities;
+package sections.feed.events.entities;
 
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;

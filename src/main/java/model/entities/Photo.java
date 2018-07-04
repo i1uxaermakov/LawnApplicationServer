@@ -1,9 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.security.Timestamp;
 import java.sql.Date;
-import java.util.Set;
 
 public class Photo implements Serializable {
     private Long id;
@@ -13,7 +11,7 @@ public class Photo implements Serializable {
     private String photoLocationSMALL;
     private Date publishDate;
     private String author;
-//    likes
+    //todo square photos and thumbnails
 
     public Photo() {
     }

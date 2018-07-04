@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="sections.feed.posts.model.entities">
 
-    <class name="PostAlbum" table="PostAlbums">
+    <class name="sections.feed.posts.entities.PostAlbum" table="PostAlbums">
         <id name="postId" type="java.lang.Long">
             <column name="post_id" />
             <generator class="foreign">
@@ -10,7 +10,7 @@
             </generator>
         </id>
         <property name="mainPhotoLocation" length="2000"/>
-        <one-to-one name="post" class="sections.feed.posts.model.entities.Post" constrained="true"/>
+        <one-to-one name="post" class="sections.feed.posts.entities.Post" constrained="true"/>
 
         <set name="albumPhotos" table="PostAlbumPhotos" fetch="join" lazy="false" inverse="true" cascade="all">
             <key>

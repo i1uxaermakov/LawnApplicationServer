@@ -1,4 +1,4 @@
-package model.entities.wrappers;
+package sections.feed.events.entities;
 
 import java.util.Date;
 

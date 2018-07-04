@@ -1,4 +1,4 @@
-package sections.mediaarchive;
+package sections.mediaarchive.entities;
 
 import model.entities.Photo;
 

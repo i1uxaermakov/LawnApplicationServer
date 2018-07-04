@@ -46,7 +46,6 @@
         <mapping resource="mappings/Event.hbm.xml"/>
         <mapping resource="mappings/Photo.hbm.xml"/>
         <mapping resource="mappings/File.hbm.xml"/>
-        <mapping resource="mappings/Video.hbm.xml"/>
         <mapping resource="mappings/RememberMeCookie.hbm.xml"/>
         <mapping resource="mappings/Organization.hbm.xml"/>
 

@@ -2,8 +2,7 @@ package sections.feed.posts;
 
 import filemanagement.FileManager;
 import model.DAO.HibernateUtil;
-import model.entities.File;
-import sections.feed.posts.model.entities.Post;
+import sections.feed.posts.entities.Post;
 import model.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,15 +12,10 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.*;
-import java.nio.file.Paths;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
+@Deprecated
 @MultipartConfig
 public class AddPostServlet extends HttpServlet {
     private String pathBeginningForPostFiles;
