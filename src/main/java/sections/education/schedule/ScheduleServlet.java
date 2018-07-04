@@ -37,14 +37,8 @@ public class ScheduleServlet extends HttpServlet {
         catch (SQLException e) {
             e.printStackTrace();
         }
-//        trying to understand merge process
-        mapResp.put("scheduleList", subjectItemList);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        resp.setContentType("text/html");
-        resp.getWriter().println(objectMapper.writeValueAsString(mapResp));
-        System.out.println(objectMapper.writeValueAsString(mapResp));
+        req.setAttribute("mapResp", mapResp);
     }
 
     @Override

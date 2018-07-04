@@ -15,7 +15,6 @@ public class Post implements Serializable {
     private Date publishDate;
     private String postContent;
 //    private String postExcerpt;
-    @JsonIgnore
     private String status;
     private Set<File> files;
     private PostAlbum album;

@@ -8,10 +8,8 @@ import java.util.Set;
 public class SubjectItem {
     private Long id;
     private String name;
-    @JsonIgnore
     private Long groupId;
     private String groupName;
-    @JsonIgnore
     private Long teacherId;
     private String teacherName;
     private String lectureHall;

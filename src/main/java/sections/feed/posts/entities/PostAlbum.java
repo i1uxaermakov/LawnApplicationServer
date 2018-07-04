@@ -7,7 +7,6 @@ import sections.feed.posts.PostAlbumJSONSerializer;
 import java.util.HashSet;
 import java.util.Set;
 
-@JsonSerialize(using = PostAlbumJSONSerializer.class)
 public class PostAlbum {
     private Long postId;
     private Post post;
