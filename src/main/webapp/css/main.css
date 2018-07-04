@@ -486,7 +486,7 @@ ul.nav li {
     margin-left: 0;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #69a03c;
+    color: #69a03c!important;
     padding-bottom: 12px;
     padding-top: 12px;
 }
