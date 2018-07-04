@@ -44,12 +44,8 @@ public class HomeworkServlet extends HttpServlet {
         catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        resp.setContentType("text/html");
-        resp.getWriter().println(objectMapper.writeValueAsString(homeworkItemList));
-        System.out.println(objectMapper.writeValueAsString(homeworkItemList));
+        req.setAttribute("homeworkItemList", homeworkItemList);
+//        req.getRequestDispatcher()
 
     }
 

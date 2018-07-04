@@ -27,18 +27,18 @@ public class ScheduleServlet extends HttpServlet {
         try {
             if(/*user.getPrivileges().contains("teacher")*/true) {
                 subjectItemList = scheduleDAO.getSubjectItemsByTeacherId((long) 1/*user.getId()*/);
-                mapResp.put("for", "teacher");
-            }
+                req.setAttribute("for", "teacher");
+        }
             else {
                 subjectItemList = scheduleDAO.getSubjectItemsByGroup((long) 1);
-                mapResp.put("for", "student");
+                req.setAttribute("for", "student");
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-
-        req.setAttribute("mapResp", mapResp);
+        req.setAttribute("subjectItemList", subjectItemList);
+        req.getRequestDispatcher("WEB-INF/JSP/edu/SchedulePageVisualizer.jsp").include(req,resp);
     }
 
     @Override

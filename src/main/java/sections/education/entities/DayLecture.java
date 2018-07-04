@@ -1,6 +1,6 @@
 package sections.education.entities;
 
-public class DayLecture {
+public class DayLecture implements Comparable<DayLecture>{
     private Long id;
     private Long day;
     private Long lectureOrder;
@@ -30,5 +30,26 @@ public class DayLecture {
 
     public void setLectureOrder(Long lectureOrder) {
         this.lectureOrder = lectureOrder;
+    }
+
+    @Override
+    public int compareTo(DayLecture o) {
+        if(this.getDay() >  o.getDay()) {
+            return 1;
+        }
+        else if(this.getDay() < o.getDay()) {
+            return -1;
+        }
+        else {
+            if(this.getLectureOrder() > o.getLectureOrder()) {
+                return 1;
+            }
+            else if(this.getLectureOrder() < o.getLectureOrder()) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
     }
 }
