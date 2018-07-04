@@ -36,6 +36,8 @@ public class SinglePostServlet extends HttpServlet {
             hibSession.close();
         }
 
+        req.setAttribute("post", post);
+
 //        Map<String,Object> mapResp = new HashMap<>();
 //        mapResp.put("post", post);
 //
@@ -48,6 +50,7 @@ public class SinglePostServlet extends HttpServlet {
 //        resp.getWriter().println(objectMapper.writeValueAsString(mapResp));
 //        System.out.println(objectMapper.writeValueAsString(mapResp));
         //todo include jsp visualization
+        req.getRequestDispatcher("WEB-INF/JSP/feed/SinglePostVisualizer.jsp").include(req,resp);
     }
 
 }
