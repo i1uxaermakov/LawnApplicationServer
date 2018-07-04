@@ -1,6 +1,5 @@
-package sections.feed.posts.model.entities;
+package sections.feed.posts.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import model.entities.Photo;
 import sections.feed.posts.PostAlbumJSONSerializer;

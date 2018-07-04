@@ -17,7 +17,7 @@ public class User implements Serializable {
     private Date lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
     private Set<Organization> organizations = new HashSet<>(0);
-
+//TODO user's password hashing with bcrypt
     public User() {
     }
 

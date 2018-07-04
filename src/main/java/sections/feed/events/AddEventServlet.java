@@ -2,7 +2,7 @@ package sections.feed.events;
 
 import filemanagement.FileManager;
 import model.DAO.HibernateUtil;
-import model.entities.Event;
+import sections.feed.events.entities.Event;
 import model.entities.User;
 import org.hibernate.Session;
 
@@ -11,11 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.sql.Date;
 
 @MultipartConfig

@@ -68,28 +68,10 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <!--end filters-->
-    
-    <!--<servlet>-->
-        <!--<servlet-name>AddPostJSP</servlet-name>-->
-        <!--<jsp-file>/AddPostJSP.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>AddPostJSP</servlet-name>-->
-        <!--<url-pattern>/AddPostJSP.jsp</url-pattern>-->
-    <!--</servlet-mapping>-->
 
-
-    <servlet>
-        <servlet-name>EducationSphereServlet</servlet-name>
-        <servlet-class>sections.education.EducationServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EducationSphereServlet</servlet-name>
-        <url-pattern>/sections.education/*</url-pattern>
-    </servlet-mapping>
     
 
-
+    <!--feed posts-->
     <servlet>
         <servlet-name>MultiplePostsServlet</servlet-name>
         <servlet-class>sections.feed.posts.MultiplePostsServlet</servlet-class>
@@ -107,7 +89,7 @@
         <servlet-name>SinglePostServlet</servlet-name>
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
-
+    <!--end feed posts-->
 
 
 
@@ -158,7 +140,7 @@
 
     <servlet>
         <servlet-name>AlbumsServlet</servlet-name>
-        <servlet-class>sections.mediaarchive.AlbumsServlet</servlet-class>
+        <servlet-class>sections.mediaarchive.MultipleAlbumsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AlbumsServlet</servlet-name>

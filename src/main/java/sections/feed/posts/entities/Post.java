@@ -1,8 +1,6 @@
-package sections.feed.posts.model.entities;
+package sections.feed.posts.entities;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import sections.mediaarchive.Album;
 import model.entities.File;
 
 import java.io.Serializable;

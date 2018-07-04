@@ -1,9 +1,9 @@
 package sections.feed.events;
 
 import model.DAO.HibernateUtil;
-import model.entities.Event;
-import model.entities.Event_;
-import model.entities.wrappers.BriefEvent;
+import sections.feed.events.entities.Event;
+import sections.feed.events.entities.Event_;
+import sections.feed.events.entities.BriefEvent;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

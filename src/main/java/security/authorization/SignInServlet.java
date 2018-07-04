@@ -44,7 +44,7 @@ public class SignInServlet extends HttpServlet {
             resp.setStatus(400);
         }
     }
-
+    //todo if user has multiple remembermecookies on various devices
     boolean checkUserSignInInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession httpSession = request.getSession();
 

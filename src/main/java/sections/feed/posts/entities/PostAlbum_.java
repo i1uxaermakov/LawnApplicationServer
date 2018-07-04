@@ -1,4 +1,4 @@
-package sections.feed.posts.model.entities;
+package sections.feed.posts.entities;
 
 import model.entities.Photo;
 
