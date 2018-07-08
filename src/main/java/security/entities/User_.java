@@ -1,4 +1,6 @@
-package model.entities;
+package security.entities;
+
+import model.entities.Organization;
 
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;

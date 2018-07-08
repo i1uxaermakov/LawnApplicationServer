@@ -1,7 +1,6 @@
 package sections.feed.posts.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import model.entities.File;
+import utils.filemanagement.File;
 
 import java.io.Serializable;
 import java.util.Date;

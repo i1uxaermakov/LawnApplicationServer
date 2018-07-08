@@ -93,16 +93,16 @@
 
 
 
-    <servlet>
-        <servlet-name>MainPageServlet</servlet-name>
-        <servlet-class>MainPageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MainPageServlet</servlet-name>
-        <url-pattern>/MainPageServlet</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>MainPageServlet</servlet-name>-->
+        <!--<servlet-class>MainPageServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>MainPageServlet</servlet-name>-->
+        <!--<url-pattern>/MainPageServlet</url-pattern>-->
+    <!--</servlet-mapping>-->
     
-    
+    <!--signin signout servlets-->
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
         <servlet-class>security.authorization.SignInServlet</servlet-class>
@@ -123,12 +123,17 @@
             <param-name>RememberMeCookieName</param-name>
             <param-value>petrmylyubimiypetr</param-value>
         </init-param>
+        <!--todo remembermecookie mechanism-->
     </servlet>
     <servlet-mapping>
         <servlet-name>SignOutServlet</servlet-name>
         <url-pattern>/signout</url-pattern>
     </servlet-mapping>
+    <!--end signin signout servlets-->
     
+
+
+
     <!--<servlet>-->
         <!--<servlet-name>ImageServlet</servlet-name>-->
         <!--<servlet-class>ImageServlet</servlet-class>-->
@@ -139,24 +144,24 @@
     <!--</servlet-mapping>-->
 
     <servlet>
-        <servlet-name>AlbumsServlet</servlet-name>
+        <servlet-name>MultipleAlbumsServlet</servlet-name>
         <servlet-class>sections.mediaarchive.MultipleAlbumsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AlbumsServlet</servlet-name>
+        <servlet-name>MultipleAlbumsServlet</servlet-name>
         <url-pattern>/albums/*</url-pattern>
     </servlet-mapping>
     
     <!--<servlet>-->
-        <!--<servlet-name>FileDownloadingServlet</servlet-name>-->
-        <!--<servlet-class>controller.FileDownloadingServlet</servlet-class>-->
+        <!--<servlet-name>utils.filemanagement.FileDownloadingServlet</servlet-name>-->
+        <!--<servlet-class>controller.utils.filemanagement.FileDownloadingServlet</servlet-class>-->
         <!--<init-param>-->
             <!--<param-name>fileUploadingRoot</param-name>-->
             <!--<param-value>/Users/ilya_ermakov/Desktop/image</param-value>-->
         <!--</init-param>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>FileDownloadingServlet</servlet-name>-->
+        <!--<servlet-name>utils.filemanagement.FileDownloadingServlet</servlet-name>-->
         <!--<url-pattern>/file/*</url-pattern>-->
     <!--</servlet-mapping>-->
     
@@ -176,24 +181,34 @@
         <servlet-name>AddPostServlet</servlet-name>
         <url-pattern>/add/post/*</url-pattern>
     </servlet-mapping>
-    <!--jsp-->
 
     <servlet>
-        <servlet-name>JSP</servlet-name>
-        <jsp-file>/JSPTemp.jsp</jsp-file>
+        <servlet-name>AddFiles</servlet-name>
+        <servlet-class>sections.feed.posts.AddFilesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>JSP</servlet-name>
-        <url-pattern>/JSPTemp.jsp</url-pattern>
+        <servlet-name>AddFiles</servlet-name>
+        <url-pattern>/add/files</url-pattern>
     </servlet-mapping>
 
+    <!--jsp-->
+    <!--<servlet>-->
+        <!--<servlet-name>JSP</servlet-name>-->
+        <!--<jsp-file>/JSPTemp.jsp</jsp-file>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>JSP</servlet-name>-->
+        <!--<url-pattern>/JSPTemp.jsp</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--education-->
     <servlet>
         <servlet-name>HW</servlet-name>
-        <servlet-class>sections.education.homework.HomeworkServlet</servlet-class>
+        <servlet-class>sections.education.homework.HomeworkServletByWeekDays</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HW</servlet-name>
-        <url-pattern>/hw</url-pattern>
+        <url-pattern>/edu/hw</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -202,8 +217,18 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
-        <url-pattern>/sc</url-pattern>
+        <url-pattern>/edu/sc</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EduPageServlet</servlet-name>
+        <servlet-class>sections.education.EduPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EduPageServlet</servlet-name>
+        <url-pattern>/edu</url-pattern>
+    </servlet-mapping>
+    <!--end education-->
 
     <!--error pages-->
     <!--<error-page>-->

@@ -14,7 +14,7 @@
 
         <set name="albumPhotos" table="PostAlbumPhotos" fetch="join" lazy="false" inverse="true" cascade="all">
             <key>
-                <column name="postalbum_id" not-null="true"/>
+                <column name="post_id" not-null="true"/>
             </key>
             <many-to-many entity-name="model.entities.Photo">
                 <column name="photo_id" not-null="true"/>

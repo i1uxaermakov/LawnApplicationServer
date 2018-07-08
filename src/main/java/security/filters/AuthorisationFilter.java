@@ -1,8 +1,8 @@
 package security.filters;
 
 import security.DAO.RememberMeCookieDAO;
-import model.DAO.HibernateUtil;
-import model.entities.User;
+import utils.HibernateUtil;
+import security.entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

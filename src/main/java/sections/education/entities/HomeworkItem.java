@@ -1,18 +1,13 @@
 package sections.education.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import model.entities.File;
-import model.entities.Photo;
+import utils.filemanagement.File;
 
 import java.sql.Date;
 import java.util.Set;
 
-public class HomeworkItem {
-    @JsonIgnore
-    private Long id;
-    @JsonIgnore
+public class HomeworkItem implements Comparable<HomeworkItem> {
+    private Long hw_id;
     private Long teacherId;
-    @JsonIgnore
     private Long groupId;
     private Long subjectId;
     private String subjectName;
@@ -20,21 +15,18 @@ public class HomeworkItem {
     private String description;
     private Date publishDate;
     private Date deadlineDate;
-    private Long albumId;
-    private Long albumPhotosNumber;
-
     private Set<File> files;
-    private Set<Photo> photos;
+    private HWAlbum hwAlbum;
 
     public HomeworkItem() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getHw_id() {
+        return hw_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHw_id(Long id) {
+        this.hw_id = id;
     }
 
     public Long getTeacherId() {
@@ -101,20 +93,12 @@ public class HomeworkItem {
         this.deadlineDate = deadlineDate;
     }
 
-    public Long getAlbumId() {
-        return albumId;
+    public HWAlbum getHwAlbum() {
+        return hwAlbum;
     }
 
-    public void setAlbumId(Long albumId) {
-        this.albumId = albumId;
-    }
-
-    public Long getAlbumPhotosNumber() {
-        return albumPhotosNumber;
-    }
-
-    public void setAlbumPhotosNumber(Long albumPhotosNumber) {
-        this.albumPhotosNumber = albumPhotosNumber;
+    public void setHwAlbum(HWAlbum hwAlbum) {
+        this.hwAlbum = hwAlbum;
     }
 
     public Set<File> getFiles() {
@@ -125,11 +109,8 @@ public class HomeworkItem {
         this.files = files;
     }
 
-    public Set<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<Photo> photos) {
-        this.photos = photos;
+    @Override
+    public int compareTo(HomeworkItem o) {
+        return this.getDeadlineDate().compareTo(o.getDeadlineDate());
     }
 }

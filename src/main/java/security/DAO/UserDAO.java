@@ -1,22 +1,21 @@
-package model.DAO.DAOImpl;
+package security.DAO;
 
-import model.DAO.HibernateUtil;
-import model.DAO.UserDAO;
-import model.entities.User;
-import model.entities.User_;
-import model.entities.wrappers.UserLoginInfo;
+
+import security.entities.User;
+import security.entities.User_;
+import security.entities.UserLoginInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
 import javax.persistence.criteria.*;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDAOImpl implements UserDAO {
+public class UserDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    @Override
     public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         List<UserLoginInfo> userLoginInfoList = null;
@@ -45,8 +44,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    @Override
-    public User getUserById(Long userId) {
+    public User getUserById(Long userId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.getTransaction();
         User user = session.get(User.class, userId);

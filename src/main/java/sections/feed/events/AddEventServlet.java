@@ -1,9 +1,9 @@
 package sections.feed.events;
 
-import filemanagement.FileManager;
-import model.DAO.HibernateUtil;
+import utils.filemanagement.FileManager;
+import utils.HibernateUtil;
 import sections.feed.events.entities.Event;
-import model.entities.User;
+import security.entities.User;
 import org.hibernate.Session;
 
 import javax.servlet.ServletException;

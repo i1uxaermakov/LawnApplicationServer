@@ -1,4 +1,4 @@
-<%--
+    <%--
   Created by IntelliJ IDEA.
   User: ilya_ermakov
   Date: 24/02/2018
@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
 
-</body>
+    </body>
 </html>

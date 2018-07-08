@@ -1,6 +1,6 @@
 package sections.education.entities;
 
-import model.entities.File;
+import utils.filemanagement.File;
 import model.entities.Photo;
 
 import javax.persistence.metamodel.SetAttribute;

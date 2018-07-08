@@ -1,8 +1,6 @@
 package sections.feed.posts.entities;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import model.entities.Photo;
-import sections.feed.posts.PostAlbumJSONSerializer;
 
 import java.util.HashSet;
 import java.util.Set;

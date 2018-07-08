@@ -6,6 +6,7 @@
 
 <%
     List<SubjectItem> subjectItemList = (List<SubjectItem>) request.getAttribute("subjectItemList");
+    String forwhom = (String) request.getAttribute("for");
     Map<DayLecture,SubjectItem> map = new HashMap<>();
     List<DayLecture> dayLectureList = new ArrayList<>();
     for(SubjectItem subjectItem: subjectItemList) {
@@ -19,7 +20,6 @@
     Calendar c = Calendar.getInstance();
     c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE | MMM dd");
-    System.out.println(simpleDateFormat.format(c.getTime()));
 %>
 <section class="blocks col-md-10 col-md-offset-1 tab-pane fade in active" id="schedule">
     <%
@@ -38,7 +38,8 @@
                             <div class="ordles"><%=dayLecture.getLectureOrder()%></div>
                             <div class="content-schedule">
                                 <h2><%=subjectItem.getName()%></h2>
-                                <p><%=subjectItem.getTeacherName()%><br> <%=subjectItem.getLectureHall()%></p>
+                                <p><%=(forwhom=="student")?subjectItem.getTeacherName():subjectItem.getGroupName()%>
+                                <br> <%=subjectItem.getLectureHall()%></p>
                             </div>
                         </a>
                     </div>

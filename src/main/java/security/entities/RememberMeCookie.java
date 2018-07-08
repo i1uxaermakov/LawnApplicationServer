@@ -1,4 +1,4 @@
-package model.entities;
+package security.entities;
 
 import java.io.Serializable;
 

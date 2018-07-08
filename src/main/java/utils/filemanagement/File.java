@@ -1,4 +1,4 @@
-package model.entities;
+package utils.filemanagement;
 
 import java.util.Date;
 

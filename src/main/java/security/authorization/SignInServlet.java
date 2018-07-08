@@ -1,11 +1,10 @@
 package security.authorization;
 
-import model.DAO.DAOImpl.UserDAOImpl;
-import model.DAO.HibernateUtil;
-import model.DAO.UserDAO;
-import model.entities.RememberMeCookie;
-import model.entities.User;
-import model.entities.wrappers.UserLoginInfo;
+import security.DAO.UserDAO;
+import utils.HibernateUtil;
+import security.entities.RememberMeCookie;
+import security.entities.User;
+import security.entities.UserLoginInfo;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -28,7 +27,7 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if((new Boolean(true)).equals(req.getSession().getAttribute("Authorised"))) {
-            req.getRequestDispatcher("/").forward(req, resp);
+            resp.sendRedirect("/");
         }
         else {
             req.getRequestDispatcher("/signin.html").include(req, resp);
@@ -38,7 +37,7 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(checkUserSignInInfo(req,resp)) {
-            req.getRequestDispatcher("/").forward(req, resp);
+            resp.sendRedirect("/");
         }
         else {
             resp.setStatus(400);
@@ -67,7 +66,7 @@ public class SignInServlet extends HttpServlet {
             response.setStatus(400);
         }
         else {
-            UserDAO userDAO = new UserDAOImpl();
+            UserDAO userDAO = new UserDAO();
             UserLoginInfo userLoginInfo = null;
 
             Session session = HibernateUtil.getSessionFactory().openSession();

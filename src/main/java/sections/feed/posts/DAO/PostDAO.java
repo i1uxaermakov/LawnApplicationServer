@@ -1,6 +1,6 @@
 package sections.feed.posts.DAO;
 
-import model.DAO.HibernateUtil;
+import utils.HibernateUtil;
 import sections.feed.posts.entities.Post;
 import sections.feed.posts.entities.Post_;
 import org.hibernate.Session;

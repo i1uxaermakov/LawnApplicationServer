@@ -1,5 +1,7 @@
-package model.entities;
+package security.entities;
 
+
+import model.entities.Organization;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +22,7 @@ public class User implements Serializable {
 //TODO user's password hashing with bcrypt
     public User() {
     }
-
+//todo all date field with timestamp class
     public Long getUserId() {
         return userId;
     }

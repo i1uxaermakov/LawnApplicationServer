@@ -1,8 +1,8 @@
 package security.authorization;
 
-import model.DAO.HibernateUtil;
-import model.entities.RememberMeCookie;
-import model.entities.User;
+import utils.HibernateUtil;
+import security.entities.RememberMeCookie;
+import security.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import security.DAO.RememberMeCookieDAO;

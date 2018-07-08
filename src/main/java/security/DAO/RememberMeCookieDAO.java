@@ -1,10 +1,11 @@
 package security.DAO;
 
-import model.DAO.HibernateUtil;
-import model.entities.RememberMeCookie;
+
+import security.entities.RememberMeCookie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

@@ -1,4 +1,4 @@
-<%@ page import="model.entities.User" %>
+<%@ page import="security.entities.User" %>
 <%@ page import="model.entities.Organization" %>
 <%@ page contentType="text/html" language="java" %>
 <!DOCTYPE html>

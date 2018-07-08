@@ -1,12 +1,8 @@
 package sections.mediaarchive;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import model.DAO.HibernateUtil;
-import org.apache.commons.lang3.StringUtils;
+import utils.HibernateUtil;
 import org.hibernate.Session;
 import sections.mediaarchive.DAO.AlbumDAO;
-import sections.mediaarchive.entities.Album;
 import sections.mediaarchive.entities.BriefAlbum;
 
 import javax.servlet.ServletException;

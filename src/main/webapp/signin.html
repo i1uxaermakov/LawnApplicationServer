@@ -192,12 +192,12 @@ div.checkbox{
 
         <div class="login-page">
         <div class="form">
-          <form class="login-form" action="">
+          <form class="login-form" action="/signin" method="post">
             <h1>LOG IN</h1>
-            <input class="textinput" type="text" placeholder="ID"/>
-            <input class="textinput" type="password" placeholder="password" id="marg10" />
+            <input class="textinput" type="text" placeholder="ID" name="login"/>
+            <input class="textinput" type="password" placeholder="password" id="marg10" name="password"/>
               <div class="checkbox text-left">
-                  <label><input type="checkbox">Remember me</label>
+                  <label><input type="checkbox" name="rememberme">Remember me</label>
               </div>
             <button>SIGN IN</button>
           </form>

@@ -1,6 +1,6 @@
 package sections.education.DAO;
 
-import model.DAO.HibernateUtil;
+import utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

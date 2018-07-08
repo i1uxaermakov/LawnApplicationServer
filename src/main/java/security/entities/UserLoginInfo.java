@@ -1,4 +1,4 @@
-package model.entities.wrappers;
+package security.entities;
 
 import java.util.HashSet;
 import java.util.Set;

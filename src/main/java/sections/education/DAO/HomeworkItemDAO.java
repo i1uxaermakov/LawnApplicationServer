@@ -1,6 +1,6 @@
 package sections.education.DAO;
 
-import model.DAO.HibernateUtil;
+import utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,14 +12,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeworkItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public List<HomeworkItem> getHomeworkItems(Date lastSavedHWDate, Long groupId) throws SQLException {
+    public List<HomeworkItem> getHomeworkItems(Date todaysDate, Long groupId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-        List<HomeworkItem> homeworkItemList = null;
+        List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
         Transaction transaction = session.beginTransaction();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -27,7 +28,7 @@ public class HomeworkItemDAO {
         Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
 
         criteriaQuery.where(criteriaBuilder.and(
-                            criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate),
+                            criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.deadlineDate), todaysDate),
                             criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId)));
 
         homeworkItemList = session.createQuery(criteriaQuery).getResultList();

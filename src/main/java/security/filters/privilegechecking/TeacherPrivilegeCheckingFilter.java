@@ -1,6 +1,6 @@
 package security.filters.privilegechecking;
 
-import model.entities.User;
+import security.entities.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

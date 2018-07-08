@@ -1,7 +1,7 @@
 import sections.mediaarchive.DAO.AlbumDAO;
 import sections.feed.events.EventDAO;
 import sections.feed.posts.DAO.PostDAO;
-import model.DAO.HibernateUtil;
+import utils.HibernateUtil;
 import sections.feed.posts.entities.Post;
 import sections.mediaarchive.entities.BriefAlbum;
 import sections.feed.events.entities.BriefEvent;

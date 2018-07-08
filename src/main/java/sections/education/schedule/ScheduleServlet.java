@@ -1,8 +1,6 @@
 package sections.education.schedule;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import model.entities.User;
+import security.entities.User;
 import sections.education.DAO.ScheduleDAO;
 import sections.education.entities.SubjectItem;
 
@@ -12,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ScheduleServlet extends HttpServlet {
     @Override
@@ -22,15 +18,14 @@ public class ScheduleServlet extends HttpServlet {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
         User user = (User) req.getSession().getAttribute("User");
         List<SubjectItem> subjectItemList = null;
-        Map<String,Object> mapResp = new HashMap<>();
 
         try {
-            if(/*user.getPrivileges().contains("teacher")*/true) {
-                subjectItemList = scheduleDAO.getSubjectItemsByTeacherId((long) 1/*user.getId()*/);
+            if(user.getPrivileges().contains("teacher")) {
+                subjectItemList = scheduleDAO.getSubjectItemsByTeacherId(user.getUserId());
                 req.setAttribute("for", "teacher");
         }
             else {
-                subjectItemList = scheduleDAO.getSubjectItemsByGroup((long) 1);
+                subjectItemList = scheduleDAO.getSubjectItemsByGroup(user.getGroupId());
                 req.setAttribute("for", "student");
             }
         }
@@ -38,7 +33,13 @@ public class ScheduleServlet extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("subjectItemList", subjectItemList);
-        req.getRequestDispatcher("WEB-INF/JSP/edu/SchedulePageVisualizer.jsp").include(req,resp);
+
+        if(req.getParameter("mobile")==null) {
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/SchedulePageVisualizer.jsp").forward(req,resp);
+        }
+        else {
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/ScheduleVisualizer.jsp").forward(req,resp);
+        }
     }
 
     @Override

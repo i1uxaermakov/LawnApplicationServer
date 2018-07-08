@@ -2,6 +2,7 @@ package security.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class IfAuthorisedFilter implements Filter {
@@ -15,7 +16,7 @@ public class IfAuthorisedFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         if(!((new Boolean(true)).equals(request.getSession(false).getAttribute("Authorised")))) {
-            request.getRequestDispatcher("/signin").forward(servletRequest,servletResponse);
+            ((HttpServletResponse)servletResponse).sendRedirect("/signin");
         }
         else {
             filterChain.doFilter(servletRequest, servletResponse);

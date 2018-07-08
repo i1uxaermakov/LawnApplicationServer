@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model.entities">
 
-    <class name="File" table="Files">
+    <class name="utils.filemanagement.File" table="Files">
         <id name="id" column="file_id">
             <generator class="native"/>
         </id>

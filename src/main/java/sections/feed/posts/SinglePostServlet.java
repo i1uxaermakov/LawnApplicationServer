@@ -1,8 +1,6 @@
 package sections.feed.posts;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import model.DAO.HibernateUtil;
+import utils.HibernateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.feed.posts.DAO.PostDAO;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SinglePostServlet extends HttpServlet {
 

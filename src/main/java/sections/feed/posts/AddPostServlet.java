@@ -1,9 +1,9 @@
 package sections.feed.posts;
 
-import filemanagement.FileManager;
-import model.DAO.HibernateUtil;
+//import utils.filemanagement.FileManager;
+import utils.HibernateUtil;
 import sections.feed.posts.entities.Post;
-import model.entities.User;
+import security.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Date;
 
-@Deprecated
+
 @MultipartConfig
 public class AddPostServlet extends HttpServlet {
     private String pathBeginningForPostFiles;
@@ -36,23 +36,46 @@ public class AddPostServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        FileManager fileManager = new FileManager();
-        User user = (User) req.getSession().getAttribute("User");
-        Date date = new Date(System.currentTimeMillis());
-        String author = user.getFirstName() + " " + user.getLastName();
+        resp.setContentType("application/json");
+        System.out.println("hello");
+        Session hibSession = HibernateUtil.getSessionFactory().openSession();
+        //FileManager fileManager = new FileManager();
+//        User user = (User) req.getSession().getAttribute("User");
+//        Date date = new Date(System.currentTimeMillis());
+        //String author = user.getFirstName() + " " + user.getLastName();
 
         Post post = new Post();
-        post.setAuthorName(author);
-        if(!(post.getAuthorName().equals(req.getParameter("author")))) {
-            if(user.getOrganizations().contains(req.getParameter("author"))) {
-                post.setOrganizationName(req.getParameter("author"));
-            }
-        }
+        post.setPostContent(req.getParameter("postContent"));
 
-        post.setPostContent(req.getParameter("postText"));
-//        post.setTitle(req.getParameter("title"));
-        post.setPublishDate(date);
+//        if(user.getPrivileges().contains("posts")) {
+//            post.setStatus("approved");
+//        }
+//        else {
+//            post.setStatus("tobechecked");
+//        }
+
+        Transaction transaction = hibSession.beginTransaction();
+        hibSession.persist(post);
+        transaction.commit();
+
+        System.out.println(post.getPostId());
+        resp.getWriter().println("{\"postId\":" + post.getPostId() + "}");
+        System.out.println("{\"postId\":" + post.getPostId() + "}");
+        hibSession.close();
+
+        //'{"result":true, "count":42}'
+        //{"postId":1}
+
+        //        post.setAuthorName(author);
+//        if(!(post.getAuthorName().equals(req.getParameter("author")))) {
+//            if(user.getOrganizations().contains(req.getParameter("author"))) {
+//                post.setOrganizationName(req.getParameter("author"));
+//            }
+//        }
+
+//        post.setPostContent(req.getParameter("postText"));
+////        post.setTitle(req.getParameter("title"));
+//        post.setPublishDate(date);
 //        if(req.getParameter("description")==null) {
 //            post.setDescription(post.getPostText().substring(0,300));
 //        }
@@ -60,16 +83,7 @@ public class AddPostServlet extends HttpServlet {
 //            post.setDescription(req.getParameter("description"));
 //        }
 
-        if(user.getPrivileges().contains("posts")) {
-            post.setStatus("approved");
-        }
-        else {
-            post.setStatus("tobechecked");
-        }
 
-        Transaction transaction = session.beginTransaction();
-        session.persist(post);
-        transaction.commit();
 
         // Retrieves <input type="file" name="file" multiple="true">
 //        List<Part> fileParts = req.getParts().stream().filter(part -> "files".equals(part.getName())).collect(Collectors.toList());
@@ -117,7 +131,7 @@ public class AddPostServlet extends HttpServlet {
 //        }
 //        post.setPhotos(photoSet);
 
-        session.close();
+
     }
 
 }
@@ -135,3 +149,4 @@ public class AddPostServlet extends HttpServlet {
     private Set<File> files;
     private Set<Tag> tags;
  */
+
