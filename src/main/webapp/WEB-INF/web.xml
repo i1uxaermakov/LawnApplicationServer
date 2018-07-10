@@ -154,7 +154,7 @@
     
     <!--<servlet>-->
         <!--<servlet-name>utils.filemanagement.FileDownloadingServlet</servlet-name>-->
-        <!--<servlet-class>controller.utils.filemanagement.FileDownloadingServlet</servlet-class>-->
+        <!--<servlet-class>utils.filemanagement.FileDownloadingServlet</servlet-class>-->
         <!--<init-param>-->
             <!--<param-name>fileUploadingRoot</param-name>-->
             <!--<param-value>/Users/ilya_ermakov/Desktop/image</param-value>-->

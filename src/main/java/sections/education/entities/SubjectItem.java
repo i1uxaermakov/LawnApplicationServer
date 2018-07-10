@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SubjectItem {
+public class SubjectItem implements Comparable<SubjectItem> {
     private Long id;
     private String name;
     private Long groupId;
@@ -80,5 +80,16 @@ public class SubjectItem {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    @Override
+    public int compareTo(SubjectItem o) {
+        if(this.getId() > o.getId()) {
+            return 1;
+        }
+        else if(this.getId() < o.getId()) {
+            return -1;
+        }
+        return 0;
     }
 }

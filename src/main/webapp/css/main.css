@@ -658,6 +658,9 @@ color: #69a03c;
   height: 100px;
   width: 100px;
 }
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: #69a03c;
+    }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
      color: #69a03c; 
     }

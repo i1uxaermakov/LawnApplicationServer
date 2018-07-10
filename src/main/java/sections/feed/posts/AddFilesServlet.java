@@ -41,15 +41,17 @@ public class AddFilesServlet extends HttpServlet{
             utils.filemanagement.File file = new utils.filemanagement.File();
             file.setLocation("/Users/ilya_ermakov/Desktop/files" + File.separator + fileName);
             file.setSize(part.getSize());
+            file.setPost(post);
 
             post.getFiles().add(file);
+
         }
         Transaction transaction = hibSession.beginTransaction();
         hibSession.update(post);
         transaction.commit();
+
         hibSession.close();
-        //todo many to one relationship files to post with fetch type lazy
-        //todo servlet addposts doesn't resolve postContent parameter
+
         //todo logging everywhere
     }
 

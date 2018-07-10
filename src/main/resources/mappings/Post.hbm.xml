@@ -20,10 +20,14 @@
             <key>
                 <column name="post_id" not-null="true"/>
             </key>
-            <many-to-many entity-name="utils.filemanagement.File">
-                <column name="file_id" not-null="true"/>
-            </many-to-many>
+            <one-to-many class="utils.filemanagement.File"/>
         </set>
+
+
+        <!--<set name="products" inverse="true" cascade="all">-->
+            <!--<key column="CATEGORY_ID" not-null="true" />-->
+            <!--<one-to-many class="Product"/>-->
+        <!--</set>-->
 
         <one-to-one name="album" class="sections.feed.posts.entities.PostAlbum" cascade="all"/>
 

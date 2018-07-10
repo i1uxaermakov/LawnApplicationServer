@@ -13,7 +13,7 @@
 
         var request = new XMLHttpRequest();
         var formData = new FormData();
-        formData.set('postContent',document.getElementById("post-text"));
+        formData.set('postContent',document.getElementById("post-text").value);
         request.open("POST", 'http://localhost:8080/add/post', false);
         request.send(formData);
 

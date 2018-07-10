@@ -21,6 +21,18 @@ public class Post implements Serializable {
     public Post() {
     }
 
+    public Post(Long postId, Long authorId, String authorName, String organizationName, Date publishDate, String postContent, String status, Set<File> files, PostAlbum album) {
+        this.postId = postId;
+        this.authorId = authorId;
+        this.authorName = authorName;
+        this.organizationName = organizationName;
+        this.publishDate = publishDate;
+        this.postContent = postContent;
+        this.status = status;
+        this.files = files;
+        this.album = album;
+    }
+
     public Long getPostId() {
         return postId;
     }

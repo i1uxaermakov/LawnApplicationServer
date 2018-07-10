@@ -45,6 +45,7 @@ public class AddPostServlet extends HttpServlet {
         //String author = user.getFirstName() + " " + user.getLastName();
 
         Post post = new Post();
+        System.out.println(req.getParameter("postContent"));
         post.setPostContent(req.getParameter("postContent"));
 
 //        if(user.getPrivileges().contains("posts")) {

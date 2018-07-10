@@ -7,18 +7,28 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Education</title>
+        <title>Education - Schedule</title>
 
         <!-- Bootstrap -->
-        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../../css/main.css" rel="stylesheet">
-        <link href="../../../css/swiper.min.css" rel="stylesheet">
-        <link href="../../../css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../../css/edu.css">
-        <link rel="stylesheet" href="../../../css/posts-template.css">
-        <link rel="stylesheet" href="../../../css/photoswipe.css">
-        <link rel="stylesheet" href="../../../css/default-skin/default-skin.css">
-        <link rel="stylesheet" href="../../../css/gallery.css">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <link href="/css/swiper.min.css" rel="stylesheet">
+        <link href="/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/edu.css">
+        <link rel="stylesheet" href="/css/posts-template.css">
+        <link rel="stylesheet" href="/css/photoswipe.css">
+        <link rel="stylesheet" href="/css/default-skin/default-skin.css">
+        <link rel="stylesheet" href="/css/gallery.css">
+        <%--<!-- Bootstrap -->--%>
+        <%--<link href="../../../css/bootstrap.min.css" rel="stylesheet">--%>
+        <%--<link href="../../../css/main.css" rel="stylesheet">--%>
+        <%--<link href="../../../css/swiper.min.css" rel="stylesheet">--%>
+        <%--<link href="../../../css/all.css" rel="stylesheet">--%>
+        <%--<link rel="stylesheet" href="../../../css/edu.css">--%>
+        <%--<link rel="stylesheet" href="../../../css/posts-template.css">--%>
+        <%--<link rel="stylesheet" href="../../../css/photoswipe.css">--%>
+        <%--<link rel="stylesheet" href="../../../css/default-skin/default-skin.css">--%>
+        <%--<link rel="stylesheet" href="../../../css/gallery.css">--%>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,6 +37,8 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
+
+
 
     <body id="body">
         <header>
@@ -109,18 +121,35 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="../css/jquery.min.js"></script>
-        <script src="../css/swiper.min.js"></script>
+        <script src="/css/jquery.min.js"></script>
+        <script src="/css/swiper.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../css/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/css/bootstrap.min.js" type="text/javascript"></script>
         <!-- <script src="slick/slick.min.js"></script>    -->
-        <script src="../css/main.js" type="text/javascript"></script>
+        <script src="/css/main.js" type="text/javascript"></script>
 
         <!-- Core JS file -->
-        <script src="../css/photoswipe.min.js"></script>
+        <script src="/css/photoswipe.min.js"></script>
 
         <!-- UI JS file -->
-        <script src="../css/photoswipe-ui-default.min.js"></script>
+        <script src="/css/photoswipe-ui-default.min.js"></script>
         <!--<a href="https://ru.freepik.com/free-vector/_801555.htm">Разработано через Freepik</a>-->
+
+        <%--<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->--%>
+        <%--<script src="../css/jquery.min.js"></script>--%>
+        <%--<script src="../css/swiper.min.js"></script>--%>
+        <%--<!-- Include all compiled plugins (below), or include individual files as needed -->--%>
+        <%--<script src="../css/bootstrap.min.js" type="text/javascript"></script>--%>
+        <%--<!-- <script src="slick/slick.min.js"></script>    -->--%>
+        <%--<script src="../css/main.js" type="text/javascript"></script>--%>
+
+        <%--<!-- Core JS file -->--%>
+        <%--<script src="../css/photoswipe.min.js"></script>--%>
+
+        <%--<!-- UI JS file -->--%>
+        <%--<script src="../css/photoswipe-ui-default.min.js"></script>--%>
+        <%--<!--<a href="https://ru.freepik.com/free-vector/_801555.htm">Разработано через Freepik</a>-->--%>
+
+        <%--${pageContext.request.contextPath}--%>
     </body>
 </html>

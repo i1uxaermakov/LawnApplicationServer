@@ -1,5 +1,7 @@
 package utils.filemanagement;
 
+import sections.feed.posts.entities.Post;
+
 import java.util.Date;
 
 public class File {
@@ -9,8 +11,19 @@ public class File {
     private String location;
     private String author;
     private Date publishDate;
+    private Post post;
 
     public File() {
+    }
+
+    public File(Long id, String name, Long size, String location, String author, Date publishDate, Post post) {
+        this.id = id;
+        this.name = name;
+        this.size = size;
+        this.location = location;
+        this.author = author;
+        this.publishDate = publishDate;
+        this.post = post;
     }
 
     public Long getId() {
@@ -59,5 +72,26 @@ public class File {
 
     public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", size=" + size +
+                ", location='" + location + '\'' +
+                ", author='" + author + '\'' +
+                ", publishDate=" + publishDate +
+                ", post=" + post +
+                '}';
     }
 }

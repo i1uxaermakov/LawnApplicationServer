@@ -1,5 +1,8 @@
 package utils.filemanagement;
 
+import org.hibernate.Session;
+import utils.HibernateUtil;
+
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,8 +18,8 @@ public class FileDownloadingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String pathBeginning = getInitParameter("fileUploadingRoot");
-        String requestPath = request.getPathInfo();
+//        String pathBeginning = getInitParameter("fileUploadingRoot");
+//        String requestPath = request.getPathInfo();
 
         /*
         // reads input file from an absolute path

@@ -104,7 +104,7 @@ section.blocks{
 .urok {
     height: 90px;
     font-size: 30px;
-    padding: 11px 7px 7px 7px;
+    /*padding: 11px 7px 7px 7px;*/
     border-right: 1px solid #aeaeae;
     width: 25%;
     font-weight: 400;
@@ -423,11 +423,70 @@ header .nav-tabs > li.active > a:hover{
 }
 .accord:hover{
     background: #efefef !important;
-}
-.urok:hover{
-    background: #efefef;
 } 
-.explanation.double-pair .urok.centered a{
+/*.explanation.double-pair .urok.centered .subject-item{
 position: absolute;
 top: 30%;
+} */
+.pointer{
+    cursor: pointer;
+}
+.subject-item{
+    background: #fff;
+}
+.subject-item:hover{
+    background: #efefef;
+}  
+.double-pair .subject-item:first-child{
+    border-bottom: 1px solid #aeaeae;
+    padding-top: 10px;
+}
+.double-pair .subject-item:only-child{
+    padding-bottom: 0;
+    border-top: 1px solid #aeaeae;
+    margin-top: 46px;
+}
+.explanation{
+    background-color: #efefef;
+}
+
+.subject-item:last-child{
+    padding: 14px 0;
+}
+.subject-item:only-child{
+    padding-top: 10px;
+    padding-bottom: 10px;    
+}
+
+.urok:nth-child(3){
+    border-right: 1px solid #aeaeae;
 } 
+.uploaded-files-hw:last-child{
+    border-bottom: 0;
+}
+.modal-body{
+    padding-top: 0;
+}
+.modal-header{
+    padding-bottom: 0;
+}
+.modal-header h3{
+    color: #868686;
+}
+.modal-footer .btn-primary{
+    border-color: #69a03c;
+}
+.modal-footer .likes .btn.active.focus,.modal-footer  .btn.active:focus,.modal-footer  .btn.focus,.modal-footer  .btn:active.focus,.modal-footer  .btn:active:focus,.modal-footer  .btn:focus {
+    outline: none;
+    color: #fff !important; 
+    }
+  .modal-footer   .btn-primary:hover{
+    background-color: #69a03c !important;
+    }
+    .modal-footer   .btn-primary {
+    color: #fff !important;
+    }
+
+    section.blocks{
+        /*margin-top: 5px;
+    }

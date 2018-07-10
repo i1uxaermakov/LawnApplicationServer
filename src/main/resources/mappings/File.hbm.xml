@@ -12,6 +12,8 @@
         <property name="location" length="2000"/>
         <property name="size"/>
         <property name="publishDate"/>
+
+        <many-to-one name="post" class="sections.feed.posts.entities.Post" column="post_id"/>
         
     </class>
 </hibernate-mapping>
