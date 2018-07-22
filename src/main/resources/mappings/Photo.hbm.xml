@@ -7,19 +7,18 @@
             <generator class="native"/>
         </id>
 
-        <property name="photoName" length="2000"/>
-        <property name="photoLocationBIG" length="2000"/>
-        <property name="photoLocationMEDIUM" length="2000"/>
-        <property name="photoLocationSMALL" length="2000"/>
+        <property name="originalPhotoLocation" column="original" length="2000"/>
+        <property name="thumbnailPhotoLocation" column="thumb" length="2000"/>
+        <property name="squareThumbnailPhotoLocation" column="square" length="2000"/>
         <property name="author"/>
-        <property name="publishDate"/>
+        <property name="publishDate" />
     </class>
 </hibernate-mapping>
 
-        <!--private Long id;-->
-        <!--private String name;-->
-        <!--private String description;-->
-        <!--private Date eventDate;-->
-        <!--private String venue;-->
-        <!--private boolean hasPassed = false;-->
-        <!--private String addedBy;-->
+<!--
+    private Long id;
+    private String originalPhotoLocation;
+    private String thumbnailPhotoLocation;
+    private String squareThumbnailPhotoLocation;
+    private Date publishDate;
+    private String author;-->

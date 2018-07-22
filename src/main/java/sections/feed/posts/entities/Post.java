@@ -16,12 +16,12 @@ public class Post implements Serializable {
 //    private String postExcerpt;
     private String status;
     private Set<File> files;
-    private PostAlbum album;
+    private AttachedAlbum album;
 
     public Post() {
     }
 
-    public Post(Long postId, Long authorId, String authorName, String organizationName, Date publishDate, String postContent, String status, Set<File> files, PostAlbum album) {
+    public Post(Long postId, Long authorId, String authorName, String organizationName, Date publishDate, String postContent, String status, Set<File> files, AttachedAlbum album) {
         this.postId = postId;
         this.authorId = authorId;
         this.authorName = authorName;
@@ -106,11 +106,11 @@ public class Post implements Serializable {
 //    }
 
 
-    public PostAlbum getAlbum() {
+    public AttachedAlbum getAlbum() {
         return album;
     }
 
-    public void setAlbum(PostAlbum album) {
+    public void setAlbum(AttachedAlbum album) {
         this.album = album;
     }
 

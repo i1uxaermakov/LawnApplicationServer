@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="sections.education.entities">
+
+    <class name="sections.education.entities.SubjectResourceCategory" table="SubjectItems">
+        <id name="categoryId" column="category_id">
+            <generator class="native"/>
+        </id>
+        <property name="categoryName"/>
+        <property name="creationDate"/>
+        <property name="course"/>
+
+        <set name="resourceItems" table="Categories_Resources" fetch="join" lazy="false" inverse="true" cascade="all">
+            <key>
+                <column name="category_id" not-null="true"/>
+            </key>
+            <one-to-many class="sections.education.entities.ResourceItem"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
+        <!--private Long categoryId;-->
+        <!--private Timestamp creationDate;-->
+        <!--private Long course;-->
+        <!--private Set<ResourceItem> resourceItems = new HashSet<>(0);-->

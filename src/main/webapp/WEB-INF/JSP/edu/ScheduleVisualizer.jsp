@@ -64,7 +64,7 @@
                                 <div class="ordles"><%=dayLecture.getLectureOrder()%></div>
                                 <div class="content-schedule">
                                     <h2><%=subjectItem.getName()%></h2>
-                                    <p><%=(forwhom=="student")?subjectItem.getTeacherName():subjectItem.getGroupName()%>
+                                    <p><%=("student".equals(forwhom))?subjectItem.getTeacherName():subjectItem.getGroupName()%>
                                     <br> <%=subjectItem.getLectureHall()%></p>
                                 </div>
                             </a>
@@ -81,93 +81,3 @@
     %>
     <%--todo своя функция, где будет попап со всеми домашними заданиями по предмету + https--%>
 </section>
-
-<%--<div class="block row">--%>
-    <%--<div class="container-fluid date firstdate1">Monday &#124; March 26</div>--%>
-    <%--<div class="explanation double-pair col-xs-12">--%>
-        <%--<div class="urok u1 ">--%>
-            <%--<div class=" subject-item pointer">--%>
-                <%--<div class="ordles">1</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Algebra</h2>--%>
-                    <%--<p>8.30 - 9.50 <br> Room#52/62</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class=" subject-item pointer">--%>
-                <%--<div class="ordles">1</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Fizra</h2>--%>
-                    <%--<p>8.30 - 9.50 <br>GYM</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-
-        <%--<div class="urok centered u2">--%>
-            <%--<div class=" subject-item pointer">--%>
-                <%--<div class="ordles">2</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Russian</h2>--%>
-                    <%--<p>10.00 - 11.20 <br> Room#32</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-        <%--</div>--%>
-        <%--<div class="urok centered u3">--%>
-            <%--<div class="subject-item pointer">--%>
-                <%--<div class="ordles">3</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>English-W</h2>--%>
-                    <%--<p>12.10 - 13.30 <br> Room#73</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-    <%--</div>--%>
-<%--</div>--%>
-
-
-<%--<div class="block row">--%>
-    <%--<div class="container-fluid date firstdate">Monday &#124; March 26</div>--%>
-    <%--<div class="explanation col-xs-12">--%>
-        <%--<div class="urok u1">--%>
-            <%--<div class="subject-item pointer">--%>
-                <%--<div class="ordles">1</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Spanish</h2>--%>
-                    <%--<p>8.30 - 9.50 <br> Room#27</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-
-        <%--<div class="urok u2">--%>
-            <%--<div class="subject-item pointer">--%>
-                <%--<div class="ordles">2</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Geometry</h2>--%>
-                    <%--<p>10.00 - 11.20 <br> Room#32</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-        <%--</div>--%>
-        <%--<div class="urok u3">--%>
-            <%--<div class="subject-item pointer">--%>
-                <%--<div class="ordles">3</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Community</h2>--%>
-                    <%--<p>12.10 - 13.30 <br> Room#73</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="urok u4">--%>
-            <%--<div class="subject-item pointer">--%>
-                <%--<div class="ordles">4</div>--%>
-                <%--<div class="content-schedule">--%>
-                    <%--<h2>Uzbek</h2>--%>
-                    <%--<p>13.40 - 15.00 <br> Room#42</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>

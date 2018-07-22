@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="sections.education.entities">
+
+    <class name="sections.education.entities.ResourceItem" table="ResourceItems">
+        <id name="resourceItemId" column="resource_id">
+            <generator class="native"/>
+        </id>
+        <property name="addedBy"/>
+        <property name="publishDate"/>
+
+        <many-to-one name="file" class="utils.filemanagement.File"
+                     column="file_id" unique="true" not-null="true"
+                     cascade="all" />
+
+        <many-to-one name="subjectCategory" class="sections.education.entities.SubjectResourceCategory"
+                     column="category_id" not-null="true"
+                     cascade="all"/>
+
+    </class>
+</hibernate-mapping>

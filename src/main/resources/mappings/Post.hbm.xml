@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="model.entities">
+<hibernate-mapping package="sections.feed.posts.entities">
 
     <class name="sections.feed.posts.entities.Post" table="Posts">
         <id name="postId" column="post_id">
@@ -16,12 +16,20 @@
         <property name="publishDate"/>
         <property name="status" length="20"/>
 
-        <set name="files" table="PostFiles" fetch="join" lazy="false" inverse="true" cascade="all">
+        <set name="files" table="PostFiles" fetch="join" lazy="false" cascade="all">
             <key>
                 <column name="post_id" not-null="true"/>
             </key>
-            <one-to-many class="utils.filemanagement.File"/>
+            <!--<one-to-many class="utils.filemanagement.File"/>-->
+            <many-to-many class="utils.filemanagement.File">
+                <column name="file_id" not-null="true"/>
+            </many-to-many>
         </set>
+
+
+        <many-to-one name="album" class="sections.feed.posts.entities.AttachedAlbum"
+                     column="attAlbum_id" unique="true" not-null="true"
+                     cascade="all" />
 
 
         <!--<set name="products" inverse="true" cascade="all">-->
@@ -29,7 +37,7 @@
             <!--<one-to-many class="Product"/>-->
         <!--</set>-->
 
-        <one-to-one name="album" class="sections.feed.posts.entities.PostAlbum" cascade="all"/>
+        <!--<one-to-one name="album" class="sections.feed.posts.entities.AttachedAlbum" cascade="all"/>-->
 
         <!--<set name="videos" table="PostVideos" fetch="join" lazy="false" inverse="true" cascade="all">-->
             <!--<key>-->

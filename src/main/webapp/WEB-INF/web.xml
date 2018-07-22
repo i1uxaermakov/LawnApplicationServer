@@ -241,4 +241,17 @@
         <!--<location>/shiiiiit.html</location>-->
     <!--</error-page>-->
 
+    <servlet>
+        <servlet-name>addPhotosServlet</servlet-name>
+        <servlet-class>sections.feed.AddPhotosServlet</servlet-class>
+        <init-param>
+            <param-name>pathToImageFolder</param-name>
+            <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addPhotosServlet</servlet-name>
+        <url-pattern>/uploadImage</url-pattern>
+    </servlet-mapping>
+
 </web-app>

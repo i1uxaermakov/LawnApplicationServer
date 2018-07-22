@@ -17,7 +17,9 @@
         <property name="publishDate"/>
         <property name="deadlineDate"/>
 
-        <one-to-one name="hwAlbum" class="sections.education.entities.HWAlbum" cascade="all"/>
+        <many-to-one name="hwAlbum" class="sections.feed.posts.entities.AttachedAlbum"
+                     column="hwAlbum_id" unique="true" not-null="true"
+                     cascade="all" />
 
 
         <set name="files" table="HWFiles" fetch="join" lazy="false" inverse="true" cascade="all">

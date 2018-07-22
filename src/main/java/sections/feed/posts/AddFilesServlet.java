@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
+import java.util.Set;
 
 @MultipartConfig
 public class AddFilesServlet extends HttpServlet{
@@ -41,15 +42,18 @@ public class AddFilesServlet extends HttpServlet{
             utils.filemanagement.File file = new utils.filemanagement.File();
             file.setLocation("/Users/ilya_ermakov/Desktop/files" + File.separator + fileName);
             file.setSize(part.getSize());
-            file.setPost(post);
+            //file.setPost(post);
 
-            post.getFiles().add(file);
+            Set<utils.filemanagement.File> fileSet= post.getFiles();
+            fileSet.add(file);
+            post.setFiles(fileSet);
 
         }
         Transaction transaction = hibSession.beginTransaction();
         hibSession.update(post);
         transaction.commit();
 
+        hibSession.flush();
         hibSession.close();
 
         //todo logging everywhere

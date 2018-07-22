@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="model.entities">
+<hibernate-mapping package="utils.filemanagement">
 
     <class name="utils.filemanagement.File" table="Files">
         <id name="id" column="file_id">
@@ -13,8 +13,19 @@
         <property name="size"/>
         <property name="publishDate"/>
 
-        <many-to-one name="post" class="sections.feed.posts.entities.Post" column="post_id"/>
-        
+        <!--<many-to-one name="post" class="sections.feed.posts.entities.Post" column="post_id"/>-->
+
+        <!--An owner should NOT have an attribute inverse!-->
+        <set name="posts" table="PostFiles" fetch="join" lazy="true" inverse="true"><!--cascade="all"-->
+            <key>
+                <column name="file_id" not-null="true"/>
+            </key>
+            <!--<one-to-many class="utils.filemanagement.File"/>-->
+            <many-to-many class="sections.feed.posts.entities.Post">
+                <column name="post_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
     </class>
 </hibernate-mapping>
 

@@ -3,6 +3,8 @@ package utils.filemanagement;
 import sections.feed.posts.entities.Post;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class File {
     private Long id;
@@ -11,19 +13,18 @@ public class File {
     private String location;
     private String author;
     private Date publishDate;
-    private Post post;
+    private Set<Post> posts = new HashSet<>(0);
 
     public File() {
     }
 
-    public File(Long id, String name, Long size, String location, String author, Date publishDate, Post post) {
-        this.id = id;
+    public File(String name, Long size, String location, String author, Date publishDate, Set<Post> posts) {
         this.name = name;
         this.size = size;
         this.location = location;
         this.author = author;
         this.publishDate = publishDate;
-        this.post = post;
+        this.posts = posts;
     }
 
     public Long getId() {
@@ -74,24 +75,11 @@ public class File {
         this.publishDate = publishDate;
     }
 
-    public Post getPost() {
-        return post;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    @Override
-    public String toString() {
-        return "File{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", size=" + size +
-                ", location='" + location + '\'' +
-                ", author='" + author + '\'' +
-                ", publishDate=" + publishDate +
-                ", post=" + post +
-                '}';
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

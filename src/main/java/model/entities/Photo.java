@@ -2,18 +2,25 @@ package model.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Photo implements Serializable {
     private Long id;
-    private String photoName;
-    private String photoLocationBIG;
-    private String photoLocationMEDIUM;
-    private String photoLocationSMALL;
-    private Date publishDate;
+    private String originalPhotoLocation;
+    private String thumbnailPhotoLocation;
+    private String squareThumbnailPhotoLocation;
+    private Timestamp publishDate;
     private String author;
-    //todo square photos and thumbnails
 
     public Photo() {
+    }
+
+    public Photo(String originalPhotoLocation, String thumbnailPhotoLocation, String squareThumbnailPhotoLocation, Timestamp publishDate, String author) {
+        this.originalPhotoLocation = originalPhotoLocation;
+        this.thumbnailPhotoLocation = thumbnailPhotoLocation;
+        this.squareThumbnailPhotoLocation = squareThumbnailPhotoLocation;
+        this.publishDate = publishDate;
+        this.author = author;
     }
 
     public Long getId() {
@@ -24,43 +31,35 @@ public class Photo implements Serializable {
         this.id = id;
     }
 
-    public String getPhotoName() {
-        return photoName;
+    public String getOriginalPhotoLocation() {
+        return originalPhotoLocation;
     }
 
-    public void setPhotoName(String photoName) {
-        this.photoName = photoName;
+    public void setOriginalPhotoLocation(String originalPhotoLocation) {
+        this.originalPhotoLocation = originalPhotoLocation;
     }
 
-    public String getPhotoLocationBIG() {
-        return photoLocationBIG;
+    public String getThumbnailPhotoLocation() {
+        return thumbnailPhotoLocation;
     }
 
-    public void setPhotoLocationBIG(String photoLocationBIG) {
-        this.photoLocationBIG = photoLocationBIG;
+    public void setThumbnailPhotoLocation(String thumbnailPhotoLocation) {
+        this.thumbnailPhotoLocation = thumbnailPhotoLocation;
     }
 
-    public String getPhotoLocationMEDIUM() {
-        return photoLocationMEDIUM;
+    public String getSquareThumbnailPhotoLocation() {
+        return squareThumbnailPhotoLocation;
     }
 
-    public void setPhotoLocationMEDIUM(String photoLocationMEDIUM) {
-        this.photoLocationMEDIUM = photoLocationMEDIUM;
+    public void setSquareThumbnailPhotoLocation(String squareThumbnailPhotoLocation) {
+        this.squareThumbnailPhotoLocation = squareThumbnailPhotoLocation;
     }
 
-    public String getPhotoLocationSMALL() {
-        return photoLocationSMALL;
-    }
-
-    public void setPhotoLocationSMALL(String photoLocationSMALL) {
-        this.photoLocationSMALL = photoLocationSMALL;
-    }
-
-    public Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -70,18 +69,5 @@ public class Photo implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    @Override
-    public String toString() {
-        return "Photo{" +
-                "id=" + id +
-                ", photoName='" + photoName + '\'' +
-                ", photoLocationBIG='" + photoLocationBIG + '\'' +
-                ", photoLocationMEDIUM='" + photoLocationMEDIUM + '\'' +
-                ", photoLocationSMALL='" + photoLocationSMALL + '\'' +
-                ", publishDate=" + publishDate +
-                ", author='" + author + '\'' +
-                '}';
     }
 }

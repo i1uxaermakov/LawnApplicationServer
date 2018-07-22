@@ -41,21 +41,25 @@
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
         <mapping resource="mappings/User.hbm.xml"/>
+
         <mapping resource="mappings/Album.hbm.xml"/>
         <mapping resource="mappings/Post.hbm.xml"/>
         <mapping resource="mappings/Event.hbm.xml"/>
-        <mapping resource="mappings/Photo.hbm.xml"/>
-        <mapping resource="mappings/File.hbm.xml"/>
         <mapping resource="mappings/RememberMeCookie.hbm.xml"/>
         <mapping resource="mappings/Organization.hbm.xml"/>
 
-        <mapping resource="mappings/PostAlbum.hbm.xml"/>
+        <!--COMMONLY USED ENTITIES-->
+        <mapping resource="mappings/AttachedAlbum.xml"/>
+        <mapping resource="mappings/Photo.hbm.xml"/>
+        <mapping resource="mappings/File.hbm.xml"/>
 
         <!--EDUCATION-->
         <mapping resource="mappings/HomeworkItem.hbm.xml"/>
         <mapping resource="mappings/DayLecture.hbm.xml"/>
         <mapping resource="mappings/SubjectItem.hbm.xml"/>
-        <mapping resource="mappings/HWAlbum.hbm.xml"/>
+        <!--<mapping resource="mappings/HWAlbum.hbm.xml"/>-->
+        <mapping resource="mappings/SubjectResourceCategory.hbm.xml"/>
+        <mapping resource="mappings/ResourceItem.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

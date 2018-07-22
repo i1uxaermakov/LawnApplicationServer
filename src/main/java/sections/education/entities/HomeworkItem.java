@@ -1,5 +1,6 @@
 package sections.education.entities;
 
+import sections.feed.posts.entities.AttachedAlbum;
 import utils.filemanagement.File;
 
 import java.sql.Date;
@@ -16,7 +17,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     private Date publishDate;
     private Date deadlineDate;
     private Set<File> files;
-    private HWAlbum hwAlbum;
+    private AttachedAlbum hwAlbum;
 
     public HomeworkItem() {
     }
@@ -93,11 +94,11 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         this.deadlineDate = deadlineDate;
     }
 
-    public HWAlbum getHwAlbum() {
+    public AttachedAlbum getHwAlbum() {
         return hwAlbum;
     }
 
-    public void setHwAlbum(HWAlbum hwAlbum) {
+    public void setHwAlbum(AttachedAlbum hwAlbum) {
         this.hwAlbum = hwAlbum;
     }
 
