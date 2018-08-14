@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import utils.HibernateUtil;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +16,21 @@ import java.io.OutputStream;
 public class FileDownloadingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pathBeginning = getInitParameter("fileUploadingRoot");
+        Long requestedFileId = new Long(request.getParameter("fid"));
 
-//        String pathBeginning = getInitParameter("fileUploadingRoot");
-//        String requestPath = request.getPathInfo();
 
-        /*
+        Session hibSession = HibernateUtil.getSessionFactory().openSession();
+        hibSession.getTransaction().begin();
+        utils.filemanagement.File file = hibSession.get(utils.filemanagement.File.class, requestedFileId);
+        hibSession.getTransaction().commit();
+        hibSession.close();
+
+        if(file==null) {
+//            todo 404
+        }
         // reads input file from an absolute path
-        File downloadFile = new File(pathBeginning + requestPath);
+        File downloadFile = new File(pathBeginning + file.getLocation());
         FileInputStream inStream = new FileInputStream(downloadFile);
 
         MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
@@ -42,8 +49,9 @@ public class FileDownloadingServlet extends HttpServlet {
 
         // forces download
         String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+        String headerValue = String.format("attachment; filename=\"%s\"", file.getOriginalName());
         response.setHeader(headerKey, headerValue);
+
 
         // obtains response's output stream
         OutputStream outStream = response.getOutputStream();
@@ -57,7 +65,7 @@ public class FileDownloadingServlet extends HttpServlet {
 
         inStream.close();
         outStream.close();
-        */
+
     }
 
 
