@@ -1,5 +1,6 @@
 package sections.education.DAO;
 
+import org.hibernate.HibernateException;
 import utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,10 +8,8 @@ import org.hibernate.Transaction;
 import sections.education.entities.HomeworkItem;
 import sections.education.entities.HomeworkItem_;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.sql.Date;
+import javax.persistence.criteria.*;
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,42 +17,114 @@ import java.util.List;
 public class HomeworkItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public List<HomeworkItem> getHomeworkItems(Date todaysDate, Long groupId) throws SQLException {
-        Session session = sessionFactory.getCurrentSession();
+
+    public List<HomeworkItem> getHomeworkItemsForHomeworkPage(Date todayDate, Long groupId) throws SQLException {
+        Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
 
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
-        Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
+            Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
 
-        criteriaQuery.where(criteriaBuilder.and(
-                            criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.deadlineDate), todaysDate),
-                            criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId)));
+            criteriaQuery.where(criteriaBuilder.and(
+                    criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.deadlineDate), todayDate),
+                    criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId)));
 
-        homeworkItemList = session.createQuery(criteriaQuery).getResultList();
+            homeworkItemList = session.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
 
-        transaction.commit();
         return homeworkItemList;
     }
 
-    public List<HomeworkItem> getHomeworkItemsBySubject(Date lastSavedHWDate, Long groupId, Long subjectId) throws SQLException{
-        Session session = sessionFactory.getCurrentSession();
-        List<HomeworkItem> homeworkItemList = null;
-        Transaction transaction = session.beginTransaction();
+    public List<HomeworkItem> getHomeworkItemsBySubject(Date lastSavedHWDate, Long subjectId, String purpose) {
+        Session session = null;
+        List<HomeworkItem> homeworkItemList = new ArrayList<>();
+        Transaction transaction = null;
 
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
-        Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
+            Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
 
-        criteriaQuery.where(criteriaBuilder.and(
-                criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate),
-                criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId),
-                criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId)));
+            criteriaQuery.where(criteriaBuilder.and(
+                    ("add_up".equals(purpose))?
+                            criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
+                            :criteriaBuilder.lessThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate),
+                    criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId)));
 
-        homeworkItemList = session.createQuery(criteriaQuery).getResultList();
+            if("add_down".equals(purpose)) {
+                session.createQuery(criteriaQuery).setMaxResults(10).getResultList();
+            }
+            else {
+                homeworkItemList = session.createQuery(criteriaQuery).getResultList();
+            }
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
 
-        transaction.commit();
+        return homeworkItemList;
+    }
+
+
+    public Long persistHomeworkItem(HomeworkItem homeworkItem) {
+        Long homeworkItemId = null;
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+            homeworkItemId = (Long) session.save(homeworkItem);
+            transaction.commit();
+            System.out.println("beach");
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+        return homeworkItemId;
+    }
+
+    public List<HomeworkItem> getHomeworkItemsForAddingFiles(Long[] hwIDs) {
+        List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
+            Root<HomeworkItem> hwItemRoot = criteriaQuery.from(HomeworkItem.class);
+
+            List<Predicate> predicates = new ArrayList<>(0);
+            for(int i=0; i<hwIDs.length; i++) {
+                predicates.add(criteriaBuilder.equal(hwItemRoot.get(HomeworkItem_.hw_id), hwIDs[i]));
+            }
+
+            criteriaQuery.where(criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()])));
+            homeworkItemList = session.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+
         return homeworkItemList;
     }
 }

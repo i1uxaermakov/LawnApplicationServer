@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Lawn</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet"> 
+    <link href="css/all.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/default-skin/default-skin.css">
+    <link rel="stylesheet" href="css/add-homework.css">
+    <link rel="stylesheet" href="css/edu.css">
+    <meta charset="UTF-8">
+    <title>LAWN ADDING</title>
+</head>
+<body>
+  <header>
+        <nav id="myNavbar" class="navbar navbar-default navbar-fixed-top  container-fluid" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">LAWN</a>
+                    <a class="myacc visible-xs" href="login.html">
+                    <i class="fas fa-user-circle"></i>    
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="nav navbar-nav navbar-right container-fluid">
+                        <li class="">
+                            <a data-toggle="tabs" href="index.html">
+                            <i class="fas fa-home"></i>
+                            Home</a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tabs" href="edu_schedule.html">
+                            <i class="fas fa-graduation-cap"></i>
+                            Education</a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tabs" href="community.html">
+                            <i class="fas fa-users"></i>
+                            Community</a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tabs" href="album.html">
+                            <i class="fas fa-images"></i>
+                            Album</a>
+                        </li>
+                        <li class="hidden-xs ">
+                            <a data-toggle="tabs" href="login.html">
+                            <i class="fas fa-user-circle"></i>
+                            Sign In</a>
+                        </li>
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <i class="fas fa-cog"></i>
+                             Settings
+                             <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">My account</a></li>
+                              <li><a href="#">My organizations</a></li>
+                              <li><a href="#">Liked posts</a></li>
+                              <li><a href="#">My posts</a></li>
+                              <li><a href="#">Tickets</a></li>
+                              <li><a href="#">Add</a></li>
+                              <li><a href="#">FAQ</a></li>
+                             </ul>
+                         </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 add-container first padd">
+
+	<section class="addingsection">
+		
+		<div id="myModal" class="modal fade" role="dialog">
+  		  <div class="modal-dialog modal-md">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Выберите </h4>
+			      </div>
+				   <div class="modal-body row">
+						 
+							<div class="teacher-subject-item inpopup" onclick="addItem(this)" options="April 12, Week 24; April 24, Week 29; April 222, Week 122">
+                                <span>Algebra</span>
+                                <p>2RuG2 <br> Room#52/62</p>
+                            </div>
+
+                            <div class="teacher-subject-item inpopup" onclick="addItem(this)">
+                                <span>Algebra</span>
+                                <p>2RuG2 <br> Room#52/62</p>
+                            </div>
+
+                            <div class="teacher-subject-item inpopup" onclick="addItem(this)">
+                                <span>Algebra</span>
+                                <p>2RuG2 <br> Room#52/62</p>
+                            </div>
+
+
+                            <div class="teacher-subject-item inpopup" onclick="addItem(this)">
+                                <span>Algebra</span>
+                                <p>2RuG2 <br> Room#52/62</p>
+                            </div>
+
+
+                            <div class="teacher-subject-item inpopup" onclick="addItem(this)">
+                                <span>Algebra</span>
+                                <p>2RuG2 <br> Room#52/62</p>
+                            </div>
+
+                            <div class="teacher-subject-item inpopup" onclick="addItem(this)">
+                                <span>Algebra</span>
+                                <p>2RuG2 <br> Room#52/62</p>
+                            </div>
+						  
+					</div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+
+			  </div>
+			</div>
+
+
+		
+
+		<h5 class="input_header">Д/З для:</h5>
+		<div class="row subject-selected" id="subject-selected">
+			
+             <div class="info_about_group col-xs-6 col-lg-4">
+                <div class="teacher-subject-item">
+                        <div class="left-div">
+                             <h2>Algebra</h2>
+                            <p>8.30 - 9.50 <br> Room#52/62</p>
+                        </div>
+                        <div class="date-lesson">
+                             <select name="" id="" onchange="iscustomcheck(this)">
+                                 <option value="April 23, 19:30">April 23, 19:30</option>
+                                 <option value="April 23, 19:30">April 23, 19:30 </option>
+                                 <option value="April 23, 19:30">April 23, 19:30 </option>
+                                 <option value="April 23, 19:30">April 23, 19:30 </option>
+                                 <option value="April 23, 19:30">April 23, 19:30</option> 
+                                 <option value="April 23, 19:30">Custom Date</option> 
+                             </select>
+                             <br>  
+                             <input type="text" placeholder="Введите свою дату" disabled="disabled">
+                        </div>
+                </div>
+              </div>
+        		
+        </div>
+		<div class="add_item_block center-content" data-toggle="modal" data-target="#myModal">
+			<span class="plus-button">+</span>
+		</div>
+
+
+
+	 
+	</section>
+<!--POP UPS FOR INPUT-->
+<!-- <div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+ 
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Выберите дату</h4>
+      </div>
+      <div class="modal-body">
+        <input type="date">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>     -->
+
+
+
+
+	<section class="addingsection">
+	  <form action="">
+	     <div class="adding-area">
+	    
+	          <div class="col-xs-12 hw-text">
+
+	           <textarea name="hw-content" id="hw-text" autocapitalize="sentences" autocomplete="on" autocorrect="on" placeholder="Напишите" spellcheck="true" dir="auto"></textarea>
+	          </div>
+	    </div>
+	    <div class="icons-add">
+	          <label for="images"><i class="far fa-image"></i></label> 
+	          <input type="file" name="images" id="images" multiple accept="image/*" onchange="previewFiles()"> 
+	        
+	           
+	          <label for="file-input"><i class="fas fa-paperclip"></i></label>
+	          <input id="file-input" type="file"/>
+
+
+
+
+	          <input type="submit" style="float: right" multiple class="btnn btn-suc">
+	    </div>
+	      </form>  
+	        <div class="col-xs-12">
+	             <div id="preview">
+
+	             </div>
+	         </div>
+
+
+       </section>
+</div>
+
+ 
+    <script src="css/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="css/bootstrap.min.js" type="text/javascript"></script>
+    <!-- <script src="slick/slick.min.js"></script>    -->
+    <script src="css/main.js" type="text/javascript"></script>
+    <script>
+function setbg(color)
+     {
+          document.getElementById("hw-text").style.background=color
+     }
+
+
+   function previewFiles() {
+            var preview = document.querySelector('#preview');
+            var files   = document.querySelector('#images').files;
+
+            function readAndPreview(file) {
+                // Make sure `file.name` matches our extensions criteria
+                if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+                    var reader = new FileReader();
+
+                    reader.addEventListener("load", function () {
+                        var image = new Image();
+                        var div = document.createElement("DIV");
+                        div.classList.add("col-xs-12");
+                        div.classList.add("col-md-3");
+                        var a = document.createElement("A");
+                        a.classList.add("thumbnail");
+                        image.height = 100;
+                        image.title = file.name;
+                        image.src = this.result;
+                        a.appendChild(image);
+                        div.appendChild(a)
+                        preview.appendChild(div);
+                    }, false);
+
+                    reader.readAsDataURL(file);
+                }
+            }
+            document.getElementById("preview").innerHTML = "";
+            if (files) {
+                [].forEach.call(files, readAndPreview);
+            }
+        }
+
+//           $("#input-ficons-1").fileinput({
+//     uploadUrl: "/file-upload-batch/2",
+//     uploadAsync: true,
+//     previewFileIcon: '<i class="fa fa-file"></i>',
+//     allowedPreviewTypes: null, // set to empty, null or false to disable preview for all types
+//     previewFileIconSettings: {
+//         'docx': '<i class="fa fa-file-word-o text-primary"></i>',
+//         'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
+//         'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+//         'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+//         'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+//         'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+//     }
+// });
+    </script>
+    <script src="css/add-homework.js"></script>
+</body>
+</html>

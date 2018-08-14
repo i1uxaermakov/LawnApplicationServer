@@ -1,5 +1,6 @@
 package sections.education.homework;
 
+import org.apache.commons.io.IOUtils;
 import utils.HibernateUtil;
 import security.entities.User;
 import org.hibernate.Session;
@@ -26,13 +27,14 @@ public class HomeworkServletByWeekDays extends HttpServlet {
         HomeworkItemDAO hwDAO = new HomeworkItemDAO();
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
 
-        User user = (User) req.getAttribute("User");
+        User user = (User) req.getSession().getAttribute("User");
         Long groupId = user.getGroupId();
 
         try {
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            Date todayWithZeroTime = (Date) formatter.parse(formatter.format(new Date(System.currentTimeMillis())));
-            homeworkItemList = hwDAO.getHomeworkItems(todayWithZeroTime, groupId);
+            Date todayWithZeroTime = new Date((formatter.parse(formatter.format(new Date(System.currentTimeMillis())))).getTime());
+            System.out.println(todayWithZeroTime);
+            homeworkItemList = hwDAO.getHomeworkItemsForHomeworkPage(todayWithZeroTime, groupId);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -40,6 +42,7 @@ public class HomeworkServletByWeekDays extends HttpServlet {
         }
         hibSession.close();
 
+        System.out.println("list "+ homeworkItemList);
 
         req.setAttribute("homeworkItemList", homeworkItemList);
         if(user.getPrivileges().contains("teacher")) {
@@ -49,6 +52,10 @@ public class HomeworkServletByWeekDays extends HttpServlet {
             req.setAttribute("for", "student");
         }
 
+        String firstDayInYearDate = readFileContents("firstDayInYear.txt");
+        req.setAttribute("firstDayInYear", firstDayInYearDate);
+
+
         if(req.getParameter("mobile")==null) {
             req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkPageVisualizer.jsp").include(req,resp);
         }
@@ -57,11 +64,17 @@ public class HomeworkServletByWeekDays extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    private String readFileContents(String path) throws IOException {
+        String result = "";
+        ClassLoader classLoader = getClass().getClassLoader();
+        try {
+            result = IOUtils.toString(classLoader.getResourceAsStream(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
-
+}
 
 //    домашка может быть
 //      для ученика
@@ -71,4 +84,3 @@ public class HomeworkServletByWeekDays extends HttpServlet {
 //      для учителя
 //          вся домашка
 //          по предмету
-}

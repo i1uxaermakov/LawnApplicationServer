@@ -1,12 +1,12 @@
 package sections.education.entities;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SubjectResourceCategory {
+public class SubjectResourceCategory implements Comparable<SubjectResourceCategory>{
     private Long categoryId;
-    private Timestamp creationDate;
+    private Date creationDate;
     private Long course;
     private String categoryName;
     private Set<ResourceItem> resourceItems = new HashSet<>(0);
@@ -14,7 +14,7 @@ public class SubjectResourceCategory {
     public SubjectResourceCategory() {
     }
 
-    public SubjectResourceCategory(Timestamp creationDate, Long course, String categoryName, Set<ResourceItem> resourceItems) {
+    public SubjectResourceCategory(Date creationDate, Long course, String categoryName, Set<ResourceItem> resourceItems) {
         this.creationDate = creationDate;
         this.course = course;
         this.categoryName = categoryName;
@@ -29,11 +29,11 @@ public class SubjectResourceCategory {
         this.categoryId = categoryId;
     }
 
-    public Timestamp getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -59,5 +59,17 @@ public class SubjectResourceCategory {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+
+    @Override
+    public int compareTo(SubjectResourceCategory o) {
+        int result = (int)(this.getCourse()-o.getCourse());
+        if(result != 0) {
+            return result;
+        }
+        else {
+            return this.getCreationDate().compareTo(o.getCreationDate());
+        }
     }
 }

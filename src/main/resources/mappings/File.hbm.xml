@@ -7,7 +7,8 @@
             <generator class="native"/>
         </id>
         
-        <property name="name" length="2000"/>
+        <property name="originalName" length="2000"/>
+        <property name="saveName" length="2000"/>
         <property name="author" length="2000"/>
         <property name="location" length="2000"/>
         <property name="size"/>
@@ -16,15 +17,15 @@
         <!--<many-to-one name="post" class="sections.feed.posts.entities.Post" column="post_id"/>-->
 
         <!--An owner should NOT have an attribute inverse!-->
-        <set name="posts" table="PostFiles" fetch="join" lazy="true" inverse="true"><!--cascade="all"-->
-            <key>
-                <column name="file_id" not-null="true"/>
-            </key>
-            <!--<one-to-many class="utils.filemanagement.File"/>-->
-            <many-to-many class="sections.feed.posts.entities.Post">
-                <column name="post_id" not-null="true"/>
-            </many-to-many>
-        </set>
+        <!--<set name="posts" table="PostFiles" fetch="join" lazy="true" inverse="true">&lt;!&ndash;cascade="all"&ndash;&gt;-->
+            <!--<key>-->
+                <!--<column name="file_id" not-null="true"/>-->
+            <!--</key>-->
+            <!--&lt;!&ndash;<one-to-many class="utils.filemanagement.File"/>&ndash;&gt;-->
+            <!--<many-to-many class="sections.feed.posts.entities.Post">-->
+                <!--<column name="post_id" not-null="true"/>-->
+            <!--</many-to-many>-->
+        <!--</set>-->
 
     </class>
 </hibernate-mapping>

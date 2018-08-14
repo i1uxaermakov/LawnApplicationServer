@@ -1,6 +1,3 @@
-
-
-import javax.jnlp.FileSaveService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +11,7 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String pathBeginning = "/Users/ilya_ermakov/Desktop/image";
+        String pathBeginning = "/Users/ilya_ermakov/Desktop/images"; //todo initialization parameter
         String requestURI = request.getPathInfo();
         //requestURI = requestURI.replace("/image", "");
 
@@ -25,9 +22,12 @@ public class ImageServlet extends HttpServlet {
         }
         else {
             File image = new File(pathBeginning + requestURI);
+            if(!image.getAbsolutePath().contains(pathBeginning)) {
+                //todo 404
+            }
 //        System.out.println("/Users/ilya_ermakov/Desktop" +reqPath);
 
-            response.setContentType("image/png");
+            response.setContentType("image/jpg");
             response.setContentLength((int) image.length());
 
             FileInputStream fileInputStream = new FileInputStream(image);

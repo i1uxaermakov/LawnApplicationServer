@@ -1,18 +1,18 @@
 package sections.feed.events.entities;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class BriefEvent {
     private Long id;
     private String name;
-    private Date eventDate;
+    private Timestamp eventDate;
     private String eventPhotoLocation;
 
-    public BriefEvent(Long id, String name, Date eventDate, String mainPhotoLocation) {
+    public BriefEvent(Long id, String name, Timestamp eventDate, String eventPhotoLocation) {
         this.id = id;
         this.name = name;
         this.eventDate = eventDate;
-        this.eventPhotoLocation = mainPhotoLocation;
+        this.eventPhotoLocation = eventPhotoLocation;
     }
 
     public BriefEvent() {
@@ -34,11 +34,11 @@ public class BriefEvent {
         this.name = name;
     }
 
-    public Date getEventDate() {
+    public Timestamp getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(Timestamp eventDate) {
         this.eventDate = eventDate;
     }
 

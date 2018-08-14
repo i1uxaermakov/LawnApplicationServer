@@ -3,12 +3,12 @@ package sections.education.entities;
 import sections.feed.posts.entities.AttachedAlbum;
 import utils.filemanagement.File;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 public class HomeworkItem implements Comparable<HomeworkItem> {
     private Long hw_id;
-    private Long teacherId;
+    private Long addedById;
     private Long groupId;
     private Long subjectId;
     private String subjectName;
@@ -30,12 +30,12 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         this.hw_id = id;
     }
 
-    public Long getTeacherId() {
-        return teacherId;
+    public Long getAddedById() {
+        return addedById;
     }
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
+    public void setAddedById(Long addedById) {
+        this.addedById = addedById;
     }
 
     public Long getGroupId() {
@@ -113,5 +113,22 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     @Override
     public int compareTo(HomeworkItem o) {
         return this.getDeadlineDate().compareTo(o.getDeadlineDate());
+    }
+
+    @Override
+    public String toString() {
+        return "HomeworkItem{" +
+                "hw_id=" + hw_id +
+                ", addedById=" + addedById +
+                ", groupId=" + groupId +
+                ", subjectId=" + subjectId +
+                ", subjectName='" + subjectName + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", description='" + description + '\'' +
+                ", publishDate=" + publishDate +
+                ", deadlineDate=" + deadlineDate +
+                ", files=" + files +
+                ", hwAlbum=" + hwAlbum +
+                '}';
     }
 }

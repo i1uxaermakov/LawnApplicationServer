@@ -33,7 +33,7 @@
         Map<DayLecture,Integer> mapCNT = new HashMap<>();
         int cnt = 0;
         for(int i=1; i<7; i++) { %>
-            <div class="block row">
+            <div class="blocklawn row">
                 <div class="container-fluid date <%=(i==1)?"firstdate1":"firstdate"%>"><%=simpleDateFormat.format(c.getTime())%></div>
                 <%
                     boolean isWide = false;

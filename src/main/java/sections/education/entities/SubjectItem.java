@@ -1,7 +1,5 @@
 package sections.education.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.HashSet;
 import java.util.Set;
 

@@ -37,7 +37,6 @@ public class AddPostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        System.out.println("hello");
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         //FileManager fileManager = new FileManager();
 //        User user = (User) req.getSession().getAttribute("User");

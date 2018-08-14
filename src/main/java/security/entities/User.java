@@ -4,6 +4,7 @@ package security.entities;
 import model.entities.Organization;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,13 +17,13 @@ public class User implements Serializable {
     private String lastName;
     private Long groupId;
     private String groupName;
-    private Date lastLoginDate;
+    private Timestamp lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
     private Set<Organization> organizations = new HashSet<>(0);
 //TODO user's password hashing with bcrypt
     public User() {
     }
-//todo all date field with timestamp class
+
     public Long getUserId() {
         return userId;
     }
@@ -79,11 +80,11 @@ public class User implements Serializable {
         this.groupName = groupName;
     }
 
-    public Date getLastLoginDate() {
+    public Timestamp getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Date lastLoginDate) {
+    public void setLastLoginDate(Timestamp lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 

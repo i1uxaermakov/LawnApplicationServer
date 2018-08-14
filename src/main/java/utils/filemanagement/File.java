@@ -1,30 +1,35 @@
 package utils.filemanagement;
 
-import sections.feed.posts.entities.Post;
-
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 public class File {
     private Long id;
-    private String name;
+    private String originalName;
+    private String saveName;
     private Long size;
     private String location;
     private String author;
-    private Date publishDate;
-    private Set<Post> posts = new HashSet<>(0);
+    private Timestamp publishDate;
 
     public File() {
     }
 
-    public File(String name, Long size, String location, String author, Date publishDate, Set<Post> posts) {
-        this.name = name;
+    public File(String name, Long size, String location, String author, Timestamp publishDate) {
+        this.originalName = name;
         this.size = size;
         this.location = location;
         this.author = author;
         this.publishDate = publishDate;
-        this.posts = posts;
+    }
+
+    public File(String name, String saveName, Long size, String location, String author, Timestamp publishDate) {
+        this.originalName = name;
+        this.saveName = saveName;
+        this.size = size;
+        this.location = location;
+        this.author = author;
+        this.publishDate = publishDate;
     }
 
     public Long getId() {
@@ -35,12 +40,20 @@ public class File {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOriginalName() {
+        return originalName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOriginalName(String name) {
+        this.originalName = name;
+    }
+
+    public String getSaveName() {
+        return saveName;
+    }
+
+    public void setSaveName(String saveName) {
+        this.saveName = saveName;
     }
 
     public Long getSize() {
@@ -67,19 +80,18 @@ public class File {
         this.author = author;
     }
 
-    public Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 
-    public Set<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
+    public String getReadableFileSize() {
+        if(this.size <= 0) return "0";
+        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(this.size)/Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(this.size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 }

@@ -34,7 +34,7 @@ header .navbar {
     height: 180px!important;
 }
 
-.block {
+.blocklawn {
     background: #fff;
 /*    padding-bottom: 7px;*/
     margin-bottom: 0;
@@ -242,7 +242,7 @@ h1 {
 }
 
 .uploaded-files-hw a {
-    color: #69a03c;
+    color: #69a03c !important;
     padding-right: 12px;
     display: flex;
     width: 100%;
@@ -252,6 +252,9 @@ h1 {
 .uploaded-files-hw a:active{
     background: #efefef;
     
+}
+.accord1:focus{
+        background: white;
 }
 
 .nav-tabs > li.active > a,
@@ -317,7 +320,7 @@ h1 {
 .uploaded-files-hw {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 5px!important;
     border-top: 1px solid #efefef;
     padding-top: 5px;
     /*box-shadow: 0 2px 6px #8fb87c;*/
@@ -339,7 +342,7 @@ h1 {
     color: #868686;
     font-size: 15px;
     line-height: 18px;
-    margin-top: 9px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 @media(max-width:350px){
@@ -348,17 +351,19 @@ h1 {
     }
 }
 
-#accord1 {
+.accord1 {
     background: #fff;
     font-size: 25px;
-    margin: 2px 0;
+        border-top: 1px solid #efefef!important;
+    margin: 0 !important;
+    /*margin: 2px 0;*/
     color: #3f3f3f;
     border: none;
     border-radius: 0;
 /*    box-shadow: 1px 3px 4px #8fb87c;*/
 }
 
-#accord1:hover {
+.accord1:hover {
     color: #3f3f3f;
     background: #fff;
     text-decoration: none;
@@ -384,7 +389,7 @@ header .nav-tabs > li.active > a:hover{
     box-shadow: none;
 }
 #resources .about-hw-file{
-    margin-top: 0;
+    /*margin-top: 0;*/
 }
 #resources .uploaded-files-hw a:active{
     background: #fff;
@@ -408,10 +413,11 @@ header .nav-tabs > li.active > a:hover{
     font-size: 3.5em;
 }
 #levelfirst a, #levelsecond a, #levelthird a {
-    color: #69a03c;
+    /*color: #69a03c;*/
+    color: black;
 }
 #levelfirst a:hover, #levelsecond a:hover, #levelthird a:hover{
-   color: #69a03c;
+   /*color: #69a03c;*/
     background: #efefef;
 }
 #resources .accord{
@@ -488,5 +494,53 @@ top: 30%;
     }
 
     section.blocks{
-        /*!margin-top: 5px;*/
+        /*margin-top: 5px;
+    }*/
+}
+    .weeknum{
+      float: right;
+    color: #868686;
+    font-size: 20px;
+    margin-top: 5px;
     }
+
+.weeknum{
+      float: right;
+      color: #3f3f3f;
+      font-size: 20px;
+      margin-top: 5px;
+      font-weight: 400;
+    }
+.weeknumbg {
+  background-color: #fff;
+  padding-right: 12px;
+  margin-top: 10px;
+}
+ .redditstyle button{
+    background-color: #69a03c9e;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 3px;
+    padding: 3px 7px 3px 7px;
+ }
+.redditstyle .dropdown
+ {
+   display: inline-block;
+}
+.filefav{
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    font-size: 1.8em;
+ }
+ .redditstyle{
+    background-color: white;
+    margin-top: 3px;
+    padding-left: 5px;
+ }

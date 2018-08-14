@@ -1,0 +1,227 @@
+.first{
+	margin-top: 50px;
+}
+label{
+    margin-bottom: 0;
+}
+textarea#hw-text{
+    width: 100%;
+    height: 230px;
+    padding: 12px 0px;
+    font-size: 1.5em;
+    box-sizing: border-box; 
+    background-color: #fff;
+    resize: none;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #efefef;
+}
+textarea#hw-text::placeholder{
+    color: #80808085;
+}
+.hw-text{
+	padding-right: 0;
+	padding-left: 0;
+}
+.icons-add i{
+	margin-top: 5px;
+	margin-right: 5px;
+	font-size: 1.9em;
+	cursor: pointer;
+	color: #6fa444;
+}
+input[type="file"]{
+	display: none!important;
+}
+
+ 
+.fileinput-button {
+	position: relative;
+}
+.thumbnail{
+    margin-top: 20px;
+    cursor: pointer;
+}
+.btn-suc{
+	color: #fff;
+    background-color: #69a03c;
+    border-color: #69a03c;
+}
+.btnn{
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+section.addingsection{
+    margin-top: 5px;
+    background: #fff;
+    padding: 10px 5px 5px 5px;
+}
+.center-content{
+    text-align: center;
+}
+.add_item_block{
+    padding: 20px;
+    margin: 5px 5px 0 5px;
+    cursor: pointer;
+    background: #bdbdbd54;
+}
+.input_header{
+    font-size: 1.4em;
+    margin-left: 7px;
+    color: #69a03c;
+    border-bottom: 1px solid #efefef;
+}
+#datemodals .modal-body{
+text-align: center;
+}
+
+.plus-button{
+    font-size: 2em;
+}
+.modal-body{
+      /*  border-bottom: 1px solid #aeaeae;
+    padding-bottom: 0;*/
+    padding-left: 30px;
+}
+.teacher-subject-item h3{
+    margin: 0;
+}
+.teacher-subject-item.inpopup{
+    padding: 10px;
+    border-radius: 3px;
+    background: #d0d0d08c;
+    margin-right: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.teacher-subject-item.inpopup p{
+    margin: 0;
+}
+.subject-selected .teacher-subject-item:nth-child(2){
+border-left: none;
+}
+.subject-selected .teacher-subject-item{
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+}
+.info_about_group{
+    /*padding: 10px 0 10px 10px;*/
+    padding: 0;
+    /*border-radius: 5px;*/
+    /*margin-top: 5px; */
+    /*background: #eaeaea; */
+
+}
+
+section.addingsection:first-child{
+    margin-top: 0;
+}
+.left-div{
+    /*text-align: center;*/
+    padding: 5px;
+    font-size: 1.2em;
+    line-height: 1.3;
+    padding-left: 14px;
+}
+
+.date-lesson{
+    /*padding-left: 30px;*/
+    /*padding-right: 5px;*/
+    cursor: pointer;
+}
+.top{
+    font-size:  1.2em;
+    line-height:  1.3;
+    /*border-top-left-radius: 7px;*/
+    /*border-top-right-radius: 7px;*/
+    background: #ff0000cf;
+    color:  white;
+}
+.number{
+
+    padding-top: 15px;
+    font-size: 2em;
+    padding-bottom:  7px;
+    background-color:  seashell;
+}
+.subject-selected{
+        padding-left: 0;
+        padding-right: 0;
+        margin-right: 0;
+        margin-left: 0;
+}
+.info_about_group {
+    padding: 5px;
+    /*cursor: pointer;*/
+}
+div.date-lesson{
+
+    padding-left: 13px;
+    padding-right: 13px;
+}
+.date-lesson select{
+    width: 100%;
+    padding: 5px 0 4px 2px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAHCAYAAAD9NeaIAAAAGXRFW…QsItsCdEtwWUSRBdgsQbeIYgtAgAWHOMwiJSBezkAhAAgwAJSTG/DI0S9VAAAAAElFTkSuQmCC);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-size: auto 15%;
+    border-radius: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid #efefef;
+    font-size: 20px;
+}
+.left-div h2{
+    margin: 0;
+    font-size: 26px;
+    color: #69a03c;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.left-div p{
+    margin-top: 3px;
+    color: #3f3f3f;
+    font-size: 20px;
+}
+.date-lesson input[type="text"]{
+        background-color: #fff;
+    resize: none;
+    border-right: none;
+    width: 100%;
+    border-left: none;
+    overflow: auto;
+    outline: none;
+    border-top: 0;
+    border-bottom: 1px solid #efefef;
+}
+

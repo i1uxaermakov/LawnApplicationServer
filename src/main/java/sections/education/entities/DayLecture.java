@@ -52,4 +52,13 @@ public class DayLecture implements Comparable<DayLecture>{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "DayLecture{" +
+                "id=" + id +
+                ", day=" + day +
+                ", lectureOrder=" + lectureOrder +
+                '}';
+    }
 }

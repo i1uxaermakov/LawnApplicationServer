@@ -18,9 +18,9 @@
         request.send(formData);
 
         if(request.readyState===4 && request.status===200) {
-            document.getElementById("pi1").innerHTML = request.responseText;
+            // document.getElementById("pi1").innerHTML = request.responseText;
             myPostId = (JSON.parse(request.responseText)).postId;
-            document.getElementById("pi").innerHTML = myPostId;
+            // document.getElementById("pi").innerHTML = myPostId;
             fileList.forEach(function (file) {
                 sendFile(file);
             });
@@ -34,17 +34,8 @@
         for (var i = 0; i < fileInput.files.length; i++) {
             fileList.push(fileInput.files[i]);
         }
-        renderFileList();
     });
 
-    renderFileList = function () {
-        fileListDisplay.innerHTML = '';
-        fileList.forEach(function (file, index) {
-            var fileDisplayEl = document.createElement('p');
-            fileDisplayEl.innerHTML = (index + 1) + ': ' + file.name;
-            fileListDisplay.appendChild(fileDisplayEl);
-        });
-    };
 
     sendFile = function (file) {
         var formData = new FormData();

@@ -1,181 +1,174 @@
 <%@ page import="sections.education.entities.HomeworkItem" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
+<%@ page import="sections.feed.posts.entities.AttachedAlbum" %>
+<%@ page import="model.entities.Photo" %>
+<%@ page import="utils.filemanagement.File" %>
+<%@ page import="java.text.ParseException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<HomeworkItem> homeworkItemList = (List<HomeworkItem>) request.getAttribute("homeworkItemList");
-    Collections.sort(homeworkItemList);
+    if(homeworkItemList==null || homeworkItemList.size() == 0) {
+        %>
+            No homework!
+        <%
+    }
+
+    String fDOY = (String) request.getAttribute("firstDayInYear");
+    if(fDOY==null) {
+        fDOY = "01-09-2018";
+    }
+    Calendar firstDateOfYear = Calendar.getInstance();
+    try {
+        firstDateOfYear.setTime((new SimpleDateFormat("dd-MM-yyyy")).parse(fDOY));
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE | MMM dd");
     SimpleDateFormat weekDayFormat = new SimpleDateFormat("EEEE");
-    SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd, hh:ss");
+    SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd yyyy, hh:ss");
     SimpleDateFormat hwDeadlineDateFormat = new SimpleDateFormat("MMM dd");
 
-    List<Date> dates = new ArrayList<>();
-    int howManyDates = 0;
+    Map<Integer, List<Date>> weekDaysCorrelationMap = new HashMap<>();
+    Map<Date, List<HomeworkItem>> specificDateHomeworkItemsCorrelation = new HashMap<>();
+    Collections.sort(homeworkItemList);
+
     for(HomeworkItem homeworkItem: homeworkItemList) {
-        if(!dates.contains(homeworkItem.getDeadlineDate())) {
-            howManyDates++;
-            dates.add(homeworkItem.getDeadlineDate());
+        Date deadlineDate = homeworkItem.getDeadlineDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(deadlineDate);
+
+        int key_WeekNumber = (calendar.get(Calendar.WEEK_OF_YEAR));
+        if(weekDaysCorrelationMap.containsKey(key_WeekNumber)) {
+            if(!weekDaysCorrelationMap.get(key_WeekNumber).contains(deadlineDate)) {
+                weekDaysCorrelationMap.get(key_WeekNumber).add(deadlineDate);
+            }
+        }
+        else {
+            ArrayList<Date> dateList = new ArrayList<>(0);
+            dateList.add(deadlineDate);
+            weekDaysCorrelationMap.put(key_WeekNumber, dateList);
+        }
+
+        if(specificDateHomeworkItemsCorrelation.containsKey(deadlineDate)) {
+            specificDateHomeworkItemsCorrelation.get(deadlineDate).add(homeworkItem);
+        }
+        else {
+            ArrayList<HomeworkItem> homeworkItemArrayList = new ArrayList<>(0);
+            homeworkItemArrayList.add(homeworkItem);
+            specificDateHomeworkItemsCorrelation.put(deadlineDate, homeworkItemArrayList);
         }
     }
 
-    int cnt=0;
-    for(int i=0; i<howManyDates; i++) {
-        Date date = dates.get(i);
-        String weekDay = weekDayFormat.format(date);%>
-        <div>
-            <a class="btn btn-primary btn-lg btn-block accord" data-toggle="collapse" href="#<%=weekDay%>"
-                role="button" aria-expanded="true"> <%=dateFormat.format(date)%>
-            </a>
-        </div>
-        <div class="collapse in buttoncol" id="<%=weekDay%>">
-        <%
-            for(int j=cnt; j<homeworkItemList.size(); j++,cnt++) {
-                if(!homeworkItemList.get(j).getDeadlineDate().equals(date)) {
-                    break;
-                }
-                HomeworkItem hwi = homeworkItemList.get(j);
+    boolean isExpandedFirst = true;
+    Calendar calendarForWeekNUmberSection = Calendar.getInstance();
+    for(Integer weekNumber: weekDaysCorrelationMap.keySet()) {
+        List<Date> weeksDates = weekDaysCorrelationMap.get(weekNumber);
+        calendarForWeekNUmberSection.setTime(weeksDates.get(0));
+        calendarForWeekNUmberSection.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        String beginningOfWeek = hwDeadlineDateFormat.format(calendarForWeekNUmberSection.getTime());
+        calendarForWeekNUmberSection.add(Calendar.DAY_OF_YEAR, 6);
+        String endOfWeek = hwDeadlineDateFormat.format(calendarForWeekNUmberSection.getTime());
         %>
-            <div class="news">
-                <div class="newsbegin">
-                    <div class="l2-homework">
-                        <span class="post-publishers-name"><%=hwi.getSubjectName() + " - " + hwi.getTeacherName()%>History - Ramis Sattarov</span>
-                        <br>
-                        <span class="item-date">Deadline: <%=hwDeadlineDateFormat.format(date)%></span> <br>
-                        <span class="item-date">Uploaded: <%=hwi.getPublishDate()%></span>
+            <section class="week_number">
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 padd weeknumbg">
+                    <span class="flright weeknum">
+                        <%=beginningOfWeek + " - " + endOfWeek%><%--, Week <%=weekNumber%>--%>
+                    </span>
+                </div>
+            </section>
+
+            <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 padd">
+            <%
+                for(Date deadlineDate: weeksDates) {%>
+                    <div>
+                        <a class="btn btn-primary btn-lg btn-block accord accord1" data-toggle="collapse" href="#<%=weekDayFormat.format(deadlineDate)+"OfWeek"+weekNumber%>"
+                           role="button" aria-expanded="<%=isExpandedFirst%>"> <%=dateFormat.format(deadlineDate)%>
+                        </a>
                     </div>
-                </div>
-                <div class="text">
-                    <%=hwi.getDescription()%>
-                </div>
-                <div class="twophotosrow photos row">
-                    <div class="my-gallery" itemscope itemtype="">
+                    <div class="collapse <%=(isExpandedFirst)?"in":""%> buttoncol" id="<%=weekDayFormat.format(deadlineDate)+"OfWeek"+weekNumber%>">
+                    <%
+                        if(isExpandedFirst) {
+                            isExpandedFirst = false;
+                        }
+                        for(HomeworkItem hwi: specificDateHomeworkItemsCorrelation.get(deadlineDate)) {
+                            %>
+                                <div class="news">
+                                    <div class="newsbegin">
+                                        <div class="l2-homework">
+                                            <span class="post-publishers-name"><%=hwi.getSubjectName() + " - " + hwi.getTeacherName()%></span> <!--History - Ramis Sattarov-->
+                                            <br>
+                                            <span class="item-date">Deadline: <%=hwDeadlineDateFormat.format(deadlineDate)%></span> <br>
+                                            <span class="item-date">Uploaded: <%=hwUploadDateFormat.format(hwi.getPublishDate())%></span>
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <%=hwi.getDescription().replaceAll("(\r\n|\r|\n|\n\r)", "<br>")%>
+                                    </div>
+                                    <%
+                                        AttachedAlbum album = hwi.getHwAlbum();
+                                        if(album != null) {
+                                            int size = album.getAlbumPhotos().size();
+                                            if(size != 0) {
+                                                if(size < 4) {
+                                                    String num = (size==1) ? "one" : ((size==2) ? "two" : "three");%>
+                                                    <div class="<%=num%>photosrow photos row">
+                                                        <div class="my-gallery" itemscope itemtype="">
+                                                            <%
+                                                                for(Photo photo: album.getAlbumPhotos()) {%>
+                                                                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                                                        <a href="/images/<%=photo.getThumbnailPhotoLocation()%>" itemprop="contentUrl" data-size="<%=photo.getThumbnailPhotoDimensions()%>">
+                                                                            <img src="/images/<%=photo.getSquareThumbnailPhotoLocation()%>" itemprop="thumbnail"/> <%--alt="Image description"--%>
+                                                                        </a>
+                                                                        <!-- </div> -->
+                                                                        <figcaption itemprop="caption description"> Photo by: <%=photo.getAuthor()%></figcaption>
+                                                                    </figure>
+                                                                <%}
+                                                            %>
+                                                        </div>
+                                                    </div>
+                                            <%  }
+                                                else {%>
+                                                    <div class="attachedalbum">
+                                                        <%--todo link to photos--%>
+                                                        <a href="album_post_photos.html">
+                                                            <img src="/images/<%=album.getMainPhotoLocation()%>" alt="" class="">
+                                                            <span class="aboutAlbum">
+                                                                Attached Photos <br>
+                                                                <span>
+                                                                    <%=size%> photos
+                                                                </span>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                <%
+                                                }
+                                            }
+                                        }
 
-                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                            <a href="imgs/eduex1.jpg" itemprop="contentUrl" data-size="635x353">
-
-                                <img src="imgs/eduex1.jpg" itemprop="thumbnail"/> <%--alt="Image description"--%>
-
-                            </a>
-                            <!-- </div> -->
-                            <figcaption itemprop="caption description">Image caption 3</figcaption>
-                        </figure>
-
-                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                            <a href="imgs/eduex1.jpg" itemprop="contentUrl" data-size="640x640">
-                                <img src="imgs/eduex1.jpg" itemprop="thumbnail" alt="Image description" />
-                            </a>
-                            <figcaption itemprop="caption description">Image caption 4</figcaption>
-                        </figure>
+                                        for(File file: hwi.getFiles()) {%>
+                                            <div class="uploaded-files-hw">
+                                                <a href="/files/download/<%=file.getSaveName()%>">
+                                                    <i class="far fa-file fa-4x"></i>
+                                                    <span class="about-hw-file" style="word-break: break-all;">
+                                                            Title: <%=file.getOriginalName()%>
+                                                            <br>Size: <%=file.getReadableFileSize()%>
+                                                            <br>Uploaded: <%=hwDeadlineDateFormat.format(file.getPublishDate())%>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                    <%  }%>
+                                </div>
+                        <%
+                        }
+                    %>
                     </div>
-                </div>
-
-                <%--<div class="uploaded-files-hw">--%>
-                    <%--<a href="#"><i class="far fa-file-word fa-4x"></i>--%>
-                        <%--<span class="about-hw-file">Title: Человек и Общество.<br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>--%>
-                <%--</div>--%>
-                <%--<div class="uploaded-files-hw">--%>
-                    <%--<a href="#"><i class="far fa-file-pdf fa-4x"></i>--%>
-                        <%--<span class="about-hw-file">Title: Презентация к уроку №9<br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>--%>
-                <%--</div>--%>
+                <%
+                }
+            %>
             </div>
+        <%
 
-
-
-
-            <%}%>
-        </div>
-
-<%
     }
-%>
-
-
-
-
-<%--<div>--%>
-    <%--<a class="btn btn-primary btn-lg btn-block accord"  data-toggle="collapse" href="#Monday" role="button" aria-expanded="true">Monday | April 22</a>--%>
-<%--</div>--%>
-<%--<div class="collapse in buttoncol" id="Monday">--%>
-    <%--<div class="news">--%>
-        <%--<div class="newsbegin">--%>
-            <%--<div class="l2-homework">--%>
-                <%--<span class="post-publishers-name">History - Ramis Sattarov</span>--%>
-                <%--<br>--%>
-                <%--<span class="item-date">Deadline: 14 мая 2018 21:09</span> <br>--%>
-                <%--<span class="item-date">Uploaded: 7 мая 2018 14:00</span>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="text">--%>
-            <%--Сделать конспект темы "Социальная независимость" с книги на странице №99. Прилагается презентация к уроку №9.--%>
-        <%--</div>--%>
-        <%--<div class="twophotosrow photos row">--%>
-            <%--<div class="my-gallery" itemscope itemtype="">--%>
-
-
-
-                <%--<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">--%>
-                    <%--<!-- <div class="wrapperThumb"> -->--%>
-
-                    <%--<a href="imgs/eduex1.jpg" itemprop="contentUrl" data-size="635x353">--%>
-
-                        <%--<img src="imgs/eduex1.jpg" itemprop="thumbnail" alt="Image description" />--%>
-
-                    <%--</a>--%>
-                    <%--<!-- </div> -->--%>
-                    <%--<figcaption itemprop="caption description">Image caption 3</figcaption>--%>
-                <%--</figure>--%>
-
-                <%--<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">--%>
-                    <%--<a href="imgs/eduex1.jpg" itemprop="contentUrl" data-size="640x640">--%>
-                        <%--<img src="imgs/eduex1.jpg" itemprop="thumbnail" alt="Image description" />--%>
-                    <%--</a>--%>
-                    <%--<figcaption itemprop="caption description">Image caption 4</figcaption>--%>
-                <%--</figure>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-        <%--<div class="uploaded-files-hw">--%>
-            <%--<a href="#"><i class="far fa-file-word fa-4x"></i>--%>
-                <%--<span class="about-hw-file">Title: Человек и Общество.<br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>--%>
-        <%--</div>--%>
-        <%--<div class="uploaded-files-hw">--%>
-            <%--<a href="#"><i class="far fa-file-pdf fa-4x"></i>--%>
-                <%--<span class="about-hw-file">Title: Презентация к уроку №9<br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-    <%--<div class="news">--%>
-        <%--<div class="newsbegin">--%>
-            <%--<div class="l2-homework">--%>
-                <%--<span class="post-publishers-name">Russian - Lyubov Anatolyevna</span>--%>
-                <%--<br>--%>
-                <%--<span class="item-date">Deadline: 20 апреля 2018 21:09</span> <br>--%>
-                <%--<span class="item-date">Uploaded: 23 апреля 2018 21:09</span>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="text">--%>
-            <%--Прочитать правила с приложенного документа, законспектировать.--%>
-        <%--</div>--%>
-        <%--<div class="uploaded-files-hw">--%>
-            <%--<a href="#"><i class="far fa-file-pdf fa-4x"></i>--%>
-                <%--<span class="about-hw-file">Title: Правило Буравчика.<br>Size: 13Mb<br>Uploaded: 2 апреля 2018 21:09 </span></a>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-    <%--<div class="news">--%>
-        <%--<div class="newsbegin">--%>
-            <%--<div class="l2-homework">--%>
-                <%--<span class="post-publishers-name">Physics - Dilbar Sultanovna</span>--%>
-                <%--<br>--%>
-                <%--<span class="item-date">Deadline: 14 марта 2018 21:09</span> <br>--%>
-                <%--<span class="item-date">Uploaded: 13 мая 2018 21:09</span>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="text">--%>
-            <%--Создать большой адронный коллайдер из подручных средств по инструкции в файле. Используя ускоритель частиц, доказать существование Бозона Хиггса.--%>
-        <%--</div>--%>
-        <%--<div class="uploaded-files-hw">--%>
-            <%--<a href="#"><i class="far fa-file-pdf fa-4x"></i>--%>
-                <%--<span class="about-hw-file">Title: Адронный Коллайдер для чайников.<br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
+        %>

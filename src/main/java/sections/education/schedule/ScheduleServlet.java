@@ -19,19 +19,16 @@ public class ScheduleServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("User");
         List<SubjectItem> subjectItemList = null;
 
-        try {
-            if(user.getPrivileges().contains("teacher")) {
-                subjectItemList = scheduleDAO.getSubjectItemsByTeacherId(user.getUserId());
-                req.setAttribute("for", "teacher");
+
+        if(user.getPrivileges().contains("teacher")) {
+            subjectItemList = scheduleDAO.getSubjectItemsByTeacherId(user.getUserId());
+            req.setAttribute("for", "teacher");
         }
-            else {
-                subjectItemList = scheduleDAO.getSubjectItemsByGroup(user.getGroupId());
-                req.setAttribute("for", "student");
-            }
+        else {
+            subjectItemList = scheduleDAO.getSubjectItemsByGroup(user.getGroupId());
+            req.setAttribute("for", "student");
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         req.setAttribute("subjectItemList", subjectItemList);
 
         if(req.getParameter("mobile")==null) {

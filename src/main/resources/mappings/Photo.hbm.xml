@@ -10,6 +10,9 @@
         <property name="originalPhotoLocation" column="original" length="2000"/>
         <property name="thumbnailPhotoLocation" column="thumb" length="2000"/>
         <property name="squareThumbnailPhotoLocation" column="square" length="2000"/>
+        <property name="originalPhotoDimensions" column="original_dim" length="50"/>
+        <property name="thumbnailPhotoDimensions" column="thumb_dim" length="50"/>
+        <property name="squarePhotoDimensions" column="square_dim" length="50"/>
         <property name="author"/>
         <property name="publishDate" />
     </class>

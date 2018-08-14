@@ -19,3 +19,20 @@ else{
    }
 
 })
+
+
+$(".filefav").click(function(){
+btn = $(this);
+heart = btn.find(".fa-star");
+if(heart.hasClass("far")){
+	heart.removeClass("far");
+	heart.addClass("fas");   
+ 	//ajax
+}
+else{
+	heart.removeClass("fas");
+	heart.addClass("far");   
+	//ajax
+   }
+
+})

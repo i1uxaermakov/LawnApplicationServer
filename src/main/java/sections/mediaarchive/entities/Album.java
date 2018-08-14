@@ -2,6 +2,7 @@ package sections.mediaarchive.entities;
 
 import model.entities.Photo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,7 @@ public class Album {
     private Long albumId;
     private String name;
     private String description;
-    private Date publishDate;
+    private Timestamp publishDate;
     private String mainPhotoLocation;
     private String author;
     private Set<Photo> albumPhotos = new HashSet<>(0);
@@ -39,11 +40,11 @@ public class Album {
         this.description = description;
     }
 
-    public Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 

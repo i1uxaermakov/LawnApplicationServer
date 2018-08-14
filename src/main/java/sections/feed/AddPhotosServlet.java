@@ -91,12 +91,15 @@ public class AddPhotosServlet extends HttpServlet {
                     Math.min(thumbnail.getWidth(),thumbnail.getHeight()),
                     Math.min(thumbnail.getWidth(),thumbnail.getHeight()));
 
-            //getting names of images
+            //getting dimensions of images
+            String originalDim = smallerInSizeActualImageToJPG.getWidth() + "x" + smallerInSizeActualImageToJPG.getHeight();
+            String thumbDim = thumbnail.getWidth() + "x" + thumbnail.getHeight();
+            String squareDim = squareImage.getWidth() + "x" + squareImage.getHeight();
 
-            String originalPhotoName = imageName + "_original" +
-                    smallerInSizeActualImageToJPG.getWidth() + "x" + smallerInSizeActualImageToJPG.getHeight() + ".jpg";
-            String thumbnailPhotoName = imageName + "_thumb" + thumbnail.getWidth() + "x" + thumbnail.getHeight() + ".jpg";
-            String squareThumbnailName = imageName + "_square" + squareImage.getWidth() + "x" + squareImage.getHeight() + ".jpg";
+            //getting names of images
+            String originalPhotoName = imageName + "_original" + originalDim + ".jpg";
+            String thumbnailPhotoName = imageName + "_thumb" + thumbDim + ".jpg";
+            String squareThumbnailName = imageName + "_square" + squareDim + ".jpg";
 
             //saving the images
             ImageIO.write(smallerInSizeActualImageToJPG, "jpg",
@@ -106,11 +109,11 @@ public class AddPhotosServlet extends HttpServlet {
             ImageIO.write(squareImage, "jpg",
                     new File(pathToImageFolder + squareThumbnailName));
 
-            Photo smallerInSizeActualImageToJPGPhoto = new Photo(originalPhotoName,
-                                                                thumbnailPhotoName,
-                                                                squareThumbnailName,
-                                                                new Timestamp(System.currentTimeMillis()),
-                                                                null);
+            Photo smallerInSizeActualImageToJPGPhoto = new Photo(
+                    originalPhotoName, originalDim,
+                    thumbnailPhotoName, thumbDim,
+                    squareThumbnailName, squareDim,
+                    new Timestamp(System.currentTimeMillis()), null);
 
             Session hibSession = HibernateUtil.getSessionFactory().openSession();
             hibSession.beginTransaction();

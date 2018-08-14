@@ -58,5 +58,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat:juli:6.0.26" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat:annotations-api:6.0.26" level="project" />
     <orderEntry type="library" name="Maven: org.imgscalr:imgscalr-lib:4.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
   </component>
 </module>

@@ -8,9 +8,9 @@ public class BriefAlbum implements Serializable{
     private Long albumId;
     private String name;
     private String mainPhotoLocation;
-    private Date publishDate;
+    private Timestamp publishDate;
 
-    public BriefAlbum(Long albumId, String name, String mainPhotoLocation, Date publishDate) {
+    public BriefAlbum(Long albumId, String name, String mainPhotoLocation, Timestamp publishDate) {
         this.albumId = albumId;
         this.name = name;
         this.mainPhotoLocation = mainPhotoLocation;
@@ -44,11 +44,11 @@ public class BriefAlbum implements Serializable{
         this.mainPhotoLocation = mainPhotoLocation;
     }
 
-    public Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 }

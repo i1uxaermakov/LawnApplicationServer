@@ -3,6 +3,7 @@ package sections.feed.posts.entities;
 import utils.filemanagement.File;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ public class Post implements Serializable {
     private Long authorId;
     private String authorName;
     private String organizationName;
-    private Date publishDate;
+    private Timestamp publishDate;
     private String postContent;
 //    private String postExcerpt;
     private String status;
@@ -21,7 +22,7 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(Long postId, Long authorId, String authorName, String organizationName, Date publishDate, String postContent, String status, Set<File> files, AttachedAlbum album) {
+    public Post(Long postId, Long authorId, String authorName, String organizationName, Timestamp publishDate, String postContent, String status, Set<File> files, AttachedAlbum album) {
         this.postId = postId;
         this.authorId = authorId;
         this.authorName = authorName;
@@ -57,11 +58,11 @@ public class Post implements Serializable {
         this.organizationName = organizationName;
     }
 
-    public Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 

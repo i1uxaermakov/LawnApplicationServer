@@ -10,15 +10,15 @@
     <title>Education - Homework</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/swiper.min.css" rel="stylesheet">
-    <link href="css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/edu.css">
-    <link rel="stylesheet" href="css/posts-template.css">
-    <link rel="stylesheet" href="css/photoswipe.css">
-    <link rel="stylesheet" href="css/default-skin/default-skin.css">
-    <link rel="stylesheet" href="css/gallery.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/swiper.min.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/edu.css">
+    <link rel="stylesheet" href="/css/posts-template.css">
+    <link rel="stylesheet" href="/css/photoswipe.css">
+    <link rel="stylesheet" href="/css/default-skin/default-skin.css">
+    <link rel="stylesheet" href="/css/gallery.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -139,24 +139,23 @@
 
 
     <section class="blocks hw container-fluid " id="homework">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 padd">
             <%@include file="HomeworkVisualizer.jsp" %>
         </div>
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="css/jquery.min.js"></script>
-    <script src="css/swiper.min.js"></script>
+    <script src="/css/jquery.min.js"></script>
+    <script src="/css/swiper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="css/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/css/bootstrap.min.js" type="text/javascript"></script>
     <!-- <script src="slick/slick.min.js"></script>    -->
-    <script src="css/main.js" type="text/javascript"></script>
+    <script src="/css/main.js" type="text/javascript"></script>
 
     <!-- Core JS file -->
-    <script src="css/edu.js"></script>
-    <script src="css/photoswipe.min.js"></script>
+    <script src="/css/edu.js"></script>
+    <script src="/css/photoswipe.min.js"></script>
     <!-- UI JS file -->
-    <script src="css/photoswipe-ui-default.min.js"></script>
+    <script src="/css/photoswipe-ui-default.min.js"></script>
     <!--<a href="https://ru.freepik.com/free-vector/_801555.htm">Разработано через Freepik</a>-->
     </body>
 

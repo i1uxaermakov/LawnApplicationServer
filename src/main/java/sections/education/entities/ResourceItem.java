@@ -2,19 +2,19 @@ package sections.education.entities;
 
 import utils.filemanagement.File;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class ResourceItem {
     private Long resourceItemId;
     private File file;
     private SubjectResourceCategory subjectCategory;
     private String addedBy;
-    private Timestamp publishDate;
+    private Date publishDate;
 
     public ResourceItem() {
     }
 
-    public ResourceItem(File file, SubjectResourceCategory subjectCategory, String addedBy, Timestamp publishDate) {
+    public ResourceItem(File file, SubjectResourceCategory subjectCategory, String addedBy, Date publishDate) {
         this.file = file;
         this.subjectCategory = subjectCategory;
         this.addedBy = addedBy;
@@ -53,11 +53,11 @@ public class ResourceItem {
         this.addedBy = addedBy;
     }
 
-    public Timestamp getPublishDate() {
+    public Date getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Timestamp publishDate) {
+    public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
     }
 }
