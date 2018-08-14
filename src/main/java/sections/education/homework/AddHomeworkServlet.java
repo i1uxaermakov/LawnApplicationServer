@@ -1,7 +1,6 @@
 package sections.education.homework;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.DAO.ScheduleDAO;
 import sections.education.entities.HomeworkItem;
@@ -144,8 +143,6 @@ public class AddHomeworkServlet extends HttpServlet {
         hibSession.close();
 
         resp.setStatus(200);
-        //resp.setContentType("application/json");
-        //resp.getWriter().println("{\"hwId\":" + idealResponse + "}");
         resp.getWriter().println(idealResponse);
         System.out.println("\n hw ID = " + idealResponse+  "\n");
     }

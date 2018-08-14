@@ -9,7 +9,7 @@
         <property name="addedBy"/>
         <property name="publishDate"/>
 
-        <many-to-one name="file" class="utils.filemanagement.File"
+        <many-to-one name="file" class="utils.files.File"
                      column="file_id" unique="true" not-null="true"
                      cascade="all" />
 

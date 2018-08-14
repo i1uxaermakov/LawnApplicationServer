@@ -1,6 +1,6 @@
 package sections.feed.events;
 
-import utils.filemanagement.FileManager;
+import utils.files.FileUtilities;
 import utils.HibernateUtil;
 import sections.feed.events.entities.Event;
 import security.entities.User;
@@ -34,7 +34,7 @@ public class AddEventServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        FileManager fileManager = new FileManager();
+        FileUtilities fileManager = new FileUtilities();
         User user = (User) req.getSession().getAttribute("User");
         Date date = new Date(System.currentTimeMillis());
         String author = user.getFirstName() + " " + user.getLastName();

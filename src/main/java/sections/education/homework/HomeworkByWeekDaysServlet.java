@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeworkServletByWeekDays extends HttpServlet {
+public class HomeworkByWeekDaysServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();

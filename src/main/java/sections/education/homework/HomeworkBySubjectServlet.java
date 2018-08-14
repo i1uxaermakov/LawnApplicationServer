@@ -15,7 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class HomeworkServletBySubject extends HttpServlet {
+public class HomeworkBySubjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();

@@ -1,9 +1,10 @@
 package sections.education.entities;
 
 import sections.feed.posts.entities.AttachedAlbum;
-import utils.filemanagement.File;
+import utils.files.File;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class HomeworkItem implements Comparable<HomeworkItem> {
@@ -16,8 +17,8 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     private String description;
     private Date publishDate;
     private Date deadlineDate;
-    private Set<File> files;
-    private AttachedAlbum hwAlbum;
+    private Set<File> files = new HashSet<>(0);
+    private AttachedAlbum hwAlbum = new AttachedAlbum();
 
     public HomeworkItem() {
     }

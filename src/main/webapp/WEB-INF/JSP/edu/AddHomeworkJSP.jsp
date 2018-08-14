@@ -202,14 +202,12 @@
                         </div>
                     </div>
                     <div class="icons-add">
-                        <label for="images"><i class="far fa-image"></i></label>
-                        <input type="file" name="images" id="images" multiple accept="image/*" form="addHWform" onchange="previewImages()">
+                        <label for="image-input"><i class="far fa-image"></i></label>
+                        <input type="file" name="image-input" id="image-input" multiple accept="image/*" form="addHWform">
 
 
                         <label for="file-input"><i class="fas fa-paperclip"></i></label>
                         <input type="file" name="files" id="file-input" multiple form="addHWform"/>
-
-
 
 
                         <input type="submit" form="addHWform" style="float: right" multiple class="btnn btn-suc">

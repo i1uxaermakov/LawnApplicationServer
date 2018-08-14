@@ -1,10 +1,9 @@
 package sections.feed.posts.entities;
 
-import utils.filemanagement.File;
+import utils.files.File;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Set;
 
 public class Post implements Serializable {

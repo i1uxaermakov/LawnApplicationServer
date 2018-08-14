@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="sections.feed.posts.entities.AttachedAlbum" %>
 <%@ page import="model.entities.Photo" %>
-<%@ page import="utils.filemanagement.File" %>
+<%@ page import="utils.files.File" %>
 <%@ page import="java.text.ParseException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%

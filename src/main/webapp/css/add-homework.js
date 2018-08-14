@@ -43,7 +43,7 @@ var iscustomcheck = function(e){
 
 function previewImages() {
     var preview = document.querySelector('#preview');
-    var files   = document.querySelector('#images').files;
+    var images   = document.querySelector('#image-input').files;
 
     function readAndPreview(file) {
         // Make sure `file.name` matches our extensions criteria
@@ -70,8 +70,8 @@ function previewImages() {
     }
 
     document.getElementById("preview").innerHTML = "";
-    if (files) {
-        [].forEach.call(files, readAndPreview);
+    if (images) {
+        [].forEach.call(images, readAndPreview);
     }
 }
 
@@ -81,7 +81,16 @@ function previewFiles() {
 
     function readAndPreview(file) {
         var isLongName = (file.name.length>25)?'\.\.\.':'';
-        var fileHTML = '<div class="uploaded-files-hw"><a href="#"><i class="far fa-file fa-4x"></i><span class="about-hw-file">Title: '+ file.name.substring(0,25) + isLongName +'<br>Size: ' + file.size + '<br></span></a></div>';
+        var fileHTML = '<div class="uploaded-files-hw">' +
+                            '<a href="#">' +
+                                '<i class="far fa-file fa-4x"></i>' +
+                                '<span class="about-hw-file">' +
+                                    'Title: '+ file.name.substring(0,25) + isLongName +
+                                    '<br>Size: ' + file.size +
+                                    '<br>' +
+                                '</span>' +
+                            '</a>' +
+                        '</div>';
         previewFiles.innerHTML = previewFiles.innerHTML + (fileHTML);
     }
 
@@ -94,14 +103,16 @@ function previewFiles() {
 
 
 (function () {
-    var fileCatcher = document.getElementById('addHWform');
+    var submitCatcher = document.getElementById('addHWform');
     var fileInput = document.getElementById('file-input');
+    var imageInput = document.getElementById('image-input');
 
     var fileList = [];
+    var imageList = [];
 
     var myHWid;
 
-    fileCatcher.addEventListener('submit', function (evnt) {
+    submitCatcher.addEventListener('submit', function (evnt) {
         evnt.preventDefault();
 
         var request = new XMLHttpRequest();
@@ -152,7 +163,7 @@ function previewFiles() {
         formData.set('HWfor', arrayOfValuesHWfor);
         if(!(document.getElementById('hw-text').value)) {
             // todo fucking encoding problem - russian does not show properly
-            alert('hello'+'\xD0\x9D\xD0\xB0\xD0\xBF\xD0\xB8\xD1\x88\xD0\xB8\xD1\x82\xD0\xB5\x20\xD0\xBA\xD0\xBE\xD0\xBC\xD0\xBC\xD0\xB5\xD0\xBD\xD1\x82\xD0\xB0\xD1\x80\xD0\xB8\xD0\xB9\x20\xD0\xBA\x20\xD0\xB4\xD0\xBE\xD0\xBC\xD0\xB0\xD1\x88\xD0\xBD\xD0\xB5\xD0\xBC\xD1\x83\x20\xD0\xB7\xD0\xB0\xD0\xB4\xD0\xB0\xD0\xBD\xD0\xB8\xD1\x8E\x2E');
+            alert("Please, add description to Homework!");
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
@@ -165,30 +176,46 @@ function previewFiles() {
                 myHWid = request.responseText;
                 alert(myHWid);
                 fileList.forEach(function (file) {
-                    sendFile(file);
+                    sendFile(file, 'files');
                 });
+
+                imageList.forEach(function(file) {
+                   sendFile(file, 'photos');
+                });
+
             }
             else {
                 alert(request.responseText + "Some problem occurred while processing on server :(");
             }
+
+
         };
 
     });
 
     fileInput.addEventListener('change', function (evnt) {
-        for (var i = 0; i < fileInput.files.length; i++) {
+        fileList = [];
+        for(var i=0; i<fileInput.files.length; i++) {
             fileList.push(fileInput.files[i]);
         }
         previewFiles();
     });
 
-    sendFile = function (file) {
+    imageInput.addEventListener('change', function(e) {
+        imageList = [];
+        for(var i=0; i<imageInput.files.length; i++) {
+            imageList.push(imageInput.files[i]);
+        }
+        previewImages();
+    });
+
+    var sendFile = function (file, url) {
         var formData = new FormData();
         var request = new XMLHttpRequest();
 
         formData.set('file', file, file.name);
         formData.set('hw_id', myHWid);
-        request.open("POST", 'http://localhost:8080/files/edu/hw/add', true);
+        request.open("POST", 'http://localhost:8080/edu/hw/add/' + url, true);
         request.send(formData);
 
         request.onload = function() {
@@ -202,4 +229,5 @@ function previewFiles() {
         }
         
     };
+
 })();

@@ -1,7 +1,7 @@
 package sections.feed.posts.entities;
 
 import sections.mediaarchive.entities.Album;
-import utils.filemanagement.File;
+import utils.files.File;
 
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;

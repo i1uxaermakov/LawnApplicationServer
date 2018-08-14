@@ -153,15 +153,15 @@
     </servlet-mapping>
     
     <!--<servlet>-->
-        <!--<servlet-name>utils.filemanagement.FileDownloadingServlet</servlet-name>-->
-        <!--<servlet-class>utils.filemanagement.FileDownloadingServlet</servlet-class>-->
+        <!--<servlet-name>utils.filesloadingServlet</servlet-name>-->
+        <!--<servlet-class>utils.filesloadingServlet</servlet-class>-->
         <!--<init-param>-->
             <!--<param-name>fileUploadingRoot</param-name>-->
             <!--<param-value>/Users/ilya_ermakov/Desktop/image</param-value>-->
         <!--</init-param>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>utils.filemanagement.FileDownloadingServlet</servlet-name>-->
+        <!--<servlet-name>utils.filesloadingServlet</servlet-name>-->
         <!--<url-pattern>/file/*</url-pattern>-->
     <!--</servlet-mapping>-->
     
@@ -204,7 +204,7 @@
     <!--education-->
     <servlet>
         <servlet-name>HW</servlet-name>
-        <servlet-class>sections.education.homework.HomeworkServletByWeekDays</servlet-class>
+        <servlet-class>sections.education.homework.HomeworkByWeekDaysServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HW</servlet-name>
@@ -248,8 +248,22 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AddFilesToHWServlet</servlet-name>
-        <url-pattern>/files/edu/hw/add</url-pattern>
+        <url-pattern>/edu/hw/add/files</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddPhotosToHWServlet</servlet-name>
+        <servlet-class>sections.education.homework.AddPhotosToHWServlet</servlet-class>
+        <init-param>
+            <param-name>pathToHWphotos</param-name>
+            <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPhotosToHWServlet</servlet-name>
+        <url-pattern>/edu/hw/add/photos</url-pattern>
+    </servlet-mapping>
+
 
     <!--end education-->
 

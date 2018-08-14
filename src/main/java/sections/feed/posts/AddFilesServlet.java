@@ -39,12 +39,12 @@ public class AddFilesServlet extends HttpServlet{
                 fne.printStackTrace();
             }
 
-            utils.filemanagement.File file = new utils.filemanagement.File();
+            utils.files.File file = new utils.files.File();
             file.setLocation("/Users/ilya_ermakov/Desktop/files" + File.separator + fileName);
             file.setSize(part.getSize());
             //file.setPost(post);
 
-            Set<utils.filemanagement.File> fileSet= post.getFiles();
+            Set<utils.files.File> fileSet= post.getFiles();
             fileSet.add(file);
             post.setFiles(fileSet);
 

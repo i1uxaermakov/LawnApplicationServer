@@ -1,6 +1,6 @@
 package sections.education.entities;
 
-import utils.filemanagement.File;
+import utils.files.File;
 
 import java.util.Date;
 

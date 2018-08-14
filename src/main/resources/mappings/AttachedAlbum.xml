@@ -14,7 +14,7 @@
         <property name="mainPhotoLocation" length="2000"/>
         <!--<one-to-one name="post" class="sections.feed.posts.entities.Post" constrained="true"/>-->
 
-        <set name="albumPhotos" table="PostAlbumPhotos" fetch="join" lazy="false" cascade="all"> <!--inverse="true"-->
+        <set name="albumPhotos" table="AttachedAlbumPhotos" fetch="join" lazy="false" cascade="all"> <!--inverse="true"-->
             <key>
                 <column name="attAlbum_id" not-null="true"/>
             </key>

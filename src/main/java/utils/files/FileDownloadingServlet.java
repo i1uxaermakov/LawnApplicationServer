@@ -1,4 +1,4 @@
-package utils.filemanagement;
+package utils.files;
 
 import org.hibernate.Session;
 import utils.HibernateUtil;
@@ -16,13 +16,14 @@ import java.io.OutputStream;
 public class FileDownloadingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        todo whole might be useless
         String pathBeginning = getInitParameter("fileUploadingRoot");
         Long requestedFileId = new Long(request.getParameter("fid"));
 
 
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         hibSession.getTransaction().begin();
-        utils.filemanagement.File file = hibSession.get(utils.filemanagement.File.class, requestedFileId);
+        utils.files.File file = hibSession.get(utils.files.File.class, requestedFileId);
         hibSession.getTransaction().commit();
         hibSession.close();
 

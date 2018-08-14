@@ -3,7 +3,7 @@
 <%@ page import="sections.feed.posts.entities.AttachedAlbum" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="model.entities.Photo" %>
-<%@ page import="utils.filemanagement.File" %>
+<%@ page import="utils.files.File" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
