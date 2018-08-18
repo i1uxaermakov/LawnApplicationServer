@@ -40,7 +40,7 @@ public class AddFilesServlet extends HttpServlet{
             }
 
             utils.files.File file = new utils.files.File();
-            file.setLocation("/Users/ilya_ermakov/Desktop/files" + File.separator + fileName);
+//            file.setLocation("/Users/ilya_ermakov/Desktop/files" + File.separator + fileName);
             file.setSize(part.getSize());
             //file.setPost(post);
 

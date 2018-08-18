@@ -14,60 +14,57 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class FileDownloadingServlet extends HttpServlet {
+    private static String pathToFiles;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        todo whole might be useless
-        String pathBeginning = getInitParameter("fileUploadingRoot");
-        Long requestedFileId = new Long(request.getParameter("fid"));
+        String requestedFile = request.getRequestURI();
+        requestedFile = requestedFile.replace("/files/download/", "");
 
-
-        Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        hibSession.getTransaction().begin();
-        utils.files.File file = hibSession.get(utils.files.File.class, requestedFileId);
-        hibSession.getTransaction().commit();
-        hibSession.close();
-
-        if(file==null) {
-//            todo 404
-        }
         // reads input file from an absolute path
-        File downloadFile = new File(pathBeginning + file.getLocation());
-        FileInputStream inStream = new FileInputStream(downloadFile);
+        File downloadFile = new File(pathToFiles + File.separator + requestedFile);
+        if(downloadFile.exists()) {
+            FileInputStream inStream = new FileInputStream(downloadFile);
 
-        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+            MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
-        // obtains ServletContext
-        String mimeType = mimetypesFileTypeMap.getContentType(downloadFile);
-        if (mimeType == null) {
-            // set to binary type if MIME mapping not found
-            mimeType = "application/octet-stream";
+            // obtains ServletContext
+            String mimeType = mimetypesFileTypeMap.getContentType(downloadFile);
+            if (mimeType == null) {
+                // set to binary type if MIME mapping not found
+                mimeType = "application/octet-stream";
+            }
+
+            // modifies response
+            response.setContentType(mimeType);
+            response.setContentLength((int) downloadFile.length());
+
+            // forces download
+            String headerKey = "Content-Disposition";
+            String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+            response.setHeader(headerKey, headerValue);
+
+            // obtains response's output stream
+            OutputStream outStream = response.getOutputStream();
+
+            byte[] buffer = new byte[4096];
+            int bytesRead = -1;
+
+            while ((bytesRead = inStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, bytesRead);
+            }
+
+            inStream.close();
+            outStream.close();
         }
-        System.out.println("MIME type: " + mimeType);
-
-        // modifies response
-        response.setContentType(mimeType);
-        response.setContentLength((int) downloadFile.length());
-
-        // forces download
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"", file.getOriginalName());
-        response.setHeader(headerKey, headerValue);
-
-
-        // obtains response's output stream
-        OutputStream outStream = response.getOutputStream();
-
-        byte[] buffer = new byte[4096];
-        int bytesRead = -1;
-
-        while ((bytesRead = inStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
+        else {
+            response.setStatus(404);
         }
-
-        inStream.close();
-        outStream.close();
-
     }
 
-
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        pathToFiles = getServletContext().getInitParameter("pathToFiles");
+    }
 }

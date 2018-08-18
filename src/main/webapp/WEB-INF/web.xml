@@ -17,6 +17,16 @@
         </jsp-property-group>
     </jsp-config>
 
+
+    <context-param>
+        <param-name>pathToPhotos</param-name>
+        <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pathToFiles</param-name>
+        <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
+    </context-param>
+
     <!--<welcome-file-list>-->
         <!--<welcome-file>MainPageServlet</welcome-file>-->
     <!--</welcome-file-list>-->
@@ -72,24 +82,24 @@
     
 
     <!--feed posts-->
-    <servlet>
-        <servlet-name>MultiplePostsServlet</servlet-name>
-        <servlet-class>sections.feed.posts.MultiplePostsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MultiplePostsServlet</servlet-name>
-        <url-pattern>/posts</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>MultiplePostsServlet</servlet-name>-->
+        <!--<servlet-class>sections.feed.posts.MultiplePostsServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>MultiplePostsServlet</servlet-name>-->
+        <!--<url-pattern>/posts</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>SinglePostServlet</servlet-name>
-        <servlet-class>sections.feed.posts.SinglePostServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SinglePostServlet</servlet-name>
-        <url-pattern>/post</url-pattern>
-    </servlet-mapping>
-    <!--end feed posts-->
+    <!--<servlet>-->
+        <!--<servlet-name>SinglePostServlet</servlet-name>-->
+        <!--<servlet-class>sections.feed.posts.SinglePostServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>SinglePostServlet</servlet-name>-->
+        <!--<url-pattern>/post</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--&lt;!&ndash;end feed posts&ndash;&gt;-->
 
 
 
@@ -102,7 +112,7 @@
         <!--<url-pattern>/MainPageServlet</url-pattern>-->
     <!--</servlet-mapping>-->
     
-    <!--signin signout servlets-->
+    <!--begin signin signout servlets-->
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
         <servlet-class>security.authorization.SignInServlet</servlet-class>
@@ -133,54 +143,62 @@
     
 
 
-
-    <!--<servlet>-->
-        <!--<servlet-name>ImageServlet</servlet-name>-->
-        <!--<servlet-class>ImageServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>ImageServlet</servlet-name>-->
-        <!--<url-pattern>/image/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-
+    <!--begin utils-->
     <servlet>
-        <servlet-name>MultipleAlbumsServlet</servlet-name>
-        <servlet-class>sections.mediaarchive.MultipleAlbumsServlet</servlet-class>
+        <servlet-name>utils.images.ImageServlet</servlet-name>
+        <servlet-class>utils.images.ImageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MultipleAlbumsServlet</servlet-name>
-        <url-pattern>/albums/*</url-pattern>
+        <servlet-name>utils.images.ImageServlet</servlet-name>
+        <url-pattern>/images/*</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>utils.files.FileDownloadingServlet</servlet-name>
+        <servlet-class>utils.files.FileDownloadingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>utils.files.FileDownloadingServlet</servlet-name>
+        <url-pattern>/files/download/*</url-pattern>
+    </servlet-mapping>
+    <!--end utils-->
+
+
+
+
+
+
+
+
+
+
+    <!--<servlet>-->
+        <!--<servlet-name>MultipleAlbumsServlet</servlet-name>-->
+        <!--<servlet-class>sections.mediaarchive.MultipleAlbumsServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>MultipleAlbumsServlet</servlet-name>-->
+        <!--<url-pattern>/albums/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+    
+    
     
     <!--<servlet>-->
-        <!--<servlet-name>utils.filesloadingServlet</servlet-name>-->
-        <!--<servlet-class>utils.filesloadingServlet</servlet-class>-->
+        <!--<servlet-name>AddPostServlet</servlet-name>-->
+        <!--<servlet-class>sections.feed.posts.AddPostServlet</servlet-class>-->
         <!--<init-param>-->
-            <!--<param-name>fileUploadingRoot</param-name>-->
-            <!--<param-value>/Users/ilya_ermakov/Desktop/image</param-value>-->
+            <!--<param-name>pathBeginningForPostFiles</param-name>-->
+            <!--<param-value>/Users/ilya_ermakov/Desktop/files</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>pathBeginningForPostPhotos</param-name>-->
+            <!--<param-value>/Users/ilya_ermakov/Desktop/photos/posts</param-value>-->
         <!--</init-param>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>utils.filesloadingServlet</servlet-name>-->
-        <!--<url-pattern>/file/*</url-pattern>-->
+        <!--<servlet-name>AddPostServlet</servlet-name>-->
+        <!--<url-pattern>/add/post/*</url-pattern>-->
     <!--</servlet-mapping>-->
-    
-    <servlet>
-        <servlet-name>AddPostServlet</servlet-name>
-        <servlet-class>sections.feed.posts.AddPostServlet</servlet-class>
-        <init-param>
-            <param-name>pathBeginningForPostFiles</param-name>
-            <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
-        </init-param>
-        <init-param>
-            <param-name>pathBeginningForPostPhotos</param-name>
-            <param-value>/Users/ilya_ermakov/Desktop/photos/posts</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddPostServlet</servlet-name>
-        <url-pattern>/add/post/*</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>AddFiles</servlet-name>
@@ -242,8 +260,8 @@
         <servlet-name>AddFilesToHWServlet</servlet-name>
         <servlet-class>sections.education.homework.AddFilesToHWServlet</servlet-class>
         <init-param>
-            <param-name>pathToHWfiles</param-name>
-            <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
+            <param-name>pathSuffixForHWfiles</param-name>
+            <param-value>hwFiles</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -255,8 +273,8 @@
         <servlet-name>AddPhotosToHWServlet</servlet-name>
         <servlet-class>sections.education.homework.AddPhotosToHWServlet</servlet-class>
         <init-param>
-            <param-name>pathToHWphotos</param-name>
-            <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
+            <param-name>pathSuffixForHWphotos</param-name>
+            <param-value>hwPhotos</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -278,18 +296,18 @@
         <!--<location>/shiiiiit.html</location>-->
     <!--</error-page>-->
 
-    <servlet>
-        <servlet-name>addPhotosServlet</servlet-name>
-        <servlet-class>sections.feed.AddPhotosServlet</servlet-class>
-        <init-param>
-            <param-name>pathToImageFolder</param-name>
-            <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>addPhotosServlet</servlet-name>
-        <url-pattern>/uploadImage</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>addPhotosServlet</servlet-name>-->
+        <!--<servlet-class>sections.feed.AddPhotosServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>pathToImageFolder</param-name>-->
+            <!--<param-value>/Users/ilya_ermakov/Desktop/images</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>addPhotosServlet</servlet-name>-->
+        <!--<url-pattern>/uploadImage</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
 

@@ -1,6 +1,5 @@
 package utils.images;
 
-import model.entities.Photo;
 import org.imgscalr.Scalr;
 import security.entities.User;
 import utils.files.FileUtilities;
@@ -16,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 
 public class ImageUtilities {
-    public static Photo processReceivedImageAndGetPhotoEntity(Part part, String pathToImageFolder, User user) {
+    public static Photo processReceivedImageAndGetPhotoEntity(Part part, String pathToImageFolder, String suffix, User user) {
         if (part == null) {
             return null;
         }
@@ -39,7 +38,7 @@ public class ImageUtilities {
         imageName = DatatypeConverter.printHexBinary(digest).toUpperCase();
 
 
-        File imageFile = new File(pathToImageFolder + imageName);
+        File imageFile = new File(pathToImageFolder + File.separator + suffix + File.separator + imageName);
 
         try (OutputStream out = new FileOutputStream(imageFile);
              InputStream fileContent = part.getInputStream()) {
@@ -92,17 +91,17 @@ public class ImageUtilities {
             String squareDim = squareImage.getWidth() + "x" + squareImage.getHeight();
 
             //getting names of images
-            String originalPhotoName = imageName + "_original" + originalDim + ".jpg";
-            String thumbnailPhotoName = imageName + "_thumb" + thumbDim + ".jpg";
-            String squareThumbnailName = imageName + "_square" + squareDim + ".jpg";
+            String originalPhotoName = suffix + File.separator + imageName + "_original" + originalDim + ".jpg";
+            String thumbnailPhotoName = suffix + File.separator + imageName + "_thumb" + thumbDim + ".jpg";
+            String squareThumbnailName = suffix + File.separator + imageName + "_square" + squareDim + ".jpg";
 
             //saving the images
             ImageIO.write(smallerInSizeActualImageToJPG, "jpg",
-                    new File(pathToImageFolder + originalPhotoName));
+                    new File(pathToImageFolder + File.separator + originalPhotoName));
             ImageIO.write(thumbnail, "jpg",
-                    new File(pathToImageFolder + thumbnailPhotoName));
+                    new File(pathToImageFolder + File.separator + thumbnailPhotoName));
             ImageIO.write(squareImage, "jpg",
-                    new File(pathToImageFolder + squareThumbnailName));
+                    new File(pathToImageFolder + File.separator + squareThumbnailName));
 
             smallerInSizeActualImageToJPGPhoto = new Photo(
                     originalPhotoName, originalDim,

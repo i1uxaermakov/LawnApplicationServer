@@ -1,11 +1,10 @@
 package sections.education.homework;
 
-import model.entities.Photo;
+import utils.images.Photo;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.entities.HomeworkItem;
-import sections.feed.posts.entities.AttachedAlbum;
 import security.entities.User;
 import utils.HibernateUtil;
 import utils.images.ImageUtilities;
@@ -16,13 +15,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 @MultipartConfig
 public class AddPhotosToHWServlet extends HttpServlet {
-    private static String pathToHWphotos;
+    //context init parameter
+    private static String pathToPhotos;
+    //servlet init parameter
+    private static String pathSuffixForHWphotos;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,24 +47,23 @@ public class AddPhotosToHWServlet extends HttpServlet {
         }
 
         HomeworkItemDAO homeworkItemDAO = new HomeworkItemDAO();
-        List<HomeworkItem> homeworkItemList = homeworkItemDAO.getHomeworkItemsForAddingFiles(idsLong);
+        List<HomeworkItem> homeworkItemList = homeworkItemDAO.getHomeworkItemsForAddingFilesOrPhotos(idsLong);
 
         if(homeworkItemList.size()!=ids.length) {
             resp.setStatus(400);
             return;
         }
 
-        Part part = req.getPart("image");
-        Photo photo = ImageUtilities.processReceivedImageAndGetPhotoEntity(part, pathToHWphotos, user);
+        Part part = req.getPart("file");
+        (new File(pathToPhotos + File.separator + pathSuffixForHWphotos)).mkdirs();
+        Photo photo = ImageUtilities.processReceivedImageAndGetPhotoEntity(part, pathToPhotos, pathSuffixForHWphotos, user);
 
         hibSession.beginTransaction();
         for(HomeworkItem homeworkItem: homeworkItemList) {
             if(user.getUserId().equals(homeworkItem.getAddedById())) {
-                AttachedAlbum album = homeworkItem.getHwAlbum();
-                Set<Photo> set= album.getAlbumPhotos();
+                Set<Photo> set= homeworkItem.getPhotos();
                 set.add(photo);
-                album.setAlbumPhotos(set);
-                homeworkItem.setHwAlbum(album);
+                homeworkItem.setPhotos(set);
                 hibSession.update(homeworkItem);
             }
             else {
@@ -78,6 +80,7 @@ public class AddPhotosToHWServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        pathToHWphotos = getInitParameter("pathToHWphotos");
+        pathToPhotos = getServletContext().getInitParameter("pathToPhotos");
+        pathSuffixForHWphotos = getInitParameter("pathSuffixForHWphotos");
     }
 }

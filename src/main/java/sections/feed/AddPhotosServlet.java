@@ -1,6 +1,6 @@
 package sections.feed;
 
-import model.entities.Photo;
+import utils.images.Photo;
 import org.hibernate.Session;
 import security.entities.User;
 import utils.HibernateUtil;
@@ -24,7 +24,7 @@ public class AddPhotosServlet extends HttpServlet {
         try {
             Part part = req.getPart("image");
 
-            Photo photo = ImageUtilities.processReceivedImageAndGetPhotoEntity(part, pathToImageFolder, user);
+            Photo photo = ImageUtilities.processReceivedImageAndGetPhotoEntity(part, pathToImageFolder, "hello", user);
             if(photo == null) {
                 resp.setStatus(400);
                 return;
@@ -47,6 +47,6 @@ public class AddPhotosServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        pathToImageFolder = getInitParameter("pathToImageFolder") + File.separator;
+        pathToImageFolder = getInitParameter("pathToImageFolder");
     }
 }

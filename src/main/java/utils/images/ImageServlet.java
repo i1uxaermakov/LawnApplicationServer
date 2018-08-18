@@ -1,3 +1,7 @@
+package utils.images;
+
+import org.apache.commons.lang3.StringUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,22 +12,26 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class ImageServlet extends HttpServlet {
+    public static String pathToPhotos;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String pathBeginning = "/Users/ilya_ermakov/Desktop/images"; //todo initialization parameter
-        String requestURI = request.getPathInfo();
-        //requestURI = requestURI.replace("/image", "");
+        String requestedPhoto = request.getRequestURI();
+        requestedPhoto = requestedPhoto.replace("/images", "");
 
 
-        if(requestURI.equals("")) {
-            response.setContentType("text/html");
-            response.getWriter().println("image");
+        //todo what is authenticate, startasync, getUserPrincipal, user in role, login(), logout(), gtPushBuilder
+
+        //todo defaultphoto
+        //todo loading while img is downloading on front
+
+        System.out.println(requestedPhoto);
+        if(requestedPhoto.equals("")) {
         }
         else {
-            File image = new File(pathBeginning + requestURI);
-            if(!image.getAbsolutePath().contains(pathBeginning)) {
-                //todo 404
+            File image = new File(pathToPhotos + requestedPhoto);
+            if(!image.exists() || image.isDirectory() || !image.getAbsolutePath().contains(pathToPhotos)) {
+//                todo 404 or defaultphoto
             }
 //        System.out.println("/Users/ilya_ermakov/Desktop" +reqPath);
 
@@ -42,5 +50,11 @@ public class ImageServlet extends HttpServlet {
 
 
         }
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        pathToPhotos = getServletContext().getInitParameter("pathToPhotos");
     }
 }

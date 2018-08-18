@@ -1,7 +1,7 @@
 package sections.education.entities;
 
-import sections.feed.posts.entities.AttachedAlbum;
 import utils.files.File;
+import utils.images.Photo;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,6 +10,7 @@ import java.util.Set;
 public class HomeworkItem implements Comparable<HomeworkItem> {
     private Long hw_id;
     private Long addedById;
+    private Long teacherId;
     private Long groupId;
     private Long subjectId;
     private String subjectName;
@@ -18,7 +19,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     private Date publishDate;
     private Date deadlineDate;
     private Set<File> files = new HashSet<>(0);
-    private AttachedAlbum hwAlbum = new AttachedAlbum();
+    private Set<Photo> photos = new HashSet<>(0);
 
     public HomeworkItem() {
     }
@@ -95,20 +96,28 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         this.deadlineDate = deadlineDate;
     }
 
-    public AttachedAlbum getHwAlbum() {
-        return hwAlbum;
-    }
-
-    public void setHwAlbum(AttachedAlbum hwAlbum) {
-        this.hwAlbum = hwAlbum;
-    }
-
     public Set<File> getFiles() {
         return files;
     }
 
     public void setFiles(Set<File> files) {
         this.files = files;
+    }
+
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
     @Override
@@ -121,6 +130,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         return "HomeworkItem{" +
                 "hw_id=" + hw_id +
                 ", addedById=" + addedById +
+                ", teacherId=" + teacherId +
                 ", groupId=" + groupId +
                 ", subjectId=" + subjectId +
                 ", subjectName='" + subjectName + '\'' +
@@ -129,7 +139,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
                 ", publishDate=" + publishDate +
                 ", deadlineDate=" + deadlineDate +
                 ", files=" + files +
-                ", hwAlbum=" + hwAlbum +
+                ", photos=" + photos +
                 '}';
     }
 }

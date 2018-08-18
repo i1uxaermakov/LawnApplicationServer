@@ -26,10 +26,21 @@
             </many-to-many>
         </set>
 
+        <set name="photos" table="PostPhotos" fetch="join" lazy="false" cascade="all">
+            <key>
+                <column name="post_id" not-null="true"/>
+            </key>
+            <many-to-many class="utils.images.Photo">
+                <column name="photo_id" not-null="true"/>
+            </many-to-many>
+        </set>
 
-        <many-to-one name="album" class="sections.feed.posts.entities.AttachedAlbum"
-                     column="attAlbum_id" unique="true" not-null="true"
-                     cascade="all" />
+
+
+
+        <!--<many-to-one name="album" class="sections.feed.posts.entities.AttachedAlbum"-->
+                     <!--column="attAlbum_id" unique="true" not-null="true"-->
+                     <!--cascade="all" />-->
 
 
         <!--<set name="products" inverse="true" cascade="all">-->
@@ -54,7 +65,7 @@
         <!--<key>-->
         <!--<column name="post_id" not-null="true"/>-->
         <!--</key>-->
-        <!--<many-to-many entity-name="model.entities.Photo">-->
+        <!--<many-to-many entity-name="utils.images.Photo">-->
         <!--<column name="photo_id" not-null="true"/>-->
         <!--</many-to-many>-->
         <!--</set>-->

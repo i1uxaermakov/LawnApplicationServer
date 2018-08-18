@@ -1,6 +1,6 @@
 package sections.mediaarchive.entities;
 
-import model.entities.Photo;
+import utils.images.Photo;
 
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;

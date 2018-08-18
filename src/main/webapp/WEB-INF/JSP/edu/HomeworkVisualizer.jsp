@@ -1,8 +1,7 @@
 <%@ page import="sections.education.entities.HomeworkItem" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
-<%@ page import="sections.feed.posts.entities.AttachedAlbum" %>
-<%@ page import="model.entities.Photo" %>
+<%@ page import="utils.images.Photo" %>
 <%@ page import="utils.files.File" %>
 <%@ page import="java.text.ParseException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -107,16 +106,14 @@
                                         <%=hwi.getDescription().replaceAll("(\r\n|\r|\n|\n\r)", "<br>")%>
                                     </div>
                                     <%
-                                        AttachedAlbum album = hwi.getHwAlbum();
-                                        if(album != null) {
-                                            int size = album.getAlbumPhotos().size();
+                                            int size = hwi.getPhotos().size();
                                             if(size != 0) {
                                                 if(size < 4) {
                                                     String num = (size==1) ? "one" : ((size==2) ? "two" : "three");%>
                                                     <div class="<%=num%>photosrow photos row">
                                                         <div class="my-gallery" itemscope itemtype="">
                                                             <%
-                                                                for(Photo photo: album.getAlbumPhotos()) {%>
+                                                                for(Photo photo: hwi.getPhotos()) {%>
                                                                     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                                                                         <a href="/images/<%=photo.getThumbnailPhotoLocation()%>" itemprop="contentUrl" data-size="<%=photo.getThumbnailPhotoDimensions()%>">
                                                                             <img src="/images/<%=photo.getSquareThumbnailPhotoLocation()%>" itemprop="thumbnail"/> <%--alt="Image description"--%>
@@ -133,7 +130,7 @@
                                                     <div class="attachedalbum">
                                                         <%--todo link to photos--%>
                                                         <a href="album_post_photos.html">
-                                                            <img src="/images/<%=album.getMainPhotoLocation()%>" alt="" class="">
+                                                            <img src="/images/<%=((Photo[])(hwi.getPhotos().toArray()))[0].getSquareThumbnailPhotoLocation()%>" alt="" class="">
                                                             <span class="aboutAlbum">
                                                                 Attached Photos <br>
                                                                 <span>
@@ -145,7 +142,7 @@
                                                 <%
                                                 }
                                             }
-                                        }
+
 
                                         for(File file: hwi.getFiles()) {%>
                                             <div class="uploaded-files-hw">

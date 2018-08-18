@@ -1,9 +1,8 @@
 package sections.mediaarchive.entities;
 
-import model.entities.Photo;
+import utils.images.Photo;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 

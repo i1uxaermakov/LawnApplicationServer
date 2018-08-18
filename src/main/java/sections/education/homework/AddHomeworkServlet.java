@@ -75,7 +75,7 @@ public class AddHomeworkServlet extends HttpServlet {
             if(!list.contains(new Long(HWforArray[i]))) {
                 resp.setStatus(228);
                 //todo bad response
-                resp.getWriter().println("Вы не можете давать задание одной или нескольким группам из выбранного списка! Жулик, не DDos\'ь!");
+                resp.getWriter().println("Вы не можете давать задание одной или нескольким группам из выбранного списка!");
                 return;
             }
 
@@ -129,6 +129,7 @@ public class AddHomeworkServlet extends HttpServlet {
             homeworkItem.setSubjectId(subjectItem.getId());
             homeworkItem.setSubjectName(subjectItem.getName());
             homeworkItem.setTeacherName(subjectItem.getTeacherName());
+            homeworkItem.setTeacherId(subjectItem.getTeacherId());
             homeworkItem.setDescription(hw_text + "\n" + "Added by: " + user.getFirstName() + " " + user.getLastName());
             homeworkItem.setPublishDate(new java.sql.Date(System.currentTimeMillis()));
             homeworkItemList.add(homeworkItem);

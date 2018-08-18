@@ -16,7 +16,7 @@
             <key>
                 <column name="album_id" not-null="true"/>
             </key>
-            <many-to-many entity-name="model.entities.Photo">
+            <many-to-many entity-name="utils.images.Photo">
                 <column name="photo_id" not-null="true"/>
             </many-to-many>
         </set>

@@ -1,6 +1,6 @@
 package sections.feed.posts.entities;
 
-import model.entities.Photo;
+import utils.images.Photo;
 
 import java.util.HashSet;
 import java.util.Set;

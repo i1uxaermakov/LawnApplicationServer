@@ -29,7 +29,7 @@ public class FileUtilities {
         return null;
     }
 
-    public static File processReceivedFileAndGetFileEntity(Part part, String pathToHWfiles, User user) {
+    public static File processReceivedFileAndGetFileEntity(Part part, String pathToHWfiles, String suffix, User user) {
         String fileName = FileUtilities.getFileName(part);
         if(part==null || fileName==null || fileName=="") {
             return null;
@@ -45,7 +45,9 @@ public class FileUtilities {
         byte[] digest = md.digest();
         String fileNameToSave = DatatypeConverter.printHexBinary(digest).toUpperCase();
 
-        try (OutputStream out = new FileOutputStream(new java.io.File(pathToHWfiles + java.io.File.separator + fileNameToSave + "." + FilenameUtils.getExtension(fileName)));
+        try (OutputStream out = new FileOutputStream(
+                new java.io.File(pathToHWfiles + java.io.File.separator + suffix + java.io.File.separator +
+                                fileNameToSave + "." + FilenameUtils.getExtension(fileName)));
              InputStream fileContent = part.getInputStream()) {
             int read = 0;
             final byte[] bytes = new byte[1024];
@@ -59,9 +61,8 @@ public class FileUtilities {
         }
 
         utils.files.File file = new utils.files.File();
-        file.setLocation(pathToHWfiles + java.io.File.separator + fileNameToSave + "." + FilenameUtils.getExtension(fileName));
         file.setSize(part.getSize());
-        file.setSaveName(fileNameToSave + "." + FilenameUtils.getExtension(fileName));
+        file.setSaveName(suffix + java.io.File.separator + fileNameToSave + "." + FilenameUtils.getExtension(fileName));
         file.setOriginalName(fileName);
         file.setAuthor(user.getFirstName() + " " + user.getLastName());
         file.setPublishDate(new Timestamp(System.currentTimeMillis()));

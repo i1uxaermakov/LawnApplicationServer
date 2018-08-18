@@ -26,7 +26,10 @@ import java.util.Set;
 
 @MultipartConfig
 public class AddFilesToHWServlet extends HttpServlet {
-    private static String pathToHWfiles;
+    //context init parameter
+    private static String pathToFiles;
+    //servlet init parameter
+    private static String pathSuffixForHWfiles;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,7 +51,7 @@ public class AddFilesToHWServlet extends HttpServlet {
         }
 
         HomeworkItemDAO homeworkItemDAO = new HomeworkItemDAO();
-        List<HomeworkItem> homeworkItemList = homeworkItemDAO.getHomeworkItemsForAddingFiles(idsLong);
+        List<HomeworkItem> homeworkItemList = homeworkItemDAO.getHomeworkItemsForAddingFilesOrPhotos(idsLong);
 
         if(homeworkItemList.size()!=ids.length) {
             resp.setStatus(400);
@@ -56,7 +59,8 @@ public class AddFilesToHWServlet extends HttpServlet {
         }
 
         Part part = req.getPart("file");
-        File file = FileUtilities.processReceivedFileAndGetFileEntity(part, pathToHWfiles, user);
+        (new java.io.File(pathToFiles + java.io.File.separator + pathSuffixForHWfiles)).mkdirs();
+        File file = FileUtilities.processReceivedFileAndGetFileEntity(part, pathToFiles, pathSuffixForHWfiles, user);
         if(file==null) {
             resp.setStatus(400);
             return;
@@ -84,6 +88,7 @@ public class AddFilesToHWServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        pathToHWfiles = getInitParameter("pathToHWfiles");
+        pathToFiles = getServletContext().getInitParameter("pathToFiles");
+        pathSuffixForHWfiles = getInitParameter("pathSuffixForHWfiles");
     }
 }

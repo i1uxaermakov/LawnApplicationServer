@@ -8,29 +8,12 @@ public class File {
     private String originalName;
     private String saveName;
     private Long size;
-    private String location;
     private String author;
     private Timestamp publishDate;
 
     public File() {
     }
 
-    public File(String name, Long size, String location, String author, Timestamp publishDate) {
-        this.originalName = name;
-        this.size = size;
-        this.location = location;
-        this.author = author;
-        this.publishDate = publishDate;
-    }
-
-    public File(String name, String saveName, Long size, String location, String author, Timestamp publishDate) {
-        this.originalName = name;
-        this.saveName = saveName;
-        this.size = size;
-        this.location = location;
-        this.author = author;
-        this.publishDate = publishDate;
-    }
 
     public Long getId() {
         return id;
@@ -64,13 +47,6 @@ public class File {
         this.size = size;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public String getAuthor() {
         return author;

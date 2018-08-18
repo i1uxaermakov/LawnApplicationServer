@@ -33,24 +33,19 @@ public class HomeworkByWeekDaysServlet extends HttpServlet {
         try {
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date todayWithZeroTime = new Date((formatter.parse(formatter.format(new Date(System.currentTimeMillis())))).getTime());
-            System.out.println(todayWithZeroTime);
-            homeworkItemList = hwDAO.getHomeworkItemsForHomeworkPage(todayWithZeroTime, groupId);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+            if(user.getPrivileges().contains("teacher")) {
+                homeworkItemList = hwDAO.getHomeworkItemsForHomeworkPageForTeacher(todayWithZeroTime, user.getUserId());
+                req.setAttribute("for", "teacher");
+            }
+            else {
+                homeworkItemList = hwDAO.getHomeworkItemsForHomeworkPageForStudent(todayWithZeroTime, groupId);
+                req.setAttribute("for", "student");
+            }
+            req.setAttribute("homeworkItemList", homeworkItemList);
+        } catch (ParseException | SQLException e) {
             e.printStackTrace();
         }
         hibSession.close();
-
-        System.out.println("list "+ homeworkItemList);
-
-        req.setAttribute("homeworkItemList", homeworkItemList);
-        if(user.getPrivileges().contains("teacher")) {
-            req.setAttribute("for", "teacher");
-        }
-        else {
-            req.setAttribute("for", "student");
-        }
 
         String firstDayInYearDate = readFileContents("firstDayInYear.txt");
         req.setAttribute("firstDayInYear", firstDayInYearDate);

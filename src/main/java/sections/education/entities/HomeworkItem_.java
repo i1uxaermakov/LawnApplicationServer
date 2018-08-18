@@ -1,7 +1,7 @@
 package sections.education.entities;
 
-import sections.feed.posts.entities.AttachedAlbum;
 import utils.files.File;
+import utils.images.Photo;
 
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -13,6 +13,7 @@ public class HomeworkItem_ {
     public static volatile SingularAttribute<HomeworkItem,Long> hw_id;
     public static volatile SingularAttribute<HomeworkItem,Long> addedById;
     public static volatile SingularAttribute<HomeworkItem,Long> groupId;
+    public static volatile SingularAttribute<HomeworkItem,Long> teacherId;
     public static volatile SingularAttribute<HomeworkItem,Long> subjectId;
     public static volatile SingularAttribute<HomeworkItem,String> subjectName;
     public static volatile SingularAttribute<HomeworkItem,String> teacherName;
@@ -20,7 +21,7 @@ public class HomeworkItem_ {
     public static volatile SingularAttribute<HomeworkItem,Date> publishDate;
     public static volatile SingularAttribute<HomeworkItem,Date> deadlineDate;
     public static volatile SetAttribute<HomeworkItem,File> files;
-    public static volatile SingularAttribute<HomeworkItem,AttachedAlbum> hwAlbum;
+    public static volatile SetAttribute<HomeworkItem,Photo> photos;
 
 }
 /*

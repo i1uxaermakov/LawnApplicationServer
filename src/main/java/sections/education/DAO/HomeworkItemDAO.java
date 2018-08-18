@@ -16,9 +16,8 @@ import java.util.List;
 
 public class HomeworkItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-
-    public List<HomeworkItem> getHomeworkItemsForHomeworkPage(Date todayDate, Long groupId) throws SQLException {
+    
+    public List<HomeworkItem> getHomeworkItemsForHomeworkPageForStudent(Date todayDate, Long groupId) throws SQLException {
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
         Transaction transaction = null;
@@ -33,6 +32,33 @@ public class HomeworkItemDAO {
             criteriaQuery.where(criteriaBuilder.and(
                     criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.deadlineDate), todayDate),
                     criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.groupId), groupId)));
+
+            homeworkItemList = session.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+
+        return homeworkItemList;
+    }
+
+    public List<HomeworkItem> getHomeworkItemsForHomeworkPageForTeacher(Date todayDate, Long userId) throws SQLException {
+        Session session = null;
+        List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
+        Transaction transaction = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
+            Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
+
+            criteriaQuery.where(criteriaBuilder.and(
+                    criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.deadlineDate), todayDate),
+                    criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.teacherId), userId)));
 
             homeworkItemList = session.createQuery(criteriaQuery).getResultList();
             transaction.commit();
@@ -99,7 +125,7 @@ public class HomeworkItemDAO {
         return homeworkItemId;
     }
 
-    public List<HomeworkItem> getHomeworkItemsForAddingFiles(Long[] hwIDs) {
+    public List<HomeworkItem> getHomeworkItemsForAddingFilesOrPhotos(Long[] hwIDs) {
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
         Session session = null;
         Transaction transaction = null;

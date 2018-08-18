@@ -1,8 +1,7 @@
-package model.entities;
+package utils.images;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Photo implements Serializable {
     private Long id;
@@ -12,14 +11,14 @@ public class Photo implements Serializable {
     private String thumbnailPhotoDimensions;
     private String squareThumbnailPhotoLocation;
     private String squarePhotoDimensions;
-    private Timestamp publishDate;
+    private java.util.Date publishDate;
     private String author;
 
     public Photo() {
     }
 
     public Photo(String originalPhotoLocation, String thumbnailPhotoLocation,
-                 String squareThumbnailPhotoLocation, Timestamp publishDate, String author) {
+                 String squareThumbnailPhotoLocation, Date publishDate, String author) {
         this.originalPhotoLocation = originalPhotoLocation;
         this.thumbnailPhotoLocation = thumbnailPhotoLocation;
         this.squareThumbnailPhotoLocation = squareThumbnailPhotoLocation;
@@ -30,7 +29,7 @@ public class Photo implements Serializable {
     public Photo(String originalPhotoLocation, String originalPhotoDimensions,
                  String thumbnailPhotoLocation, String thumbnailPhotoDimensions,
                  String squareThumbnailPhotoLocation, String squarePhotoDimensions,
-                 Timestamp publishDate, String author) {
+                 Date publishDate, String author) {
         this.originalPhotoLocation = originalPhotoLocation;
         this.originalPhotoDimensions = originalPhotoDimensions;
         this.thumbnailPhotoLocation = thumbnailPhotoLocation;
@@ -73,11 +72,11 @@ public class Photo implements Serializable {
         this.squareThumbnailPhotoLocation = squareThumbnailPhotoLocation;
     }
 
-    public Timestamp getPublishDate() {
+    public java.util.Date getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Timestamp publishDate) {
+    public void setPublishDate(java.util.Date publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -111,5 +110,20 @@ public class Photo implements Serializable {
 
     public void setSquarePhotoDimensions(String squarePhotoDimensions) {
         this.squarePhotoDimensions = squarePhotoDimensions;
+    }
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", originalPhotoLocation='" + originalPhotoLocation + '\'' +
+                ", originalPhotoDimensions='" + originalPhotoDimensions + '\'' +
+                ", thumbnailPhotoLocation='" + thumbnailPhotoLocation + '\'' +
+                ", thumbnailPhotoDimensions='" + thumbnailPhotoDimensions + '\'' +
+                ", squareThumbnailPhotoLocation='" + squareThumbnailPhotoLocation + '\'' +
+                ", squarePhotoDimensions='" + squarePhotoDimensions + '\'' +
+                ", publishDate=" + publishDate +
+                ", author='" + author + '\'' +
+                '}';
     }
 }

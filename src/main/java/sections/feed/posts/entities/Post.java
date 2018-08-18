@@ -1,6 +1,7 @@
 package sections.feed.posts.entities;
 
 import utils.files.File;
+import utils.images.Photo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,21 +17,9 @@ public class Post implements Serializable {
 //    private String postExcerpt;
     private String status;
     private Set<File> files;
-    private AttachedAlbum album;
+    private Set<Photo> photos;
 
     public Post() {
-    }
-
-    public Post(Long postId, Long authorId, String authorName, String organizationName, Timestamp publishDate, String postContent, String status, Set<File> files, AttachedAlbum album) {
-        this.postId = postId;
-        this.authorId = authorId;
-        this.authorName = authorName;
-        this.organizationName = organizationName;
-        this.publishDate = publishDate;
-        this.postContent = postContent;
-        this.status = status;
-        this.files = files;
-        this.album = album;
     }
 
     public Long getPostId() {
@@ -106,12 +95,12 @@ public class Post implements Serializable {
 //    }
 
 
-    public AttachedAlbum getAlbum() {
-        return album;
+    public Set<Photo> getPhotos() {
+        return photos;
     }
 
-    public void setAlbum(AttachedAlbum album) {
-        this.album = album;
+    public void setPhotos(Set<Photo> photos) {
+        this.photos = photos;
     }
 
     @Override
@@ -125,7 +114,7 @@ public class Post implements Serializable {
                 ", postContent='" + postContent + '\'' +
                 ", status='" + status + '\'' +
                 ", files=" + files +
-                ", album=" + album +
+                ", photos=" + photos +
                 '}';
     }
 }
