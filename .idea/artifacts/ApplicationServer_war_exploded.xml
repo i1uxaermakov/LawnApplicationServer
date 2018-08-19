@@ -28,6 +28,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.1" />
           <element id="library" level="project" name="Maven: org.imgscalr:imgscalr-lib:4.2" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.6" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-crypto:5.0.7.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

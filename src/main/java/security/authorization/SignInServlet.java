@@ -1,5 +1,6 @@
 package security.authorization;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import security.DAO.UserDAO;
 import utils.HibernateUtil;
 import security.entities.RememberMeCookie;
@@ -10,7 +11,10 @@ import org.hibernate.Transaction;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
@@ -81,21 +85,34 @@ public class SignInServlet extends HttpServlet {
                 response.setStatus(401);
             }
             else {
-                if (userLoginInfo.getPassword().equals(password)) {
+                if (BCrypt.checkpw(password, userLoginInfo.getPassword())) {
+//                    userLoginInfo.getPassword().equals(password)
                     User user = null;
 
                     Transaction transaction = session.beginTransaction();
                     user = session.get(User.class, userLoginInfo.getUserId());
                     transaction.commit();
 
-                    RememberMeCookie rememberMeCookie = new RememberMeCookie(user.getUserId(), httpSession.getId());
-                    Cookie cookie = new Cookie(rememberMeCookieName, httpSession.getId());
-                    cookie.setMaxAge(60*60);
-                    response.addCookie(cookie);
-                    Transaction transactionCookie = session.beginTransaction();
-                    session.persist(rememberMeCookie);
-                    transactionCookie.commit();
+                    if("true".equals(rememberme)) {
+                        String sessionId = request.getSession().getId();
+                        MessageDigest md = null;
+                        try {
+                            md = MessageDigest.getInstance("MD5");
+                        } catch (NoSuchAlgorithmException e) {
+                            e.printStackTrace();
+                        }
+                        md.update(sessionId.getBytes());
+                        byte[] digest = md.digest();
+                        String randomToken = DatatypeConverter.printHexBinary(digest).toUpperCase();
 
+                        RememberMeCookie rememberMeCookie = new RememberMeCookie(user.getUserId(), httpSession.getId());
+                        Cookie cookie = new Cookie(rememberMeCookieName, httpSession.getId());
+                        cookie.setMaxAge(60 * 60);
+                        response.addCookie(cookie);
+                        Transaction transactionCookie = session.beginTransaction();
+                        session.persist(rememberMeCookie);
+                        transactionCookie.commit();
+                    }
                     session.close();
 
                     httpSession.setAttribute("User", user);
