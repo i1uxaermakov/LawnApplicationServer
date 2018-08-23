@@ -97,18 +97,19 @@
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>
         <div class="pswp__scroll-wrap">
-            <div class="pswp__container" style="transform: translate3d(0px, 0px, 0px);">
-                <div class="pswp__item" style="display: block; transform: translate3d(-403px, 0px, 0px);"></div>
-                <div class="pswp__item" style="transform: translate3d(0px, 0px, 0px);"><div class="pswp__zoom-wrap" style="transform: translate3d(0px, 140px, 0px) scale(1);"><img class="pswp__img pswp__img--placeholder" src="imgs/unn.jpg" style="width: 360px; height: 360px; display: none;"><img class="pswp__img" src="imgs/unn.jpg" style="display: block; width: 360px; height: 360px;"></div></div>
-                <div class="pswp__item" style="display: block; transform: translate3d(403px, 0px, 0px);"></div>
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
             </div>
-            <div class="pswp__ui pswp__ui--fit pswp__ui--one-slide pswp__ui--hidden">
+            <div class="pswp__ui pswp__ui--hidden">
                 <div class="pswp__top-bar">
-                    <div class="pswp__counter">1 / 1</div>
+                    <div class="pswp__counter"></div>
                     <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
                     <button class="pswp__button pswp__button--share" title="Share"></button>
                     <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
                     <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
                     <div class="pswp__preloader">
                         <div class="pswp__preloader__icn">
                             <div class="pswp__preloader__cut">
@@ -117,13 +118,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
                     <div class="pswp__share-tooltip"></div>
                 </div>
+
                 <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
                 <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
                 <div class="pswp__caption">
-                    <div class="pswp__caption__center">Image caption 3</div>
+                    <div class="pswp__caption__center"></div>
                 </div>
             </div>
         </div>
@@ -140,7 +144,6 @@
 
     <section class="blocks hw container-fluid " id="homework">
             <%@include file="HomeworkVisualizer.jsp" %>
-        </div>
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -152,7 +155,6 @@
     <script src="/css/main.js" type="text/javascript"></script>
 
     <!-- Core JS file -->
-    <script src="/css/edu.js"></script>
     <script src="/css/photoswipe.min.js"></script>
     <!-- UI JS file -->
     <script src="/css/photoswipe-ui-default.min.js"></script>

@@ -71,7 +71,9 @@ public class HomeworkItemDAO {
         return homeworkItemList;
     }
 
-    public List<HomeworkItem> getHomeworkItemsBySubject(Date lastSavedHWDate, Long subjectId, String purpose) {
+    public List<HomeworkItem> getHomeworkItemsBySubjectAddUp(Date lastSavedHWDate, Long subjectId, String purpose) {
+//        purpose - add_up_to_empty
+//        purpose - add_up_to_smth
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>();
         Transaction transaction = null;
@@ -83,16 +85,19 @@ public class HomeworkItemDAO {
             CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
             Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
 
-            criteriaQuery.where(criteriaBuilder.and(
-                    ("add_up".equals(purpose))?
-                            criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
-                            :criteriaBuilder.lessThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate),
-                    criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId)));
-
-            if("add_down".equals(purpose)) {
-                session.createQuery(criteriaQuery).setMaxResults(10).getResultList();
+            if("add_up_to_empty".equals(purpose)) {
+                criteriaQuery.where(criteriaBuilder.and(
+                        criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId),
+                        criteriaBuilder.lessThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
+                ));
+                //todo sort
+                homeworkItemList = session.createQuery(criteriaQuery).setMaxResults(5).getResultList();
             }
-            else {
+            else if("add_up_to_smth".equals(purpose)){
+                criteriaQuery.where(criteriaBuilder.and(
+                        criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId),
+                        criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
+                ));
                 homeworkItemList = session.createQuery(criteriaQuery).getResultList();
             }
             transaction.commit();
@@ -104,6 +109,37 @@ public class HomeworkItemDAO {
 
         return homeworkItemList;
     }
+
+
+    public List<HomeworkItem> getHomeworkItemsBySubjectAddDown(Date lastSavedHWDate, Long subjectId) {
+        Session session = null;
+        List<HomeworkItem> homeworkItemList = new ArrayList<>();
+        Transaction transaction = null;
+
+        try{
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(HomeworkItem.class);
+            Root<HomeworkItem> homeworkRoot = criteriaQuery.from(HomeworkItem.class);
+
+            criteriaQuery.where(criteriaBuilder.and(
+                    criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId),subjectId),
+                    criteriaBuilder.lessThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate),lastSavedHWDate)
+            ));
+
+            homeworkItemList = session.createQuery(criteriaQuery).setMaxResults(5).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+
+
+        return homeworkItemList;
+    }
+
 
 
     public Long persistHomeworkItem(HomeworkItem homeworkItem) {

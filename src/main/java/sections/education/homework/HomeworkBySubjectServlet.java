@@ -7,6 +7,7 @@ import sections.education.entities.HomeworkItem;
 import utils.HibernateUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,35 +16,45 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@MultipartConfig
 public class HomeworkBySubjectServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         HomeworkItemDAO hwDAO = new HomeworkItemDAO();
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
 
-        String subjectId = req.getParameter("subjectId");
-        if(subjectId == null || !StringUtils.isNumeric(subjectId)) {
+        String subjectId = req.getParameter("sid");
+
+        if(subjectId == null || !(StringUtils.isNumeric(subjectId))) {
             resp.setStatus(400);
             hibSession.close();
             return;
         }
 
+//        todo when no hw
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd yyyy, hh:ss");
         String purpose = req.getParameter("purpose");
-        if("add_down".equals(purpose)) {
+        req.setAttribute("addButton",false);
+        if("add_up".equals(purpose)) {
             String dateString = req.getParameter("date");
             Date dateToCheck = new Date(System.currentTimeMillis());
+            String purposeSuffix = "_to_empty";
             if(dateString != null) {
                 try {
-                    dateToCheck.setTime(simpleDateFormat.parse(dateString).getTime());
+                    dateToCheck = simpleDateFormat.parse(dateString);
+                    purposeSuffix = "_to_smth";
+                    req.setAttribute("addButton",true);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
-            homeworkItemList = hwDAO.getHomeworkItemsBySubject(new java.sql.Date(dateToCheck.getTime()), new Long(subjectId), purpose);
+            System.out.println(dateString);
+            System.out.println(dateToCheck);
+            homeworkItemList = hwDAO.getHomeworkItemsBySubjectAddUp(dateToCheck, new Long(subjectId), purpose+purposeSuffix);
         }
-        else if("add_up".equals(purpose)) {
+        else if("add_down".equals(purpose)) {
             String dateString = req.getParameter("date");
             if(dateString == null) {
                 resp.setStatus(400);
@@ -52,7 +63,8 @@ public class HomeworkBySubjectServlet extends HttpServlet {
             }
 
             try {
-                homeworkItemList = hwDAO.getHomeworkItemsBySubject(new java.sql.Date(simpleDateFormat.parse(dateString).getTime()), new Long(subjectId), purpose);
+                Date dateToCheck = simpleDateFormat.parse(dateString);
+                homeworkItemList = hwDAO.getHomeworkItemsBySubjectAddDown(dateToCheck, new Long(subjectId));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -65,6 +77,7 @@ public class HomeworkBySubjectServlet extends HttpServlet {
 
         Collections.sort(homeworkItemList);
         Collections.reverse(homeworkItemList);
+        req.setAttribute("homeworkItemList", homeworkItemList);
         req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkItemsVisualizer.jsp").include(req, resp);
     }
 }
@@ -78,9 +91,9 @@ public class HomeworkBySubjectServlet extends HttpServlet {
             на предмет
                 есть даты последнего загруженного дз - отдаю дз > присланной даты
                     purpose=add_up
-                нет даты - отдаю дз < нынешней даты
-                    purpose=add_down
-                есть даты давно загруженной даты - отдаю дз < даты
+                нет даты - отдаю дз < нынешней даты, ограничение 10
+                    purpose=add_up
+                есть даты давно загруженной даты - отдаю дз < даты ограничение 10
                     purpose=add_down
 
 */

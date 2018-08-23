@@ -50,7 +50,6 @@ public class HomeworkByWeekDaysServlet extends HttpServlet {
         String firstDayInYearDate = readFileContents("firstDayInYear.txt");
         req.setAttribute("firstDayInYear", firstDayInYearDate);
 
-
         if(req.getParameter("mobile")==null) {
             req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkPageVisualizer.jsp").include(req,resp);
         }

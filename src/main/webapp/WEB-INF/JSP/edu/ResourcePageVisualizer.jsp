@@ -223,7 +223,6 @@
 
 <!-- Core JS file -->
 
-<script src="/css/edu.js"></script>
 <script src="/css/like.js"> </script>
 
 <script src="/css/photoswipe.min.js"></script>

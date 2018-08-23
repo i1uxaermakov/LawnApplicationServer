@@ -228,6 +228,16 @@
         <servlet-name>HW</servlet-name>
         <url-pattern>/edu/hw</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>HWbySubject</servlet-name>
+        <servlet-class>sections.education.homework.HomeworkBySubjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HWbySubject</servlet-name>
+        <url-pattern>/edu/hw/subject</url-pattern>
+    </servlet-mapping>
+    
 
     <servlet>
         <servlet-name>Schedule</servlet-name>

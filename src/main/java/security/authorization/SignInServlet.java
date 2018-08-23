@@ -85,8 +85,8 @@ public class SignInServlet extends HttpServlet {
                 response.setStatus(401);
             }
             else {
-                if (BCrypt.checkpw(password, userLoginInfo.getPassword())) {
-//                    userLoginInfo.getPassword().equals(password)
+                if (userLoginInfo.getPassword().equals(password)) {
+//                    BCrypt.checkpw(password, userLoginInfo.getPassword())
                     User user = null;
 
                     Transaction transaction = session.beginTransaction();

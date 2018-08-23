@@ -26,7 +26,7 @@
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE | MMM dd");
     SimpleDateFormat weekDayFormat = new SimpleDateFormat("EEEE");
-    SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd yyyy, hh:ss");
+    SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd yyyy, HH:ss");
     SimpleDateFormat hwDeadlineDateFormat = new SimpleDateFormat("MMM dd");
 
     Map<Integer, List<Date>> weekDaysCorrelationMap = new HashMap<>();

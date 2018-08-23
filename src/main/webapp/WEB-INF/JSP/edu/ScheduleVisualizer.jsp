@@ -59,8 +59,9 @@
                     <div class="urok <%=(subjectItems.size() != 1)?"centered":""%> u<%=dayLecture.getLectureOrder()%>">
                     <%
                     for(SubjectItem subjectItem: subjectItems) { %>
-                        <div class="subject-item pointer">
-                            <a href="http://localhost:8080/edu/hw?id=<%=subjectItem.getId()%>">
+                        <div class="subject-item pointer" data-toggle="modal" data-target="#myModal<%=subjectItem.getId()%>"
+                             onclick="showHomeworkBySubjectAddUp(this)" sID="<%=subjectItem.getId()%>">
+                            <a>
                                 <div class="ordles"><%=dayLecture.getLectureOrder()%></div>
                                 <div class="content-schedule">
                                     <h2><%=subjectItem.getName()%></h2>
@@ -69,6 +70,8 @@
                                 </div>
                             </a>
                         </div>
+
+
                 <%      j++; cnt++;
                     }
 
@@ -77,6 +80,37 @@
                 </div>
             </div><%
             c.add(Calendar.DATE, 1);
+        }
+
+        for(SubjectItem subjectItem: subjectItemList) {
+            %>
+            <div id="myModal<%=subjectItem.getId()%>" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-md">
+
+                <!-- Modal content-->
+                    <div class="modal-content">
+
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">HW по <%=subjectItem.getName()+", "+subjectItem.getTeacherName()%></h4>
+                        </div>
+
+                        <div class="modal-body row" id="myModal<%=subjectItem.getId() + "body"%>" style="background: #dfead6;
+                            margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+    <%
         }
     %>
     <%--todo своя функция, где будет попап со всеми домашними заданиями по предмету + https--%>
