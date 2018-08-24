@@ -34,6 +34,7 @@ public class SignInServlet extends HttpServlet {
             resp.sendRedirect("/");
         }
         else {
+            resp.setStatus(401);
             req.getRequestDispatcher("/signin.html").include(req, resp);
         }
     }

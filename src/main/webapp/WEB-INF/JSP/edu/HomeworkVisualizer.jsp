@@ -26,7 +26,7 @@
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE | MMM dd");
     SimpleDateFormat weekDayFormat = new SimpleDateFormat("EEEE");
-    SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd yyyy, HH:ss");
+    SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd yyyy, HH:mm");
     SimpleDateFormat hwDeadlineDateFormat = new SimpleDateFormat("MMM dd");
 
     Map<Integer, List<Date>> weekDaysCorrelationMap = new HashMap<>();
@@ -126,25 +126,31 @@
                                                         </div>
                                                     </div>
                                             <%  }
-                                                else {%>
-                                                    <div class="attachedalbum">
-                                                        <%--todo link to photos--%>
-                                                        <a href="album_post_photos.html">
-                                                            <img src="/images/<%=((Photo[])(hwi.getPhotos().toArray()))[0].getSquareThumbnailPhotoLocation()%>" alt="" class="">
-                                                            <span class="aboutAlbum">
-                                                                Attached Photos <br>
-                                                                <span>
-                                                                    <%=size%> photos
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                    </div>
+                                            else {
+                                                List<Photo> photos = new ArrayList<>(hwi.getPhotos());
+                                                Collections.sort(photos);
+                                            %>
+                                    <div class="attachedalbum">
+                                        <%--todo link to photos--%>
+                                        <a href="album_post_photos.html">
+                                            <img src="/images/<%=photos.get(0).getSquareThumbnailPhotoLocation()%>" alt="" class="">
+                                            <span class="aboutAlbum">
+                                                Attached Photos
+                                                <br>
+                                                <span>
+                                                <%=size%> photos
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
                                                 <%
                                                 }
                                             }
 
 
-                                        for(File file: hwi.getFiles()) {%>
+                                                    ArrayList<File> files = new ArrayList<>(hwi.getFiles());
+                                                    Collections.sort(files);
+                                                    for(File file: files) {%>
                                             <div class="uploaded-files-hw">
                                                 <a href="/files/download/<%=file.getSaveName()%>">
                                                     <i class="far fa-file fa-4x"></i>

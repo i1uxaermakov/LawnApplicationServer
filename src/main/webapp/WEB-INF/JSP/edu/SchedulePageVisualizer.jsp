@@ -174,6 +174,11 @@
         <!-- UI JS file -->
         <script src="/css/photoswipe-ui-default.min.js"></script>
         <!--<a href="https://ru.freepik.com/free-vector/_801555.htm">Разработано через Freepik</a>-->
+        <script type="text/javascript">
+            function removeWarn () {
+                $('.warn').remove();
+            }
+        </script>
 
         <%--<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->--%>
         <%--<script src="../css/jquery.min.js"></script>--%>

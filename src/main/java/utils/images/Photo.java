@@ -3,7 +3,7 @@ package utils.images;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Photo implements Serializable {
+public class Photo implements Serializable, Comparable<Photo>{
     private Long id;
     private String originalPhotoLocation;
     private String originalPhotoDimensions;
@@ -125,5 +125,10 @@ public class Photo implements Serializable {
                 ", publishDate=" + publishDate +
                 ", author='" + author + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Photo o) {
+        return this.getPublishDate().compareTo(o.getPublishDate());
     }
 }

@@ -6,6 +6,7 @@ import utils.images.Photo;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class HomeworkItem implements Comparable<HomeworkItem> {
     private Long hw_id;
@@ -18,8 +19,8 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     private String description;
     private Date publishDate;
     private Date deadlineDate;
-    private Set<File> files = new HashSet<>(0);
-    private Set<Photo> photos = new HashSet<>(0);
+    private Set<File> files = new TreeSet<>();
+    private Set<Photo> photos = new TreeSet<>();
 
     public HomeworkItem() {
     }

@@ -249,6 +249,15 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>ResourcesServlet</servlet-name>
+        <servlet-class>sections.education.resources.ResourcesPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResourcesServlet</servlet-name>
+        <url-pattern>/edu/lib</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>EduPageServlet</servlet-name>
         <servlet-class>sections.education.EduPageServlet</servlet-class>
     </servlet>

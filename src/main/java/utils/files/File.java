@@ -3,7 +3,7 @@ package utils.files;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 
-public class File {
+public class File implements Comparable<File>{
     private Long id;
     private String originalName;
     private String saveName;
@@ -69,5 +69,10 @@ public class File {
         final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
         int digitGroups = (int) (Math.log10(this.size)/Math.log10(1024));
         return new DecimalFormat("#,##0.#").format(this.size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+    @Override
+    public int compareTo(File o) {
+        return this.getPublishDate().compareTo(o.getPublishDate());
     }
 }

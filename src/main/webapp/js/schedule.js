@@ -11,7 +11,9 @@ function showHomeworkBySubjectAddUp(element) {
 
     if(firstChild != null) {
         var date = firstChild.getAttribute('lastDate');
-        formData.set('date', date);
+        if(date != null) {
+            formData.set('date', date);
+        }
     }
 
     formData.set("sid", subjID);
@@ -26,10 +28,13 @@ function showHomeworkBySubjectAddUp(element) {
             el.innerHTML = hw + el.innerHTML;
             initPhotoSwipeFromDOM('.my-gallery');
         }
+        else if(request.status===401) {
+            window.location.href = "/signin";
+        }
         else {
             el.innerHTML =
                 '<div class="news" onclick="showHomeworkBySubjectAddUp(parent(this))" style="padding-bottom: 15px; margin-bottom: 10px;">' +
-                    '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px; padding-bottom: 0px; height:auto !important;">' +
+                    '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0; padding-bottom: 0; height:auto !important;">' +
                         '<span >There was a problem downloading new HW. <br> Press here to try again.</span>' +
                     '</div>' +
                 '</div>' +
@@ -59,10 +64,13 @@ function showHomeworkBySubjectAddDown(element) {
             el.innerHTML.append(hw);
             initPhotoSwipeFromDOM('.my-gallery');
         }
+        else if(request.status===401) {
+            window.location.href = "signin";
+        }
         else {
             el.innerHTML.append(
                 '<div class="news" onclick="showHomeworkBySubjectAddDown(parent(this))" style="padding-bottom: 15px; margin-bottom: 10px;">' +
-                    '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px; padding-bottom: 0px; height:auto !important;">' +
+                    '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0; padding-bottom: 0; height:auto !important;">' +
                         '<span >There was a problem downloading HW. <br> Press here to try again.</span>' +
                     '</div>' +
                 '</div>');

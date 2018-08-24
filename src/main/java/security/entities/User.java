@@ -10,13 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User implements Serializable {
-    private Long userId;
-    private String lyceumId;
-    private String password;
+    private Long userId; //internal
+    private String lyceumId; //to login
+    private String password; //bcrypted
     private String firstName;
     private String lastName;
-    private Long groupId;
+    private Long groupId;//??? do i need it
     private String groupName;
+    private Long level;
     private Timestamp lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
     private Set<Organization> organizations = new HashSet<>(0);
@@ -102,5 +103,13 @@ public class User implements Serializable {
 
     public void setOrganizations(Set<Organization> organizations) {
         this.organizations = organizations;
+    }
+
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
     }
 }

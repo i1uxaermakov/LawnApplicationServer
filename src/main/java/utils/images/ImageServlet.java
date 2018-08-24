@@ -25,13 +25,12 @@ public class ImageServlet extends HttpServlet {
         //todo defaultphoto
         //todo loading while img is downloading on front
 
-        System.out.println(requestedPhoto);
         if(requestedPhoto.equals("")) {
         }
         else {
             File image = new File(pathToPhotos + requestedPhoto);
             if(!image.exists() || image.isDirectory() || !image.getAbsolutePath().contains(pathToPhotos)) {
-//                todo 404 or defaultphoto
+                image = new File(pathToPhotos + File.separator + "404.jpg");
             }
 //        System.out.println("/Users/ilya_ermakov/Desktop" +reqPath);
 

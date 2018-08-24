@@ -32,26 +32,19 @@ public class HomeworkBySubjectServlet extends HttpServlet {
             return;
         }
 
-//        todo when no hw
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd yyyy, hh:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd yyyy, HH:ss");
         String purpose = req.getParameter("purpose");
-        req.setAttribute("addButton",false);
+        req.setAttribute("addButton",true);
         if("add_up".equals(purpose)) {
             String dateString = req.getParameter("date");
             Date dateToCheck = new Date(System.currentTimeMillis());
             String purposeSuffix = "_to_empty";
-            if(dateString != null) {
-                try {
-                    dateToCheck = simpleDateFormat.parse(dateString);
+            if(Objects.nonNull(dateString) && StringUtils.isNumeric(dateString)) {
+                    dateToCheck = new Date(new Long(dateString));
                     purposeSuffix = "_to_smth";
-                    req.setAttribute("addButton",true);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                    req.setAttribute("addButton",false);
             }
-            System.out.println(dateString);
-            System.out.println(dateToCheck);
             homeworkItemList = hwDAO.getHomeworkItemsBySubjectAddUp(dateToCheck, new Long(subjectId), purpose+purposeSuffix);
         }
         else if("add_down".equals(purpose)) {
@@ -61,19 +54,15 @@ public class HomeworkBySubjectServlet extends HttpServlet {
                 hibSession.close();
                 return;
             }
-
-            try {
-                Date dateToCheck = simpleDateFormat.parse(dateString);
-                homeworkItemList = hwDAO.getHomeworkItemsBySubjectAddDown(dateToCheck, new Long(subjectId));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            Date dateToCheck = new Date(new Long(dateString));
+            homeworkItemList = hwDAO.getHomeworkItemsBySubjectAddDown(dateToCheck, new Long(subjectId));
         }
         else {
             resp.setStatus(400);
             hibSession.close();
             return;
         }
+
 
         Collections.sort(homeworkItemList);
         Collections.reverse(homeworkItemList);

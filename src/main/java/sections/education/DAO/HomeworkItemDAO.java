@@ -88,7 +88,7 @@ public class HomeworkItemDAO {
             if("add_up_to_empty".equals(purpose)) {
                 criteriaQuery.where(criteriaBuilder.and(
                         criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId),
-                        criteriaBuilder.lessThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
+                        criteriaBuilder.lessThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
                 ));
                 //todo sort
                 homeworkItemList = session.createQuery(criteriaQuery).setMaxResults(5).getResultList();
@@ -96,7 +96,7 @@ public class HomeworkItemDAO {
             else if("add_up_to_smth".equals(purpose)){
                 criteriaQuery.where(criteriaBuilder.and(
                         criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId),
-                        criteriaBuilder.greaterThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
+                        criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
                 ));
                 homeworkItemList = session.createQuery(criteriaQuery).getResultList();
             }

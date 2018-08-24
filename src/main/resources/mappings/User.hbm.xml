@@ -30,6 +30,6 @@
         <property name = "lastLoginDate" column = "last_login_date" type = "timestamp"/>
         <property name = "groupId" column="group_id"/>
         <property name="groupName" column="group_name"/>
-
+        <property name="level" column="level"/>
     </class>
 </hibernate-mapping>
