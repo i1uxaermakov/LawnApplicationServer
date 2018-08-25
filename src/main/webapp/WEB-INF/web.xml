@@ -250,7 +250,7 @@
     
     <servlet>
         <servlet-name>ResourcesServlet</servlet-name>
-        <servlet-class>sections.education.resources.ResourcesPageServlet</servlet-class>
+        <servlet-class>sections.education.resources.ResourcesCategoriesPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ResourcesServlet</servlet-name>

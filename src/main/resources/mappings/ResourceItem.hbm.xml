@@ -8,14 +8,10 @@
         </id>
         <property name="addedBy"/>
         <property name="publishDate"/>
+        <property name="subjectResourceCategoryId"/>
 
         <many-to-one name="file" class="utils.files.File"
                      column="file_id" unique="true" not-null="true"
                      cascade="all" />
-
-        <many-to-one name="subjectCategory" class="sections.education.entities.SubjectResourceCategory"
-                     column="category_id" not-null="true"
-                     cascade="all"/>
-
     </class>
 </hibernate-mapping>

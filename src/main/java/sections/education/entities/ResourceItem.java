@@ -7,16 +7,16 @@ import java.util.Date;
 public class ResourceItem {
     private Long resourceItemId;
     private File file;
-    private SubjectResourceCategory subjectCategory;
+    private Long subjectResourceCategoryId;
     private String addedBy;
     private Date publishDate;
 
     public ResourceItem() {
     }
 
-    public ResourceItem(File file, SubjectResourceCategory subjectCategory, String addedBy, Date publishDate) {
+    public ResourceItem(File file, Long subjectResourceCategoryId, String addedBy, Date publishDate) {
         this.file = file;
-        this.subjectCategory = subjectCategory;
+        this.subjectResourceCategoryId = subjectResourceCategoryId;
         this.addedBy = addedBy;
         this.publishDate = publishDate;
     }
@@ -37,12 +37,12 @@ public class ResourceItem {
         this.file = file;
     }
 
-    public SubjectResourceCategory getSubjectCategory() {
-        return subjectCategory;
+    public Long getSubjectResourceCategoryId() {
+        return subjectResourceCategoryId;
     }
 
-    public void setSubjectCategory(SubjectResourceCategory subjectCategory) {
-        this.subjectCategory = subjectCategory;
+    public void setSubjectResourceCategoryId(Long subjectResourceCategoryId) {
+        this.subjectResourceCategoryId = subjectResourceCategoryId;
     }
 
     public String getAddedBy() {

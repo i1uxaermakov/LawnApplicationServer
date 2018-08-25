@@ -40,9 +40,9 @@ public class HomeworkItemDAO {
             transaction.rollback();
             e.printStackTrace();
         }
-
         return homeworkItemList;
     }
+
 
     public List<HomeworkItem> getHomeworkItemsForHomeworkPageForTeacher(Date todayDate, Long userId) throws SQLException {
         Session session = null;
@@ -67,9 +67,9 @@ public class HomeworkItemDAO {
             transaction.rollback();
             e.printStackTrace();
         }
-
         return homeworkItemList;
     }
+
 
     public List<HomeworkItem> getHomeworkItemsBySubjectAddUp(Date lastSavedHWDate, Long subjectId, String purpose) {
 //        purpose - add_up_to_empty
@@ -90,7 +90,7 @@ public class HomeworkItemDAO {
                         criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId),
                         criteriaBuilder.lessThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
                 ));
-                //todo sort
+                criteriaQuery.orderBy(criteriaBuilder.desc(homeworkRoot.get(HomeworkItem_.publishDate)));
                 homeworkItemList = session.createQuery(criteriaQuery).setMaxResults(5).getResultList();
             }
             else if("add_up_to_smth".equals(purpose)){
@@ -98,6 +98,7 @@ public class HomeworkItemDAO {
                         criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId), subjectId),
                         criteriaBuilder.greaterThan(homeworkRoot.get(HomeworkItem_.publishDate), lastSavedHWDate)
                 ));
+                criteriaQuery.orderBy(criteriaBuilder.desc(homeworkRoot.get(HomeworkItem_.publishDate)));
                 homeworkItemList = session.createQuery(criteriaQuery).getResultList();
             }
             transaction.commit();
@@ -106,7 +107,6 @@ public class HomeworkItemDAO {
             transaction.rollback();
             e.printStackTrace();
         }
-
         return homeworkItemList;
     }
 
@@ -125,8 +125,9 @@ public class HomeworkItemDAO {
 
             criteriaQuery.where(criteriaBuilder.and(
                     criteriaBuilder.equal(homeworkRoot.get(HomeworkItem_.subjectId),subjectId),
-                    criteriaBuilder.lessThanOrEqualTo(homeworkRoot.get(HomeworkItem_.publishDate),lastSavedHWDate)
+                    criteriaBuilder.lessThan(homeworkRoot.get(HomeworkItem_.publishDate),lastSavedHWDate)
             ));
+            criteriaQuery.orderBy(criteriaBuilder.desc(homeworkRoot.get(HomeworkItem_.publishDate)));
 
             homeworkItemList = session.createQuery(criteriaQuery).setMaxResults(5).getResultList();
             transaction.commit();
@@ -135,11 +136,8 @@ public class HomeworkItemDAO {
             transaction.rollback();
             e.printStackTrace();
         }
-
-
         return homeworkItemList;
     }
-
 
 
     public Long persistHomeworkItem(HomeworkItem homeworkItem) {
@@ -160,6 +158,7 @@ public class HomeworkItemDAO {
         }
         return homeworkItemId;
     }
+
 
     public List<HomeworkItem> getHomeworkItemsForAddingFilesOrPhotos(Long[] hwIDs) {
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
@@ -186,7 +185,6 @@ public class HomeworkItemDAO {
             transaction.rollback();
             e.printStackTrace();
         }
-
         return homeworkItemList;
     }
 }

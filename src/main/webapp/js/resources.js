@@ -23,22 +23,22 @@ function getResourceItems(element) {
 
     request.onload = function () {
         if(request.status===200) {
-            var hw = request.responseText;
-            console.log(hw);
-            el.innerHTML = hw + el.innerHTML;
-            initPhotoSwipeFromDOM('.my-gallery');
+            var files = request.responseText;
+            console.log(files);
+            whereToPut.innerHTML = files + whereToPut.innerHTML;
+            // initPhotoSwipeFromDOM('.my-gallery');
         }
         else if(request.status===401) {
             window.location.href = "/signin";
         }
         else {
-            el.innerHTML =
-                '<div class="news" onclick="showHomeworkBySubjectAddUp(parent(this))" style="padding-bottom: 15px; margin-bottom: 10px;">' +
-                '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0; padding-bottom: 0; height:auto !important;">' +
-                '<span >There was a problem downloading new HW. <br> Press here to try again.</span>' +
+            whereToPut.innerHTML =
+                '<div class="news" onclick="getResourceItems($element)" style="padding-bottom: 15px; margin-bottom: 10px;">' +
+                    '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0; padding-bottom: 0; height:auto !important;">' +
+                        '<span >There was a problem downloading resource files. <br> Press here to try again.</span>' +
+                    '</div>' +
                 '</div>' +
-                '</div>' +
-                el.innerHTML;
+                whereToPut.innerHTML;
         }
     };
 

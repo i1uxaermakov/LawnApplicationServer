@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.*;
 
 @MultipartConfig
-public class ResourcesPageServlet extends HttpServlet {
+public class ResourcesCategoriesPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
@@ -46,10 +46,10 @@ public class ResourcesPageServlet extends HttpServlet {
         req.setAttribute("lvl", level);
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesVisualizer.jsp").include(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesPageVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesPageVisualizer.jsp").include(req,resp);
         }
 
     }

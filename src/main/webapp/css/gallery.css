@@ -1,8 +1,8 @@
 .my-gallery {
   width: 100%;
   float: left;
-  padding: 12px;	
-  padding-bottom: 0;
+  padding: 12px;
+  padding-top: 7px;
   display: flex;
   justify-content: center;
 }

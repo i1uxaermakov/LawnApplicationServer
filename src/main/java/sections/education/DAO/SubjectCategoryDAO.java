@@ -31,6 +31,7 @@ public class SubjectCategoryDAO {
             Root<SubjectResourceCategory> subjectCategoryRoot = criteriaQuery.from(SubjectResourceCategory.class);
 
             criteriaQuery.where(criteriaBuilder.equal(subjectCategoryRoot.get(SubjectResourceCategory_.course),level));
+            criteriaQuery.orderBy(criteriaBuilder.desc(subjectCategoryRoot.get(SubjectResourceCategory_.creationDate)));
 
             categories = hibSession.createQuery(criteriaQuery).getResultList();
             transaction.commit();
@@ -58,6 +59,7 @@ public class SubjectCategoryDAO {
             criteriaQuery.where(criteriaBuilder.and(
                     criteriaBuilder.equal(subjectCategoryRoot.get(SubjectResourceCategory_.course),level),
                     criteriaBuilder.greaterThan(subjectCategoryRoot.get(SubjectResourceCategory_.creationDate),lastSavedDate)));
+            criteriaQuery.orderBy(criteriaBuilder.desc(subjectCategoryRoot.get(SubjectResourceCategory_.creationDate)));
 
             categories = hibSession.createQuery(criteriaQuery).getResultList();
             transaction.commit();

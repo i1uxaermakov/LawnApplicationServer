@@ -32,8 +32,6 @@ public class HomeworkBySubjectServlet extends HttpServlet {
             return;
         }
 
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd yyyy, HH:ss");
         String purpose = req.getParameter("purpose");
         req.setAttribute("addButton",true);
         if("add_up".equals(purpose)) {
@@ -64,8 +62,8 @@ public class HomeworkBySubjectServlet extends HttpServlet {
         }
 
 
-        Collections.sort(homeworkItemList);
-        Collections.reverse(homeworkItemList);
+        //Collections.sort(homeworkItemList);
+//        Collections.reverse(homeworkItemList);
         req.setAttribute("homeworkItemList", homeworkItemList);
         req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkItemsVisualizer.jsp").include(req, resp);
     }

@@ -4,7 +4,6 @@
 <%@ page import="utils.images.Photo" %>
 <%@ page import="utils.files.File" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.Collections" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,13 +91,15 @@
     <%
         }
         if(addButton && homeworkItemList.size()==5) {%>
-            <div class="news" style="padding-bottom: 15px; margin-bottom: 10px;" onclick="showHomeworkBySubjectAddDown(this)"
+        <a>
+            <div class="news" style="padding-bottom: 15px; margin-bottom: 10px;" onclick="showHomeworkBySubjectAddDown(this)" sID="<%=homeworkItemList.get(0).getSubjectId()%>"
                  lastDate="<%=homeworkItemList.get(homeworkItemList.size()-1).getPublishDate().getTime()%>">
-                <div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px;
-                                    padding-bottom: 0px; height:auto !important;">
-                    <span>Press here to download old HW.</span>
-                </div>
+                    <div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px;
+                                        padding-bottom: 0px; height:auto !important;">
+                        <span>Press here to download older HW.</span>
+                    </div>
             </div>
+        </a>
         <%}
     }
     else if(addButton){%>

@@ -11,6 +11,7 @@ import utils.HibernateUtil;
 
 import javax.persistence.criteria.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
@@ -18,7 +19,7 @@ public class UserDAO {
 
     public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-        List<UserLoginInfo> userLoginInfoList = null;
+        List<UserLoginInfo> userLoginInfoList = new ArrayList<>(0);
         Transaction transaction = session.beginTransaction();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
