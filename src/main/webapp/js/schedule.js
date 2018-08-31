@@ -20,6 +20,7 @@ function showHomeworkBySubjectAddUp(element) {
     request.open("POST", 'http://localhost:8080/edu/hw/subject', true);
     request.send(formData);
 
+    //todo xml look functions
     request.onload = function () {
         if(request.status===200) {
             var hw = request.responseText;
@@ -31,7 +32,7 @@ function showHomeworkBySubjectAddUp(element) {
         }
         else {
             el.innerHTML =
-                '<div class="news" onclick="showHomeworkBySubjectAddUp(this.parentElement)" style="padding-bottom: 15px; margin-bottom: 10px;">' +
+                '<div class="news warn" onclick="showHomeworkBySubjectAddUp(this.parentElement)" style="padding-bottom: 15px; margin-bottom: 10px;">' +
                     '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0; padding-bottom: 0; height:auto !important;">' +
                         '<span >There was a problem downloading new HW. <br> Press here to try again.</span>' +
                     '</div>' +
@@ -39,6 +40,7 @@ function showHomeworkBySubjectAddUp(element) {
             el.innerHTML;
         }
     };
+    // request.
 }
 
 function showHomeworkBySubjectAddDown(element) {
@@ -68,7 +70,9 @@ function showHomeworkBySubjectAddDown(element) {
         }
         else {
             el.innerHTML = el.innerHTML +
-                '<div class="news" onclick="showHomeworkBySubjectAddDown(this)" style="padding-bottom: 15px; margin-bottom: 10px;">' +
+                '<div class="news warn" onclick="showHomeworkBySubjectAddDown(this)" ' +
+                    'style="padding-bottom: 15px; margin-bottom: 10px;" ' +
+                    'sID="'+ subjID +'" lastDate="'+lastDate+'">' +
                     '<div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0; padding-bottom: 0; height:auto !important;">' +
                         '<span >There was a problem downloading older HW. <br> Press here to try again.</span>' +
                     '</div>' +

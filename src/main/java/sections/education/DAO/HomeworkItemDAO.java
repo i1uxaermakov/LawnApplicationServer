@@ -150,7 +150,6 @@ public class HomeworkItemDAO {
             transaction = session.beginTransaction();
             homeworkItemId = (Long) session.save(homeworkItem);
             transaction.commit();
-            System.out.println("beach");
         }
         catch (HibernateException e) {
             transaction.rollback();

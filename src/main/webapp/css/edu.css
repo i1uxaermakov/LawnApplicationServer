@@ -331,7 +331,11 @@ h1 {
 }
 #resources .uploaded-files-hw{
     box-shadow: none;
-    margin-bottom: 0;
+    margin-bottom: 0!important;
+    background-color: white;
+    padding: 5px;    background-color: white;
+    padding: 5px;
+    margin-top: 2px;
 }
 #resources .news{
     padding-top: 0;

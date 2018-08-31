@@ -112,4 +112,8 @@ public class User implements Serializable {
     public void setLevel(Long level) {
         this.level = level;
     }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
 }

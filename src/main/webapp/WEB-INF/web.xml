@@ -256,7 +256,27 @@
         <servlet-name>ResourcesServlet</servlet-name>
         <url-pattern>/edu/lib</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>ResourcesFilesServlet</servlet-name>
+        <servlet-class>sections.education.resources.ResourcesFilesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResourcesFilesServlet</servlet-name>
+        <url-pattern>/edu/lib/files</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddResourceItems</servlet-name>
+        <servlet-class>sections.education.resources.AddResourceItemServlet</servlet-class>
+        <init-param>
+            <param-name>pathSuffixForResourceFiles</param-name>
+            <param-value>res</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddResourceItems</servlet-name>
+        <url-pattern>/edu/lib/add</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>EduPageServlet</servlet-name>
         <servlet-class>sections.education.EduPageServlet</servlet-class>

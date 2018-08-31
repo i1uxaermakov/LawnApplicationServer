@@ -34,10 +34,12 @@ public class ResourcesFilesServlet extends HttpServlet {
         List<ResourceItem> resourceItemList = new ArrayList<>(0);
         String purpose = req.getParameter("purpose");
         req.setAttribute("addButton",true);
+
         if("add_up".equals(purpose)) {
             String dateString = req.getParameter("date");
             Date dateToCheck = new Date(System.currentTimeMillis());
             String purposeSuffix = "_to_empty";
+
             if(Objects.nonNull(dateString) && StringUtils.isNumeric(dateString)) {
                 dateToCheck = new Date(new Long(dateString));
                 purposeSuffix = "_to_smth";
@@ -63,6 +65,6 @@ public class ResourcesFilesServlet extends HttpServlet {
         hibSession.close();
 
         req.setAttribute("resourceItemList", resourceItemList);
-        req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkItemsVisualizer.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesFilesVisualizer.jsp").include(req, resp);
     }
 }

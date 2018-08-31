@@ -34,10 +34,10 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
         List<SubjectResourceCategory> categoryList = new ArrayList<>(0);
         String lastSavedDate = req.getParameter("date");
         if(Objects.isNull(lastSavedDate) || !StringUtils.isNumeric(lastSavedDate)) {
-            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevelAndDate(level, new Date(new Long(lastSavedDate)));
+            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevel(level);
         }
         else {
-            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevel(level);
+            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevelAndDate(level, new Date(new Long(lastSavedDate)));
         }
 
         hibSession.close();
@@ -46,16 +46,16 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
         req.setAttribute("lvl", level);
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesPageVisualizer.jsp").include(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesPageVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesVisualizer.jsp").include(req,resp);
         }
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        doGet(req, resp);
     }
 }

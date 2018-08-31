@@ -35,8 +35,8 @@ var addItem  = function(e){
 
 var iscustomcheck = function(e){
  if($(e).find(":selected").text()=="Custom Date"){
- 	$(e).attr("disabled","disabled")
- 	$(e).parent().find("input").removeAttr("disabled")
+ 	$(e).attr("disabled","disabled");
+ 	$(e).parent().find("input").removeAttr("disabled");
  }
 }
 
@@ -85,13 +85,24 @@ function previewFiles() {
                             '<a href="#">' +
                                 '<i class="far fa-file fa-4x"></i>' +
                                 '<span class="about-hw-file">' +
-                                    'Title: '+ file.name.substring(0,25) + isLongName +
-                                    '<br>Size: ' + file.size +
+                                    'Title: '+ file.name +
+                                    '<br>Size: ' + getReadableFileSizeString(file.size) +
                                     '<br>' +
                                 '</span>' +
                             '</a>' +
                         '</div>';
         previewFiles.innerHTML = previewFiles.innerHTML + (fileHTML);
+    }
+
+    function getReadableFileSizeString(fileSizeInBytes) {
+        var i = -1;
+        var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+        do {
+            fileSizeInBytes = fileSizeInBytes / 1024;
+            i++;
+        } while (fileSizeInBytes > 1024);
+
+        return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
     }
 
     document.getElementById("previewFiles").innerHTML = "";

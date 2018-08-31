@@ -12,6 +12,17 @@
 
         <many-to-one name="file" class="utils.files.File"
                      column="file_id" unique="true" not-null="true"
-                     cascade="all" />
+                     cascade="all" lazy="false"/>
     </class>
 </hibernate-mapping>
+
+
+
+<!--
+    private Long resourceItemId;
+    private File file;
+    private Long subjectResourceCategoryId;
+    private String addedBy;
+    private Date publishDate;
+
+-->

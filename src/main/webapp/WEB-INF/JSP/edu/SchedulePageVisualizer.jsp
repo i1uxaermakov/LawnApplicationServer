@@ -147,7 +147,7 @@
 
         <section class="tabsection container">
             <ul class="nav nav-tabs">
-                <li class="active first"><a   href="edu_schedule.html">Schedule</a></li>
+                <li class="active first"><a   href="/edu/sc">Schedule</a></li>
                 <li><a href="/edu/hw">Homework</a></li>
                 <li><a href="/edu/lib">Recources</a></li>
             </ul>
@@ -160,19 +160,19 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="/css/jquery.min.js"></script>
-        <script src="/css/swiper.min.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/swiper.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/css/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- <script src="slick/slick.min.js"></script>    -->
-        <script src="/css/main.js" type="text/javascript"></script>
+        <script src="/js/main.js" type="text/javascript"></script>
 
         <!-- Core JS file -->
-        <script src="/css/photoswipe.min.js"></script>
+        <script src="/js/photoswipe.min.js"></script>
         <script src="/js/schedule.js"></script>
 
         <!-- UI JS file -->
-        <script src="/css/photoswipe-ui-default.min.js"></script>
+        <script src="/js/photoswipe-ui-default.min.js"></script>
         <!--<a href="https://ru.freepik.com/free-vector/_801555.htm">Разработано через Freepik</a>-->
         <script type="text/javascript">
             function removeWarn () {

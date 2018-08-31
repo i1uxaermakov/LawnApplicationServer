@@ -47,7 +47,6 @@ public class File implements Comparable<File>{
         this.size = size;
     }
 
-
     public String getAuthor() {
         return author;
     }
@@ -74,5 +73,17 @@ public class File implements Comparable<File>{
     @Override
     public int compareTo(File o) {
         return this.getPublishDate().compareTo(o.getPublishDate());
+    }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", originalName='" + originalName + '\'' +
+                ", saveName='" + saveName + '\'' +
+                ", size=" + size +
+                ", author='" + author + '\'' +
+                ", publishDate=" + publishDate +
+                '}';
     }
 }

@@ -102,14 +102,13 @@
 
     <section class="tabsection container">
         <ul class="nav nav-tabs">
-            <li class=" first"><a  href="edu_schedule.html">Schedule</a></li>
-            <li><a href="edu_homework.html">Homework</a></li>
-            <li class="active"><a href="edu_resources.html">Recources</a></li>
+            <li class="first"><a   href="/edu/sc">Schedule</a></li>
+            <li><a href="/edu/hw">Homework</a></li>
+            <li class="active"><a href="/edu/lib">Recources</a></li>
         </ul>
     </section>
-
     <%
-        Long lvl = new Long((String)request.getAttribute("lvl"));
+        Long lvl = (Long) request.getAttribute("lvl");
     %>
 
     <section class="blocks container-fluid" id="resources">
@@ -120,9 +119,10 @@
                         <span class="caret"></span></button>
 
                     <ul class="dropdown-menu nav nav-tabs">
-                        <li class="<%=(lvl.equals(1))?"active":""%>"><a data-toggle="tab" href="/edu/lib?lvl=1">Level 1</a></li>
-                        <li class="<%=(lvl.equals(2))?"active":""%>"><a data-toggle="tab" href="/edu/lib?lvl=1">Level 2</a></li>
-                        <li class="<%=(lvl.equals(3))?"active":""%>"><a data-toggle="tab" href="/edu/lib?lvl=1">Level 3</a></li>
+                        <li class="<%=(lvl.equals(1))?"active":""%>"><a href="/edu/lib?lvl=1">Level 1</a></li>
+                        <li class="<%=(lvl.equals(2))?"active":""%>"><a href="/edu/lib?lvl=2">Level 2</a></li>
+                        <li class="<%=(lvl.equals(3))?"active":""%>"><a href="/edu/lib?lvl=3">Level 3</a></li>
+                        <%-- data-toggle="tab" a--%>
                     </ul>
 
                 </div>
@@ -131,65 +131,7 @@
 
             <div class="tab-content" >
                 <div class="collapse in buttoncol fade tab-pane active in" id="levelfirst">
-                    <a class="btn btn-primary btn-lg btn-block accord1" href="#history"  role="button" data-toggle="modal" data-target="#exampleModalLong">History</a>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" id="exampleModalLongTitle">Resources</h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="uploaded-files-hw">
-                                        <a href="#"><i class="far fa-file-word fa-4x"></i>
-                                            <span class="about-hw-file">Title: Человек и Общество.
-                                            <br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span>
-                                            <span class="filefav"><i class="far fa-star"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="uploaded-files-hw">
-                                        <a href="#"><i class="far fa-file-word fa-4x"></i>
-                                            <span class="about-hw-file">Title: Человек и Общество.
-                                            <br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>
-                                    </div>
-                                    <div class="uploaded-files-hw">
-                                        <a href="#"><i class="far fa-file-word fa-4x"></i>
-                                            <span class="about-hw-file">Title: Человек и Общество.
-                                            <br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>
-                                    </div>
-                                    <div class="uploaded-files-hw">
-                                        <a href="#"><i class="far fa-file-word fa-4x"></i>
-                                            <span class="about-hw-file">Title: Человек и Общество.
-                                            <br>Size: 1Mb<br>Uploaded: 20 марта 2018 21:09 </span></a>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#english" role="button">English</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Algebra</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Geometry</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Chemistry</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Biology</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Physics</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Law</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">IT</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Uzbek</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Russian</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Native Language &#40;RUG&#41;</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Native Language &#40;UZG&#41;</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Literature</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">НДП</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Religion</a>
-                    <a class="btn btn-primary btn-lg btn-block accord1"  href="#maths" role="button">Aesthetics</a>
+                    <%@include file="ResourcesCategoriesVisualizer.jsp" %>
                 </div>
 
             </div>
@@ -199,21 +141,27 @@
     <!-- foooter -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/css/jquery.min.js"></script>
-    <script src="/css/swiper.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/swiper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/css/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- <script src="slick/slick.min.js"></script>    -->
-    <script src="/css/main.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
 
+    <script src="/js/resources.js" type="text/javascript"></script>
     <!-- Core JS file -->
 
-    <script src="/css/like.js"> </script>
+    <script src="/js/like.js"> </script>
 
-    <script src="/css/photoswipe.min.js"></script>
+    <script src="/js/photoswipe.min.js"></script>
 
     <!-- UI JS file -->
-    <script src="/css/photoswipe-ui-default.min.js"></script>
+    <script src="/js/photoswipe-ui-default.min.js"></script>
+    <script type="text/javascript">
+        function removeWarn () {
+            $('.warn').remove();
+        }
+    </script>
     <!--<a href="https://ru.freepik.com/free-vector/_801555.htm">Разработано через Freepik</a>-->
     </body>
 

@@ -9,8 +9,14 @@
     List<HomeworkItem> homeworkItemList = (List<HomeworkItem>) request.getAttribute("homeworkItemList");
     if(homeworkItemList==null || homeworkItemList.size() == 0) {
         %>
-            No homework!
+            <div class="news warn" style="padding-bottom: 15px; margin-bottom: 10px;">
+                <div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px;
+                                                        padding-bottom: 0px; height:auto !important;">
+                    <span>Fortunately, there is no homework!</span>
+                </div>
+            </div>
         <%
+        return;
     }
 
     String fDOY = (String) request.getAttribute("firstDayInYear");

@@ -71,4 +71,27 @@ public class SubjectCategoryDAO {
         }
         return categories;
     }
+
+    public static List<SubjectResourceCategory> getAllSubjectCategories() {
+        List<SubjectResourceCategory> list = new ArrayList<>(0);
+        Session hibSession = null;
+        Transaction transaction = null;
+
+        try {
+            hibSession = sessionFactory.getCurrentSession();
+            transaction = hibSession.beginTransaction();
+            CriteriaBuilder criteriaBuilder = hibSession.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(SubjectResourceCategory.class);
+            Root<SubjectResourceCategory> subjectCategoryRoot = criteriaQuery.from(SubjectResourceCategory.class);
+
+            list = hibSession.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
