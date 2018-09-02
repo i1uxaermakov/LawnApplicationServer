@@ -1,12 +1,13 @@
 package sections.education.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 public class SubjectResourceCategory implements Comparable<SubjectResourceCategory>{
     private Long categoryId;
-    private Date creationDate;
+    private Timestamp creationDate;
     private Long course;
     private String categoryName;
     private Set<ResourceItem> resourceItems = new HashSet<>(0);
@@ -14,11 +15,8 @@ public class SubjectResourceCategory implements Comparable<SubjectResourceCatego
     public SubjectResourceCategory() {
     }
 
-    public SubjectResourceCategory(Date creationDate, Long course, String categoryName, Set<ResourceItem> resourceItems) {
+    public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
-        this.course = course;
-        this.categoryName = categoryName;
-        this.resourceItems = resourceItems;
     }
 
     public Long getCategoryId() {
@@ -29,12 +27,8 @@ public class SubjectResourceCategory implements Comparable<SubjectResourceCatego
         this.categoryId = categoryId;
     }
 
-    public Date getCreationDate() {
+    public Timestamp getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 
     public Long getCourse() {

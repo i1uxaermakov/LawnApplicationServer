@@ -4,6 +4,7 @@
 <%@ page import="utils.images.Photo" %>
 <%@ page import="utils.files.File" %>
 <%@ page import="java.text.ParseException" %>
+<%@ page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<HomeworkItem> homeworkItemList = (List<HomeworkItem>) request.getAttribute("homeworkItemList");
@@ -35,12 +36,12 @@
     SimpleDateFormat hwUploadDateFormat = new SimpleDateFormat("MMM dd yyyy, HH:mm");
     SimpleDateFormat hwDeadlineDateFormat = new SimpleDateFormat("MMM dd");
 
-    Map<Integer, List<Date>> weekDaysCorrelationMap = new HashMap<>();
-    Map<Date, List<HomeworkItem>> specificDateHomeworkItemsCorrelation = new HashMap<>();
+    Map<Integer, List<Timestamp>> weekDaysCorrelationMap = new HashMap<>();
+    Map<Timestamp, List<HomeworkItem>> specificDateHomeworkItemsCorrelation = new HashMap<>();
     Collections.sort(homeworkItemList);
 
     for(HomeworkItem homeworkItem: homeworkItemList) {
-        Date deadlineDate = homeworkItem.getDeadlineDate();
+        Timestamp deadlineDate = homeworkItem.getDeadlineDate();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(deadlineDate);
 
@@ -51,7 +52,7 @@
             }
         }
         else {
-            ArrayList<Date> dateList = new ArrayList<>(0);
+            ArrayList<Timestamp> dateList = new ArrayList<>(0);
             dateList.add(deadlineDate);
             weekDaysCorrelationMap.put(key_WeekNumber, dateList);
         }
@@ -69,7 +70,7 @@
     boolean isExpandedFirst = true;
     Calendar calendarForWeekNUmberSection = Calendar.getInstance();
     for(Integer weekNumber: weekDaysCorrelationMap.keySet()) {
-        List<Date> weeksDates = weekDaysCorrelationMap.get(weekNumber);
+        List<Timestamp> weeksDates = weekDaysCorrelationMap.get(weekNumber);
         calendarForWeekNUmberSection.setTime(weeksDates.get(0));
         calendarForWeekNUmberSection.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         String beginningOfWeek = hwDeadlineDateFormat.format(calendarForWeekNUmberSection.getTime());
@@ -86,7 +87,7 @@
 
             <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 padd">
             <%
-                for(Date deadlineDate: weeksDates) {%>
+                for(Timestamp deadlineDate: weeksDates) {%>
                     <div>
                         <a class="btn btn-primary btn-lg btn-block accord accord1" data-toggle="collapse" href="#<%=weekDayFormat.format(deadlineDate)+"OfWeek"+weekNumber%>"
                            role="button" aria-expanded="<%=isExpandedFirst%>"> <%=dateFormat.format(deadlineDate)%>

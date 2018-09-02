@@ -46,9 +46,10 @@ function getResourceItemsByCategoryIdAddUp(element) {
 
 function getResourceItemsByCategoryIdAddDown(element) {
     var catID = $(element).attr("cID");
-    var id = $(element).attr('id') + "ModalBody";
-    var el = document.getElementById(id);
-    var lastDate = $(element).attr('lastDate')
+    var modalBody = element.parentElement;
+    var lastDate = $(element).attr('lastDate');
+
+    console.log("parent\n" + modalBody.innerHTML);
 
     var formData = new FormData();
     var request = new XMLHttpRequest();
@@ -59,18 +60,29 @@ function getResourceItemsByCategoryIdAddDown(element) {
     request.open("POST",'http://localhost:8080/edu/lib/files', true);
     request.send(formData);
 
+    $.ajax({
+        url:  'http://localhost:8080/edu/lib/files',
+        type: 'post',
+        contentType: 'multipart/form-data',
+        data: jQuery.param({date: lastDate, cid: catID}),
+        success: function (response) {
+            console.log("responseeee" + response);
+        }
+    });
+
     element.remove();
     request.onload = function () {
         if(request.status===200) {
             var files = request.responseText;
-            el.innerHTML = el.innerHTML + files;
+            modalBody.innerHTML = modalBody.innerHTML + files;
             // initPhotoSwipeFromDOM('.my-gallery');
+            console.log("answer" + request.responseText);
         }
         else if(request.status===401) {
             window.location.href = "signin";
         }
         else {
-            el.innerHTML = el.innerHTML +
+            modalBody = modalBody.innerHTML +
                 '<div class="news" onclick="showHomeworkBySubjectAddDown(this)" ' +
                     'style="padding-bottom: 15px; margin-bottom: 10px;" ' +
                     'cID="'+ catID +'" lastDate="'+lastDate+'">' +

@@ -7,7 +7,9 @@
             <generator class="native"/>
         </id>
         <property name="categoryName"/>
-        <property name="creationDate"/>
+        <property name="creationDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="creationDate"/>
+        </property>
         <property name="course"/>
 
         <set name="resourceItems" table="Categories_Resources" lazy="false" fetch="join" cascade="all">

@@ -15,8 +15,12 @@
         <property name="description" length="15000">
             <column name="description" sql-type="text"></column>
         </property>
-        <property name="publishDate"/>
-        <property name="deadlineDate"/>
+        <property name="publishDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="publishDate"/>
+        </property>
+        <property name="deadlineDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="deadlineDate"/>
+        </property>
 
         <!--<many-to-one name="hwAlbum" class="sections.feed.posts.entities.AttachedAlbum"-->
                      <!--column="hwAlbum_id" cascade="all" lazy="false"/>-->

@@ -3,8 +3,7 @@ package sections.education.entities;
 import utils.files.File;
 import utils.images.Photo;
 
-import java.util.Date;
-import java.util.HashSet;
+import java.sql.Timestamp;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,8 +16,8 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     private String subjectName;
     private String teacherName;
     private String description;
-    private Date publishDate;
-    private Date deadlineDate;
+    private Timestamp publishDate;
+    private Timestamp deadlineDate;
     private Set<File> files = new TreeSet<>();
     private Set<Photo> photos = new TreeSet<>();
 
@@ -81,19 +80,19 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         this.description = description;
     }
 
-    public Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 
-    public Date getDeadlineDate() {
+    public Timestamp getDeadlineDate() {
         return deadlineDate;
     }
 
-    public void setDeadlineDate(Date deadlineDate) {
+    public void setDeadlineDate(Timestamp deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
 

@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,11 +36,11 @@ public class ResourcesFilesServlet extends HttpServlet {
 
         if("add_up".equals(purpose)) {
             String dateString = req.getParameter("date");
-            Date dateToCheck = new Date(System.currentTimeMillis());
+            Timestamp dateToCheck = new Timestamp(System.currentTimeMillis());
             String purposeSuffix = "_to_empty";
 
             if(Objects.nonNull(dateString) && StringUtils.isNumeric(dateString)) {
-                dateToCheck = new Date(new Long(dateString));
+                dateToCheck = new Timestamp(new Long(dateString));
                 purposeSuffix = "_to_smth";
                 req.setAttribute("addButton",false);
             }
@@ -54,7 +53,7 @@ public class ResourcesFilesServlet extends HttpServlet {
                 hibSession.close();
                 return;
             }
-            Date dateToCheck = new Date(new Long(dateString));
+            Timestamp dateToCheck = new Timestamp(new Long(dateString));
             resourceItemList = ResourceItemDAO.getResourceItemsByCategoryAddDown(dateToCheck, new Long(categoryId));
         }
         else {

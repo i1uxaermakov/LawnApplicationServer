@@ -274,7 +274,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AddResourceItems</servlet-name>
-        <url-pattern>/edu/lib/add</url-pattern>
+        <url-pattern>/edu/lib/add/files</url-pattern>
     </servlet-mapping>
 
     <servlet>

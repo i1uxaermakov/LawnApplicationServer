@@ -7,7 +7,10 @@
             <generator class="native"/>
         </id>
         <property name="addedBy"/>
-        <property name="publishDate"/>
+        <property name="publishDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="publishDate"/>
+            <!--<type name="utils.converters.LongToDateConverter"/>-->
+        </property>
         <property name="subjectResourceCategoryId"/>
 
         <many-to-one name="file" class="utils.files.File"

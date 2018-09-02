@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @MultipartConfig
@@ -86,20 +86,20 @@ public class AddHomeworkServlet extends HttpServlet {
                 isCustom = true;
             }
             try {
-                Date deadlineDate = null;
+                Timestamp deadlineDate = null;
                 Calendar calendar = Calendar.getInstance();
                 if(isCustom) {
-                    deadlineDate = newSimpleDateFormat.parse(selectDate);
+                    deadlineDate = new Timestamp(newSimpleDateFormat.parse(selectDate).getTime());
                 }
                 else {
-                    deadlineDate = simpleDateFormat.parse(selectDate);
+                    deadlineDate = new Timestamp(simpleDateFormat.parse(selectDate).getTime());
                 }
                 if(deadlineDate != null) {
                     calendar.setTime(deadlineDate);
                     calendar.set(Calendar.YEAR, 2018);
 
                     Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(new Date(System.currentTimeMillis()));
+                    calendar1.setTime(new Timestamp(System.currentTimeMillis()));
                     while(calendar.get(Calendar.YEAR) < calendar1.get(Calendar.YEAR)) {
                         calendar.add(Calendar.YEAR,1);
                     }
@@ -108,7 +108,7 @@ public class AddHomeworkServlet extends HttpServlet {
                             calendar.add(Calendar.YEAR, 1);
                         }
                     }
-                    homeworkItem.setDeadlineDate(calendar.getTime());
+                    homeworkItem.setDeadlineDate(new Timestamp(calendar.getTime().getTime()));
                 }
                 else {
                     //todo bad response
@@ -131,7 +131,7 @@ public class AddHomeworkServlet extends HttpServlet {
             homeworkItem.setTeacherName(subjectItem.getTeacherName());
             homeworkItem.setTeacherId(subjectItem.getTeacherId());
             homeworkItem.setDescription(hw_text + "\n" + "Added by: " + user.getFirstName() + " " + user.getLastName());
-            homeworkItem.setPublishDate(new java.sql.Date(System.currentTimeMillis()));
+            homeworkItem.setPublishDate(new Timestamp(System.currentTimeMillis()));
             homeworkItemList.add(homeworkItem);
         }
 

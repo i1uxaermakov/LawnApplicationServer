@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +32,7 @@ public class HomeworkByWeekDaysServlet extends HttpServlet {
 
         try {
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            Date todayWithZeroTime = new Date((formatter.parse(formatter.format(new Date(System.currentTimeMillis())))).getTime());
+            Timestamp todayWithZeroTime = new Timestamp((formatter.parse(formatter.format(new Timestamp(System.currentTimeMillis())))).getTime());
             if(user.getPrivileges().contains("teacher")) {
                 homeworkItemList = hwDAO.getHomeworkItemsForHomeworkPageForTeacher(todayWithZeroTime, user.getUserId());
                 req.setAttribute("for", "teacher");

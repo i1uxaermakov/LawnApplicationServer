@@ -11,6 +11,7 @@ import utils.HibernateUtil;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ResourceItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public static List<ResourceItem> getResourceItemsByCategoryAddUp(Date lastSavedHWDate, Long categoryId, String purpose) {
+    public static List<ResourceItem> getResourceItemsByCategoryAddUp(Timestamp lastSavedHWDate, Long categoryId, String purpose) {
 //        purpose - add_up_to_empty
 //        purpose - add_up_to_smth
         Session session = null;
@@ -58,7 +59,7 @@ public class ResourceItemDAO {
     }
 
 
-    public static List<ResourceItem> getResourceItemsByCategoryAddDown(Date lastSavedHWDate, Long categoryId) {
+    public static List<ResourceItem> getResourceItemsByCategoryAddDown(Timestamp lastSavedHWDate, Long categoryId) {
         Session session = null;
         List<ResourceItem> homeworkItemList = new ArrayList<>();
         Transaction transaction = null;

@@ -11,6 +11,7 @@ import utils.HibernateUtil;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class SubjectCategoryDAO {
         return categories;
     }
 
-    public static List<SubjectResourceCategory> getSubjectCategoriesByLevelAndDate(Long level, Date lastSavedDate) {
+    public static List<SubjectResourceCategory> getSubjectCategoriesByLevelAndDate(Long level, Timestamp lastSavedDate) {
         List<SubjectResourceCategory> categories = new ArrayList<>(0);
         Session hibSession = null;
         Transaction transaction = null;

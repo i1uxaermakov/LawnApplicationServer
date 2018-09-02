@@ -91,9 +91,10 @@
     <%
         }
         if(addButton && homeworkItemList.size()==5) {%>
-        <a>
-            <div class="news" style="padding-bottom: 15px; margin-bottom: 10px;" onclick="showHomeworkBySubjectAddDown(this)" sID="<%=homeworkItemList.get(0).getSubjectId()%>"
-                 lastDate="<%=homeworkItemList.get(homeworkItemList.size()-1).getPublishDate().getTime()%>">
+        <a  onclick="showHomeworkBySubjectAddDown(this)"
+            sID="<%=homeworkItemList.get(0).getSubjectId()%>"
+            lastDate="<%=homeworkItemList.get(homeworkItemList.size()-1).getPublishDate().getTime()%>">
+            <div class="news" style="padding-bottom: 15px; margin-bottom: 10px;">
                     <div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px;
                                         padding-bottom: 0px; height:auto !important;">
                         <span>Press here to download older HW.</span>

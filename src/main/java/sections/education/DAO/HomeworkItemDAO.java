@@ -9,6 +9,7 @@ import sections.education.entities.HomeworkItem;
 import sections.education.entities.HomeworkItem_;
 
 import javax.persistence.criteria.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
 public class HomeworkItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     
-    public List<HomeworkItem> getHomeworkItemsForHomeworkPageForStudent(Date todayDate, Long groupId) throws SQLException {
+    public List<HomeworkItem> getHomeworkItemsForHomeworkPageForStudent(Timestamp todayDate, Long groupId) throws SQLException {
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
         Transaction transaction = null;
@@ -44,7 +45,7 @@ public class HomeworkItemDAO {
     }
 
 
-    public List<HomeworkItem> getHomeworkItemsForHomeworkPageForTeacher(Date todayDate, Long userId) throws SQLException {
+    public List<HomeworkItem> getHomeworkItemsForHomeworkPageForTeacher(Timestamp todayDate, Long userId) throws SQLException {
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
         Transaction transaction = null;
@@ -71,7 +72,7 @@ public class HomeworkItemDAO {
     }
 
 
-    public List<HomeworkItem> getHomeworkItemsBySubjectAddUp(Date lastSavedHWDate, Long subjectId, String purpose) {
+    public List<HomeworkItem> getHomeworkItemsBySubjectAddUp(Timestamp lastSavedHWDate, Long subjectId, String purpose) {
 //        purpose - add_up_to_empty
 //        purpose - add_up_to_smth
         Session session = null;
@@ -111,7 +112,7 @@ public class HomeworkItemDAO {
     }
 
 
-    public List<HomeworkItem> getHomeworkItemsBySubjectAddDown(Date lastSavedHWDate, Long subjectId) {
+    public List<HomeworkItem> getHomeworkItemsBySubjectAddDown(Timestamp lastSavedHWDate, Long subjectId) {
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>();
         Transaction transaction = null;

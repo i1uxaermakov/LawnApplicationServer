@@ -24,9 +24,10 @@
 <%
         }
     if(addButton && resourceItemList.size()==5) {%>
-        <a>
-            <div class="news" style="padding-bottom: 15px; margin-bottom: 10px; padding-top: 15px" onclick="getResourceItemsByCategoryIdAddDown(this)" cID="<%=resourceItemList.get(0).getSubjectResourceCategoryId()%>"
-                 lastDate="<%=resourceItemList.get(resourceItemList.size()-1).getPublishDate().getTime()%>">
+        <a  onclick="getResourceItemsByCategoryIdAddDown(this)"
+            cID="<%=resourceItemList.get(0).getSubjectResourceCategoryId()%>"
+            lastDate="<%=resourceItemList.get(resourceItemList.size()-1).getPublishDate().getTime()%>">
+            <div class="news" style="padding-bottom: 15px; margin-bottom: 10px; padding-top: 15px">
                 <div class="newsbegin" style="text-align: center; font-size: 20px; margin-bottom: 0px;
                                                 padding-bottom: 0px; height:auto !important;">
                     <span>Press here to see older resources.</span>

@@ -6,6 +6,7 @@ import utils.images.Photo;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @StaticMetamodel( HomeworkItem.class )
@@ -18,8 +19,8 @@ public class HomeworkItem_ {
     public static volatile SingularAttribute<HomeworkItem,String> subjectName;
     public static volatile SingularAttribute<HomeworkItem,String> teacherName;
     public static volatile SingularAttribute<HomeworkItem,String> description;
-    public static volatile SingularAttribute<HomeworkItem,Date> publishDate;
-    public static volatile SingularAttribute<HomeworkItem,Date> deadlineDate;
+    public static volatile SingularAttribute<HomeworkItem,Timestamp> publishDate;
+    public static volatile SingularAttribute<HomeworkItem,Timestamp> deadlineDate;
     public static volatile SetAttribute<HomeworkItem,File> files;
     public static volatile SetAttribute<HomeworkItem,Photo> photos;
 

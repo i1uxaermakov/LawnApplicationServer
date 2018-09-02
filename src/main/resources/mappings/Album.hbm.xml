@@ -9,7 +9,9 @@
         <property name="name" length="2000"/>
         <property name="description" length="15000"/>
         <property name="mainPhotoLocation" length="2000"/>
-        <property name="publishDate"/>
+        <property name="publishDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="publishDate"/>
+        </property>
         <property name="author"/>
 
         <set name="albumPhotos" table="AlbumPhotos" fetch="join" lazy="false" inverse="true" cascade="all">

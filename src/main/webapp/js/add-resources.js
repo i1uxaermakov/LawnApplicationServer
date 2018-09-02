@@ -70,13 +70,7 @@ submitCatcher.addEventListener('submit', function (evnt) {
     var categorySelect = document.getElementById("category_select");
     var categorySelectValue = categorySelect.options[categorySelect.selectedIndex].value;
 
-
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
     for(var i=0; i<fileList.length; i++) {
-
 
         var file = fileList[i];
         var formData = new FormData();
@@ -84,7 +78,7 @@ submitCatcher.addEventListener('submit', function (evnt) {
 
         formData.set('file', file, file.name);
         formData.set("catid", categorySelectValue);
-        request.open("POST", 'http://localhost:8080/edu/lib/add', true);
+        request.open("POST", 'http://localhost:8080/edu/lib/add/files', true);
         request.send(formData);
 
         request.onload = function() {

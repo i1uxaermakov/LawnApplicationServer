@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -36,10 +37,10 @@ public class HomeworkBySubjectServlet extends HttpServlet {
         req.setAttribute("addButton",true);
         if("add_up".equals(purpose)) {
             String dateString = req.getParameter("date");
-            Date dateToCheck = new Date(System.currentTimeMillis());
+            Timestamp dateToCheck = new Timestamp(System.currentTimeMillis());
             String purposeSuffix = "_to_empty";
             if(Objects.nonNull(dateString) && StringUtils.isNumeric(dateString)) {
-                    dateToCheck = new Date(new Long(dateString));
+                    dateToCheck = new Timestamp(new Long(dateString));
                     purposeSuffix = "_to_smth";
                     req.setAttribute("addButton",false);
             }
@@ -52,7 +53,7 @@ public class HomeworkBySubjectServlet extends HttpServlet {
                 hibSession.close();
                 return;
             }
-            Date dateToCheck = new Date(new Long(dateString));
+            Timestamp dateToCheck = new Timestamp(new Long(dateString));
             homeworkItemList = hwDAO.getHomeworkItemsBySubjectAddDown(dateToCheck, new Long(subjectId));
         }
         else {

@@ -1,7 +1,7 @@
 package utils.images;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Photo implements Serializable, Comparable<Photo>{
     private Long id;
@@ -11,14 +11,14 @@ public class Photo implements Serializable, Comparable<Photo>{
     private String thumbnailPhotoDimensions;
     private String squareThumbnailPhotoLocation;
     private String squarePhotoDimensions;
-    private java.util.Date publishDate;
+    private Timestamp publishDate;
     private String author;
 
     public Photo() {
     }
 
     public Photo(String originalPhotoLocation, String thumbnailPhotoLocation,
-                 String squareThumbnailPhotoLocation, Date publishDate, String author) {
+                 String squareThumbnailPhotoLocation, Timestamp publishDate, String author) {
         this.originalPhotoLocation = originalPhotoLocation;
         this.thumbnailPhotoLocation = thumbnailPhotoLocation;
         this.squareThumbnailPhotoLocation = squareThumbnailPhotoLocation;
@@ -29,7 +29,7 @@ public class Photo implements Serializable, Comparable<Photo>{
     public Photo(String originalPhotoLocation, String originalPhotoDimensions,
                  String thumbnailPhotoLocation, String thumbnailPhotoDimensions,
                  String squareThumbnailPhotoLocation, String squarePhotoDimensions,
-                 Date publishDate, String author) {
+                 Timestamp publishDate, String author) {
         this.originalPhotoLocation = originalPhotoLocation;
         this.originalPhotoDimensions = originalPhotoDimensions;
         this.thumbnailPhotoLocation = thumbnailPhotoLocation;
@@ -72,11 +72,11 @@ public class Photo implements Serializable, Comparable<Photo>{
         this.squareThumbnailPhotoLocation = squareThumbnailPhotoLocation;
     }
 
-    public java.util.Date getPublishDate() {
+    public Timestamp getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(java.util.Date publishDate) {
+    public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
 

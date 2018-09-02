@@ -4,7 +4,8 @@ import utils.files.File;
 
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 @StaticMetamodel(ResourceItem.class)
 public class ResourceItem_ {
@@ -12,7 +13,7 @@ public class ResourceItem_ {
     public static volatile SingularAttribute<ResourceItem,File> file;
     public static volatile SingularAttribute<ResourceItem,Long> subjectResourceCategoryId;
     public static volatile SingularAttribute<ResourceItem,String> addedBy;
-    public static volatile SingularAttribute<ResourceItem,Date> publishDate;
+    public static volatile SingularAttribute<ResourceItem,Timestamp> publishDate;
 }
 /*
     private Long resourceItemId;

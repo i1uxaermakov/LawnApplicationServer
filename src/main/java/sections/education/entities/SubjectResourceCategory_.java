@@ -3,12 +3,13 @@ package sections.education.entities;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @StaticMetamodel(SubjectResourceCategory.class)
 public class SubjectResourceCategory_ {
     public static volatile SingularAttribute<SubjectResourceCategory,Long> categoryId;
-    public static volatile SingularAttribute<SubjectResourceCategory,Date> creationDate;
+    public static volatile SingularAttribute<SubjectResourceCategory,Timestamp> creationDate;
     public static volatile SingularAttribute<SubjectResourceCategory,Long> course;
     public static volatile SingularAttribute<SubjectResourceCategory,String> categoryName;
     public static volatile SetAttribute<SubjectResourceCategory,ResourceItem> resourceItems;

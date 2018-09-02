@@ -14,14 +14,14 @@
             <element column="privilege" type="string"/>
         </set>
 
-        <set name="organizations" table="UserOrganizations" fetch="join" lazy="false" inverse="true" cascade="all">
-            <key>
-                <column name="user_id" not-null="true"/>
-            </key>
-            <many-to-many entity-name="model.entities.Organization">
-                <column name="organization_id" not-null="true"/>
-            </many-to-many>
-        </set>
+        <!--<set name="organizations" table="UserOrganizations" fetch="join" lazy="false" inverse="true" cascade="all">-->
+            <!--<key>-->
+                <!--<column name="user_id" not-null="true"/>-->
+            <!--</key>-->
+            <!--<many-to-many entity-name="model.entities.Organization">-->
+                <!--<column name="organization_id" not-null="true"/>-->
+            <!--</many-to-many>-->
+        <!--</set>-->
 
         <property name = "lyceumId" column = "lyceum_id" length="50"/>
         <property name = "password" column = "password" type = "string" length="50"/>

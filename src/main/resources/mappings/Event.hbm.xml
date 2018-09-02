@@ -10,7 +10,9 @@
         <property name="description">
             <column name="description" sql-type="text"></column>
         </property>
-        <property name="eventDate"/>
+        <property name="eventDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="eventDate"/>
+        </property>
         <property name="venue" length="2000"/>
         <property name="hasPassed"/>
         <property name="addedBy" length="2000"/>

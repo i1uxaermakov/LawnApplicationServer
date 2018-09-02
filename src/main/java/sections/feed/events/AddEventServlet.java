@@ -36,7 +36,7 @@ public class AddEventServlet extends HttpServlet {
         Session session = HibernateUtil.getSessionFactory().openSession();
         FileUtilities fileManager = new FileUtilities();
         User user = (User) req.getSession().getAttribute("User");
-        Date date = new Date(System.currentTimeMillis());
+        //Date date = new Date(System.currentTimeMillis());
         String author = user.getFirstName() + " " + user.getLastName();
 
         Event event = new Event();

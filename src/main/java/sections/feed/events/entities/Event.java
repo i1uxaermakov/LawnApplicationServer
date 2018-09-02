@@ -1,7 +1,6 @@
 package sections.feed.events.entities;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,7 +9,7 @@ public class Event implements Serializable {
     private String name;
     private String description;
     private String eventPhotoLocation;
-    private Timestamp eventDate;
+    private Date eventDate;
     private String venue;
     private boolean hasPassed = false;
     private String addedBy;
@@ -44,11 +43,11 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public Timestamp getEventDate() {
+    public Date getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Timestamp eventDate) {
+    public void setEventDate(Date eventDate) {
         this.eventDate = eventDate;
     }
 

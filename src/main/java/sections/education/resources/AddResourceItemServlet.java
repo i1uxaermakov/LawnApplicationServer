@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,9 +37,13 @@ public class AddResourceItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(1);
+
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         List<SubjectResourceCategory> list = SubjectCategoryDAO.getAllSubjectCategories();
         hibSession.close();
+
+        System.out.println(2);
 
         List<SubjectResourceCategory> listForFirstLevel = new ArrayList<>(0),
                 listForSecondLevel = new ArrayList<>(0),
@@ -56,6 +59,8 @@ public class AddResourceItemServlet extends HttpServlet {
                 listForThirdLevel.add(category);
             }
         }
+
+        System.out.println(3);
 
         req.setAttribute("listForFirstLevel",listForFirstLevel);
         req.setAttribute("listForSecondLevel",listForSecondLevel);
@@ -79,8 +84,6 @@ public class AddResourceItemServlet extends HttpServlet {
             return;
         }
 
-        System.out.println(0);
-
         Part part = req.getPart("file");
         (new java.io.File(pathToFiles + java.io.File.separator + pathSuffixForResourceFiles)).mkdirs();
         File file = FileUtilities.processReceivedFileAndGetFileEntity(part, pathToFiles, pathSuffixForResourceFiles, user);
@@ -89,14 +92,11 @@ public class AddResourceItemServlet extends HttpServlet {
             return;
         }
 
-        System.out.println(1);
-        System.out.println(file);
-
         ResourceItem resourceItem = new ResourceItem();
         resourceItem.setAddedBy(user.getFullName());
         resourceItem.setFile(file);
-        resourceItem.setPublishDate(new Date());
         resourceItem.setSubjectResourceCategoryId(new Long(categoryId));
+        resourceItem.setPublishDate(file.getPublishDate());
 
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         hibSession.beginTransaction();
@@ -104,7 +104,6 @@ public class AddResourceItemServlet extends HttpServlet {
         hibSession.getTransaction().commit();
 
         if(Objects.isNull(category)) {
-            System.out.println(400);
             resp.setStatus(400);
             hibSession.close();
             return;

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
 @MultipartConfig
@@ -37,7 +38,7 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
             categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevel(level);
         }
         else {
-            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevelAndDate(level, new Date(new Long(lastSavedDate)));
+            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevelAndDate(level, new Timestamp(new Long(lastSavedDate)));
         }
 
         hibSession.close();

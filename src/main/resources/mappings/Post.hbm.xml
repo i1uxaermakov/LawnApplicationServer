@@ -13,7 +13,7 @@
             <column name="postContent" sql-type="text"></column>
         </property>
         <!--<property name="postExcerpt" length="500"/>-->
-        <property name="publishDate"/>
+        <property name="publishDate" type="timestamp"/>
         <property name="status" length="20"/>
 
         <set name="files" table="PostFiles" fetch="join" lazy="false" cascade="all">

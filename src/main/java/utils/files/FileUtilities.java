@@ -9,6 +9,7 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class FileUtilities {
     public void writeFileFromInputStreamToOutputStream(InputStream inputStream, OutputStream outputStream) throws IOException {
@@ -20,10 +21,12 @@ public class FileUtilities {
     }
 
     public static String getFileName(final Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
+        if(Objects.nonNull(part)) {
+            for (String content : part.getHeader("content-disposition").split(";")) {
+                if (content.trim().startsWith("filename")) {
+                    return content.substring(
+                            content.indexOf('=') + 1).trim().replace("\"", "");
+                }
             }
         }
         return null;
@@ -66,6 +69,10 @@ public class FileUtilities {
         file.setOriginalName(fileName);
         file.setAuthor(user.getFirstName() + " " + user.getLastName());
         file.setPublishDate(new Timestamp(System.currentTimeMillis()));
+
+        System.out.println(fileName);
+        System.out.println(System.currentTimeMillis());
+        System.out.println(file.getPublishDate());
 
         return file;
     }
