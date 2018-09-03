@@ -178,7 +178,7 @@ function previewFiles() {
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
-        request.open("POST", 'http://localhost:8080/edu/hw/add', true);
+        request.open("POST", '/edu/hw/add', true);
         request.send(formData);
 
         //todo block user from clicking anywhere and make him wait for the response
@@ -226,7 +226,7 @@ function previewFiles() {
 
         formData.set('file', file, file.name);
         formData.set('hw_id', myHWid);
-        request.open("POST", 'http://localhost:8080/edu/hw/add/' + url, true);
+        request.open("POST", '/edu/hw/add/' + url, true);
         request.send(formData);
 
         request.onload = function() {

@@ -22,6 +22,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @MultipartConfig
@@ -36,6 +37,11 @@ public class AddFilesToHWServlet extends HttpServlet {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         User user = (User) req.getSession().getAttribute("User");
         String hwIDs = req.getParameter("hw_id");
+        if(Objects.isNull(hwIDs)) {
+            resp.setStatus(404);
+            resp.getWriter().write("Whom is homework for?");
+            return;
+        }
         String[] ids = hwIDs.split(";");
 
         Long[] idsLong = new Long[ids.length];

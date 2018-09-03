@@ -96,14 +96,14 @@ public class User implements Serializable {
     public void setPrivileges(Set<String> privileges) {
         this.privileges = privileges;
     }
-
-    public Set<Organization> getOrganizations() {
-        return organizations;
-    }
-
-    public void setOrganizations(Set<Organization> organizations) {
-        this.organizations = organizations;
-    }
+//
+//    public Set<Organization> getOrganizations() {
+//        return organizations;
+//    }
+//
+//    public void setOrganizations(Set<Organization> organizations) {
+//        this.organizations = organizations;
+//    }
 
     public Long getLevel() {
         return level;
@@ -115,5 +115,22 @@ public class User implements Serializable {
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", lyceumId='" + lyceumId + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", groupId=" + groupId +
+                ", groupName='" + groupName + '\'' +
+                ", level=" + level +
+                ", lastLoginDate=" + lastLoginDate +
+                ", privileges=" + privileges +
+                ", organizations=" + organizations +
+                '}';
     }
 }

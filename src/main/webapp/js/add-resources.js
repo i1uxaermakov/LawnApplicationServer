@@ -74,21 +74,30 @@ submitCatcher.addEventListener('submit', function (evnt) {
 
         var file = fileList[i];
         var formData = new FormData();
-        var request = new XMLHttpRequest();
 
         formData.set('file', file, file.name);
         formData.set("catid", categorySelectValue);
-        request.open("POST", 'http://localhost:8080/edu/lib/add/files', true);
-        request.send(formData);
 
-        request.onload = function() {
-            if(request.status===200) {
-                alert(file.name + " good good");
+        $.ajax({
+            url:  '/edu/lib/add/files',
+            type: 'post',
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            data: formData,
+            cache: false,
+            success: function (data,textStatus,jqXHR) {
+                alert(file.name + "yes yes")
+            },
+            error: function (data,textStatus,jqXHR) {
+                if(jqXHR.status===401) {
+                    window.location.href = "/signin";
+                }
+                else {
+                    alert(file.name + "shiiiit");
+                }
             }
-            else {
-                alert(file.name + " not uploaded!" + "\n" + request.responseText);
-            }
-        }
+        });
 
     }
 

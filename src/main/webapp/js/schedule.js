@@ -17,7 +17,7 @@ function showHomeworkBySubjectAddUp(element) {
 
     formData.set("sid", subjID);
     formData.set("purpose","add_up");
-    request.open("POST", 'http://localhost:8080/edu/hw/subject', true);
+    request.open("POST", '/edu/hw/subject', true);
     request.send(formData);
 
     //todo xml look functions
@@ -58,7 +58,7 @@ function showHomeworkBySubjectAddDown(element) {
     formData.set('date', lastDate);
     formData.set("sid",subjID);
     formData.set("purpose","add_down");
-    request.open("POST",'http://localhost:8080/edu/hw/subject', true);
+    request.open("POST",'/edu/hw/subject', true);
     request.send(formData);
 
     element.remove();

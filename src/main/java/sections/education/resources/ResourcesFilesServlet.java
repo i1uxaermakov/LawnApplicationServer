@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 @MultipartConfig
-public class ResourcesFilesServlet extends HttpServlet {
+public class    ResourcesFilesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
