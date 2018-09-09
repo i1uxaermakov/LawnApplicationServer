@@ -2,6 +2,7 @@ package security.entities;
 
 
 import model.entities.Organization;
+import utils.files.File;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -21,6 +22,8 @@ public class User implements Serializable {
     private Timestamp lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
     private Set<Organization> organizations = new HashSet<>(0);
+    private Set<File> favouriteFiles = new HashSet<>(0);
+
 //TODO user's password hashing with bcrypt
     public User() {
     }
@@ -115,6 +118,14 @@ public class User implements Serializable {
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
+    }
+
+    public Set<File> getFavouriteFiles() {
+        return favouriteFiles;
+    }
+
+    public void setFavouriteFiles(Set<File> favouriteFiles) {
+        this.favouriteFiles = favouriteFiles;
     }
 
     @Override

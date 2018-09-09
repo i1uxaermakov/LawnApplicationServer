@@ -5,9 +5,7 @@
          version="3.1">
 
     <session-config>
-        <session-timeout>
-            60
-        </session-timeout>
+        <session-timeout>60</session-timeout>
     </session-config>
 
     <jsp-config>
@@ -27,9 +25,11 @@
         <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
     </context-param>
 
-    <!--<welcome-file-list>-->
-        <!--<welcome-file>MainPageServlet</welcome-file>-->
-    <!--</welcome-file-list>-->
+    <!--In welcome-file-list, you have to specify url of servlet/jsp without first slash(/)-->
+    <!--If I want servlet mapped to url /MainPage to be default page, I write MainPage here-->
+    <welcome-file-list>
+        <welcome-file>edu/sc</welcome-file>
+    </welcome-file-list>
 
     <!--filters-->
     <filter>
@@ -109,7 +109,7 @@
     <!--</servlet>-->
     <!--<servlet-mapping>-->
         <!--<servlet-name>MainPageServlet</servlet-name>-->
-        <!--<url-pattern>/MainPageServlet</url-pattern>-->
+        <!--<url-pattern>/mp</url-pattern>-->
     <!--</servlet-mapping>-->
     
     <!--begin signin signout servlets-->
@@ -200,14 +200,14 @@
         <!--<url-pattern>/add/post/*</url-pattern>-->
     <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>AddFiles</servlet-name>
-        <servlet-class>sections.feed.posts.AddFilesServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddFiles</servlet-name>
-        <url-pattern>/add/files</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>AddFiles</servlet-name>-->
+        <!--<servlet-class>sections.feed.posts.AddFilesServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddFiles</servlet-name>-->
+        <!--<url-pattern>/add/files</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!--jsp-->
     <!--<servlet>-->

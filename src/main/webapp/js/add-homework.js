@@ -126,7 +126,6 @@ function previewFiles() {
     submitCatcher.addEventListener('submit', function (evnt) {
         evnt.preventDefault();
 
-        var request = new XMLHttpRequest();
         var formData = new FormData();
         var arrayHWfor = document.forms['addHWform'].elements['HWfor[]'];
         var arrayOfValuesHWfor = "";
@@ -173,34 +172,60 @@ function previewFiles() {
         }
         formData.set('HWfor', arrayOfValuesHWfor);
         if(!(document.getElementById('hw-text').value)) {
-            // todo fucking encoding problem - russian does not show properly
             alert("Please, add description to Homework!");
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
-        request.open("POST", '/edu/hw/add', true);
-        request.send(formData);
 
         //todo block user from clicking anywhere and make him wait for the response
-        request.onload = function () {
-            if(request.status===200) {
-                myHWid = request.responseText;
+        // request.onload = function () {
+        //     if(request.status===200) {
+        //         myHWid = request.responseText;
+        //         alert(myHWid);
+        //         fileList.forEach(function (file) {
+        //             sendFile(file, 'files');
+        //         });
+        //
+        //         imageList.forEach(function(file) {
+        //            sendFile(file, 'photos');
+        //         });
+        //
+        //     }
+        //     else {
+        //
+        //     }
+        // };
+
+
+        $.ajax({
+            url:  '/edu/hw/add',
+            type: 'post',
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            data: formData,
+            cache: false,
+            timeout: 600000,
+            success: function (data,textStatus,jqXHR) {
+                myHWid = data;
                 alert(myHWid);
                 fileList.forEach(function (file) {
                     sendFile(file, 'files');
                 });
 
                 imageList.forEach(function(file) {
-                   sendFile(file, 'photos');
+                    sendFile(file, 'photos');
                 });
-
+            },
+            error: function (data,textStatus,jqXHR) {
+                if(jqXHR.status===401) {
+                    window.location.href = "/signin";
+                }
+                else {
+                    alert(data + "Some problem occurred while processing on server :(");
+                }
             }
-            else {
-                alert(request.responseText + "Some problem occurred while processing on server :(");
-            }
-
-
-        };
+        });
 
     });
 
@@ -222,23 +247,30 @@ function previewFiles() {
 
     var sendFile = function (file, url) {
         var formData = new FormData();
-        var request = new XMLHttpRequest();
-
         formData.set('file', file, file.name);
         formData.set('hw_id', myHWid);
-        request.open("POST", '/edu/hw/add/' + url, true);
-        request.send(formData);
 
-        request.onload = function() {
-            if(request.status===200) {
+        $.ajax({
+            url:  '/edu/hw/add/'+url,
+            type: 'post',
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            data: formData,
+            cache: false,
+            timeout: 600000,
+            success: function (data,textStatus,jqXHR) {
                 alert(file.name + " good good");
+            },
+            error: function (data,textStatus,jqXHR) {
+                // if(jqXHR.status===401) {
+                //     window.location.href = "/signin";
+                // }
+                // else {
+                //     tackleErrorAddUp();
+                // }
+                alert(file.name + " not uploaded!" + "\n" + data);
             }
-            else {
-                
-                alert(file.name + " not uploaded!" + "\n" + request.responseText);
-            }
-        }
-        
+        });
     };
-
 })();

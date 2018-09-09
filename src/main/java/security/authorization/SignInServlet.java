@@ -2,6 +2,7 @@ package security.authorization;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import security.DAO.UserDAO;
+import security.UpdatableBCrypt;
 import utils.HibernateUtil;
 import security.entities.RememberMeCookie;
 import security.entities.User;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
+@MultipartConfig
 public class SignInServlet extends HttpServlet {
     String rememberMeCookieName;
 
@@ -45,7 +48,7 @@ public class SignInServlet extends HttpServlet {
             resp.sendRedirect("/");
         }
         else {
-            resp.setStatus(400);
+            resp.setStatus(401);
         }
     }
     //todo if user has multiple remembermecookies on various devices
@@ -68,12 +71,11 @@ public class SignInServlet extends HttpServlet {
         }
 
         if(lyceumId==null || password==null || "".equals(lyceumId) || "".equals(password)) {
-            response.setStatus(400);
+            response.setStatus(401);
         }
         else {
             UserDAO userDAO = new UserDAO();
             UserLoginInfo userLoginInfo = null;
-
             Session session = HibernateUtil.getSessionFactory().openSession();
 
             try {
@@ -86,8 +88,8 @@ public class SignInServlet extends HttpServlet {
                 response.setStatus(401);
             }
             else {
-                if (userLoginInfo.getPassword().equals(password)) {
-//                    BCrypt.checkpw(password, userLoginInfo.getPassword())
+                UpdatableBCrypt bCrypt = new UpdatableBCrypt(12);
+                if(bCrypt.verifyHash(password, userLoginInfo.getPassword())) {
                     User user = null;
 
                     Transaction transaction = session.beginTransaction();

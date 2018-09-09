@@ -51,6 +51,7 @@ public class SignOutServlet extends HttpServlet {
             }
             httpSession.invalidate();
         }
+        resp.sendRedirect("/");
 
     }
 

@@ -9,7 +9,7 @@ body {
 }
 
 header .navbar {
-/*    background: #69a03c;*/
+    /*    background: #69a03c;*/
 }
 
 .headerofsections {
@@ -36,7 +36,7 @@ header .navbar {
 
 .blocklawn {
     background: #fff;
-/*    padding-bottom: 7px;*/
+    /*    padding-bottom: 7px;*/
     margin-bottom: 0;
 }
 section.blocks{
@@ -59,7 +59,7 @@ section.blocks{
     border-bottom: 1px solid #aeaeae;
     border-top: 1px solid #aeaeae;
     padding-top: 5px;
-/*    margin-bottom: 7px;*/
+    /*    margin-bottom: 7px;*/
     word-spacing: 15px;
     font-weight: 400;
     background: #eaefe6;
@@ -245,16 +245,16 @@ h1 {
     color: #69a03c !important;
     padding-right: 12px;
     display: flex;
-    width: 100%;
+    width: calc(100% - 30px);
     padding: 5px;
     text-decoration: none;
 }
 .uploaded-files-hw a:active{
     background: #efefef;
-    
+
 }
 .accord1:focus{
-        background: white;
+    background: white;
 }
 
 .nav-tabs > li.active > a,
@@ -318,6 +318,7 @@ h1 {
     margin-bottom: 10px;
 }
 .uploaded-files-hw {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 5px!important;
@@ -331,9 +332,8 @@ h1 {
 }
 #resources .uploaded-files-hw{
     box-shadow: none;
-    margin-bottom: 0!important;
+    margin-bottom: 0;
     background-color: white;
-    padding: 5px;    background-color: white;
     padding: 5px;
     margin-top: 2px;
 }
@@ -358,13 +358,13 @@ h1 {
 .accord1 {
     background: #fff;
     font-size: 25px;
-        border-top: 1px solid #efefef!important;
+    border-top: 1px solid #efefef!important;
     margin: 0 !important;
     /*margin: 2px 0;*/
     color: #3f3f3f;
     border: none;
     border-radius: 0;
-/*    box-shadow: 1px 3px 4px #8fb87c;*/
+    /*    box-shadow: 1px 3px 4px #8fb87c;*/
 }
 
 .accord1:hover {
@@ -372,14 +372,14 @@ h1 {
     background: #fff;
     text-decoration: none;
     border-radius: 0;
-/*    box-shadow: 1px 3px 4px #8fb87c;*/
+    /*    box-shadow: 1px 3px 4px #8fb87c;*/
 }
 .news {
     margin-top: 2px !important;
     margin-bottom: 10px;
 }
 .buttoncol.collapsing{
-/*    box-shadow: 1px 2px 4px #8fb87c;*/
+    /*    box-shadow: 1px 2px 4px #8fb87c;*/
     margin-top: -2px;
 }
 .buttoncol.collapsing:first-child{
@@ -421,7 +421,7 @@ header .nav-tabs > li.active > a:hover{
     color: black;
 }
 #levelfirst a:hover, #levelsecond a:hover, #levelthird a:hover{
-   /*color: #69a03c;*/
+    /*color: #69a03c;*/
     background: #efefef;
 }
 #resources .accord{
@@ -433,7 +433,7 @@ header .nav-tabs > li.active > a:hover{
 }
 .accord:hover{
     background: #efefef !important;
-} 
+}
 /*.explanation.double-pair .urok.centered .subject-item{
 position: absolute;
 top: 30%;
@@ -446,7 +446,7 @@ top: 30%;
 }
 .subject-item:hover{
     background: #efefef;
-}  
+}
 .double-pair .subject-item:first-child{
     border-bottom: 1px solid #aeaeae;
     padding-top: 10px;
@@ -465,12 +465,12 @@ top: 30%;
 }
 .subject-item:only-child{
     padding-top: 10px;
-    padding-bottom: 10px;    
+    padding-bottom: 10px;
 }
 
 .urok:nth-child(3){
     border-right: 1px solid #aeaeae;
-} 
+}
 .uploaded-files-hw:last-child{
     border-bottom: 0;
 }
@@ -488,39 +488,39 @@ top: 30%;
 }
 .modal-footer .likes .btn.active.focus,.modal-footer  .btn.active:focus,.modal-footer  .btn.focus,.modal-footer  .btn:active.focus,.modal-footer  .btn:active:focus,.modal-footer  .btn:focus {
     outline: none;
-    color: #fff !important; 
-    }
-  .modal-footer   .btn-primary:hover{
-    background-color: #69a03c !important;
-    }
-    .modal-footer   .btn-primary {
     color: #fff !important;
-    }
-
-    section.blocks{
-        /*margin-top: 5px;
-    }*/
 }
-    .weeknum{
-      float: right;
+.modal-footer   .btn-primary:hover{
+    background-color: #69a03c !important;
+}
+.modal-footer   .btn-primary {
+    color: #fff !important;
+}
+
+section.blocks{
+    /*margin-top: 5px;
+}*/
+}
+.weeknum{
+    float: right;
     color: #868686;
     font-size: 20px;
     margin-top: 5px;
-    }
+}
 
 .weeknum{
-      float: right;
-      color: #3f3f3f;
-      font-size: 20px;
-      margin-top: 5px;
-      font-weight: 400;
-    }
-.weeknumbg {
-  background-color: #fff;
-  padding-right: 12px;
-  margin-top: 10px;
+    float: right;
+    color: #3f3f3f;
+    font-size: 20px;
+    margin-top: 5px;
+    font-weight: 400;
 }
- .redditstyle button{
+.weeknumbg {
+    background-color: #fff;
+    padding-right: 12px;
+    margin-top: 10px;
+}
+.redditstyle button{
     background-color: #69a03c9e;
     border: none;
     color: white;
@@ -532,19 +532,21 @@ top: 30%;
     margin-top: 3px;
     border-radius: 3px;
     padding: 3px 7px 3px 7px;
- }
+}
 .redditstyle .dropdown
- {
-   display: inline-block;
+{
+    display: inline-block;
 }
 .filefav{
+    cursor: pointer;
+    color: #69a03c;
     position: absolute;
-    right: 25px;
+    right: 5px;
     top: 25px;
     font-size: 1.8em;
- }
- .redditstyle{
+}
+.redditstyle{
     background-color: white;
     margin-top: 3px;
     padding-left: 5px;
- }
+}

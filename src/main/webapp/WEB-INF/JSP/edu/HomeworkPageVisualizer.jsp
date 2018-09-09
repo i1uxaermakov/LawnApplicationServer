@@ -138,6 +138,10 @@
             <li class="first"><a href="/edu/sc">Schedule</a></li>
             <li class="active"><a href="/edu/hw">Homework</a></li>
             <li><a href="/edu/lib">Recources</a></li>
+            <li class="" style="float: right;">
+                <a href="/edu/hw/add" style="color: #69a03c;font-size: 1.8em;padding-top: 0;padding-bottom: 0px;" title="Add homework!">+</a>
+            </li>
+
         </ul>
     </section>
 

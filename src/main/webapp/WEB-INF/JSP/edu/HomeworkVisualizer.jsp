@@ -113,52 +113,31 @@
                                         <%=hwi.getDescription().replaceAll("(\r\n|\r|\n|\n\r)", "<br>")%>
                                     </div>
                                     <%
-                                            int size = hwi.getPhotos().size();
-                                            if(size != 0) {
-                                                if(size < 4) {
-                                                    String num = (size==1) ? "one" : ((size==2) ? "two" : "three");%>
-                                                    <div class="<%=num%>photosrow photos row">
-                                                        <div class="my-gallery" itemscope itemtype="">
-                                                            <%
-                                                                for(Photo photo: hwi.getPhotos()) {%>
-                                                                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                                                        <a href="/images/<%=photo.getThumbnailPhotoLocation()%>" itemprop="contentUrl" data-size="<%=photo.getThumbnailPhotoDimensions()%>">
-                                                                            <img src="/images/<%=photo.getSquareThumbnailPhotoLocation()%>" itemprop="thumbnail"/> <%--alt="Image description"--%>
-                                                                        </a>
-                                                                        <!-- </div> -->
-                                                                        <figcaption itemprop="caption description"> Photo by: <%=photo.getAuthor()%></figcaption>
-                                                                    </figure>
-                                                                <%}
-                                                            %>
-                                                        </div>
-                                                    </div>
-                                            <%  }
-                                            else {
-                                                List<Photo> photos = new ArrayList<>(hwi.getPhotos());
-                                                Collections.sort(photos);
+                                        List<Photo> photos = new ArrayList<>(hwi.getPhotos());
+                                        Collections.sort(photos);
+                                        int size = photos.size();
+                                        if(size != 0) {
+                                            String num = (size==1) ? "one" : ((size==2) ? "two" : "three");%>
+                                    <div class="<%=num%>photosrow photos row">
+                                        <div class="my-gallery" itemscope itemtype="">
+                                            <%
+                                                for(Photo photo: photos) {%>
+                                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                                <a href="/images/<%=photo.getThumbnailPhotoLocation()%>" itemprop="contentUrl" data-size="<%=photo.getThumbnailPhotoDimensions()%>">
+                                                    <img src="/images/<%=photo.getSquareThumbnailPhotoLocation()%>" itemprop="thumbnail"/> <%--alt="Image description"--%>
+                                                </a>
+                                                <!-- </div> -->
+                                                <figcaption itemprop="caption description"> Photo by: <%=photo.getAuthor()%></figcaption>
+                                            </figure>
+                                            <%}
                                             %>
-                                    <div class="attachedalbum">
-                                        <%--todo link to photos--%>
-                                        <a href="album_post_photos.html">
-                                            <img src="/images/<%=photos.get(0).getSquareThumbnailPhotoLocation()%>" alt="" class="">
-                                            <span class="aboutAlbum">
-                                                Attached Photos
-                                                <br>
-                                                <span>
-                                                <%=size%> photos
-                                                </span>
-                                            </span>
-                                        </a>
+                                        </div>
                                     </div>
-                                                <%
-                                                }
-                                            }
-
-
-                                                    ArrayList<File> files = new ArrayList<>(hwi.getFiles());
-                                                    Collections.sort(files);
-                                                    for(File file: files) {%>
-                                            <div class="uploaded-files-hw">
+                                    <%  }
+                                        ArrayList<File> files = new ArrayList<>(hwi.getFiles());
+                                        Collections.sort(files);
+                                        for(File file: files) {%>
+                                            <div class="uploaded-files-hw" style="position: relative">
                                                 <a href="/files/download/<%=file.getSaveName()%>">
                                                     <i class="far fa-file fa-4x"></i>
                                                     <span class="about-hw-file" style="word-break: break-all;">
@@ -167,6 +146,7 @@
                                                             <br>Uploaded: <%=hwDeadlineDateFormat.format(file.getPublishDate())%>
                                                     </span>
                                                 </a>
+                                                <span class="filefav"><i class="far fa-star"></i></span>
                                             </div>
                                     <%  }%>
                                 </div>

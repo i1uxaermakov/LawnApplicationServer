@@ -10,10 +10,10 @@
     <title>Lawn</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet"> 
-    <link href="css/all.css" rel="stylesheet"> 
-    <link rel="stylesheet" href="css/default-skin/default-skin.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/default-skin/default-skin.css">
     <meta charset="UTF-8">
   <title>LAWN LOGIN</title>
   <style>
@@ -187,29 +187,30 @@ div.checkbox{
         </nav>
     </header>
 
-
-    
-
         <div class="login-page">
-        <div class="form">
-          <form class="login-form" action="/signin" method="post">
-            <h1>LOG IN</h1>
-            <input class="textinput" type="text" placeholder="ID" name="login"/>
-            <input class="textinput" type="password" placeholder="password" id="marg10" name="password"/>
-              <div class="checkbox text-left">
-                  <label><input type="checkbox" name="rememberme">Remember me</label>
-              </div>
-            <button>SIGN IN</button>
-          </form>
+            <div class="form">
+                <form class="login-form" action="/signin" method="post" id="SignInForm">
+                    <h1 id="loginsign" style="margin-bottom: 10px;">LOG IN</h1>
+                    <h5 id="warn" style="background-color: rgb(249,215,215); padding: 5px; display: none;">Username or password is incorrect. Please try again.</h5>
+                    <img id="spinner" style="height: 80px; margin-bottom: 10px; display: none" src="/js/spinner.gif">
+
+                    <input class="textinput" type="text" placeholder="ID" name="login" id="login"/>
+                    <input class="textinput" type="password" placeholder="Password" name="password" id="password"/>
+                    <div class="checkbox text-left">
+                        <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
+                    </div>
+                    <button>SIGN IN</button>
+                </form>
+            </div>
         </div>
-      </div>
 
 
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- <script src="slick/slick.min.js"></script>    -->
-    <script src="js/main.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+    <script src="/js/signin.js" type="text/javascript"></script>
 </body>
 </html>
 

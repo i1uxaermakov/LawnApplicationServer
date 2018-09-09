@@ -97,9 +97,7 @@
                         </div>
 
                         <div class="modal-body row" id="myModal<%=subjectItem.getId() + "body"%>" style="background: #dfead6;
-                            margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
-
-                        </div>
+                            margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;"></div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeWarn()">Close</button>

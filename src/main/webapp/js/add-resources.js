@@ -71,7 +71,6 @@ submitCatcher.addEventListener('submit', function (evnt) {
     var categorySelectValue = categorySelect.options[categorySelect.selectedIndex].value;
 
     for(var i=0; i<fileList.length; i++) {
-
         var file = fileList[i];
         var formData = new FormData();
 
