@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: ilya_ermakov
   Date: 29/07/2018
@@ -112,6 +112,9 @@
     </section>
     <%
         Long lvl = (Long) request.getAttribute("lvl");
+        if(Objects.isNull(lvl)) {
+            lvl = new Long(4);
+        }
     %>
 
     <section class="blocks container-fluid" id="resources">
@@ -121,19 +124,20 @@
                     <button class="dropdown-toggle" type="button" data-toggle="dropdown"> Level <%=lvl%>
                         <span class="caret"></span></button>
 
-                    <ul class="dropdown-menu nav nav-tabs">
+                    <ul class="dropdown-menu">
                         <li class="<%=(lvl.equals(1))?"active":""%>"><a href="/edu/lib?lvl=1">Level 1</a></li>
                         <li class="<%=(lvl.equals(2))?"active":""%>"><a href="/edu/lib?lvl=2">Level 2</a></li>
                         <li class="<%=(lvl.equals(3))?"active":""%>"><a href="/edu/lib?lvl=3">Level 3</a></li>
+                        <li class="<%=(lvl.equals(4))?"active":""%>"><a href="/edu/lib?lvl=3">Common</a></li>
                         <%-- data-toggle="tab" a--%>
                     </ul>
 
                 </div>
-                <button class="">favourite</button>
+                <a href="/files/fav"> <button class="">Favourite files</button> </a>
             </div>
 
             <div class="tab-content" >
-                <div class="collapse in buttoncol fade tab-pane active in" id="levelfirst">
+                <div class="collapse in buttoncol fade tab-pane active in">
                     <%@include file="ResourcesCategoriesVisualizer.jsp" %>
                 </div>
 
@@ -154,7 +158,7 @@
     <script src="/js/resources.js" type="text/javascript"></script>
     <!-- Core JS file -->
 
-    <script src="/js/like.js"> </script>
+    <script src="/js/like.js" type="text/javascript"></script>
 
     <script src="/js/photoswipe.min.js"></script>
 

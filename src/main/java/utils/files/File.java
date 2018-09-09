@@ -85,4 +85,30 @@ public class File implements Comparable<File>{
                 ", publishDate=" + publishDate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        File file = (File) o;
+
+        if (id != null ? !id.equals(file.id) : file.id != null) return false;
+        if (originalName != null ? !originalName.equals(file.originalName) : file.originalName != null) return false;
+        if (saveName != null ? !saveName.equals(file.saveName) : file.saveName != null) return false;
+        if (size != null ? !size.equals(file.size) : file.size != null) return false;
+        if (author != null ? !author.equals(file.author) : file.author != null) return false;
+        return publishDate != null ? publishDate.equals(file.publishDate) : file.publishDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (originalName != null ? originalName.hashCode() : 0);
+        result = 31 * result + (saveName != null ? saveName.hashCode() : 0);
+        result = 31 * result + (size != null ? size.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+        return result;
+    }
 }

@@ -21,7 +21,6 @@ ul.nav li {
 body {
     font-family: 'Helvetica Neue';
     line-height: 25px;
-    font-weight: 700;
     letter-spacing: .01em;
     font-size: 18px;
     background: #dfead6;
@@ -733,4 +732,7 @@ li.dropdown{
 }
 hr{
     margin: 8px;
+}
+button{
+    outline: none!important;
 }

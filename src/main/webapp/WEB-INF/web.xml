@@ -161,6 +161,15 @@
         <servlet-name>utils.files.FileDownloadingServlet</servlet-name>
         <url-pattern>/files/download/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>FavoriteFileServlet</servlet-name>
+        <servlet-class>utils.files.FavoriteFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FavoriteFileServlet</servlet-name>
+        <url-pattern>/files/fav</url-pattern>
+    </servlet-mapping>
     <!--end utils-->
 
 

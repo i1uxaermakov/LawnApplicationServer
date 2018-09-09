@@ -95,18 +95,7 @@
 
         <select form="addResourcesForm"
                 id="lvl_select"
-                onchange="changeSelectOptionsForLevel(this)"
-                style="
-                    width: 100%;
-                    padding: 15px 10px 10px 10px;
-                    background-position: 100% 50%;
-                    background-repeat: no-repeat;
-                    background-size: auto 15%;
-                    border-radius: 0;
-                    cursor: pointer;
-                    -webkit-appearance: none;
-                    border: 1px solid #efefef;
-                    font-size: 20px;">
+                onchange="changeSelectOptionsForLevel(this)">
             <option style="color: grey" value="" disabled selected>Click/Touch to select level.</option>
             <option value="1"> Level 1 </option>
             <option value="2"> Level 2 </option>
@@ -117,18 +106,7 @@
 
         <select form="addResourcesForm"
                 id="category_select"
-                disabled="disabled"
-                style="
-                    width: 100%;
-                    padding: 15px 10px 10px 10px;
-                    background-position: 100% 50%;
-                    background-repeat: no-repeat;
-                    background-size: auto 15%;
-                    border-radius: 0;
-                    cursor: pointer;
-                    -webkit-appearance: none;
-                    border: 1px solid #efefef;
-                    font-size: 20px;">
+                disabled="disabled">
             <option style="color: grey" value="" disabled selected>To choose subject please choose level.</option>
         </select>
     </section>

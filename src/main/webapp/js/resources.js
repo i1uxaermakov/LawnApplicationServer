@@ -4,6 +4,8 @@ function getResourceItemsByCategoryIdAddUp(element) {
     var modalBody = $("#"+modalId);
 
     var formData = new FormData();
+    formData.set("cid", catId);
+    formData.set("purpose","add_up");
 
     var whereToPut = document.getElementById(modalId);
     var firstChild = whereToPut.firstElementChild;
@@ -13,9 +15,6 @@ function getResourceItemsByCategoryIdAddUp(element) {
             formData.set('date', date);
         }
     }
-
-    formData.set("cid", catId);
-    formData.set("purpose","add_up");
 
     function tackleErrorAddUp() {
         modalBody.prepend(
@@ -35,6 +34,9 @@ function getResourceItemsByCategoryIdAddUp(element) {
         data: formData,
         cache: false,
         timeout: 600000,
+        beforeSend: function () {
+
+        },
         success: function (data,textStatus,jqXHR) {
             modalBody.prepend(data);
         },

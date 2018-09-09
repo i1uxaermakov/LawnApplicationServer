@@ -9,19 +9,21 @@ import security.entities.User;
 import utils.HibernateUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
+@MultipartConfig
 public class FavoriteFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("User");
 
         String fileID = req.getParameter("fid");
-        if(Objects.isNull(fileID) || StringUtils.isNumeric(fileID)) {
+        if(Objects.isNull(fileID) || !StringUtils.isNumeric(fileID)) {
             resp.setStatus(400);
             return;
         }
@@ -50,7 +52,8 @@ public class FavoriteFileServlet extends HttpServlet {
         if(Objects.nonNull(file)) {
             if(purpose.equals("add")) {
                 if(user.getFavouriteFiles().contains(file)) {
-                    resp.getWriter().write("File is already added to Favourites!");
+                    resp.getWriter().println("File is already added to Favourites!");
+                    return;
                 }
                 else {
                     try {
@@ -58,6 +61,7 @@ public class FavoriteFileServlet extends HttpServlet {
                         transaction = hibSession.beginTransaction();
                         hibSession.update(user);
                         transaction.commit();
+                        resp.getWriter().println("Successfully added to favorite!");
                     }
                     catch (HibernateException e) {
                         transaction.rollback();
@@ -73,6 +77,7 @@ public class FavoriteFileServlet extends HttpServlet {
                         transaction = hibSession.beginTransaction();
                         hibSession.update(user);
                         transaction.commit();
+                        resp.getWriter().println("Successfully removed from favorite!");
                     }
                     catch (HibernateException e) {
                         transaction.rollback();
@@ -83,16 +88,30 @@ public class FavoriteFileServlet extends HttpServlet {
                 else {
                     resp.setStatus(400);
                     hibSession.close();
+                    resp.getWriter().println("No file to delete!");
                     return;
                 }
             }
         }
         else {
             resp.setStatus(400);
+            resp.getWriter().println("No file with the given ID!");
             hibSession.close();
             return;
         }
 
         hibSession.close();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute("User");
+        req.setAttribute("lvl", user.getLevel());
+        if(req.getParameter("mobile")==null) {
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/FavoriteFilesPageVisualizer.jsp").include(req,resp);
+        }
+        else {
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/FavoriteFileItemsVisualizer.jsp").include(req,resp);
+        }
     }
 }

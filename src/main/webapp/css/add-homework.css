@@ -101,7 +101,8 @@ text-align: center;
 .plus-button{
     font-size: 2em;
 }
-.modal-body{
+
+#myModal .modal-body{
       /*  border-bottom: 1px solid #aeaeae;
     padding-bottom: 0;*/
     padding-left: 30px;

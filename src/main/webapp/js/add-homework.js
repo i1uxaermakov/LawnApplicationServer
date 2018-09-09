@@ -1,3 +1,105 @@
+var numberOfAlertsTriggered = 0;
+var alertLAWN = function(textOfAlert, typeOfAlert){
+    numberOfAlertsTriggered++;
+    modalID = "lawnModal"+numberOfAlertsTriggered;
+    if(typeOfAlert == 'error'){
+        var modalContent = '<div class="alert alert-danger" role="alert">' +
+            textOfAlert +
+            '</div>';
+        $('.first').after('<div id=""'+modalID+'" class="modal fade" role="dialog">\n' +
+            '  <div class="modal-dialog">\n' +
+            '\n' +
+            '    <!-- Modal content-->\n' +
+            '    <div class="modal-content">\n' +
+            '      <div class="modal-header">\n' +
+            '        <button type="button" class="close" data-dismiss="modal">&times;</button>\n' +
+            '        <h4 class="modal-title">Ошибка</h4>\n' +
+            '      </div>\n' +
+            '      <div class="modal-body">\n' +
+            modalContent +
+            '      </div>\n' +
+            '      <div class="modal-footer">\n' +
+            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n' +
+            '      </div>\n' +
+            '    </div>\n' +
+            '\n' +
+            '  </div>\n' +
+            '</div>');
+        $('#'+modalID).modal('toggle');
+    }
+    else if(typeOfAlert == 'normal' || typeOfAlert == undefined){
+        var modalContent = '<div class="alert alert-warning">\n' +
+            textOfAlert +
+            '\n' +
+            '</div>\n';
+        $('.first').after('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
+            '  <div class="modal-dialog">\n' +
+            '\n' +
+            '    <!-- Modal content-->\n' +
+            '    <div class="modal-content">\n' +
+            '      <div class="modal-header">\n' +
+            '        <button type="button" class="close" data-dismiss="modal">&times;</button>\n' +
+            '        <h4 class="modal-title">Warning</h4>\n' +
+            '      </div>\n' +
+            '      <div class="modal-body">\n' +
+            modalContent +
+            '      </div>\n' +
+            '      <div class="modal-footer">\n' +
+            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n' +
+            '      </div>\n' +
+            '    </div>\n' +
+            '\n' +
+            '  </div>\n' +
+            '</div>');
+        $('#'+modalID).modal('toggle');
+
+    }
+    else{
+        console.log('Not right modal trigger, you fucktard')
+    }
+
+}
+
+var emptyPageContent = function(){
+    $('.first').empty();
+}
+
+
+
+function Utf8ArrayToStr(array) {
+    var out, i, len, c;
+    var char2, char3;
+
+    out = "";
+    len = array.length;
+    i = 0;
+    while(i < len) {
+        c = array[i++];
+        switch(c >> 4)
+        {
+            case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+
+            out += String.fromCharCode(c);
+            break;
+            case 12: case 13:
+            char2 = array[i++];
+            out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+            break;
+            case 14:
+                char2 = array[i++];
+                char3 = array[i++];
+                out += String.fromCharCode(((c & 0x0F) << 12) |
+                    ((char2 & 0x3F) << 6) |
+                    ((char3 & 0x3F) << 0));
+                break;
+        }
+    }
+
+    return out;
+}
+
+
+
 var addItem  = function(e){
     e.remove();
     // counter++;
@@ -16,28 +118,28 @@ var addItem  = function(e){
     }
     var customDateText = "Custom Date"
     var strinnew =  '<div class="info_about_group col-xs-6 col-lg-4">' +
-                        '<div class="teacher-subject-item">' +
-                            '<div class="left-div">' +
-                                '<h2>'+subject+'</h2>' +
-                                '<p>'+groupandvenue+'</p>' +
-                            '</div>' +
-                            '<div class="date-lesson">' +
-                                '<select form="addHWform" id="'+ hwFor + 'select' +'" onchange="iscustomcheck(this)">'+optionsHTML+' </select>' +
-                                '<br>' +
-                                '<input form="addHWform" id="'+ hwFor + 'select' + '_custom' + '" type="text" placeholder="'+ customDateText +'" disabled="disabled">' +
-                            '</div>' +
-                        '</div>' +
-                        '<input form="addHWform" type="text" name="HWfor[]" style="display: none" value="'+ hwFor +'">'+
-                    '</div>';
+        '<div class="teacher-subject-item">' +
+        '<div class="left-div">' +
+        '<h2>'+subject+'</h2>' +
+        '<p>'+groupandvenue+'</p>' +
+        '</div>' +
+        '<div class="date-lesson">' +
+        '<select form="addHWform" id="'+ hwFor + 'select' +'" onchange="iscustomcheck(this)">'+optionsHTML+' </select>' +
+        '<br>' +
+        '<input form="addHWform" id="'+ hwFor + 'select' + '_custom' + '" type="text" placeholder="'+ customDateText +'" disabled="disabled">' +
+        '</div>' +
+        '</div>' +
+        '<input form="addHWform" type="text" name="HWfor[]" style="display: none" value="'+ hwFor +'">'+
+        '</div>';
     $('#subject-selected').append(strinnew);
 }
 
 
 var iscustomcheck = function(e){
- if($(e).find(":selected").text()=="Custom Date"){
- 	$(e).attr("disabled","disabled");
- 	$(e).parent().find("input").removeAttr("disabled");
- }
+    if($(e).find(":selected").text()=="Custom Date"){
+        $(e).attr("disabled","disabled");
+        $(e).parent().find("input").removeAttr("disabled");
+    }
 }
 
 
@@ -82,15 +184,15 @@ function previewFiles() {
     function readAndPreview(file) {
         var isLongName = (file.name.length>25)?'\.\.\.':'';
         var fileHTML = '<div class="uploaded-files-hw">' +
-                            '<a href="#">' +
-                                '<i class="far fa-file fa-4x"></i>' +
-                                '<span class="about-hw-file">' +
-                                    'Title: '+ file.name +
-                                    '<br>Size: ' + getReadableFileSizeString(file.size) +
-                                    '<br>' +
-                                '</span>' +
-                            '</a>' +
-                        '</div>';
+            '<a href="#">' +
+            '<i class="far fa-file fa-4x"></i>' +
+            '<span class="about-hw-file">' +
+            'Title: '+ file.name +
+            '<br>Size: ' + getReadableFileSizeString(file.size) +
+            '<br>' +
+            '</span>' +
+            '</a>' +
+            '</div>';
         previewFiles.innerHTML = previewFiles.innerHTML + (fileHTML);
     }
 
@@ -131,7 +233,7 @@ function previewFiles() {
         var arrayOfValuesHWfor = "";
 
         if(!arrayHWfor) {
-            alert("Добавьте получателей ДЗ");
+            alertLAWN("Добавьте тех, кому отправлять дз!", 'normal');
             return;
         }
 
@@ -143,7 +245,7 @@ function previewFiles() {
             if (selectValue === 'Custom Date') {
                 var customDateInputValue = document.getElementById(arrayHWfor.value + 'select_custom');
                 if (isNaN(Date.parse(customDateInputValue.value))) {
-                    alert("Problem with first subject chosen! Wrong input in Date!")
+                    alertLAWN("Вы неправильно ввели дату для группы! Исправьте пожалуйста)))", "error")
                     return;
                 }
                 formData.set(arrayHWfor.value + 'select' + '_custom', customDateInputValue.value);
@@ -162,8 +264,8 @@ function previewFiles() {
                 if (selectValue === 'Custom Date') {
                     var customDateInputValue = document.getElementById(arrayHWfor[i].value + 'select_custom');
                     var regexExp = new RegExp("^((0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-[12]\d{3})$");
-                        if (regexExp.test(customDateInputValue.value)) {
-                        alert("Problem with " + i + " subject chosen! Wrong input in Date!")
+                    if (regexExp.test(customDateInputValue.value)) {
+                        alertLAWN("У предмета " + i + " по счету проблема с датой. Исправь пидор ебанный!", "error")
                         return;
                     }
                     formData.set(arrayHWfor[i].value + 'select' + '_custom', customDateInputValue.value);
@@ -172,31 +274,11 @@ function previewFiles() {
         }
         formData.set('HWfor', arrayOfValuesHWfor);
         if(!(document.getElementById('hw-text').value)) {
-            alert("Please, add description to Homework!");
+            // todo fucking encoding problem - russian does not show properly
+            alertLAWN("Добавьте текст к ДЗ. Ученики не поймут что делать с файлами!", "error");
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
-
-        //todo block user from clicking anywhere and make him wait for the response
-        // request.onload = function () {
-        //     if(request.status===200) {
-        //         myHWid = request.responseText;
-        //         alert(myHWid);
-        //         fileList.forEach(function (file) {
-        //             sendFile(file, 'files');
-        //         });
-        //
-        //         imageList.forEach(function(file) {
-        //            sendFile(file, 'photos');
-        //         });
-        //
-        //     }
-        //     else {
-        //
-        //     }
-        // };
-
-
         $.ajax({
             url:  '/edu/hw/add',
             type: 'post',
@@ -208,7 +290,7 @@ function previewFiles() {
             timeout: 600000,
             success: function (data,textStatus,jqXHR) {
                 myHWid = data;
-                alert(myHWid);
+                alertLAWN(myHWid, "normal");
                 fileList.forEach(function (file) {
                     sendFile(file, 'files');
                 });
@@ -216,16 +298,31 @@ function previewFiles() {
                 imageList.forEach(function(file) {
                     sendFile(file, 'photos');
                 });
+                // emptyPageContent();
             },
             error: function (data,textStatus,jqXHR) {
                 if(jqXHR.status===401) {
                     window.location.href = "/signin";
                 }
                 else {
-                    alert(data + "Some problem occurred while processing on server :(");
+                    alertLAWN(data+ " Проблема на сервере сукаааааааааа :(", "error");
                 }
-            }
+            },
+            progress: function(e){
+                if(e.lengthComputable) {
+                    //calculate the percentage loaded
+                    var pct = (e.loaded / e.total) * 100;
+
+                    //log percentage loaded
+                    console.log(pct);
+                }
+                //this usually happens when Content-Length isn't set
+                else {
+                    console.log('Content Length not reported!');
+                }
+            },
         });
+
 
     });
 
@@ -260,7 +357,7 @@ function previewFiles() {
             cache: false,
             timeout: 600000,
             success: function (data,textStatus,jqXHR) {
-                alert(file.name + " good good");
+                alertLAWN(file.name + " good good", "normal");
             },
             error: function (data,textStatus,jqXHR) {
                 // if(jqXHR.status===401) {
@@ -269,8 +366,26 @@ function previewFiles() {
                 // else {
                 //     tackleErrorAddUp();
                 // }
-                alert(file.name + " not uploaded!" + "\n" + data);
-            }
+                alertLAWN(file.name + " not uploaded!" + "\n" + data, "error");
+            },
+            progress: function(e){
+                // emptyPageContent();
+                if(e.lengthComputable) {
+
+                    var pct = (e.loaded / e.total) * 100;
+
+                    $(".first").append(pct+'\n');
+                }
+                //this usually happens when Content-Length isn't set
+                else {
+                    console.warn('Content Length not reported!');
+                }
+
+            },
         });
+
+
     };
+
 })();
+

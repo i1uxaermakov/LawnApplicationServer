@@ -137,7 +137,7 @@
                                         ArrayList<File> files = new ArrayList<>(hwi.getFiles());
                                         Collections.sort(files);
                                         for(File file: files) {%>
-                                            <div class="uploaded-files-hw" style="position: relative">
+                                            <div class="uploaded-files-hw">
                                                 <a href="/files/download/<%=file.getSaveName()%>">
                                                     <i class="far fa-file fa-4x"></i>
                                                     <span class="about-hw-file" style="word-break: break-all;">
@@ -146,7 +146,7 @@
                                                             <br>Uploaded: <%=hwDeadlineDateFormat.format(file.getPublishDate())%>
                                                     </span>
                                                 </a>
-                                                <span class="filefav"><i class="far fa-star"></i></span>
+                                                <span class="filefav" fid="<%=file.getId()%>"><i class="far fa-star"></i></span>
                                             </div>
                                     <%  }%>
                                 </div>

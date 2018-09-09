@@ -12,15 +12,15 @@
     if(resourceItemList.size() > 0) {
         for(ResourceItem resourceItem: resourceItemList) {
         File file = resourceItem.getFile();%>
-            <div class="uploaded-files-hw" date="<%=file.getPublishDate().getTime()%>" style="position: relative">
+            <div class="uploaded-files-hw" date="<%=file.getPublishDate().getTime()%>" >
                 <a href="/files/download/<%=file.getSaveName()%>">
                     <i class="far fa-file fa-4x"></i>
-                    <span class="about-hw-file">Title: <%=file.getOriginalName()%>
+                    <span class="about-hw-file" style="word-break: break-all;">Title: <%=file.getOriginalName()%>
                         <br>Size: <%=file.getReadableFileSize()%>
                         <br>Uploaded on <%=hwUploadDateFormat.format(file.getPublishDate()) + " by " + file.getAuthor()%>
                     </span>
                 </a>
-                <span class="filefav"><i class="far fa-star"></i></span>
+                <span class="filefav" fid="<%=file.getId()%>"><i class="far fa-star"></i></span>
             </div>
 <%
         }
