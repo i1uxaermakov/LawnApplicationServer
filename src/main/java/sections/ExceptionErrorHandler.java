@@ -57,10 +57,10 @@ public class ExceptionErrorHandler extends HttpServlet {
         }
 
         out.write("<br><br>");
-        out.write("<a href=\"index.html\">Home Page</a>");
+        out.write("<a href=\"/\">Home Page</a>");
         out.write("</body></html>");
 
-        ans+=("<br><br>" + "<a href=\"index.html\">Home Page</a>"+ "</body></html>");
+        ans+=("<br><br>" + "<a href=\"/\">Home Page</a>"+ "</body></html>");
 
 
         System.out.println("\n\n Exception Handled! \n" + ans + "\n");

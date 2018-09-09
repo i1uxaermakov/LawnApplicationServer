@@ -38,7 +38,7 @@ public class SignInServlet extends HttpServlet {
         }
         else {
             resp.setStatus(401);
-            req.getRequestDispatcher("/signin.html").include(req, resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/authorisation/SignInPageVisualizerJSP.jsp").include(req, resp);
         }
     }
 

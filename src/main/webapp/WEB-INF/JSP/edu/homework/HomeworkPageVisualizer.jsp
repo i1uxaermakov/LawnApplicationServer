@@ -29,70 +29,10 @@
 </head>
 
 <body id="body">
-    <header>
-        <nav id="myNavbar" class="navbar navbar-default navbar-fixed-top  container-fluid" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">LAWN</a>
-                    <a class="myacc visible-xs" href="login.html">
-                        <i class="fas fa-user-circle"></i>
-                    </a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="nav navbar-nav navbar-right container-fluid">
-                        <li class="">
-                            <a data-toggle="tabs" href="index.html">
-                                <i class="fas fa-home"></i>
-                                Home</a>
-                        </li>
-                        <li class="active">
-                            <a data-toggle="tabs" href="edu_schedule.html">
-                                <i class="fas fa-graduation-cap"></i>
-                                Education</a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tabs" href="community.html">
-                                <i class="fas fa-users"></i>
-                                Community</a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tabs" href="album.html">
-                                <i class="fas fa-images"></i>
-                                Album</a>
-                        </li>
-                        <li class="hidden-xs">
-                            <a data-toggle="tabs" href="login.html">
-                                <i class="fas fa-user-circle"></i>
-                                Sign In</a>
-                        </li>
-                        <li class="dropdown ">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                                Settings
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">My account</a></li>
-                                <li><a href="#">My organizations</a></li>
-                                <li><a href="#">Liked posts</a></li>
-                                <li><a href="#">My posts</a></li>
-                                <li><a href="#">Tickets</a></li>
-                                <li><a href="#">Add</a></li>
-                                <li><a href="#">FAQ</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <%--begin header--%>
+    <%request.setAttribute("ActiveNavBarSection", "education");%>
+    <%@include file="/WEB-INF/JSP/header/HeaderVisualizerJSP.jsp"%>
+    <%--end header--%>
 
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>

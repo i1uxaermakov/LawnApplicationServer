@@ -75,6 +75,7 @@
         <filter-name>IfAuthorisedFilter</filter-name>
         <!--<url-pattern>/add/*</url-pattern>-->
         <url-pattern>/edu/*</url-pattern>
+        <url-pattern>/files/fav</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <!--end filters-->
