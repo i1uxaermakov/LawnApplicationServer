@@ -10,7 +10,7 @@ public class AddAlbumServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        request.getRequestDispatcher("/WEB-INF/JSP/AddAlbumJSP.jsp").include(request, response);
+//        request.getRequestDispatcher("/WEB-INF/JSP/AddAlbumJSP.jsp").include(request, response);
     }
 
     @Override

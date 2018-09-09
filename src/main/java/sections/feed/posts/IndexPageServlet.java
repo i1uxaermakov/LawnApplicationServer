@@ -37,7 +37,6 @@ public class IndexPageServlet extends HttpServlet {
 
         req.setAttribute("postList", postList);
         req.setAttribute("eventList", eventList);
-        req.getRequestDispatcher("IndexPageVisualizer.jsp").include(req,resp);
     }
 
 }

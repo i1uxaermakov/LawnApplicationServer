@@ -147,7 +147,7 @@
 
 
     <section class="blocks hw container-fluid " id="homework">
-            <%@include file="HomeworkVisualizer.jsp" %>
+            <%@include file="HomeworkItemsVisualizer.jsp" %>
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

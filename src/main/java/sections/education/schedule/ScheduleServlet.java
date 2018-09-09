@@ -32,10 +32,10 @@ public class ScheduleServlet extends HttpServlet {
         req.setAttribute("subjectItemList", subjectItemList);
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/SchedulePageVisualizer.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/schedule/SchedulePageVisualizer.jsp").forward(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ScheduleVisualizer.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/schedule/ScheduleVisualizer.jsp").forward(req,resp);
         }
     }
 

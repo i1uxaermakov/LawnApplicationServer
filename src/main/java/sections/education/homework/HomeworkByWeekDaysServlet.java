@@ -51,10 +51,10 @@ public class HomeworkByWeekDaysServlet extends HttpServlet {
         req.setAttribute("firstDayInYear", firstDayInYearDate);
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkPageVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/homework/HomeworkPageVisualizer.jsp").include(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/HomeworkVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/homework/HomeworkItemsVisualizer.jsp").include(req,resp);
         }
     }
 

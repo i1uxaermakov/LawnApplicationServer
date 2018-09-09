@@ -64,6 +64,6 @@ public class    ResourcesFilesServlet extends HttpServlet {
         hibSession.close();
 
         req.setAttribute("resourceItemList", resourceItemList);
-        req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesFilesVisualizer.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/ResourcesFilesVisualizer.jsp").include(req, resp);
     }
 }

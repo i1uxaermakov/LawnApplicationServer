@@ -67,10 +67,10 @@ public class AddResourceItemServlet extends HttpServlet {
         req.setAttribute("listForThirdLevel",listForThirdLevel);
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/AddResourceItemPageJSP.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/AddResourceItemPageJSP.jsp").include(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/AddResourceItemOptionsJSP.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/AddResourceItemOptionsJSP.jsp").include(req,resp);
         }
     }
 

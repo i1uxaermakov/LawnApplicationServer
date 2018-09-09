@@ -91,6 +91,7 @@ ul.navbar-right {
 }
 
 .text {
+    word-break: break-all;
     margin-bottom: 5px;
     font-size: 16px;
     line-height: 21px;

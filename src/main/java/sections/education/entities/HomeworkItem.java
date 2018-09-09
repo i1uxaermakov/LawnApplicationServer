@@ -1,5 +1,6 @@
 package sections.education.entities;
 
+import org.apache.commons.text.StringEscapeUtils;
 import utils.files.File;
 import utils.images.Photo;
 
@@ -73,7 +74,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     }
 
     public String getDescription() {
-        return description;
+        return StringEscapeUtils.escapeHtml4(description);
     }
 
     public void setDescription(String description) {

@@ -108,10 +108,10 @@ public class FavoriteFileServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("User");
         req.setAttribute("lvl", user.getLevel());
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/FavoriteFilesPageVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/files/FavoriteFilesPageVisualizer.jsp").include(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/FavoriteFileItemsVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/files/FavoriteFileItemsVisualizer.jsp").include(req,resp);
         }
     }
 }

@@ -47,10 +47,10 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
         req.setAttribute("lvl", level);
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesPageVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/ResourcesCategoriesPageVisualizer.jsp").include(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/ResourcesCategoriesVisualizer.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/ResourcesCategoriesVisualizer.jsp").include(req,resp);
         }
 
     }

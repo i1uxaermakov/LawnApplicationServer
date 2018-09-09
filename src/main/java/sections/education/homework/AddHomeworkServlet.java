@@ -43,10 +43,10 @@ public class AddHomeworkServlet extends HttpServlet {
 
 
         if(req.getParameter("mobile")==null) {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/AddHomeworkPageJSP.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/homework/AddHomeworkPageJSP.jsp").forward(req,resp);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/JSP/edu/AddHomeworkForWhom.jsp").include(req,resp);
+            req.getRequestDispatcher("/WEB-INF/JSP/edu/homework/AddHomeworkForWhom.jsp").include(req,resp);
         }
 
         hibSession.close();
