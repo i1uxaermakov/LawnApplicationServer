@@ -40,6 +40,7 @@
             <option value="1"> Level 1 </option>
             <option value="2"> Level 2 </option>
             <option value="3"> Level 3 </option>
+            <option value="4"> Common </option>
         </select>
 
         <hr>

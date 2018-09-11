@@ -1,6 +1,9 @@
 package security.filters;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import security.DAO.RememberMeCookieDAO;
+import security.DAO.UserDAO;
+import security.entities.RememberMeCookie;
 import utils.HibernateUtil;
 import security.entities.User;
 import org.hibernate.Session;
@@ -18,17 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class AuthorisationFilter implements Filter {
     private String cookieName;
-    private RememberMeCookieDAO rememberMeCookieDAO;
-    private static SessionFactory sessionFactory;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         cookieName = filterConfig.getInitParameter("RememberMeCookieName");
-        rememberMeCookieDAO = new RememberMeCookieDAO();
-        sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     @Override
@@ -39,32 +39,28 @@ public class AuthorisationFilter implements Filter {
         if(!((new Boolean(true)).equals(httpSession.getAttribute("Authorised")))) {
             String cookieValue = null;
             Cookie[] cookies = request.getCookies();
-            if(cookies!=null) {
+            if(Objects.nonNull(cookies)) {
                 for (Cookie cookie : cookies) {
-//                    System.out.println(cookie.getName());
                     if (cookie.getName().equals(cookieName)) {
                         cookieValue = cookie.getValue();
                     }
                 }
             }
-            if(!(cookieValue==null || cookieValue.isEmpty())) {
-                Session session = sessionFactory.openSession();
-                Long cookieOwner = null;
+            if(Objects.nonNull(cookieValue) && cookieValue.length()==77) {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                String selector = cookieValue.substring(0,12);
+                String validator = cookieValue.substring(13,cookieValue.length());
 
-                try {
-                    cookieOwner = rememberMeCookieDAO.getRememberMeCookieOwner(cookieValue);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                RememberMeCookie rememberMeCookie = RememberMeCookieDAO.getRememberMeCookieBySelector(selector);
+                if(Objects.nonNull(rememberMeCookie)) {
 
-                if(cookieOwner != null) {
-                    Transaction transaction = session.beginTransaction();
-                    User user = session.get(User.class, cookieOwner);
-                    transaction.commit();
-
-                    httpSession.setAttribute("User", user);
-                    httpSession.setAttribute("Authorised", true);
-                    filterChain.doFilter(servletRequest,servletResponse);
+                    if(rememberMeCookie.getHashedValidator().equals(DigestUtils.sha256Hex(validator))) {
+                        User user = UserDAO.getUserById(rememberMeCookie.getUserId());
+                        if(Objects.nonNull(user)) {
+                            httpSession.setAttribute("User", user);
+                            httpSession.setAttribute("Authorised", true);
+                        }
+                    }
                 }
                 session.close();
             }

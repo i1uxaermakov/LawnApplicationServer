@@ -1,6 +1,9 @@
 package security.authorization;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.text.RandomStringGenerator;
+import org.hibernate.SessionFactory;
+import security.DAO.RememberMeCookieDAO;
 import security.DAO.UserDAO;
 import security.UpdatableBCrypt;
 import utils.HibernateUtil;
@@ -8,26 +11,27 @@ import security.entities.RememberMeCookie;
 import security.entities.User;
 import security.entities.UserLoginInfo;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
-import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Enumeration;
+
+import static org.apache.commons.text.CharacterPredicates.DIGITS;
+import static org.apache.commons.text.CharacterPredicates.LETTERS;
 
 @MultipartConfig
 public class SignInServlet extends HttpServlet {
-    String rememberMeCookieName;
+    private static String rememberMeCookieName;
+    private static SessionFactory sessionFactory;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        rememberMeCookieName = getInitParameter("RememberMeCookieName");
+        rememberMeCookieName = getServletContext().getInitParameter("RememberMeCookieName");
+        sessionFactory = HibernateUtil.getSessionFactory();
     }
 
 
@@ -51,7 +55,7 @@ public class SignInServlet extends HttpServlet {
             resp.setStatus(401);
         }
     }
-    //todo if user has multiple remembermecookies on various devices
+
     boolean checkUserSignInInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession httpSession = request.getSession();
 
@@ -74,15 +78,10 @@ public class SignInServlet extends HttpServlet {
             response.setStatus(401);
         }
         else {
-            UserDAO userDAO = new UserDAO();
             UserLoginInfo userLoginInfo = null;
             Session session = HibernateUtil.getSessionFactory().openSession();
 
-            try {
-                userLoginInfo = userDAO.getUserSignInfoByLyceumId(lyceumId);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            userLoginInfo = UserDAO.getUserSignInfoByLyceumId(lyceumId);
 
             if(userLoginInfo==null) {
                 response.setStatus(401);
@@ -90,31 +89,26 @@ public class SignInServlet extends HttpServlet {
             else {
                 UpdatableBCrypt bCrypt = new UpdatableBCrypt(12);
                 if(bCrypt.verifyHash(password, userLoginInfo.getPassword())) {
-                    User user = null;
+                    User user = UserDAO.getUserById(userLoginInfo.getUserId());
+                    if("on".equals(rememberme)) {
+                        RandomStringGenerator generator = new RandomStringGenerator.Builder()
+                                .withinRange('0', 'z')
+                                .filteredBy(LETTERS, DIGITS)
+                                .build();
 
-                    Transaction transaction = session.beginTransaction();
-                    user = session.get(User.class, userLoginInfo.getUserId());
-                    transaction.commit();
+                        String selector = generator.generate(12), validator = generator.generate(64);
 
-                    if("true".equals(rememberme)) {
-                        String sessionId = request.getSession().getId();
-                        MessageDigest md = null;
-                        try {
-                            md = MessageDigest.getInstance("MD5");
-                        } catch (NoSuchAlgorithmException e) {
-                            e.printStackTrace();
-                        }
-                        md.update(sessionId.getBytes());
-                        byte[] digest = md.digest();
-                        String randomToken = DatatypeConverter.printHexBinary(digest).toUpperCase();
+                        RememberMeCookie rememberMeCookie = new RememberMeCookie();
+                        rememberMeCookie.setUserId(user.getUserId());
+                        rememberMeCookie.setExpiresDate(new Timestamp(System.currentTimeMillis() + 31556952000L)); //1 year in milliseconds
+                        rememberMeCookie.setSelector(selector);
+                        rememberMeCookie.setHashedValidator(DigestUtils.sha256Hex(validator));
+                        RememberMeCookieDAO.persistRememberMeCookie(rememberMeCookie);
 
-                        RememberMeCookie rememberMeCookie = new RememberMeCookie(user.getUserId(), httpSession.getId());
-                        Cookie cookie = new Cookie(rememberMeCookieName, httpSession.getId());
-                        cookie.setMaxAge(60 * 60);
+                        Cookie cookie = new Cookie(rememberMeCookieName, selector+":"+validator);
+                        cookie.setMaxAge(31556952); //1 year
+                        cookie.setHttpOnly(true);
                         response.addCookie(cookie);
-                        Transaction transactionCookie = session.beginTransaction();
-                        session.persist(rememberMeCookie);
-                        transactionCookie.commit();
                     }
                     session.close();
 

@@ -61,7 +61,7 @@
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 padd">
             <div class="redditstyle">
                 <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" data-toggle="dropdown"> Level <%=lvl%>
+                    <button class="dropdown-toggle" type="button" data-toggle="dropdown"> <%=(lvl==0)?"Common":"Level "+lvl%>
                         <span class="caret"></span></button>
 
                     <ul class="dropdown-menu">

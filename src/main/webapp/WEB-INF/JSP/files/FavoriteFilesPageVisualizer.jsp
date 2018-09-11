@@ -58,7 +58,7 @@
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 padd">
             <div class="redditstyle">
                 <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" data-toggle="dropdown"> Level <%=lvl%>
+                    <button class="dropdown-toggle" type="button" data-toggle="dropdown"> <%=(lvl==0)?"Common":"Level "+lvl%>
                         <span class="caret"></span></button>
 
                     <ul class="dropdown-menu">
@@ -66,7 +66,6 @@
                         <li class="<%=(lvl.equals(2))?"active":""%>"><a href="/edu/lib?lvl=2">Level 2</a></li>
                         <li class="<%=(lvl.equals(3))?"active":""%>"><a href="/edu/lib?lvl=3">Level 3</a></li>
                         <li class="<%=(lvl.equals(4))?"active":""%>"><a href="/edu/lib?lvl=3">Common</a></li>
-                        <%-- data-toggle="tab" a--%>
                     </ul>
 
                 </div>

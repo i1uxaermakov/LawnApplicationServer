@@ -24,6 +24,10 @@
         <param-name>pathToFiles</param-name>
         <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
     </context-param>
+    <context-param>
+        <param-name>RememberMeCookieName</param-name>
+        <param-value>RMC</param-value>
+    </context-param>
 
     <!--In welcome-file-list, you have to specify url of servlet/jsp without first slash(/)-->
     <!--If I want servlet mapped to url /MainPage to be default page, I write MainPage here-->
@@ -57,7 +61,7 @@
         <filter-class>security.filters.AuthorisationFilter</filter-class>
         <init-param>
             <param-name>RememberMeCookieName</param-name>
-            <param-value>petrmylyubimiypetr</param-value>
+            <param-value>RMC</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -117,10 +121,7 @@
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
         <servlet-class>security.authorization.SignInServlet</servlet-class>
-        <init-param>
-            <param-name>RememberMeCookieName</param-name>
-            <param-value>petrmylyubimiypetr</param-value>
-        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignInServlet</servlet-name>
@@ -130,11 +131,6 @@
     <servlet>
         <servlet-name>SignOutServlet</servlet-name>
         <servlet-class>security.authorization.SignOutServlet</servlet-class>
-        <init-param>
-            <param-name>RememberMeCookieName</param-name>
-            <param-value>petrmylyubimiypetr</param-value>
-        </init-param>
-        <!--todo remembermecookie mechanism-->
     </servlet>
     <servlet-mapping>
         <servlet-name>SignOutServlet</servlet-name>

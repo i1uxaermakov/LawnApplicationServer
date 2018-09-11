@@ -1,6 +1,7 @@
 package security.entities;
 
 import model.entities.Organization;
+import utils.files.File;
 
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -18,7 +19,7 @@ public class User_ {
         public static volatile SingularAttribute<User, Timestamp> lastLoginDate;
         public static volatile SingularAttribute<User, Long> groupId;
         public static volatile SetAttribute<User, String> privileges;
-        public static volatile SetAttribute<User,Organization> organizations;
+        public static volatile SetAttribute<User,File> favoriteFiles;
 }
 /*
     private Long userId;

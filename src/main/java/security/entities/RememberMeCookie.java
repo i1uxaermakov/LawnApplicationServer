@@ -1,26 +1,24 @@
 package security.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class RememberMeCookie implements Serializable {
-    private Long id;
+    private Long cookieID;
     private Long userId;
-    private String cookieValue;
+    private String selector;
+    private String hashedValidator;
+    private Timestamp expiresDate;
 
     public RememberMeCookie() {
     }
 
-    public RememberMeCookie(Long userId, String cookieValue) {
-        this.userId = userId;
-        this.cookieValue = cookieValue;
+    public Long getCookieID() {
+        return cookieID;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setCookieID(Long id) {
+        this.cookieID = id;
     }
 
     public Long getUserId() {
@@ -31,20 +29,38 @@ public class RememberMeCookie implements Serializable {
         this.userId = userId;
     }
 
-    public String getCookieValue() {
-        return cookieValue;
+    public Timestamp getExpiresDate() {
+        return expiresDate;
     }
 
-    public void setCookieValue(String cookieValue) {
-        this.cookieValue = cookieValue;
+    public void setExpiresDate(Timestamp expiresDate) {
+        this.expiresDate = expiresDate;
+    }
+
+    public String getSelector() {
+        return selector;
+    }
+
+    public void setSelector(String selector) {
+        this.selector = selector;
+    }
+
+    public String getHashedValidator() {
+        return hashedValidator;
+    }
+
+    public void setHashedValidator(String hashedValidator) {
+        this.hashedValidator = hashedValidator;
     }
 
     @Override
     public String toString() {
         return "RememberMeCookie{" +
-                "id=" + id +
+                "cookieID=" + cookieID +
                 ", userId=" + userId +
-                ", cookieValue='" + cookieValue + '\'' +
+                ", selector='" + selector + '\'' +
+                ", hashedValidator='" + hashedValidator + '\'' +
+                ", expiresDate=" + expiresDate +
                 '}';
     }
 }

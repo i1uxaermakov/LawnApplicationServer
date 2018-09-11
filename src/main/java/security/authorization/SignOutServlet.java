@@ -1,5 +1,6 @@
 package security.authorization;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import utils.HibernateUtil;
 import security.entities.RememberMeCookie;
 import security.entities.User;
@@ -10,6 +11,7 @@ import security.DAO.RememberMeCookieDAO;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Objects;
 
 public class SignOutServlet extends HttpServlet {
     String rememberMeCookieName;
@@ -17,15 +19,13 @@ public class SignOutServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        rememberMeCookieName = getInitParameter("RememberMeCookieName");
+        rememberMeCookieName = getServletContext().getInitParameter("RememberMeCookieName");
     }
-
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession httpSession = req.getSession(false);
-        if(httpSession != null && (new Boolean(true)).equals(httpSession.getAttribute("Authorised"))) {
+        if(Objects.nonNull(httpSession) && (new Boolean(true)).equals(httpSession.getAttribute("Authorised"))) {
             User user = (User) httpSession.getAttribute("User");
             Cookie[] cookies = req.getCookies();
             String cookieValue = null;
@@ -33,19 +33,21 @@ public class SignOutServlet extends HttpServlet {
                 if(cookie.getName().equals(rememberMeCookieName)) {
                     cookieValue = cookie.getValue();
                     cookie.setMaxAge(0);
+                    resp.addCookie(cookie);
                 }
             }
 
-            if(cookieValue!=null) {
-                RememberMeCookieDAO rememberMeCookieDAO = new RememberMeCookieDAO();
+            if(Objects.nonNull(cookieValue) && cookieValue.length()==77) { //12+:+64
                 Session session = HibernateUtil.getSessionFactory().openSession();
+                String selector = cookieValue.substring(0,12);
+                String validator = cookieValue.substring(13,cookieValue.length());
 
-                Transaction transaction = session.beginTransaction();
-                RememberMeCookie rememberMeCookie = rememberMeCookieDAO.getRememberMeCookieByUserId(user.getUserId());
-                transaction.commit();
-                Transaction transactionDelete = session.beginTransaction();
-                session.delete(rememberMeCookie);
-                transactionDelete.commit();
+                RememberMeCookie rememberMeCookie = RememberMeCookieDAO.getRememberMeCookieBySelector(selector);
+                if(Objects.nonNull(rememberMeCookie)) {
+                    if(rememberMeCookie.getHashedValidator().equals(DigestUtils.sha256Hex(validator))) {
+                        RememberMeCookieDAO.deleteRememberMeCookie(rememberMeCookie);
+                    }
+                }
 
                 session.close();
             }

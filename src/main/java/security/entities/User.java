@@ -1,12 +1,9 @@
 package security.entities;
 
-
-import model.entities.Organization;
 import utils.files.File;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,10 +18,8 @@ public class User implements Serializable {
     private Long level;
     private Timestamp lastLoginDate;
     private Set<String> privileges = new HashSet<>(0);
-    private Set<Organization> organizations = new HashSet<>(0);
     private Set<File> favouriteFiles = new HashSet<>(0);
 
-//TODO user's password hashing with bcrypt
     public User() {
     }
 
@@ -99,14 +94,6 @@ public class User implements Serializable {
     public void setPrivileges(Set<String> privileges) {
         this.privileges = privileges;
     }
-//
-//    public Set<Organization> getOrganizations() {
-//        return organizations;
-//    }
-//
-//    public void setOrganizations(Set<Organization> organizations) {
-//        this.organizations = organizations;
-//    }
 
     public Long getLevel() {
         return level;
@@ -141,7 +128,44 @@ public class User implements Serializable {
                 ", level=" + level +
                 ", lastLoginDate=" + lastLoginDate +
                 ", privileges=" + privileges +
-                ", organizations=" + organizations +
+                ", favouriteFiles=" + favouriteFiles +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userId != null ? !userId.equals(user.userId) : user.userId != null) return false;
+        if (lyceumId != null ? !lyceumId.equals(user.lyceumId) : user.lyceumId != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (groupId != null ? !groupId.equals(user.groupId) : user.groupId != null) return false;
+        if (groupName != null ? !groupName.equals(user.groupName) : user.groupName != null) return false;
+        if (level != null ? !level.equals(user.level) : user.level != null) return false;
+        if (lastLoginDate != null ? !lastLoginDate.equals(user.lastLoginDate) : user.lastLoginDate != null)
+            return false;
+        if (privileges != null ? !privileges.equals(user.privileges) : user.privileges != null) return false;
+        return favouriteFiles != null ? favouriteFiles.equals(user.favouriteFiles) : user.favouriteFiles == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (lyceumId != null ? lyceumId.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (groupId != null ? groupId.hashCode() : 0);
+        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        result = 31 * result + (level != null ? level.hashCode() : 0);
+        result = 31 * result + (lastLoginDate != null ? lastLoginDate.hashCode() : 0);
+        result = 31 * result + (privileges != null ? privileges.hashCode() : 0);
+        result = 31 * result + (favouriteFiles != null ? favouriteFiles.hashCode() : 0);
+        return result;
     }
 }

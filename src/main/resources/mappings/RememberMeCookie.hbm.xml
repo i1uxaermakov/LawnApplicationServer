@@ -3,11 +3,20 @@
 <hibernate-mapping package="model.entities">
 
     <class name="security.entities.RememberMeCookie" table="RememberMeCookies">
-        <id name="id" column="cookie_id">
+        <id name="cookieID" column="cookie_id">
             <generator class="native"/>
         </id>
-        <property name="cookieValue" length="2000"/>
+        <property name="selector">
+            <column name="selector" sql-type="char(12)"/>
+        </property>
+        <property name="hashedValidator">
+            <column name="hashedValidator" sql-type="char(64)"/>
+        </property>
         <property name="userId"/>
+        <property name="expiresDate" type="converted::utils.converters.LongToDateConverter">
+            <column name="expiresDate"/>
+            <!--<type name="utils.converters.LongToDateConverter"/>-->
+        </property>
 
     </class>
 </hibernate-mapping>

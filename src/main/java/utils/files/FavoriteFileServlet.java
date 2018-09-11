@@ -1,10 +1,9 @@
 package utils.files;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import security.DAO.UserDAO;
 import security.entities.User;
 import utils.HibernateUtil;
 
@@ -34,20 +33,7 @@ public class FavoriteFileServlet extends HttpServlet {
         }
 
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        File file;
-
-        try{
-            transaction = hibSession.beginTransaction();
-            file = hibSession.get(File.class, new Long(fileID));
-            transaction.commit();
-        }
-        catch (HibernateException e) {
-            transaction.rollback();
-            hibSession.close();
-            e.printStackTrace();
-            return;
-        }
+        File file = FileDAO.getFileByID(new Long(fileID));
 
         if(Objects.nonNull(file)) {
             if(purpose.equals("add")) {
@@ -56,34 +42,16 @@ public class FavoriteFileServlet extends HttpServlet {
                     return;
                 }
                 else {
-                    try {
-                        user.getFavouriteFiles().add(file);
-                        transaction = hibSession.beginTransaction();
-                        hibSession.update(user);
-                        transaction.commit();
-                        resp.getWriter().println("Successfully added to favorite!");
-                    }
-                    catch (HibernateException e) {
-                        transaction.rollback();
-                        hibSession.close();
-                        e.printStackTrace();
-                    }
+                    user.getFavouriteFiles().add(file);
+                    UserDAO.updateUser(user);
+                    resp.getWriter().println("Successfully added to favorite!");
                 }
             }
             else if(purpose.equals("del")) {
                 if(user.getFavouriteFiles().contains(file)) {
-                    try {
-                        user.getFavouriteFiles().remove(file);
-                        transaction = hibSession.beginTransaction();
-                        hibSession.update(user);
-                        transaction.commit();
-                        resp.getWriter().println("Successfully removed from favorite!");
-                    }
-                    catch (HibernateException e) {
-                        transaction.rollback();
-                        hibSession.close();
-                        e.printStackTrace();
-                    }
+                    user.getFavouriteFiles().remove(file);
+                    UserDAO.updateUser(user);
+                    resp.getWriter().println("Successfully removed from favorite!");
                 }
                 else {
                     resp.setStatus(400);
