@@ -29,6 +29,21 @@
         <param-value>RMC</param-value>
     </context-param>
 
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.js</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.css</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.otf</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
     <!--In welcome-file-list, you have to specify url of servlet/jsp without first slash(/)-->
     <!--If I want servlet mapped to url /MainPage to be default page, I write MainPage here-->
     <welcome-file-list>
@@ -62,6 +77,10 @@
         <init-param>
             <param-name>RememberMeCookieName</param-name>
             <param-value>RMC</param-value>
+        </init-param>
+        <init-param>
+            <param-name>StaticFilesStringPatterns</param-name>
+            <param-value>/js;/css;/webfonts;/fonts;/html</param-value>
         </init-param>
     </filter>
     <filter-mapping>

@@ -145,7 +145,6 @@ public class AddHomeworkServlet extends HttpServlet {
 
         resp.setStatus(200);
         resp.getWriter().println(idealResponse);
-        System.out.println("\n hw ID = " + idealResponse+  "\n");
     }
 }
 /*

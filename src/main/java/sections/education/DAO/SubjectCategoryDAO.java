@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import sections.education.entities.ResourceItem;
 import sections.education.entities.SubjectResourceCategory;
 import sections.education.entities.SubjectResourceCategory_;
 import utils.HibernateUtil;
@@ -19,7 +20,7 @@ import java.util.List;
 public class SubjectCategoryDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public static List<SubjectResourceCategory> getSubjectCategoriesByLevel(Long level) {
+    public List<SubjectResourceCategory> getSubjectCategoriesByLevel(Long level) {
         List<SubjectResourceCategory> categories = new ArrayList<>(0);
         Session hibSession = null;
         Transaction transaction = null;
@@ -45,7 +46,7 @@ public class SubjectCategoryDAO {
         return categories;
     }
 
-    public static List<SubjectResourceCategory> getSubjectCategoriesByLevelAndDate(Long level, Timestamp lastSavedDate) {
+    public List<SubjectResourceCategory> getSubjectCategoriesByLevelAndDate(Long level, Timestamp lastSavedDate) {
         List<SubjectResourceCategory> categories = new ArrayList<>(0);
         Session hibSession = null;
         Transaction transaction = null;
@@ -73,7 +74,7 @@ public class SubjectCategoryDAO {
         return categories;
     }
 
-    public static List<SubjectResourceCategory> getAllSubjectCategories() {
+    public List<SubjectResourceCategory> getAllSubjectCategories() {
         List<SubjectResourceCategory> list = new ArrayList<>(0);
         Session hibSession = null;
         Transaction transaction = null;
@@ -94,5 +95,42 @@ public class SubjectCategoryDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public SubjectResourceCategory getCategoryByID(Long categoryID) {
+        Session hibSession = null;
+        Transaction transaction = null;
+        SubjectResourceCategory category = null;
+
+        try {
+            hibSession = sessionFactory.getCurrentSession();
+            transaction = hibSession.beginTransaction();
+            category = hibSession.get(SubjectResourceCategory.class, categoryID);
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
+        }
+
+        return category;
+    }
+
+    public void updateSubjectResourceCategory(SubjectResourceCategory category) {
+        Session hibSession = null;
+        Transaction transaction = null;
+
+        try {
+            hibSession = sessionFactory.getCurrentSession();
+            transaction = hibSession.beginTransaction();
+            hibSession.update(category);
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
+        }
     }
 }

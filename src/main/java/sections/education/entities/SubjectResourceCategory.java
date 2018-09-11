@@ -66,4 +66,14 @@ public class SubjectResourceCategory implements Comparable<SubjectResourceCatego
             return this.getCreationDate().compareTo(o.getCreationDate());
         }
     }
+
+    @Override
+    public String toString() {
+        return "SubjectResourceCategory{" +
+                "categoryId=" + categoryId +
+                ", creationDate=" + creationDate +
+                ", course=" + course +
+                ", categoryName='" + categoryName + '\'' +
+                '}';
+    }
 }

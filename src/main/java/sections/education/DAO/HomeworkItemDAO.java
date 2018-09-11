@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import sections.education.entities.HomeworkItem;
 import sections.education.entities.HomeworkItem_;
+import utils.files.File;
+import utils.images.Photo;
 
 import javax.persistence.criteria.*;
 import java.sql.Timestamp;
@@ -44,7 +46,6 @@ public class HomeworkItemDAO {
         return homeworkItemList;
     }
 
-
     public List<HomeworkItem> getHomeworkItemsForHomeworkPageForTeacher(Timestamp todayDate, Long userId) throws SQLException {
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
@@ -70,7 +71,6 @@ public class HomeworkItemDAO {
         }
         return homeworkItemList;
     }
-
 
     public List<HomeworkItem> getHomeworkItemsBySubjectAddUp(Timestamp lastSavedHWDate, Long subjectId, String purpose) {
 //        purpose - add_up_to_empty
@@ -111,7 +111,6 @@ public class HomeworkItemDAO {
         return homeworkItemList;
     }
 
-
     public List<HomeworkItem> getHomeworkItemsBySubjectAddDown(Timestamp lastSavedHWDate, Long subjectId) {
         Session session = null;
         List<HomeworkItem> homeworkItemList = new ArrayList<>();
@@ -140,7 +139,6 @@ public class HomeworkItemDAO {
         return homeworkItemList;
     }
 
-
     public Long persistHomeworkItem(HomeworkItem homeworkItem) {
         Long homeworkItemId = null;
         Session session = null;
@@ -158,7 +156,6 @@ public class HomeworkItemDAO {
         }
         return homeworkItemId;
     }
-
 
     public List<HomeworkItem> getHomeworkItemsForAddingFilesOrPhotos(Long[] hwIDs) {
         List<HomeworkItem> homeworkItemList = new ArrayList<>(0);
@@ -186,5 +183,61 @@ public class HomeworkItemDAO {
             e.printStackTrace();
         }
         return homeworkItemList;
+    }
+
+    public boolean addFileToHomeworkItemsAndUpdate(List<HomeworkItem> homeworkItems, File file, Long userID) {
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+
+            for(HomeworkItem homeworkItem: homeworkItems) {
+                if (userID.equals(homeworkItem.getAddedById())) {
+                    homeworkItem.getFiles().add(file);
+                    session.update(homeworkItem);
+                } else {
+                    transaction.rollback();
+                    return false;
+                }
+            }
+
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            session.close();
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean addPhotoToHomeworkItemsAndUpdate(List<HomeworkItem> homeworkItems, Photo photo, Long userID) {
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+
+            for(HomeworkItem homeworkItem: homeworkItems) {
+                if (userID.equals(homeworkItem.getAddedById())) {
+                    homeworkItem.getPhotos().add(photo);
+                    session.update(homeworkItem);
+                } else {
+                    transaction.rollback();
+                    return false;
+                }
+            }
+
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            session.close();
+            e.printStackTrace();
+        }
+        return true;
     }
 }

@@ -37,13 +37,9 @@ public class AddResourceItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(1);
-
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        List<SubjectResourceCategory> list = SubjectCategoryDAO.getAllSubjectCategories();
+        List<SubjectResourceCategory> list = (new SubjectCategoryDAO()).getAllSubjectCategories();
         hibSession.close();
-
-        System.out.println(2);
 
         List<SubjectResourceCategory> listForFirstLevel = new ArrayList<>(0),
                 listForSecondLevel = new ArrayList<>(0),
@@ -59,8 +55,6 @@ public class AddResourceItemServlet extends HttpServlet {
                 listForThirdLevel.add(category);
             }
         }
-
-        System.out.println(3);
 
         req.setAttribute("listForFirstLevel",listForFirstLevel);
         req.setAttribute("listForSecondLevel",listForSecondLevel);
@@ -99,9 +93,8 @@ public class AddResourceItemServlet extends HttpServlet {
         resourceItem.setPublishDate(file.getPublishDate());
 
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        hibSession.beginTransaction();
-        SubjectResourceCategory category = hibSession.get(SubjectResourceCategory.class, new Long(categoryId));
-        hibSession.getTransaction().commit();
+        SubjectCategoryDAO subjectCategoryDAO = new SubjectCategoryDAO();
+        SubjectResourceCategory category = subjectCategoryDAO.getCategoryByID(new Long(categoryId));
 
         if(Objects.isNull(category)) {
             resp.setStatus(400);
@@ -110,9 +103,7 @@ public class AddResourceItemServlet extends HttpServlet {
         }
         else {
             category.getResourceItems().add(resourceItem);
-            hibSession.beginTransaction();
-            hibSession.update(category);
-            hibSession.getTransaction().commit();
+            subjectCategoryDAO.updateSubjectResourceCategory(category);
         }
 
         hibSession.close();

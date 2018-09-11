@@ -21,6 +21,7 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
+        SubjectCategoryDAO subjectCategoryDAO = new SubjectCategoryDAO();
         User user = (User) req.getSession().getAttribute("User");
 
         String lvl = req.getParameter("lvl");
@@ -35,10 +36,10 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
         List<SubjectResourceCategory> categoryList = new ArrayList<>(0);
         String lastSavedDate = req.getParameter("date");
         if(Objects.isNull(lastSavedDate) || !StringUtils.isNumeric(lastSavedDate)) {
-            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevel(level);
+            categoryList = subjectCategoryDAO.getSubjectCategoriesByLevel(level);
         }
         else {
-            categoryList = SubjectCategoryDAO.getSubjectCategoriesByLevelAndDate(level, new Timestamp(new Long(lastSavedDate)));
+            categoryList = subjectCategoryDAO.getSubjectCategoriesByLevelAndDate(level, new Timestamp(new Long(lastSavedDate)));
         }
 
         hibSession.close();
@@ -47,9 +48,11 @@ public class ResourcesCategoriesPageServlet extends HttpServlet {
         req.setAttribute("lvl", level);
 
         if(req.getParameter("mobile")==null) {
+
             req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/ResourcesCategoriesPageVisualizer.jsp").include(req,resp);
         }
         else {
+            req.setAttribute("mobile", true);
             req.getRequestDispatcher("/WEB-INF/JSP/edu/resources/ResourcesCategoriesVisualizer.jsp").include(req,resp);
         }
 

@@ -1,5 +1,7 @@
 package sections.education.homework;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
 import utils.images.Photo;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
@@ -29,7 +31,6 @@ public class AddPhotosToHWServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session hibSession = HibernateUtil.getSessionFactory().openSession();
         User user = (User) req.getSession().getAttribute("User");
         String hwIDs = req.getParameter("hw_id");
         String[] ids = hwIDs.split(";");
@@ -46,11 +47,13 @@ public class AddPhotosToHWServlet extends HttpServlet {
             }
         }
 
+        Session hibSession = HibernateUtil.getSessionFactory().openSession();
         HomeworkItemDAO homeworkItemDAO = new HomeworkItemDAO();
         List<HomeworkItem> homeworkItemList = homeworkItemDAO.getHomeworkItemsForAddingFilesOrPhotos(idsLong);
 
         if(homeworkItemList.size()!=ids.length) {
             resp.setStatus(400);
+            hibSession.close();
             return;
         }
 
@@ -58,22 +61,11 @@ public class AddPhotosToHWServlet extends HttpServlet {
         (new File(pathToPhotos + File.separator + pathSuffixForHWphotos)).mkdirs();
         Photo photo = ImageUtilities.processReceivedImageAndGetPhotoEntity(part, pathToPhotos, pathSuffixForHWphotos, user);
 
-        hibSession.beginTransaction();
-        for(HomeworkItem homeworkItem: homeworkItemList) {
-            if(user.getUserId().equals(homeworkItem.getAddedById())) {
-                Set<Photo> set= homeworkItem.getPhotos();
-                set.add(photo);
-                homeworkItem.setPhotos(set);
-                hibSession.update(homeworkItem);
-            }
-            else {
-                hibSession.getTransaction().rollback();
-                hibSession.close();
-                resp.setStatus(400);
-                return;
-            }
+        boolean isOK = homeworkItemDAO.addPhotoToHomeworkItemsAndUpdate(homeworkItemList,photo,user.getUserId());
+        if(!isOK) {
+            resp.setStatus(400);
+            hibSession.close();
         }
-        hibSession.getTransaction().commit();
         hibSession.close();
     }
 

@@ -19,7 +19,7 @@ import java.util.List;
 public class ResourceItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public static List<ResourceItem> getResourceItemsByCategoryAddUp(Timestamp lastSavedHWDate, Long categoryId, String purpose) {
+    public List<ResourceItem> getResourceItemsByCategoryAddUp(Timestamp lastSavedHWDate, Long categoryId, String purpose) {
 //        purpose - add_up_to_empty
 //        purpose - add_up_to_smth
         Session session = null;
@@ -59,7 +59,7 @@ public class ResourceItemDAO {
     }
 
 
-    public static List<ResourceItem> getResourceItemsByCategoryAddDown(Timestamp lastSavedHWDate, Long categoryId) {
+    public List<ResourceItem> getResourceItemsByCategoryAddDown(Timestamp lastSavedHWDate, Long categoryId) {
         Session session = null;
         List<ResourceItem> homeworkItemList = new ArrayList<>();
         Transaction transaction = null;

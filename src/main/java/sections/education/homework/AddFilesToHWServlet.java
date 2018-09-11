@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.entities.HomeworkItem;
-import org.apache.commons.io.FilenameUtils;
 import security.entities.User;
 import utils.HibernateUtil;
 import utils.files.File;
@@ -16,14 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.xml.bind.DatatypeConverter;
 import java.io.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @MultipartConfig
 public class AddFilesToHWServlet extends HttpServlet {
@@ -72,22 +66,11 @@ public class AddFilesToHWServlet extends HttpServlet {
             return;
         }
 
-        hibSession.beginTransaction();
-        for(HomeworkItem homeworkItem: homeworkItemList) {
-            if(user.getUserId().equals(homeworkItem.getAddedById())) {
-                Set<utils.files.File> set = homeworkItem.getFiles();
-                set.add(file);
-                homeworkItem.setFiles(set);
-                hibSession.update(homeworkItem);
-            }
-            else{
-                hibSession.getTransaction().rollback();
-                hibSession.close();
-                resp.setStatus(400);
-                return;
-            }
+        boolean isOK = homeworkItemDAO.addFileToHomeworkItemsAndUpdate(homeworkItemList,file,user.getUserId());
+        if(!isOK) {
+            resp.setStatus(400);
         }
-        hibSession.getTransaction().commit();
+
         hibSession.close();
     }
 

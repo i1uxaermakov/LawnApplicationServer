@@ -31,6 +31,7 @@ public class    ResourcesFilesServlet extends HttpServlet {
         }
 
         List<ResourceItem> resourceItemList = new ArrayList<>(0);
+        ResourceItemDAO resourceItemDAO = new ResourceItemDAO();
         String purpose = req.getParameter("purpose");
         req.setAttribute("addButton",true);
 
@@ -44,7 +45,7 @@ public class    ResourcesFilesServlet extends HttpServlet {
                 purposeSuffix = "_to_smth";
                 req.setAttribute("addButton",false);
             }
-            resourceItemList = ResourceItemDAO.getResourceItemsByCategoryAddUp(dateToCheck, new Long(categoryId), purpose+purposeSuffix);
+            resourceItemList = resourceItemDAO.getResourceItemsByCategoryAddUp(dateToCheck, new Long(categoryId), purpose+purposeSuffix);
         }
         else if("add_down".equals(purpose)) {
             String dateString = req.getParameter("date");
@@ -54,7 +55,7 @@ public class    ResourcesFilesServlet extends HttpServlet {
                 return;
             }
             Timestamp dateToCheck = new Timestamp(new Long(dateString));
-            resourceItemList = ResourceItemDAO.getResourceItemsByCategoryAddDown(dateToCheck, new Long(categoryId));
+            resourceItemList = resourceItemDAO.getResourceItemsByCategoryAddDown(dateToCheck, new Long(categoryId));
         }
         else {
             resp.setStatus(400);

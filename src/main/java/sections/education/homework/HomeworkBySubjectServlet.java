@@ -62,9 +62,6 @@ public class HomeworkBySubjectServlet extends HttpServlet {
             return;
         }
 
-
-        //Collections.sort(homeworkItemList);
-//        Collections.reverse(homeworkItemList);
         req.setAttribute("homeworkItemList", homeworkItemList);
         req.getRequestDispatcher("/WEB-INF/JSP/edu/homework/HomeworkItemsVisualizerInSchedule.jsp").include(req, resp);
     }

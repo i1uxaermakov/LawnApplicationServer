@@ -21,14 +21,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class AuthorisationFilter implements Filter {
     private String cookieName;
+    private List<String> pathBeginnings;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         cookieName = filterConfig.getInitParameter("RememberMeCookieName");
+        String paths = filterConfig.getInitParameter("StaticFilesStringPatterns");
+        String[] pathsArray = paths.split(";");
+        pathBeginnings = new ArrayList<>(Arrays.asList(pathsArray));
     }
 
     @Override
@@ -36,37 +43,51 @@ public class AuthorisationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession httpSession = ((HttpServletRequest) servletRequest).getSession(true);
 
-        if(!((new Boolean(true)).equals(httpSession.getAttribute("Authorised")))) {
-            String cookieValue = null;
-            Cookie[] cookies = request.getCookies();
-            if(Objects.nonNull(cookies)) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals(cookieName)) {
-                        cookieValue = cookie.getValue();
-                    }
-                }
+        String requestedURI = request.getRequestURI();
+        boolean isStatic = false;
+        for(String path: pathBeginnings) {
+            if(requestedURI.startsWith(path)) {
+                isStatic = true;
             }
-            if(Objects.nonNull(cookieValue) && cookieValue.length()==77) {
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                String selector = cookieValue.substring(0,12);
-                String validator = cookieValue.substring(13,cookieValue.length());
+        }
 
-                RememberMeCookie rememberMeCookie = RememberMeCookieDAO.getRememberMeCookieBySelector(selector);
-                if(Objects.nonNull(rememberMeCookie)) {
-
-                    if(rememberMeCookie.getHashedValidator().equals(DigestUtils.sha256Hex(validator))) {
-                        User user = UserDAO.getUserById(rememberMeCookie.getUserId());
-                        if(Objects.nonNull(user)) {
-                            httpSession.setAttribute("User", user);
-                            httpSession.setAttribute("Authorised", true);
+        System.out.println("it is supposed here");
+        if(!isStatic) {
+            System.out.println("it is not supposed here" + requestedURI);
+            if (!((new Boolean(true)).equals(httpSession.getAttribute("Authorised")))) {
+                String cookieValue = null;
+                Cookie[] cookies = request.getCookies();
+                if (Objects.nonNull(cookies)) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals(cookieName)) {
+                            cookieValue = cookie.getValue();
                         }
                     }
                 }
-                session.close();
+                if (Objects.nonNull(cookieValue) && cookieValue.length() == 77) {
+                    Session session = HibernateUtil.getSessionFactory().openSession();
+                    String selector = cookieValue.substring(0, 12);
+                    String validator = cookieValue.substring(13, cookieValue.length());
+
+                    RememberMeCookie rememberMeCookie = RememberMeCookieDAO.getRememberMeCookieBySelector(selector);
+                    if (Objects.nonNull(rememberMeCookie)) {
+
+                        if (rememberMeCookie.getHashedValidator().equals(DigestUtils.sha256Hex(validator))) {
+                            User user = UserDAO.getUserById(rememberMeCookie.getUserId());
+                            if (Objects.nonNull(user)) {
+                                httpSession.setAttribute("User", user);
+                                httpSession.setAttribute("Authorised", true);
+                            }
+                        }
+                    }
+                    session.close();
+                }
             }
         }
-        filterChain.doFilter(servletRequest,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
+
+
 
     @Override
     public void destroy() {
