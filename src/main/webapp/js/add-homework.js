@@ -250,10 +250,7 @@ function previewFiles() {
 
     submitCatcher.addEventListener('submit', function (evnt) {
         evnt.preventDefault();
-        emptyPageContent();
-        if(fileList.length!=0 || imageList.legth!=0){
-            showLoader();
-        }
+
         var formData = new FormData();
         var arrayHWfor = document.forms['addHWform'].elements['HWfor[]'];
         var arrayOfValuesHWfor = "";
@@ -306,6 +303,10 @@ function previewFiles() {
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
+        emptyPageContent();
+        if(fileList.length!=0 || imageList.legth!=0){
+            showLoader();
+        }
         $.ajax({
             xhr: function () {
                 var xhr = $.ajaxSettings.xhr();
@@ -451,7 +452,6 @@ function previewFiles() {
                 if(howManyFilesAre100==howManyFilesSent&&howManyPhotosSent==howManyPhotosAre100){
                     isAllSuccess=true;
                     successShow();
-                    console.log('isAllSuccess ',isAllSuccess,'howManyPhotosAre100', howManyFilesAre100,'howManyFilesAre100', howManyFilesAre100);
                     setTimeout(function(){  window.location.href = "/edu/hw"}, 3000);
                 }
             },

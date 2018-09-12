@@ -19,10 +19,14 @@
     <context-param>
         <param-name>pathToPhotos</param-name>
         <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
+        <!--/Users/ilya_ermakov/Desktop/images
+        C:\Users\ilya\Desktop\images-->
     </context-param>
     <context-param>
         <param-name>pathToFiles</param-name>
         <param-value>/Users/ilya_ermakov/Desktop/files</param-value>
+        <!--C:\Users\ilya\Desktop\files
+        /Users/ilya_ermakov/Desktop/files-->
     </context-param>
     <context-param>
         <param-name>RememberMeCookieName</param-name>

@@ -32,6 +32,9 @@ footer {
     border-top: 1px solid;
     padding-top: 12px;
 }
+span, h1, h2, h3, h4, p{
+    word-break: break-all;
+}
 footer p{
     color: #69a03c;
 }

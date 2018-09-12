@@ -82,79 +82,83 @@ fileInput.addEventListener('change', function (evnt) {
 
 var submitCatcher = document.getElementById('addResourcesForm');
 submitCatcher.addEventListener('submit', function (evnt) {
+    if(fileList.length){
+        evnt.preventDefault();
+        hidePageContent();
+        showLoader();
+        var categorySelect = document.getElementById("category_select");
+        var categorySelectValue = categorySelect.options[categorySelect.selectedIndex].value;
+        var files100 = 0;
+        for(var i=0; i<fileList.length; i++) {
+            var file = fileList[i];
+            var formData = new FormData();
 
-    evnt.preventDefault();
-    hidePageContent();
-    showLoader();
-    var categorySelect = document.getElementById("category_select");
-    var categorySelectValue = categorySelect.options[categorySelect.selectedIndex].value;
+            formData.set('file', file, file.name);
+            formData.set("catid", categorySelectValue);
+            formData.set('file', file, file.name);
 
-    for(var i=0; i<fileList.length; i++) {
-        var file = fileList[i];
-        var formData = new FormData();
-
-        formData.set('file', file, file.name);
-        formData.set("catid", categorySelectValue);
-        formData.set('file', file, file.name);
-
-        var progressId="progress"+i;
-        $('#loaderDiv').append('<h2>Uploading'+file.name+'</h2><div class="progress" id="'+progressId+'"><div class="progress-bar" role="progressbar" style="0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>')
-
-
-        $.ajax({
-            xhr: function () {
-                // var xhr = new window.XMLHttpRequest();
-                var xhr = $.ajaxSettings.xhr();
-
-                xhr.upload.onprogress = function (e) {
-                    // For uploads
-                    if(e.lengthComputable) {
-
-                        var pct = Math.floor((e.loaded / e.total) * 100);
-
-                        console.log('File sending percentage '+ pct+'\n');
-
-                        //Visualizing fukin progress
-                        $("#"+progressId+" .progress-bar").css('width', pct+"%");
-                        $("#"+progressId+" .progress-bar").attr('aria-valuenow', pct);
-                        $("#"+progressId+" .progress-bar").html(pct+"%");
+            var progressId="progress"+i;
+            $('#loaderDiv').append('<h4>Uploading'+file.name+'</h4><div class="progress" id="'+progressId+'"><div class="progress-bar" role="progressbar" style="0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>')
 
 
+            $.ajax({
+                xhr: function () {
+                    // var xhr = new window.XMLHttpRequest();
+                    var xhr = $.ajaxSettings.xhr();
+
+                    xhr.upload.onprogress = function (e) {
+                        // For uploads
+                        if(e.lengthComputable) {
+
+                            var pct = Math.floor((e.loaded / e.total) * 100);
+
+                            console.log('File sending percentage '+ pct+'\n');
+
+                            //Visualizing fukin progress
+                            $("#"+progressId+" .progress-bar").css('width', pct+"%");
+                            $("#"+progressId+" .progress-bar").attr('aria-valuenow', pct);
+                            $("#"+progressId+" .progress-bar").html(pct+"%");
+
+
+                        }
+                        //this usually happens when Content-Length isn't set
+                        else {
+                            $("#"+progressId+" .progress-bar").replaceWith("<h2>File is uploading, please wait</h2>");
+
+                            console.log('Content Length not reported!');
+                        }
+                    };
+                    return xhr;
+                },
+
+                url:  '/edu/lib/add/files',
+                type: 'post',
+                processData: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                data: formData,
+                cache: false,
+
+                success: function (data,textStatus,jqXHR) {
+                    files100++;
+                    console.log(file.name + "yes yes");
+                    if(files100==i+1){
+                        successShow();
+                        setTimeout(function(){  window.location.href = "/edu/hw"}, 3000);
                     }
-                    //this usually happens when Content-Length isn't set
+
+                },
+                error: function (data,textStatus,jqXHR) {
+                    if(jqXHR.status===401) {
+                        window.location.href = "/signin";
+                    }
                     else {
-                        $("#"+progressId+" .progress-bar").replaceWith("<h2>File is uploading, please wait</h2>");
-
-                        console.log('Content Length not reported!');
+                        alert(file.name + "shiiiit");
                     }
-                };
-                return xhr;
-            },
-
-            url:  '/edu/lib/add/files',
-            type: 'post',
-            processData: false,
-            contentType: false,
-            enctype: 'multipart/form-data',
-            data: formData,
-            cache: false,
-
-            success: function (data,textStatus,jqXHR) {
-                alert(file.name + "yes yes");
-            },
-            error: function (data,textStatus,jqXHR) {
-                if(jqXHR.status===401) {
-                    window.location.href = "/signin";
                 }
-                else {
-                    alert(file.name + "shiiiit");
-                }
-            }
-        });
+            });
 
+        }
     }
-    successShow();
-
 
 });
-
