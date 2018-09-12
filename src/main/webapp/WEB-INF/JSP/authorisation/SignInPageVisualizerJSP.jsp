@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ilya_ermakov
-  Date: 10/09/2018
-  Time: 00:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -128,42 +121,34 @@
         });
     </script>
 </head>
-<body>
-<%--begin header--%>
-<%request.setAttribute("ActiveNavBarSection", "authorisation");%>
-<%@include file="/WEB-INF/JSP/header/HeaderVisualizerJSP.jsp"%>
-<%--end header--%>
+    <body>
+        <%--begin header--%>
+        <%request.setAttribute("ActiveNavBarSection", "authorisation");%>
+        <%@include file="/WEB-INF/JSP/header/HeaderVisualizerJSP.jsp"%>
+        <%--end header--%>
 
-<div class="login-page">
-    <div class="form">
-        <form class="login-form" action="/signin" method="post" id="SignInForm">
-            <h1 id="loginsign" style="margin-bottom: 10px;">LOG IN</h1>
-            <h5 id="warn" style="background-color: rgb(249,215,215); padding: 5px; display: none;">Username or password is incorrect. Please try again.</h5>
-            <img id="spinner" style="height: 80px; margin-bottom: 10px; display: none" src="/js/spinner.gif">
-
-            <input class="textinput" type="text" placeholder="ID" name="login" id="login"/>
-            <input class="textinput" type="password" placeholder="Password" name="password" id="password"/>
-            <div class="checkbox text-left">
-                <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
+        <div class="login-page">
+            <div class="form">
+                <form class="login-form" action="/signin" method="post" id="SignInForm">
+                    <h1 id="loginsign" style="margin-bottom: 10px;">LOG IN</h1>
+                    <h5 id="warn" style="background-color: rgb(249,215,215); padding: 5px; display: none;">Username or password is incorrect. Please try again.</h5>
+                    <center id="loader" style="display: none"><div class="lds-hourglass"></div></center>
+                    <input class="textinput" type="text" placeholder="ID" name="login" id="login"/>
+                    <input class="textinput" type="password" placeholder="Password" name="password" id="password"/>
+                    <div class="checkbox text-left">
+                        <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
+                    </div>
+                    <button>SIGN IN</button>
+                </form>
             </div>
-            <button>SIGN IN</button>
-        </form>
-    </div>
-</div>
+        </div>
 
 
-<script src="/js/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- <script src="slick/slick.min.js"></script>    -->
-<script src="/js/main.js" type="text/javascript"></script>
-<script src="/js/signin.js" type="text/javascript"></script>
-</body>
+        <script src="/js/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- <script src="slick/slick.min.js"></script>    -->
+        <script src="/js/main.js" type="text/javascript"></script>
+        <script src="/js/signin.js" type="text/javascript"></script>
+    </body>
 </html>
-
-
-
-
-
-
-

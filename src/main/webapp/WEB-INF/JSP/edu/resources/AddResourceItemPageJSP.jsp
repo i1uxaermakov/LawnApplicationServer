@@ -35,7 +35,7 @@
     </ul>
 </section>
 
-<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 add-container first padd">
+<div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 add-container firstcontainer padd">
 
     <form name="addResourcesForm" id="addResourcesForm" enctype="multipart/form-data"></form>
 

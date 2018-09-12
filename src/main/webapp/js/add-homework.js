@@ -1,3 +1,21 @@
+var showLoader = function(){
+
+    $('.firstcontainer').after('<div id="loaderDiv" class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 "></div>')
+    $('#loaderDiv').css('margin-top','5px');
+    $('#loaderDiv').html('<center><div class="lds-hourglass"></div></center>');
+
+
+}
+function successShow(){
+    $('#loaderDiv').hide();
+    $('.firstcontainer').after('<div id="successDiv" class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 "></div>')
+    $('#successDiv').css('margin-top','5px');
+    // $('#loaderDiv').css('margin-top','10px');
+    $('#successDiv').html('<center><div class="alert alert-success"><strong>Success!</strong> You successfully added homework </div></center>'
+    )
+}
+
+
 var numberOfAlertsTriggered = 0;
 var alertLAWN = function(textOfAlert, typeOfAlert){
     numberOfAlertsTriggered++;
@@ -6,7 +24,7 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
         var modalContent = '<div class="alert alert-danger" role="alert">' +
             textOfAlert +
             '</div>';
-        $('.first').after('<div id=""'+modalID+'" class="modal fade" role="dialog">\n' +
+        $('.firstcontainer').after('<div id=""'+modalID+'" class="modal fade" role="dialog">\n' +
             '  <div class="modal-dialog">\n' +
             '\n' +
             '    <!-- Modal content-->\n' +
@@ -32,7 +50,7 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
             textOfAlert +
             '\n' +
             '</div>\n';
-        $('.first').after('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
+        $('.firstcontainer').after('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
             '  <div class="modal-dialog">\n' +
             '\n' +
             '    <!-- Modal content-->\n' +
@@ -61,7 +79,7 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
 }
 
 var emptyPageContent = function(){
-    $('.first').empty();
+    $('.firstcontainer').hide();
 }
 
 
@@ -122,7 +140,7 @@ var addItem  = function(e){
     var strinnew =  '<div class="info_about_group col-xs-6 col-lg-4">' +
         '<div class="teacher-subject-item">' +
         '<div class="left-div">' +
-        '<h2>'+subject+'<i class="fas fa-minus" style="float: right;font-size:  25px;position:  absolute;top: 2px;right:  12px;cursor:  pointer;" onclick="deleteSubject(this)" id="minus'+addingCounterId+'"></i></h2>' +
+        '<h2>'+subject+'<i   style="float: right;font-size:  28px;position:  absolute;top: 2px;right:  12px;cursor:  pointer;font-weight:700;" onclick="deleteSubject(this)" id="minus'+addingCounterId+'">×</i></h2>' +
         '<p>'+groupandvenue+'</p>' +
         '</div>' +
         '<div class="date-lesson">' +
@@ -139,8 +157,11 @@ var addItem  = function(e){
 
 var iscustomcheck = function(e){
     if($(e).find(":selected").text()=="Custom Date"){
-        $(e).attr("disabled","disabled");
         $(e).parent().find("input").removeAttr("disabled");
+    }
+    else{
+        $(e).parent().find("input").attr("disabled", "disabled");
+        $(e).parent().find("input").val(" ");
     }
 }
 
@@ -229,13 +250,17 @@ function previewFiles() {
 
     submitCatcher.addEventListener('submit', function (evnt) {
         evnt.preventDefault();
-
+        emptyPageContent();
+        if(fileList.length!=0 || imageList.legth!=0){
+            showLoader();
+        }
         var formData = new FormData();
         var arrayHWfor = document.forms['addHWform'].elements['HWfor[]'];
         var arrayOfValuesHWfor = "";
 
         if(!arrayHWfor) {
             alertLAWN("Р”РѕР±Р°РІСЊС‚Рµ С‚РµС…, РєРѕРјСѓ РѕС‚РїСЂР°РІР»СЏС‚СЊ РґР·!", 'normal');
+            $('#loaderDiv').remove();
             return;
         }
 
@@ -282,6 +307,21 @@ function previewFiles() {
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
         $.ajax({
+            xhr: function () {
+                var xhr = $.ajaxSettings.xhr();
+
+                xhr.upload.onprogress = function (e) {
+                    // For uploads
+                    if(e.lengthComputable) {
+                        var pct = Math.floor((e.loaded / e.total) * 100);
+                        console.log('Form uploading '+pct);
+                    }
+                    else {
+                        console.log('Content Length not reported!');
+                    }
+                };
+                return xhr;
+            },
             url:  '/edu/hw/add',
             type: 'post',
             processData: false,
@@ -290,17 +330,24 @@ function previewFiles() {
             data: formData,
             cache: false,
             timeout: 600000,
+
             success: function (data,textStatus,jqXHR) {
                 myHWid = data;
-                alertLAWN(myHWid, "normal");
-                fileList.forEach(function (file) {
-                    sendFile(file, 'files');
-                });
+                if(fileList.length ==0 && imageList.length ==0){
+                    successShow();
+                    setTimeout(function(){  window.location.href = "/edu/hw"}, 3000);
+                }
+                else{
+                    fileList.forEach(function (file) {
+                        sendFile(file, 'files');
+                    });
 
-                imageList.forEach(function(file) {
-                    sendFile(file, 'photos');
-                });
-                // emptyPageContent();
+                    imageList.forEach(function(file) {
+                        sendFile(file, 'photos');
+                    });
+                }
+
+
             },
             error: function (data,textStatus,jqXHR) {
                 if(jqXHR.status===401) {
@@ -310,19 +357,8 @@ function previewFiles() {
                     alertLAWN(data+ " РџСЂРѕР±Р»РµРјР° РЅР° СЃРµСЂРІРµСЂРµ СЃСѓРєР°Р°Р°Р°Р°Р°Р°Р°Р°Р° :(", "error");
                 }
             },
-            progress: function(e){
-                if(e.lengthComputable) {
-                    //calculate the percentage loaded
-                    var pct = (e.loaded / e.total) * 100;
 
-                    //log percentage loaded
-                    console.log(pct);
-                }
-                //this usually happens when Content-Length isn't set
-                else {
-                    console.log('Content Length not reported!');
-                }
-            },
+
         });
 
 
@@ -343,13 +379,52 @@ function previewFiles() {
         }
         previewImages();
     });
-
+    var howManyFilesSent = 0;
+    var howManyPhotosSent = 0;
+    var howManyPhotosAre100 =0;
+    var howManyFilesAre100 = 0;
+    var forIdPurposesOnly = 0;
+    var isAllSuccess = false;
     var sendFile = function (file, url) {
+        forIdPurposesOnly++;
+        if(url=='files'){howManyFilesSent++;}
+        else{howManyPhotosSent++;}
+        var progressId="progress"+forIdPurposesOnly;
         var formData = new FormData();
         formData.set('file', file, file.name);
         formData.set('hw_id', myHWid);
-
+        $('#loaderDiv').append('<h4 style="word-break: break-all;">Uploading '+file.name+'</h4><div class="progress" id="'+progressId+'"><div class="progress-bar" role="progressbar" style="0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>')
         $.ajax({
+            xhr: function () {
+                // var xhr = new window.XMLHttpRequest();
+                var xhr = $.ajaxSettings.xhr();
+
+                xhr.upload.onprogress = function (e) {
+                    // For uploads
+                    if(e.lengthComputable) {
+
+                        var pct = Math.floor((e.loaded / e.total) * 100);
+
+                        console.log('File sending percentage '+ pct+'\n');
+
+                        //Visualizing fukin progress
+                        $("#"+progressId+" .progress-bar").css('width', pct+"%");
+                        $("#"+progressId+" .progress-bar").attr('aria-valuenow', pct);
+                        $("#"+progressId+" .progress-bar").html(pct+"%");
+
+
+
+
+                    }
+                    //this usually happens when Content-Length isn't set
+                    else {
+                        $("#"+progressId+" .progress-bar").replaceWith("<h2>File is uploading, please wait</h2>");
+
+                        console.log('Content Length not reported!');
+                    }
+                };
+                return xhr;
+            },
             url:  '/edu/hw/add/'+url,
             type: 'post',
             processData: false,
@@ -359,7 +434,26 @@ function previewFiles() {
             cache: false,
             timeout: 600000,
             success: function (data,textStatus,jqXHR) {
-                alertLAWN(file.name + " good good", "normal");
+                if(url=='photos'){
+
+                    howManyPhotosAre100++;
+                    console.log("Photos is 100", file.name)
+                    if(howManyPhotosAre100==howManyPhotosSent){console.log("All attachedd photos are sent")}
+                }
+                else{
+                    howManyFilesAre100++;
+                    console.log("FILE IS 100 ", file.name)
+                    if(howManyFilesAre100==howManyFilesSent){console.log("All attachedd photos are sent")}
+
+                }
+
+
+                if(howManyFilesAre100==howManyFilesSent&&howManyPhotosSent==howManyPhotosAre100){
+                    isAllSuccess=true;
+                    successShow();
+                    console.log('isAllSuccess ',isAllSuccess,'howManyPhotosAre100', howManyFilesAre100,'howManyFilesAre100', howManyFilesAre100);
+                    setTimeout(function(){  window.location.href = "/edu/hw"}, 3000);
+                }
             },
             error: function (data,textStatus,jqXHR) {
                 // if(jqXHR.status===401) {
@@ -370,19 +464,7 @@ function previewFiles() {
                 // }
                 alertLAWN(file.name + " not uploaded!" + "\n" + data, "error");
             },
-            progress: function(e){
-                // emptyPageContent();
-                if(e.lengthComputable) {
 
-                    var pct = (e.loaded / e.total) * 100;
-
-                    $(".first").append(pct+'\n');
-                }
-                //this usually happens when Content-Length isn't set
-                else {
-                    console.warn('Content Length not reported!');
-                }
-            },
         });
 
 

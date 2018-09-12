@@ -235,6 +235,7 @@ h1 {
     height: 94px !important;
 }
 
+
 .container .nav-tabs {
     width: 100%;
     padding: 0;
@@ -347,6 +348,7 @@ h1 {
     font-size: 15px;
     line-height: 18px;
     margin-top: 5px;
+    word-break: break-all;
     margin-left: 10px;
     font-weight: 500 !important;
 }
@@ -567,4 +569,15 @@ section.blocks{
     border: 1px solid #efefef;
     font-size: 20px;
     outline: none;
+}
+
+.progress-bar {
+    -webkit-transition: width 2.5s ease;
+    transition: width .2s ease;
+}
+#loaderDiv, #successDiv
+{
+    background: #fff;
+    padding: 10px 5px 5px 5px;
+
 }
