@@ -6,7 +6,7 @@
         <id name="categoryId" column="category_id">
             <generator class="native"/>
         </id>
-        <property name="categoryName"/>
+        <property name="categoryName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="creationDate" type="converted::utils.converters.LongToDateConverter">
             <column name="creationDate"/>
         </property>
@@ -21,28 +21,5 @@
             </many-to-many>
         </set>
 
-
     </class>
 </hibernate-mapping>
-        <!--private Long categoryId;-->
-        <!--private Timestamp creationDate;-->
-        <!--private Long course;-->
-        <!--private Set<ResourceItem> resourceItems = new HashSet<>(0);
-
-
-
-        <set name="files" table="PostFiles" fetch="join" lazy="false" cascade="all">
-            <key>
-                <column name="post_id" not-null="true"/>
-            </key>
-            <!--<one-to-many class="utils.files-->
-<!--<many-to-many class="utils.files.File">-->
-<!--<column name="file_id" not-null="true"/>-->
-<!--</many-to-many>-->
-        <!--</set>-->
-
-
-
-
-
-        -->

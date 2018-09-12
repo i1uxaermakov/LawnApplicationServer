@@ -35,6 +35,7 @@ public class ScheduleServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/JSP/edu/schedule/SchedulePageVisualizer.jsp").forward(req,resp);
         }
         else {
+            req.setAttribute("mobile", true);
             req.getRequestDispatcher("/WEB-INF/JSP/edu/schedule/ScheduleVisualizer.jsp").forward(req,resp);
         }
     }

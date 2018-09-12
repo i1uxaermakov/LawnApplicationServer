@@ -8,11 +8,11 @@
         </id>
         <property name="addedById"/>
         <property name="teacherId"/>
-        <property name="teacherName"/>
+        <property name="teacherName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="groupId"/>
         <property name="subjectId"/>
-        <property name="subjectName"/>
-        <property name="description" length="15000">
+        <property name="subjectName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
+        <property name="description" length="15000" type="converted::utils.converters.StringToEscapedHTMLStringConverter">
             <column name="description" sql-type="text"></column>
         </property>
         <property name="publishDate" type="converted::utils.converters.LongToDateConverter">

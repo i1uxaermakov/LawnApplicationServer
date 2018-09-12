@@ -7,9 +7,9 @@
             <generator class="native"/>
         </id>
         
-        <property name="originalName" length="2000"/>
+        <property name="originalName" length="2000" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="saveName" length="2000"/>
-        <property name="author" length="2000"/>
+        <property name="author" length="2000" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="size"/>
         <property name="publishDate" type="converted::utils.converters.LongToDateConverter">
             <column name="publishDate"/>

@@ -6,6 +6,7 @@
 
 <%
     List<SubjectItem> subjectItemList = (List<SubjectItem>) request.getAttribute("subjectItemList");
+    Boolean isMobile = (Boolean) request.getAttribute("mobile");
     String forwhom = (String) request.getAttribute("for");
     Map<DayLecture,Set<SubjectItem> > map = new HashMap<>();
     List<DayLecture> dayLectureList = new ArrayList<>();
@@ -59,8 +60,13 @@
                     <div class="urok <%=(subjectItems.size() != 1)?"centered":""%> u<%=dayLecture.getLectureOrder()%>">
                     <%
                     for(SubjectItem subjectItem: subjectItems) { %>
-                        <div class="subject-item pointer" data-toggle="modal" data-target="#myModal<%=subjectItem.getId()%>"
-                             onclick="showHomeworkBySubjectAddUp(this)" sID="<%=subjectItem.getId()%>">
+                        <div class="subject-item pointer"
+                             sID="<%=subjectItem.getId()%>"
+                            <%if(Objects.isNull(isMobile) || !isMobile) {%>
+                             data-toggle="modal"
+                             data-target="#myModal<%=subjectItem.getId()%>"
+                             onclick="showHomeworkBySubjectAddUp(this)">
+                            <%}%>
                             <a>
                                 <div class="ordles"><%=dayLecture.getLectureOrder()%></div>
                                 <div class="content-schedule">
@@ -82,15 +88,13 @@
             c.add(Calendar.DATE, 1);
         }
 
-        for(SubjectItem subjectItem: subjectItemList) {
+        if(Objects.isNull(isMobile) || !isMobile) {
+            for(SubjectItem subjectItem: subjectItemList) {
             %>
+            <%--Modal--%>
             <div id="myModal<%=subjectItem.getId()%>" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-md">
-
-                <!-- Modal content-->
                     <div class="modal-content">
-
-
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="removeWarn()">&times;</button>
                             <h4 class="modal-title">HW по <%=subjectItem.getName()+", "+subjectItem.getTeacherName()%></h4>
@@ -102,13 +106,11 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeWarn()">Close</button>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
     <%
+            }
         }
     %>
 </section>

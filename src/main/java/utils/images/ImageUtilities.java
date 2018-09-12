@@ -108,7 +108,7 @@ public class ImageUtilities {
                     thumbnailPhotoName, thumbDim,
                     squareThumbnailName, squareDim,
                     new Timestamp(System.currentTimeMillis()),
-                    user.getFirstName() + " " + user.getLastName());
+                    user.getFullName());
         }
         catch (IOException e) {
             e.printStackTrace();

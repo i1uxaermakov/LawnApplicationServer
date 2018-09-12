@@ -13,7 +13,7 @@
         <property name="originalPhotoDimensions" column="original_dim" length="50"/>
         <property name="thumbnailPhotoDimensions" column="thumb_dim" length="50"/>
         <property name="squarePhotoDimensions" column="square_dim" length="50"/>
-        <property name="author"/>
+        <property name="author" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="publishDate" type="converted::utils.converters.LongToDateConverter">
             <column name="publishDate"/>
         </property>

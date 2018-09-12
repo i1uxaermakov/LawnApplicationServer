@@ -74,7 +74,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     }
 
     public String getDescription() {
-        return StringEscapeUtils.escapeHtml4(description);
+        return description;
     }
 
     public void setDescription(String description) {

@@ -34,7 +34,7 @@ public class FileUtilities {
 
     public static File processReceivedFileAndGetFileEntity(Part part, String pathToHWfiles, String suffix, User user) {
         String fileName = FileUtilities.getFileName(part);
-        if(part==null || fileName==null || fileName=="") {
+        if(part==null || fileName==null || fileName.equals("")) {
             return null;
         }
 
@@ -67,7 +67,7 @@ public class FileUtilities {
         file.setSize(part.getSize());
         file.setSaveName(suffix + java.io.File.separator + fileNameToSave + "." + FilenameUtils.getExtension(fileName));
         file.setOriginalName(fileName);
-        file.setAuthor(user.getFirstName() + " " + user.getLastName());
+        file.setAuthor(user.getFullName());
         file.setPublishDate(new Timestamp(System.currentTimeMillis()));
 
         System.out.println(fileName);

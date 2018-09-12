@@ -6,12 +6,12 @@
         <id name="id" column="subject_id">
             <generator class="native"/>
         </id>
-        <property name="name"/>
+        <property name="name" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="teacherId"/>
-        <property name="teacherName"/>
+        <property name="teacherName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="groupId"/>
-        <property name="lectureHall"/>
-        <property name="groupName"/>
+        <property name="lectureHall" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
+        <property name="groupName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
 
         <set name="whenIsSubject" table="Subject_DayLecture" fetch="join" lazy="false" inverse="true" cascade="all">
             <key>

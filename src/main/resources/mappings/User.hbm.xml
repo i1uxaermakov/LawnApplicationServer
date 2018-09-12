@@ -24,12 +24,14 @@
         <!--</set>-->
 
         <property name = "lyceumId" column = "lyceum_id" length="50"/>
-        <property name = "password" column = "password" type = "string" length="100"/>
-        <property name = "firstName" column = "first_name" type = "string" length="50"/>
-        <property name = "lastName" column = "last_name" type = "string" length="50"/>
-        <property name = "lastLoginDate" column = "last_login_date" type = "timestamp"/>
+        <property name = "password" column = "password" type = "string" length="100" />
+        <property name = "firstName" column = "first_name" length="50" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
+        <property name = "lastName" column = "last_name"  length="50" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
+        <property name="lastLoginDate">
+            <column name="lastLoginDate"/>
+        </property>
         <property name = "groupId" column="group_id"/>
-        <property name="groupName" column="group_name"/>
+        <property name="groupName" column="group_name" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="level" column="level"/>
 
         <set name="favouriteFiles" table="UserFavouriteFiles" fetch="join" lazy="false" cascade="all">

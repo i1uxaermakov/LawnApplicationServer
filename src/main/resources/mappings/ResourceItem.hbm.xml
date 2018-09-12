@@ -6,7 +6,7 @@
         <id name="resourceItemId" column="resource_id">
             <generator class="native"/>
         </id>
-        <property name="addedBy"/>
+        <property name="addedBy" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="publishDate" type="converted::utils.converters.LongToDateConverter">
             <column name="publishDate"/>
             <!--<type name="utils.converters.LongToDateConverter"/>-->
