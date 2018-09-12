@@ -82,6 +82,7 @@ public class SignInServlet extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().openSession();
 
             userLoginInfo = UserDAO.getUserSignInfoByLyceumId(lyceumId);
+            System.out.println("rememberme" + rememberme);
 
             if(userLoginInfo==null) {
                 response.setStatus(401);
@@ -90,7 +91,7 @@ public class SignInServlet extends HttpServlet {
                 UpdatableBCrypt bCrypt = new UpdatableBCrypt(12);
                 if(bCrypt.verifyHash(password, userLoginInfo.getPassword())) {
                     User user = UserDAO.getUserById(userLoginInfo.getUserId());
-                    if("on".equals(rememberme)) {
+                    if("true".equals(rememberme)) {
                         RandomStringGenerator generator = new RandomStringGenerator.Builder()
                                 .withinRange('0', 'z')
                                 .filteredBy(LETTERS, DIGITS)

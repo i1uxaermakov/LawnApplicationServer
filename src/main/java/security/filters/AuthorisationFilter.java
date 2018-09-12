@@ -51,9 +51,7 @@ public class AuthorisationFilter implements Filter {
             }
         }
 
-        System.out.println("it is supposed here");
         if(!isStatic) {
-            System.out.println("it is not supposed here" + requestedURI);
             if (!((new Boolean(true)).equals(httpSession.getAttribute("Authorised")))) {
                 String cookieValue = null;
                 Cookie[] cookies = request.getCookies();

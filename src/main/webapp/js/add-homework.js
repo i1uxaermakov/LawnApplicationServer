@@ -13,7 +13,7 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
             '    <div class="modal-content">\n' +
             '      <div class="modal-header">\n' +
             '        <button type="button" class="close" data-dismiss="modal">&times;</button>\n' +
-            '        <h4 class="modal-title">Ошибка</h4>\n' +
+            '        <h4 class="modal-title">РћС€РёР±РєР°</h4>\n' +
             '      </div>\n' +
             '      <div class="modal-body">\n' +
             modalContent +
@@ -99,9 +99,11 @@ function Utf8ArrayToStr(array) {
 }
 
 
-
+var addingCounterId = 0;
 var addItem  = function(e){
-    e.remove();
+    addingCounterId++;
+    $(e).attr("id", "hidden"+addingCounterId)
+    $(e).hide();
     // counter++;
     var hwFor = $(e).attr('subjID');
     var subject = $(e).find('span').html();
@@ -120,7 +122,7 @@ var addItem  = function(e){
     var strinnew =  '<div class="info_about_group col-xs-6 col-lg-4">' +
         '<div class="teacher-subject-item">' +
         '<div class="left-div">' +
-        '<h2>'+subject+'</h2>' +
+        '<h2>'+subject+'<i class="fas fa-minus" style="float: right;font-size:  25px;position:  absolute;top: 2px;right:  12px;cursor:  pointer;" onclick="deleteSubject(this)" id="minus'+addingCounterId+'"></i></h2>' +
         '<p>'+groupandvenue+'</p>' +
         '</div>' +
         '<div class="date-lesson">' +
@@ -233,7 +235,7 @@ function previewFiles() {
         var arrayOfValuesHWfor = "";
 
         if(!arrayHWfor) {
-            alertLAWN("Добавьте тех, кому отправлять дз!", 'normal');
+            alertLAWN("Р”РѕР±Р°РІСЊС‚Рµ С‚РµС…, РєРѕРјСѓ РѕС‚РїСЂР°РІР»СЏС‚СЊ РґР·!", 'normal');
             return;
         }
 
@@ -245,7 +247,7 @@ function previewFiles() {
             if (selectValue === 'Custom Date') {
                 var customDateInputValue = document.getElementById(arrayHWfor.value + 'select_custom');
                 if (isNaN(Date.parse(customDateInputValue.value))) {
-                    alertLAWN("Вы неправильно ввели дату для группы! Исправьте пожалуйста)))", "error")
+                    alertLAWN("Р’С‹ РЅРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµР»Рё РґР°С‚Сѓ РґР»СЏ РіСЂСѓРїРїС‹! Р�СЃРїСЂР°РІСЊС‚Рµ РїРѕР¶Р°Р»СѓР№СЃС‚Р°)))", "error")
                     return;
                 }
                 formData.set(arrayHWfor.value + 'select' + '_custom', customDateInputValue.value);
@@ -265,7 +267,7 @@ function previewFiles() {
                     var customDateInputValue = document.getElementById(arrayHWfor[i].value + 'select_custom');
                     var regexExp = new RegExp("^((0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-[12]\d{3})$");
                     if (regexExp.test(customDateInputValue.value)) {
-                        alertLAWN("У предмета " + i + " по счету проблема с датой. Исправь пидор ебанный!", "error")
+                        alertLAWN("РЈ РїСЂРµРґРјРµС‚Р° " + i + " РїРѕ СЃС‡РµС‚Сѓ РїСЂРѕР±Р»РµРјР° СЃ РґР°С‚РѕР№. Р�СЃРїСЂР°РІСЊ РїРёРґРѕСЂ РµР±Р°РЅРЅС‹Р№!", "error")
                         return;
                     }
                     formData.set(arrayHWfor[i].value + 'select' + '_custom', customDateInputValue.value);
@@ -275,7 +277,7 @@ function previewFiles() {
         formData.set('HWfor', arrayOfValuesHWfor);
         if(!(document.getElementById('hw-text').value)) {
             // todo fucking encoding problem - russian does not show properly
-            alertLAWN("Добавьте текст к ДЗ. Ученики не поймут что делать с файлами!", "error");
+            alertLAWN("Р”РѕР±Р°РІСЊС‚Рµ С‚РµРєСЃС‚ Рє Р”Р—. РЈС‡РµРЅРёРєРё РЅРµ РїРѕР№РјСѓС‚ С‡С‚Рѕ РґРµР»Р°С‚СЊ СЃ С„Р°Р№Р»Р°РјРё!", "error");
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
@@ -305,7 +307,7 @@ function previewFiles() {
                     window.location.href = "/signin";
                 }
                 else {
-                    alertLAWN(data+ " Проблема на сервере сукаааааааааа :(", "error");
+                    alertLAWN(data+ " РџСЂРѕР±Р»РµРјР° РЅР° СЃРµСЂРІРµСЂРµ СЃСѓРєР°Р°Р°Р°Р°Р°Р°Р°Р°Р° :(", "error");
                 }
             },
             progress: function(e){
@@ -380,7 +382,6 @@ function previewFiles() {
                 else {
                     console.warn('Content Length not reported!');
                 }
-
             },
         });
 
@@ -389,3 +390,9 @@ function previewFiles() {
 
 })();
 
+var deleteSubject = function(element){
+    var minusId = $(element).attr("id").split("minus")[1];
+    var idForShowing = "hidden" + minusId;
+    $(element).parents(".info_about_group").remove();
+    $("#"+idForShowing).show();
+}

@@ -10,7 +10,7 @@
            role="button"
            id="<%=id%>"
 
-           <%if(Objects.nonNull(isMobile) && !isMobile) {%>
+           <%if(Objects.isNull(isMobile) || !isMobile) {%>
            data-toggle="modal"
            data-target="#<%=id+"Modal"%>"
            onclick="getResourceItemsByCategoryIdAddUp(this)"
@@ -22,7 +22,7 @@
         </a>
 
         <!-- Modal -->
-        <%if(Objects.nonNull(isMobile) && !isMobile) {%>
+        <%if(Objects.isNull(isMobile) || !isMobile) {%>
         <div class="modal fade" id="<%=id+"Modal"%>"
              tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog modal-md" role="document">

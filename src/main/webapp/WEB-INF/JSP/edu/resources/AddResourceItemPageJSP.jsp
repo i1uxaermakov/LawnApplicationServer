@@ -24,13 +24,22 @@
 <%request.setAttribute("ActiveNavBarSection", "education");%>
 <%@include file="/WEB-INF/JSP/header/HeaderVisualizerJSP.jsp"%>
 <%--end header--%>
-
+<section class="tabsection container">
+    <ul class="nav nav-tabs">
+        <li class="first"><a   href="/edu/sc">Schedule</a></li>
+        <li><a href="/edu/hw">Homework</a></li>
+        <li class=""><a href="/edu/lib">Recources</a></li>
+        <li class="active" style="float: right;">
+            <a href="/edu/lib/add/files" style="color: #69a03c;font-size: 1.8em;padding-top: 0;padding-bottom: 0px;" title="Add resources!">+</a>
+        </li>
+    </ul>
+</section>
 
 <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 add-container first padd">
 
     <form name="addResourcesForm" id="addResourcesForm" enctype="multipart/form-data"></form>
 
-    <section class="addingsection">
+    <section class="addingsection" style="margin-top: 2px !important;">
         <h5 class="input_header">Добавление ресурсов:</h5>
 
         <select form="addResourcesForm"

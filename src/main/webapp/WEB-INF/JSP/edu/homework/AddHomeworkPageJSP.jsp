@@ -34,8 +34,19 @@
         <%@include file="/WEB-INF/JSP/header/HeaderVisualizerJSP.jsp"%>
         <%--end header--%>
 
+        <section class="tabsection container">
+            <ul class="nav nav-tabs">
+                <li class="first"><a href="/edu/sc">Schedule</a></li>
+                <li class=""><a href="/edu/hw">Homework</a></li>
+                <li><a href="/edu/lib">Recources</a></li>
+                <li class="active" style="float: right;">
+                    <a href="/edu/hw/add" style="color: #69a03c;font-size: 1.8em;padding-top: 0;padding-bottom: 0px;" title="Add homework!">+</a>
+                </li>
 
-        <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 add-container first padd">
+            </ul>
+        </section>
+
+        <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 add-container firstcontainer padd">
 
             <section class="addingsection">
 
