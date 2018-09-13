@@ -45,7 +45,7 @@
             <li class="first"><a   href="/edu/sc">Schedule</a></li>
             <li><a href="/edu/hw">Homework</a></li>
             <li class="active"><a href="/edu/lib">Recources</a></li>
-            <li class=" linkToAdd" style="float: right;">
+            <li class=" plusSign" style="float: right;">
                 <a href="/edu/lib/add/files" style="color: #69a03c;font-size: 1.8em;padding-top: 0;padding-bottom: 0px;" title="Add resources!">+</a>
             </li>
         </ul>

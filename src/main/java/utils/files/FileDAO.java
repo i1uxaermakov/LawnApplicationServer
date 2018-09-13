@@ -9,7 +9,7 @@ import utils.HibernateUtil;
 public class FileDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public static File getFileByID(Long fileID) {
+    public File getFileByID(Long fileID) {
         Session hibSession = null;
         Transaction transaction = null;
         File file = null;

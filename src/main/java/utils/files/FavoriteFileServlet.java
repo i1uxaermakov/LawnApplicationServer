@@ -33,7 +33,8 @@ public class FavoriteFileServlet extends HttpServlet {
         }
 
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        File file = FileDAO.getFileByID(new Long(fileID));
+        FileDAO fileDAO = new FileDAO();
+        File file = fileDAO.getFileByID(new Long(fileID));
 
         UserDAO userDAO = new UserDAO();
         if(Objects.nonNull(file)) {
