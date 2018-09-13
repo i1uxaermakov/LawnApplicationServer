@@ -67,11 +67,13 @@ public class AuthorisationFilter implements Filter {
                     String selector = cookieValue.substring(0, 12);
                     String validator = cookieValue.substring(13, cookieValue.length());
 
-                    RememberMeCookie rememberMeCookie = RememberMeCookieDAO.getRememberMeCookieBySelector(selector);
+                    RememberMeCookieDAO cookieDAO = new RememberMeCookieDAO();
+                    RememberMeCookie rememberMeCookie = cookieDAO.getRememberMeCookieBySelector(selector);
                     if (Objects.nonNull(rememberMeCookie)) {
 
                         if (rememberMeCookie.getHashedValidator().equals(DigestUtils.sha256Hex(validator))) {
-                            User user = UserDAO.getUserById(rememberMeCookie.getUserId());
+                            UserDAO userDAO = new UserDAO();
+                            User user = userDAO.getUserById(rememberMeCookie.getUserId());
                             if (Objects.nonNull(user)) {
                                 httpSession.setAttribute("User", user);
                                 httpSession.setAttribute("Authorised", true);

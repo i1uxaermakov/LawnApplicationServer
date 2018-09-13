@@ -6,13 +6,22 @@ var showLoader = function(){
 
 
 }
+function dontClose(){
+    window.onbeforeunload = function(e) {
+        var dialogText = 'You did not finish adding';
+        e.returnValue = dialogText;
+        return dialogText;
+    };
+}
 function successShow(){
     $('#loaderDiv').hide();
     $('.firstcontainer').after('<div id="successDiv" class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 "></div>')
     $('#successDiv').css('margin-top','5px');
     // $('#loaderDiv').css('margin-top','10px');
-    $('#successDiv').html('<center><div class="alert alert-success"><strong>Success!</strong> You successfully added homework </div></center>'
+    $('#successDiv').html('<center><div class="alert alert-success"><strong>Success!</strong> You successfully added homework.  Now, you will be redirected to Homework Page. </div></center>'
     )
+    window.onbeforeunload = null;
+
 }
 
 
@@ -249,6 +258,7 @@ function previewFiles() {
     var myHWid;
 
     submitCatcher.addEventListener('submit', function (evnt) {
+        dontClose();
         evnt.preventDefault();
 
         var formData = new FormData();

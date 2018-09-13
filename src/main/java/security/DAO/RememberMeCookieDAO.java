@@ -19,51 +19,7 @@ import java.util.List;
 public class RememberMeCookieDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-//    public Long getRememberMeCookieOwner(String cookieValue) throws SQLException{
-//        Session session = sessionFactory.getCurrentSession();
-//        List<RememberMeCookie> rememberMeCookieList;
-//        Transaction transaction = session.beginTransaction();
-//
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(RememberMeCookie.class);
-//        Root<RememberMeCookie> rememberMeCookieRoot = criteriaQuery.from(RememberMeCookie.class);
-//
-//        criteriaQuery.where(criteriaBuilder.equal(rememberMeCookieRoot.get("cookieValue"), cookieValue));
-//
-//        rememberMeCookieList = session.createQuery(criteriaQuery).getResultList();
-//
-//        transaction.commit();
-//
-//        if (rememberMeCookieList == null || rememberMeCookieList.isEmpty()) {
-//            return null;
-//        } else {
-//            return rememberMeCookieList.get(0).getUserId();
-//        }
-//    }
-
-
-//    public RememberMeCookie getRememberMeCookieByUserId(Long userId) {
-//        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(RememberMeCookie.class);
-//        Root<RememberMeCookie> rememberMeCookieRoot = criteriaQuery.from(RememberMeCookie.class);
-//
-//        criteriaQuery.where(criteriaBuilder.equal(rememberMeCookieRoot.get("userId"), userId));
-//
-//        List<RememberMeCookie> rememberMeCookieList = session.createQuery(criteriaQuery).getResultList();
-//        transaction.commit();
-//        if((rememberMeCookieList==null || rememberMeCookieList.isEmpty())) {
-//            return null;
-//        }
-//        else {
-//            System.out.println(rememberMeCookieList.get(0).toString());
-//            return rememberMeCookieList.get(0);
-//        }
-//    }
-
-    public static RememberMeCookie getRememberMeCookieBySelector(String selector) {
+    public RememberMeCookie getRememberMeCookieBySelector(String selector) {
         Session hibSession = null;
         Transaction transaction = null;
         List<RememberMeCookie> rememberMeCookieList = new ArrayList<>(0);
@@ -95,7 +51,7 @@ public class RememberMeCookieDAO {
     }
 
 
-    public static void persistRememberMeCookie(RememberMeCookie rememberMeCookie) {
+    public void persistRememberMeCookie(RememberMeCookie rememberMeCookie) {
         Session hibSession = null;
         Transaction transaction = null;
 
@@ -113,7 +69,7 @@ public class RememberMeCookieDAO {
     }
 
 
-    public static void deleteRememberMeCookie(RememberMeCookie rememberMeCookie) {
+    public void deleteRememberMeCookie(RememberMeCookie rememberMeCookie) {
         Session hibSession = null;
         Transaction transaction = null;
 

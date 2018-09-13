@@ -35,6 +35,7 @@ public class FavoriteFileServlet extends HttpServlet {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         File file = FileDAO.getFileByID(new Long(fileID));
 
+        UserDAO userDAO = new UserDAO();
         if(Objects.nonNull(file)) {
             if(purpose.equals("add")) {
                 if(user.getFavouriteFiles().contains(file)) {
@@ -43,14 +44,14 @@ public class FavoriteFileServlet extends HttpServlet {
                 }
                 else {
                     user.getFavouriteFiles().add(file);
-                    UserDAO.updateUser(user);
+                    userDAO.updateUser(user);
                     resp.getWriter().println("Successfully added to favorite!");
                 }
             }
             else if(purpose.equals("del")) {
                 if(user.getFavouriteFiles().contains(file)) {
                     user.getFavouriteFiles().remove(file);
-                    UserDAO.updateUser(user);
+                    userDAO.updateUser(user);
                     resp.getWriter().println("Successfully removed from favorite!");
                 }
                 else {

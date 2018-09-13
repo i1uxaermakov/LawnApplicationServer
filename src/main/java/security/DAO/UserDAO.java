@@ -19,7 +19,7 @@ import java.util.Objects;
 public class UserDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public static UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) {
+    public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) {
         Session session = null;
         List<UserLoginInfo> userLoginInfoList = new ArrayList<>(0);
         Transaction transaction = null;
@@ -57,7 +57,7 @@ public class UserDAO {
         }
     }
 
-    public static User getUserById(Long userId){
+    public User getUserById(Long userId){
         User user = null;
         Session session = null;
         Transaction transaction = null;
@@ -77,7 +77,7 @@ public class UserDAO {
         return user;
     }
 
-    public static void updateUser(User user) {
+    public void updateUser(User user) {
         Session session = null;
         Transaction transaction = null;
 

@@ -79,10 +79,10 @@ public class SignInServlet extends HttpServlet {
         }
         else {
             UserLoginInfo userLoginInfo = null;
+            UserDAO userDAO = new UserDAO();
             Session session = HibernateUtil.getSessionFactory().openSession();
 
-            userLoginInfo = UserDAO.getUserSignInfoByLyceumId(lyceumId);
-            System.out.println("rememberme" + rememberme);
+            userLoginInfo = userDAO.getUserSignInfoByLyceumId(lyceumId);
 
             if(userLoginInfo==null) {
                 response.setStatus(401);
@@ -90,7 +90,7 @@ public class SignInServlet extends HttpServlet {
             else {
                 UpdatableBCrypt bCrypt = new UpdatableBCrypt(12);
                 if(bCrypt.verifyHash(password, userLoginInfo.getPassword())) {
-                    User user = UserDAO.getUserById(userLoginInfo.getUserId());
+                    User user = userDAO.getUserById(userLoginInfo.getUserId());
                     if("true".equals(rememberme)) {
                         RandomStringGenerator generator = new RandomStringGenerator.Builder()
                                 .withinRange('0', 'z')
@@ -104,7 +104,9 @@ public class SignInServlet extends HttpServlet {
                         rememberMeCookie.setExpiresDate(new Timestamp(System.currentTimeMillis() + 31556952000L)); //1 year in milliseconds
                         rememberMeCookie.setSelector(selector);
                         rememberMeCookie.setHashedValidator(DigestUtils.sha256Hex(validator));
-                        RememberMeCookieDAO.persistRememberMeCookie(rememberMeCookie);
+
+                        RememberMeCookieDAO cookieDAO = new RememberMeCookieDAO();
+                        cookieDAO.persistRememberMeCookie(rememberMeCookie);
 
                         Cookie cookie = new Cookie(rememberMeCookieName, selector+":"+validator);
                         cookie.setMaxAge(31556952); //1 year

@@ -133,8 +133,8 @@
                     <h1 id="loginsign" style="margin-bottom: 10px;">LOG IN</h1>
                     <h5 id="warn" style="background-color: rgb(249,215,215); padding: 5px; display: none;">Username or password is incorrect. Please try again.</h5>
                     <center id="loader" style="display: none"><div class="lds-hourglass"></div></center>
-                    <input class="textinput" type="text" placeholder="ID" name="login" id="login"/>
-                    <input class="textinput" type="password" placeholder="Password" name="password" id="password"/>
+                    <input class="textinput" type="text" placeholder="ID" name="login" id="login" autocomplete="off"/>
+                    <input class="textinput" type="password" placeholder="Password" name="password" id="password" autocomplete="off"/>
                     <div class="checkbox text-left">
                         <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
                     </div>

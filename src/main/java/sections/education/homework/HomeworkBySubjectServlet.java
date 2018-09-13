@@ -27,7 +27,7 @@ public class HomeworkBySubjectServlet extends HttpServlet {
 
         String subjectId = req.getParameter("sid");
 
-        if(subjectId == null || !(StringUtils.isNumeric(subjectId))) {
+        if(Objects.isNull(subjectId)|| !(StringUtils.isNumeric(subjectId))) {
             resp.setStatus(400);
             hibSession.close();
             return;

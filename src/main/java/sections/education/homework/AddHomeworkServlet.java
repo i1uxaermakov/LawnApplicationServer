@@ -1,5 +1,6 @@
 package sections.education.homework;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.DAO.ScheduleDAO;
@@ -17,9 +18,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @MultipartConfig
 public class AddHomeworkServlet extends HttpServlet {
@@ -40,7 +39,6 @@ public class AddHomeworkServlet extends HttpServlet {
         }
 
         req.setAttribute("subjectItemList", subjectItemList);
-
 
         if(req.getParameter("mobile")==null) {
             req.getRequestDispatcher("/WEB-INF/JSP/edu/homework/AddHomeworkPageJSP.jsp").forward(req,resp);
@@ -72,9 +70,8 @@ public class AddHomeworkServlet extends HttpServlet {
 
         for(int i=0; i<HWforArray.length; i++) {
             HomeworkItem homeworkItem = new HomeworkItem();
-            if(!list.contains(new Long(HWforArray[i]))) {
-                resp.setStatus(228);
-                //todo bad response
+            if(!StringUtils.isNumeric(HWforArray[i]) || !list.contains(new Long(HWforArray[i]))) {
+                resp.setStatus(400);
                 resp.getWriter().println("Вы не можете давать задание одной или нескольким группам из выбранного списка!");
                 return;
             }
@@ -88,38 +85,39 @@ public class AddHomeworkServlet extends HttpServlet {
             try {
                 Timestamp deadlineDate = null;
                 Calendar calendar = Calendar.getInstance();
+                Date date = null;
                 if(isCustom) {
-                    deadlineDate = new Timestamp(newSimpleDateFormat.parse(selectDate).getTime());
+                    date = newSimpleDateFormat.parse(selectDate);
                 }
                 else {
-                    deadlineDate = new Timestamp(simpleDateFormat.parse(selectDate).getTime());
+                    date = simpleDateFormat.parse(selectDate);
                 }
-                if(deadlineDate != null) {
-                    calendar.setTime(deadlineDate);
-                    calendar.set(Calendar.YEAR, 2018);
-
-                    Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(new Timestamp(System.currentTimeMillis()));
-                    while(calendar.get(Calendar.YEAR) < calendar1.get(Calendar.YEAR)) {
-                        calendar.add(Calendar.YEAR,1);
-                    }
-                    if(calendar.getTime().getTime() < calendar1.getTime().getTime()) {
-                        if(!(calendar.get(Calendar.DAY_OF_YEAR)==calendar1.get(Calendar.DAY_OF_YEAR))) {
-                            calendar.add(Calendar.YEAR, 1);
-                        }
-                    }
-                    homeworkItem.setDeadlineDate(new Timestamp(calendar.getTime().getTime()));
-                }
-                else {
-                    //todo bad response
-                    resp.getWriter().println("Возникла проблема с введением deadline'ов. Пожалуйста, пересмотрите.");
+                if(Objects.isNull(date)) {
+                    resp.setStatus(400);
+                    resp.getWriter().println("Неправильный формат даты дедлайнов. Пожалуйста, пересмотрите");
                     return;
                 }
 
+                deadlineDate = new Timestamp(date.getTime());
+                calendar.setTime(deadlineDate);
+                calendar.set(Calendar.YEAR, 2018);
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.setTime(new Timestamp(System.currentTimeMillis()));
+                while(calendar.get(Calendar.YEAR) < calendar1.get(Calendar.YEAR)) {
+                    calendar.add(Calendar.YEAR,1);
+                }
+                if(calendar.getTime().getTime() < calendar1.getTime().getTime()) {
+                    if(!(calendar.get(Calendar.DAY_OF_YEAR)==calendar1.get(Calendar.DAY_OF_YEAR))) {
+                        calendar.add(Calendar.YEAR, 1);
+                    }
+                }
+                homeworkItem.setDeadlineDate(new Timestamp(calendar.getTime().getTime()));
             } catch (ParseException e) {
-                //todo bad response
-                resp.getWriter().println("Возникла проблема с введением deadline'ов. Пожалуйста, пересмотрите.");
+                resp.setStatus(400);
+                resp.getWriter().println("Неправильный формат даты дедлайнов. Пожалуйста, пересмотрите");
                 e.printStackTrace();
+                return;
             }
 
             SubjectItem subjectItem = scheduleDAO.getSubjectItemById(new Long(HWforArray[i]));
@@ -130,7 +128,7 @@ public class AddHomeworkServlet extends HttpServlet {
             homeworkItem.setSubjectName(subjectItem.getName());
             homeworkItem.setTeacherName(subjectItem.getTeacherName());
             homeworkItem.setTeacherId(subjectItem.getTeacherId());
-            homeworkItem.setDescription(hw_text + "\n" + "Added by: " + user.getFirstName() + " " + user.getLastName());
+            homeworkItem.setDescription(hw_text + "\n" + "Added by: " + user.getFullName());
             homeworkItem.setPublishDate(new Timestamp(System.currentTimeMillis()));
             homeworkItemList.add(homeworkItem);
         }
