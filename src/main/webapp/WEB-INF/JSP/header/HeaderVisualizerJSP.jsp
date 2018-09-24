@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">LAWN</a>
-                <a class="myacc visible-xs" href="/signin">
+                <a class="myacc visible-xs" href="<%=(authorised)?"/acc":"/signin"%>">
                     <i class="fas fa-user-circle"></i>
                 </a>
             </div>
@@ -49,9 +49,9 @@
                             <%--Album</a>--%>
                     <%--</li>--%>
                     <li class="<%=("authorisation".equals(whichSectionIsActive))?"active":""%> hidden-xs">
-                        <a data-toggle="tabs" href="/sign<%=(authorised)?"out":"in"%>">
+                        <a data-toggle="tabs" href="<%=(authorised)?"/acc":"/signin"%>">
                             <i class="fas fa-user-circle"></i>
-                            <%=(authorised)?"Sign Out":"Sign In"%></a>
+                            <%=(authorised)?"Account":"Sign In"%></a>
                     </li>
                     <li class="dropdown <%=("common".equals(whichSectionIsActive))?"active":""%>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -60,9 +60,9 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">My Account</a></li>
                             <li><a href="/files/fav">Favorite Files</a></li>
                             <li><a href="#">FAQ</a></li>
+                            <li><a href="/signout">Sign Out</a></li>
                             <%--<li><a href="#">My organizations</a></li>--%>
                             <%--<li><a href="#">Liked posts</a></li>--%>
                             <%--<li><a href="#">My posts</a></li>--%>

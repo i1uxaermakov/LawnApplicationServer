@@ -60,4 +60,41 @@ public class ResourceItem {
     public void setPublishDate(Timestamp publishDate) {
         this.publishDate = publishDate;
     }
+
+    @Override
+    public String toString() {
+        return "ResourceItem{" +
+                "resourceItemId=" + resourceItemId +
+                ", file=" + file +
+                ", subjectResourceCategoryId=" + subjectResourceCategoryId +
+                ", addedBy='" + addedBy + '\'' +
+                ", publishDate=" + publishDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ResourceItem that = (ResourceItem) o;
+
+        if (resourceItemId != null ? !resourceItemId.equals(that.resourceItemId) : that.resourceItemId != null)
+            return false;
+        if (file != null ? !file.equals(that.file) : that.file != null) return false;
+        if (subjectResourceCategoryId != null ? !subjectResourceCategoryId.equals(that.subjectResourceCategoryId) : that.subjectResourceCategoryId != null)
+            return false;
+        if (addedBy != null ? !addedBy.equals(that.addedBy) : that.addedBy != null) return false;
+        return publishDate != null ? publishDate.equals(that.publishDate) : that.publishDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = resourceItemId != null ? resourceItemId.hashCode() : 0;
+        result = 31 * result + (file != null ? file.hashCode() : 0);
+        result = 31 * result + (subjectResourceCategoryId != null ? subjectResourceCategoryId.hashCode() : 0);
+        result = 31 * result + (addedBy != null ? addedBy.hashCode() : 0);
+        result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+        return result;
+    }
 }

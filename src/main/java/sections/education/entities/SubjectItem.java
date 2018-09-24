@@ -90,4 +90,48 @@ public class SubjectItem implements Comparable<SubjectItem> {
         }
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "SubjectItem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", groupId=" + groupId +
+                ", groupName='" + groupName + '\'' +
+                ", teacherId=" + teacherId +
+                ", teacherName='" + teacherName + '\'' +
+                ", lectureHall='" + lectureHall + '\'' +
+                ", whenIsSubject=" + whenIsSubject +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SubjectItem that = (SubjectItem) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (groupId != null ? !groupId.equals(that.groupId) : that.groupId != null) return false;
+        if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
+        if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
+        if (teacherName != null ? !teacherName.equals(that.teacherName) : that.teacherName != null) return false;
+        if (lectureHall != null ? !lectureHall.equals(that.lectureHall) : that.lectureHall != null) return false;
+        return whenIsSubject != null ? whenIsSubject.equals(that.whenIsSubject) : that.whenIsSubject == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (groupId != null ? groupId.hashCode() : 0);
+        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        result = 31 * result + (teacherId != null ? teacherId.hashCode() : 0);
+        result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
+        result = 31 * result + (lectureHall != null ? lectureHall.hashCode() : 0);
+        result = 31 * result + (whenIsSubject != null ? whenIsSubject.hashCode() : 0);
+        return result;
+    }
 }

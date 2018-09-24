@@ -3,7 +3,6 @@ package sections.feed.posts;
 //import utils.files.FileUtilities;
 import utils.HibernateUtil;
 import sections.feed.posts.entities.Post;
-import security.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.sql.Date;
 
 
 @MultipartConfig

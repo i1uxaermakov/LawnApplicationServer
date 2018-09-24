@@ -1,7 +1,7 @@
 package utils.files;
 
 import org.apache.commons.io.FilenameUtils;
-import security.entities.User;
+import account.entities.User;
 
 import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;

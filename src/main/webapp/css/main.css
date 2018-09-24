@@ -741,7 +741,8 @@ button{
     outline: none!important;
 }
 figure{
-    background: #80808033;
+    background: url("/images/");
+    /*#80808033*/
 }
 .lds-hourglass {
     display: inline-block;

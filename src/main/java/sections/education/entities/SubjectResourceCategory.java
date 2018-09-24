@@ -55,7 +55,6 @@ public class SubjectResourceCategory implements Comparable<SubjectResourceCatego
         this.categoryName = categoryName;
     }
 
-
     @Override
     public int compareTo(SubjectResourceCategory o) {
         int result = (int)(this.getCourse()-o.getCourse());
@@ -75,5 +74,31 @@ public class SubjectResourceCategory implements Comparable<SubjectResourceCatego
                 ", course=" + course +
                 ", categoryName='" + categoryName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SubjectResourceCategory category = (SubjectResourceCategory) o;
+
+        if (categoryId != null ? !categoryId.equals(category.categoryId) : category.categoryId != null) return false;
+        if (creationDate != null ? !creationDate.equals(category.creationDate) : category.creationDate != null)
+            return false;
+        if (course != null ? !course.equals(category.course) : category.course != null) return false;
+        if (categoryName != null ? !categoryName.equals(category.categoryName) : category.categoryName != null)
+            return false;
+        return resourceItems != null ? resourceItems.equals(category.resourceItems) : category.resourceItems == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = categoryId != null ? categoryId.hashCode() : 0;
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (course != null ? course.hashCode() : 0);
+        result = 31 * result + (categoryName != null ? categoryName.hashCode() : 0);
+        result = 31 * result + (resourceItems != null ? resourceItems.hashCode() : 0);
+        return result;
     }
 }

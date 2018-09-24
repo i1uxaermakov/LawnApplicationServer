@@ -18,8 +18,7 @@ function successShow(){
     $('.firstcontainer').after('<div id="successDiv" class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3 "></div>')
     $('#successDiv').css('margin-top','5px');
     // $('#loaderDiv').css('margin-top','10px');
-    $('#successDiv').html('<center><div class="alert alert-success"><strong>Success!</strong> You successfully added homework.  Now, you will be redirected to Homework Page. </div></center>'
-    )
+    $('#successDiv').html('<center><div class="alert alert-success"><strong>Success!</strong> You successfully added homework.  Now, you will be redirected to Homework Page. </div></center>');
     window.onbeforeunload = null;
 
 }
@@ -33,24 +32,22 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
         var modalContent = '<div class="alert alert-danger" role="alert">' +
             textOfAlert +
             '</div>';
-        $('.firstcontainer').after('<div id=""'+modalID+'" class="modal fade" role="dialog">\n' +
-            '  <div class="modal-dialog">\n' +
-            '\n' +
-            '    <!-- Modal content-->\n' +
-            '    <div class="modal-content">\n' +
-            '      <div class="modal-header">\n' +
-            '        <button type="button" class="close" data-dismiss="modal">&times;</button>\n' +
-            '        <h4 class="modal-title">РћС€РёР±РєР°</h4>\n' +
-            '      </div>\n' +
-            '      <div class="modal-body">\n' +
+        $('.firstcontainer').after('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
+            '  <div class="modal-dialog">' +
+            '    <!-- Modal content-->' +
+            '    <div class="modal-content">' +
+            '      <div class="modal-header">' +
+            '        <button type="button" class="close" data-dismiss="modal">&times;</button>' +
+            '        <h4 class="modal-title">Error</h4>' +
+            '      </div>' +
+            '      <div class="modal-body">' +
             modalContent +
-            '      </div>\n' +
-            '      <div class="modal-footer">\n' +
-            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n' +
-            '      </div>\n' +
-            '    </div>\n' +
-            '\n' +
-            '  </div>\n' +
+            '      </div>' +
+            '      <div class="modal-footer">' +
+            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '      </div>' +
+            '    </div>' +
+            '  </div>' +
             '</div>');
         $('#'+modalID).modal('toggle');
     }
@@ -146,10 +143,11 @@ var addItem  = function(e){
         }
     }
     var customDateText = "Custom Date"
-    var strinnew =  '<div class="info_about_group col-xs-6 col-lg-4">' +
+    var strinnew =
+        '<div class="info_about_group col-xs-6 col-lg-4">' +
         '<div class="teacher-subject-item">' +
         '<div class="left-div">' +
-        '<h2>'+subject+'<i   style="float: right;font-size:  28px;position:  absolute;top: 2px;right:  12px;cursor:  pointer;font-weight:700;" onclick="deleteSubject(this)" id="minus'+addingCounterId+'">×</i></h2>' +
+        '<h2>'+subject+'<div   style="float: right;font-size:  28px;position:  absolute;top: 2px;right:  12px;cursor:  pointer;font-weight:700;" onclick="deleteSubject(this)" id="minus'+addingCounterId+'">&times;</div></h2>' +
         '<p>'+groupandvenue+'</p>' +
         '</div>' +
         '<div class="date-lesson">' +
@@ -170,7 +168,7 @@ var iscustomcheck = function(e){
     }
     else{
         $(e).parent().find("input").attr("disabled", "disabled");
-        $(e).parent().find("input").val(" ");
+        $(e).parent().find("input").val("");
     }
 }
 
@@ -266,7 +264,7 @@ function previewFiles() {
         var arrayOfValuesHWfor = "";
 
         if(!arrayHWfor) {
-            alertLAWN("Р”РѕР±Р°РІСЊС‚Рµ С‚РµС…, РєРѕРјСѓ РѕС‚РїСЂР°РІР»СЏС‚СЊ РґР·!", 'normal');
+            alertLAWN("Укажите, для каких групп вы отправляете домашнее задание!", 'normal');
             $('#loaderDiv').remove();
             return;
         }
@@ -277,9 +275,14 @@ function previewFiles() {
             var selectValue = select.options[select.selectedIndex].text;
             formData.set(arrayHWfor.value + 'select', selectValue);
             if (selectValue === 'Custom Date') {
+                var regexExp = new RegExp(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
                 var customDateInputValue = document.getElementById(arrayHWfor.value + 'select_custom');
-                if (isNaN(Date.parse(customDateInputValue.value))) {
-                    alertLAWN("Р’С‹ РЅРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµР»Рё РґР°С‚Сѓ РґР»СЏ РіСЂСѓРїРїС‹! Р�СЃРїСЂР°РІСЊС‚Рµ РїРѕР¶Р°Р»СѓР№СЃС‚Р°)))", "error")
+                console.log(customDateInputValue.value);
+                console.log(customDateInputValue.value.length);
+                console.log(regexExp.test(customDateInputValue.value));
+                if (customDateInputValue.value.length!=10 || !regexExp.test(customDateInputValue.value)) {
+                    alertLAWN("bad date", "error");
+                    console.log("Bad custom date");
                     return;
                 }
                 formData.set(arrayHWfor.value + 'select' + '_custom', customDateInputValue.value);
@@ -297,9 +300,11 @@ function previewFiles() {
                 formData.set(arrayHWfor[i].value + 'select', selectValue);
                 if (selectValue === 'Custom Date') {
                     var customDateInputValue = document.getElementById(arrayHWfor[i].value + 'select_custom');
-                    var regexExp = new RegExp("^((0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-[12]\d{3})$");
-                    if (regexExp.test(customDateInputValue.value)) {
-                        alertLAWN("РЈ РїСЂРµРґРјРµС‚Р° " + i + " РїРѕ СЃС‡РµС‚Сѓ РїСЂРѕР±Р»РµРјР° СЃ РґР°С‚РѕР№. Р�СЃРїСЂР°РІСЊ РїРёРґРѕСЂ РµР±Р°РЅРЅС‹Р№!", "error")
+                    console.log(customDateInputValue.value);
+                    var regexExp = new RegExp(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
+                    if (!regexExp.test(customDateInputValue.value)) {
+                        alertLAWN("BAD DATe", "error");
+                        console.log("Bad custom Date!");
                         return;
                     }
                     formData.set(arrayHWfor[i].value + 'select' + '_custom', customDateInputValue.value);
@@ -309,7 +314,7 @@ function previewFiles() {
         formData.set('HWfor', arrayOfValuesHWfor);
         if(!(document.getElementById('hw-text').value)) {
             // todo fucking encoding problem - russian does not show properly
-            alertLAWN("Р”РѕР±Р°РІСЊС‚Рµ С‚РµРєСЃС‚ Рє Р”Р—. РЈС‡РµРЅРёРєРё РЅРµ РїРѕР№РјСѓС‚ С‡С‚Рѕ РґРµР»Р°С‚СЊ СЃ С„Р°Р№Р»Р°РјРё!", "error");
+            alertLAWN("Р вЂќР С•Р В±Р В°Р Р†РЎРЉРЎвЂљР Вµ РЎвЂљР ВµР С”РЎРѓРЎвЂљ Р С” Р вЂќР вЂ”. Р Р€РЎвЂЎР ВµР Р…Р С‘Р С”Р С‘ Р Р…Р Вµ Р С—Р С•Р в„–Р С�РЎС“РЎвЂљ РЎвЂЎРЎвЂљР С• Р Т‘Р ВµР В»Р В°РЎвЂљРЎРЉ РЎРѓ РЎвЂћР В°Р в„–Р В»Р В°Р С�Р С‘!", "error");
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
@@ -365,7 +370,7 @@ function previewFiles() {
                     window.location.href = "/signin";
                 }
                 else {
-                    alertLAWN(data+ " РџСЂРѕР±Р»РµРјР° РЅР° СЃРµСЂРІРµСЂРµ СЃСѓРєР°Р°Р°Р°Р°Р°Р°Р°Р°Р° :(", "error");
+                    alertLAWN(data+ " Р СџРЎР‚Р С•Р В±Р В»Р ВµР С�Р В° Р Р…Р В° РЎРѓР ВµРЎР‚Р Р†Р ВµРЎР‚Р Вµ РЎРѓРЎС“Р С”Р В°Р В°Р В°Р В°Р В°Р В°Р В°Р В°Р В°Р В° :(", "error");
                 }
             },
 
@@ -459,7 +464,7 @@ function previewFiles() {
                 }
 
 
-                if(howManyFilesAre100==howManyFilesSent&&howManyPhotosSent==howManyPhotosAre100){
+                if(howManyFilesAre100==howManyFilesSent && howManyPhotosSent==howManyPhotosAre100){
                     isAllSuccess=true;
                     successShow();
                     setTimeout(function(){  window.location.href = "/edu/hw"}, 3000);

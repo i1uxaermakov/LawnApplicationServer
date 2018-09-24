@@ -1,7 +1,7 @@
 package utils.images;
 
 import org.imgscalr.Scalr;
-import security.entities.User;
+import account.entities.User;
 import utils.files.FileUtilities;
 
 import javax.imageio.ImageIO;

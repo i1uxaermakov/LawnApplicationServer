@@ -6,7 +6,7 @@ import sections.education.DAO.HomeworkItemDAO;
 import sections.education.DAO.ScheduleDAO;
 import sections.education.entities.HomeworkItem;
 import sections.education.entities.SubjectItem;
-import security.entities.User;
+import account.entities.User;
 import utils.HibernateUtil;
 
 import javax.servlet.ServletException;

@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.SubjectCategoryDAO;
 import sections.education.entities.SubjectResourceCategory;
-import security.entities.User;
+import account.entities.User;
 import utils.HibernateUtil;
 
 import javax.servlet.ServletException;

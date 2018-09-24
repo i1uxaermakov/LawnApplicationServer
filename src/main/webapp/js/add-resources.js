@@ -99,8 +99,6 @@ submitCatcher.addEventListener('submit', function (evnt) {
         var categorySelect = document.getElementById("category_select");
         var categorySelectValue = categorySelect.options[categorySelect.selectedIndex].value;
 
-
-
         var howManyFilesSent=0;
         var howManyFilesAre100=0;
         var sendFile = function (file) {
@@ -130,10 +128,6 @@ submitCatcher.addEventListener('submit', function (evnt) {
                             $("#"+progressId+" .progress-bar").css('width', pct+"%");
                             $("#"+progressId+" .progress-bar").attr('aria-valuenow', pct);
                             $("#"+progressId+" .progress-bar").html(pct+"%");
-
-
-
-
                         }
                         //this usually happens when Content-Length isn't set
                         else {
@@ -163,94 +157,13 @@ submitCatcher.addEventListener('submit', function (evnt) {
                     }
                 },
                 error: function (data,textStatus,jqXHR) {
-                    // if(jqXHR.status===401) {
-                    //     window.location.href = "/signin";
-                    // }
-                    // else {
-                    //     tackleErrorAddUp();
-                    // }
                     alertLAWN(file.name + " not uploaded!" + "\n" + data, "error");
                 },
 
             });
-
-
         };
         fileList.forEach(function (file) {
             sendFile(file, 'files');
         });
-
-
-        // for(var i=0; i<fileList.length; i++) {
-        //     var file = fileList[i];
-        //     var formData = new FormData();
-
-        //     formData.set('file', file, file.name);
-        //     formData.set("catid", categorySelectValue);
-        //     formData.set('file', file, file.name);
-
-        //     progressId="progress"+i;
-        //     $('#loaderDiv').append('<h4>Uploading '+file.name+'</h4><div class="progress" id="'+progressId+'"><div class="progress-bar" role="progressbar" style="0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>')
-
-
-        //     $.ajax({
-        //         xhr: function () {
-        //             // var xhr = new window.XMLHttpRequest();
-        //             var xhr = $.ajaxSettings.xhr();
-
-        //             xhr.upload.onprogress = function (e) {
-        //                 // For uploads
-        //                 if(e.lengthComputable) {
-
-        //                     var pct = Math.floor((e.loaded / e.total) * 100);
-
-        //                     console.log('File sending percentage '+ pct+'\n');
-
-        //                     //Visualizing fukin progress
-        //                     $("#"+progressId+" .progress-bar").css('width', pct+"%");
-        //                     $("#"+progressId+" .progress-bar").attr('aria-valuenow', pct);
-        //                     $("#"+progressId+" .progress-bar").html(pct+"%");
-
-
-        //                 }
-        //                 //this usually happens when Content-Length isn't set
-        //                 else {
-        //                     $("#"+progressId+" .progress-bar").replaceWith("<h2>File is uploading, please wait</h2>");
-
-        //                     console.log('Content Length not reported!');
-        //                 }
-        //             };
-        //             return xhr;
-        //         },
-
-        //         url:  '/edu/lib/add/files',
-        //         type: 'post',
-        //         processData: false,
-        //         contentType: false,
-        //         enctype: 'multipart/form-data',
-        //         data: formData,
-        //         cache: false,
-
-        //         success: function (data,textStatus,jqXHR) {
-        //             files100++;
-        //             console.log(file.name + "yes yes");
-        //             if(files100==fileList.length){
-        //                 successShow();
-        //                 setTimeout(function(){  window.location.href = "/edu/lib"}, 3000);
-        //             }
-
-        //         },
-        //         error: function (data,textStatus,jqXHR) {
-        //             if(jqXHR.status===401) {
-        //                 window.location.href = "/signin";
-        //             }
-        //             else {
-        //                 alert(file.name + " not uploaded");
-        //             }
-        //         }
-        //     });
-
-        // }
     }
-
 });

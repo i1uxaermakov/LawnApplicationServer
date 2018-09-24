@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import sections.education.DAO.SubjectCategoryDAO;
 import sections.education.entities.ResourceItem;
 import sections.education.entities.SubjectResourceCategory;
-import security.entities.User;
+import account.entities.User;
 import utils.HibernateUtil;
 import utils.files.File;
 import utils.files.FileUtilities;

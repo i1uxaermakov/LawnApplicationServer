@@ -446,6 +446,7 @@ top: 30%;
 }
 .subject-item{
     background: #fff;
+    max-height: 92px;
 }
 .subject-item:hover{
     background: #efefef;

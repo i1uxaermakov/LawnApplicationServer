@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.entities.HomeworkItem;
-import security.entities.User;
+import account.entities.User;
 import utils.HibernateUtil;
 import utils.files.File;
 import utils.files.FileUtilities;

@@ -21,12 +21,6 @@ public class ImageServlet extends HttpServlet {
         requestedPhoto = requestedPhoto.replace("/images", "");
 
 
-
-        //todo what is authenticate, startasync, getUserPrincipal, user in role, login(), logout(), gtPushBuilder
-
-        //todo defaultphoto
-        //todo loading while img is downloading on front
-
         if(requestedPhoto.equals("")) {
         }
         else {

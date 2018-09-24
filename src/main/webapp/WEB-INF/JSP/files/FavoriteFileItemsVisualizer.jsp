@@ -1,7 +1,7 @@
 <%@ page import="utils.files.File" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Collections" %>
-<%@ page import="security.entities.User" %>
+<%@ page import="account.entities.User" %>
 <%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: ilya_ermakov

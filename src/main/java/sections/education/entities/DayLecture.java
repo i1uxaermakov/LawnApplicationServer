@@ -61,4 +61,24 @@ public class DayLecture implements Comparable<DayLecture>{
                 ", lectureOrder=" + lectureOrder +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DayLecture that = (DayLecture) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (day != null ? !day.equals(that.day) : that.day != null) return false;
+        return lectureOrder != null ? lectureOrder.equals(that.lectureOrder) : that.lectureOrder == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (day != null ? day.hashCode() : 0);
+        result = 31 * result + (lectureOrder != null ? lectureOrder.hashCode() : 0);
+        return result;
+    }
 }

@@ -146,6 +146,6 @@
     <script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <!-- <script src="slick/slick.min.js"></script>    -->
     <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/add-homework.js" charset="utf-8" type="text/javascript"></script>
+    <script src="/js/add-homework.js" type="text/javascript"></script>
     </body>
 </html>

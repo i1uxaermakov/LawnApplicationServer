@@ -1,6 +1,5 @@
 package sections.education.entities;
 
-import org.apache.commons.text.StringEscapeUtils;
 import utils.files.File;
 import utils.images.Photo;
 
@@ -142,5 +141,43 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
                 ", files=" + files +
                 ", photos=" + photos +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HomeworkItem that = (HomeworkItem) o;
+
+        if (hw_id != null ? !hw_id.equals(that.hw_id) : that.hw_id != null) return false;
+        if (addedById != null ? !addedById.equals(that.addedById) : that.addedById != null) return false;
+        if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
+        if (groupId != null ? !groupId.equals(that.groupId) : that.groupId != null) return false;
+        if (subjectId != null ? !subjectId.equals(that.subjectId) : that.subjectId != null) return false;
+        if (subjectName != null ? !subjectName.equals(that.subjectName) : that.subjectName != null) return false;
+        if (teacherName != null ? !teacherName.equals(that.teacherName) : that.teacherName != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (publishDate != null ? !publishDate.equals(that.publishDate) : that.publishDate != null) return false;
+        if (deadlineDate != null ? !deadlineDate.equals(that.deadlineDate) : that.deadlineDate != null) return false;
+        if (files != null ? !files.equals(that.files) : that.files != null) return false;
+        return photos != null ? photos.equals(that.photos) : that.photos == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = hw_id != null ? hw_id.hashCode() : 0;
+        result = 31 * result + (addedById != null ? addedById.hashCode() : 0);
+        result = 31 * result + (teacherId != null ? teacherId.hashCode() : 0);
+        result = 31 * result + (groupId != null ? groupId.hashCode() : 0);
+        result = 31 * result + (subjectId != null ? subjectId.hashCode() : 0);
+        result = 31 * result + (subjectName != null ? subjectName.hashCode() : 0);
+        result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+        result = 31 * result + (deadlineDate != null ? deadlineDate.hashCode() : 0);
+        result = 31 * result + (files != null ? files.hashCode() : 0);
+        result = 31 * result + (photos != null ? photos.hashCode() : 0);
+        return result;
     }
 }

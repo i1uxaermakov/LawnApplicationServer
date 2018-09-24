@@ -58,6 +58,7 @@
         <mapping resource="mappings/SubjectItem.hbm.xml"/>
         <mapping resource="mappings/SubjectResourceCategory.hbm.xml"/>
         <mapping resource="mappings/ResourceItem.hbm.xml"/>
+        <mapping resource="mappings/LyceumGroup.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

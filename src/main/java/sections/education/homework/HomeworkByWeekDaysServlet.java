@@ -2,7 +2,7 @@ package sections.education.homework;
 
 import org.apache.commons.io.IOUtils;
 import utils.HibernateUtil;
-import security.entities.User;
+import account.entities.User;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.entities.HomeworkItem;

@@ -1,0 +1,37 @@
+.first {
+    margin-top: 50px;
+}
+.blocks{
+    margin-top:5px;
+}
+.bootstrap-select.btn-group .dropdown-menu li a {
+    padding-top: 11px;
+}
+.bootstrap-select button{
+    padding-top: 5px;
+    font-size: 17px;
+    padding-bottom: 2px;
+}
+
+.dzdlya{
+    font-size: 1.1em
+}
+
+.submitsection{
+    margin-top: 10px;
+    text-align: center;
+}
+.submitsection button{
+    padding: 8px 10px 5px 10px;
+    text-transform: uppercase;
+}
+.subject-item{
+    height: 90px;
+
+}
+.subject-item .plus{
+    text-align: center;
+    font-size: 3em;
+    margin-top: 22px;
+    color: #80808082;
+} 

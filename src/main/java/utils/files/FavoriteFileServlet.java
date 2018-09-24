@@ -1,10 +1,9 @@
 package utils.files;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import security.DAO.UserDAO;
-import security.entities.User;
+import account.DAO.UserDAO;
+import account.entities.User;
 import utils.HibernateUtil;
 
 import javax.servlet.ServletException;

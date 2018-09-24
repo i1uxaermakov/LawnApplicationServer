@@ -1,6 +1,6 @@
 package sections.education.schedule;
 
-import security.entities.User;
+import account.entities.User;
 import sections.education.DAO.ScheduleDAO;
 import sections.education.entities.SubjectItem;
 
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ScheduleServlet extends HttpServlet {

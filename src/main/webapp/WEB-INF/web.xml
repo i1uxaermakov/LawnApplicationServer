@@ -56,28 +56,28 @@
 
     <!--filters-->
     <filter>
-        <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>security.filters.CharacterEncodingFilter</filter-class>
+        <filter-name>URLRewritingFilter</filter-name>
+        <filter-class>account.filters.URLRewritingFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-name>URLRewritingFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
     <filter>
-        <filter-name>URLRewritingFilter</filter-name>
-        <filter-class>security.filters.URLRewritingFilter</filter-class>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>account.filters.CharacterEncodingFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>URLRewritingFilter</filter-name>
+        <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
     <filter>
         <filter-name>AuthorisationFilter</filter-name>
-        <filter-class>security.filters.AuthorisationFilter</filter-class>
+        <filter-class>account.filters.AuthorisationFilter</filter-class>
         <init-param>
             <param-name>RememberMeCookieName</param-name>
             <param-value>RMC</param-value>
@@ -96,13 +96,14 @@
 
     <filter>
         <filter-name>IfAuthorisedFilter</filter-name>
-        <filter-class>security.filters.IfAuthorisedFilter</filter-class>
+        <filter-class>account.filters.IfAuthorisedFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>IfAuthorisedFilter</filter-name>
         <!--<url-pattern>/add/*</url-pattern>-->
         <url-pattern>/edu/*</url-pattern>
         <url-pattern>/files/fav</url-pattern>
+        <url-pattern>/acc</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <!--end filters-->
@@ -143,7 +144,7 @@
     <!--begin signin signout servlets-->
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
-        <servlet-class>security.authorization.SignInServlet</servlet-class>
+        <servlet-class>account.authorization.SignInServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -153,11 +154,20 @@
 
     <servlet>
         <servlet-name>SignOutServlet</servlet-name>
-        <servlet-class>security.authorization.SignOutServlet</servlet-class>
+        <servlet-class>account.authorization.SignOutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignOutServlet</servlet-name>
         <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AccountPageServlet</servlet-name>
+        <servlet-class>account.AccountPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountPageServlet</servlet-name>
+        <url-pattern>/acc</url-pattern>
     </servlet-mapping>
     <!--end signin signout servlets-->
     
@@ -276,6 +286,16 @@
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/edu/sc</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddSchedule</servlet-name>
+        <servlet-class>sections.education.schedule.AddSchedulePageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddSchedule</servlet-name>
+        <url-pattern>/edu/sc/add</url-pattern>
+    </servlet-mapping>
+
     
     <servlet>
         <servlet-name>ResourcesServlet</servlet-name>

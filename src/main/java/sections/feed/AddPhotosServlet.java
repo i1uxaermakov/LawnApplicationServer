@@ -2,7 +2,7 @@ package sections.feed;
 
 import utils.images.Photo;
 import org.hibernate.Session;
-import security.entities.User;
+import account.entities.User;
 import utils.HibernateUtil;
 import utils.images.ImageUtilities;
 

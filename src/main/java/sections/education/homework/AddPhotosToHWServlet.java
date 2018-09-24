@@ -1,13 +1,11 @@
 package sections.education.homework;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Transaction;
 import utils.images.Photo;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.entities.HomeworkItem;
-import security.entities.User;
+import account.entities.User;
 import utils.HibernateUtil;
 import utils.images.ImageUtilities;
 
@@ -20,7 +18,6 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 @MultipartConfig
 public class AddPhotosToHWServlet extends HttpServlet {
