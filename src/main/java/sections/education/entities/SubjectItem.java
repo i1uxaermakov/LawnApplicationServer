@@ -10,7 +10,6 @@ public class SubjectItem implements Comparable<SubjectItem> {
     private String groupName;
     private Long teacherId;
     private String teacherName;
-    private String lectureHall;
     private Set<DayLecture> whenIsSubject= new HashSet<>(0);
 
     public SubjectItem() {
@@ -56,14 +55,6 @@ public class SubjectItem implements Comparable<SubjectItem> {
         this.teacherName = teacherName;
     }
 
-    public String getLectureHall() {
-        return lectureHall;
-    }
-
-    public void setLectureHall(String lectureHall) {
-        this.lectureHall = lectureHall;
-    }
-
     public Set<DayLecture> getWhenIsSubject() {
         return whenIsSubject;
     }
@@ -100,7 +91,6 @@ public class SubjectItem implements Comparable<SubjectItem> {
                 ", groupName='" + groupName + '\'' +
                 ", teacherId=" + teacherId +
                 ", teacherName='" + teacherName + '\'' +
-                ", lectureHall='" + lectureHall + '\'' +
                 ", whenIsSubject=" + whenIsSubject +
                 '}';
     }
@@ -118,7 +108,6 @@ public class SubjectItem implements Comparable<SubjectItem> {
         if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
         if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
         if (teacherName != null ? !teacherName.equals(that.teacherName) : that.teacherName != null) return false;
-        if (lectureHall != null ? !lectureHall.equals(that.lectureHall) : that.lectureHall != null) return false;
         return whenIsSubject != null ? whenIsSubject.equals(that.whenIsSubject) : that.whenIsSubject == null;
     }
 
@@ -130,7 +119,6 @@ public class SubjectItem implements Comparable<SubjectItem> {
         result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
         result = 31 * result + (teacherId != null ? teacherId.hashCode() : 0);
         result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
-        result = 31 * result + (lectureHall != null ? lectureHall.hashCode() : 0);
         result = 31 * result + (whenIsSubject != null ? whenIsSubject.hashCode() : 0);
         return result;
     }

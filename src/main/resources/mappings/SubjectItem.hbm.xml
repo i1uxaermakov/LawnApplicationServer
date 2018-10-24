@@ -10,10 +10,9 @@
         <property name="teacherId"/>
         <property name="teacherName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="groupId"/>
-        <property name="lectureHall" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="groupName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
 
-        <set name="whenIsSubject" table="Subject_DayLecture" fetch="join" lazy="false" inverse="true" cascade="all">
+        <set name="whenIsSubject" table="Subject_DayLecture" fetch="join" lazy="false" cascade="all">
             <key>
                 <column name="subject_id" not-null="true"/>
             </key>
@@ -21,6 +20,7 @@
                 <column name="daylecture_id" not-null="true"/>
             </many-to-many>
         </set>
+
 
     </class>
 </hibernate-mapping>

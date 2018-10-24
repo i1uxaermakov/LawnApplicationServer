@@ -9,6 +9,8 @@ var addsubject = function(e){
     var id = modalID.split('modal')[1];
     var nomerUroka = id;
 
+    var groupId = $('#groupSelector').find('option:selected').val();
+
     while(nomerUroka-8>0) {
         nomerUroka-=8;
     }
@@ -16,13 +18,16 @@ var addsubject = function(e){
     $('#subject'+id).html('<div class="ordles">'+Math.ceil(nomerUroka/2)+'</div><div class="content-schedule"><h2>'+subject+'</h2><p>'+teacher+' <br> '+venue+'</p></div>');
 
     var formData = new FormData();
-    formData.set('subj_name', subject);
-    formData.set('teacherID', teacherID);
+    formData.set('sname', subject);
+    formData.set('tid', teacherID);
     formData.set('venue', venue);
     formData.set('place_on_page', id);
+    formData.set('gid', groupId);
+
+    console.log(formData);
 
     $.ajax({
-        url:  '/edu/sc/add/subject',
+        url:  '/edu/sc/add/item',
         type: 'post',
         processData: false,
         contentType: false,

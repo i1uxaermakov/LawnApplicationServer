@@ -3,7 +3,7 @@ package sections.education.homework;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
-import sections.education.DAO.ScheduleDAO;
+import sections.education.DAO.SubjectItemDAO;
 import sections.education.entities.HomeworkItem;
 import sections.education.entities.SubjectItem;
 import account.entities.User;
@@ -26,15 +26,15 @@ public class AddHomeworkServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("User");
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        SubjectItemDAO subjectItemDAO = new SubjectItemDAO();
         List<SubjectItem> subjectItemList = new ArrayList<>(0);
 
         if(user.getPrivileges().contains("teacher")) {
-            subjectItemList = scheduleDAO.getSubjectItemsByTeacherId(user.getUserId());
+            subjectItemList = subjectItemDAO.getSubjectItemsByTeacherId(user.getUserId());
             req.setAttribute("for", "teacher");
         }
         else {
-            subjectItemList = scheduleDAO.getSubjectItemsByGroup(user.getGroupId());
+            subjectItemList = subjectItemDAO.getSubjectItemsByGroup(user.getGroupId());
             req.setAttribute("for", "student");
         }
 
@@ -54,10 +54,10 @@ public class AddHomeworkServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("User");
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
-        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        SubjectItemDAO subjectItemDAO = new SubjectItemDAO();
         HomeworkItemDAO homeworkItemDAO = new HomeworkItemDAO();
 
-        List<Long> list = scheduleDAO.getSubjectItemsIDsByTeacherIdAndGroupId(user.getUserId(), user.getGroupId());
+        List<Long> list = subjectItemDAO.getSubjectItemsIDsByTeacherIdAndGroupId(user.getUserId(), user.getGroupId());
 
         String HWfor = req.getParameter("HWfor");
         String[] HWforArray = HWfor.split(";");
@@ -120,7 +120,7 @@ public class AddHomeworkServlet extends HttpServlet {
                 return;
             }
 
-            SubjectItem subjectItem = scheduleDAO.getSubjectItemById(new Long(HWforArray[i]));
+            SubjectItem subjectItem = subjectItemDAO.getSubjectItemById(new Long(HWforArray[i]));
 
             homeworkItem.setAddedById(user.getUserId());
             homeworkItem.setGroupId(subjectItem.getGroupId());

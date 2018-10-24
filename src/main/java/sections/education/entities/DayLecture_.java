@@ -8,6 +8,7 @@ public class DayLecture_ {
     public static volatile SingularAttribute<DayLecture,Long> id;
     public static volatile SingularAttribute<DayLecture,Long> day;
     public static volatile SingularAttribute<DayLecture,Long> lectureOrder;
+    public static volatile SingularAttribute<DayLecture,String> venue;
 }
 /*
     private Long id;

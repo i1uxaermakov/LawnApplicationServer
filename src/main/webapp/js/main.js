@@ -65,7 +65,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     };
 
     // triggers when user clicks on thumbnail
-  var onThumbnailsClick = function(e) {
+    var onThumbnailsClick = function(e) {
         e = e || window.event;
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
@@ -112,7 +112,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     // parse picture index and gallery index from URL (#&pid=1&gid=2)
     var photoswipeParseHash = function() {
         var hash = window.location.hash.substring(1),
-        params = {};
+            params = {};
 
         if(hash.length < 5) {
             return params;
@@ -155,7 +155,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             //     // See Options -> getThumbBoundsFn section of documentation for more info
             //     var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
             //         pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-            //         rect = thumbnail.getBoundingClientRect(); 
+            //         rect = thumbnail.getBoundingClientRect();
 
             //     return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
             // }
@@ -165,7 +165,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         // PhotoSwipe opened from URL
         if(fromURL) {
             if(options.galleryPIDs) {
-                // parse real index when custom PIDs are used 
+                // parse real index when custom PIDs are used
                 // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
                 for(var j = 0; j < items.length; j++) {
                     if(items[j].pid == index) {
@@ -247,36 +247,77 @@ if($(window).width() >= 960){
     });
 }
 
-// $('#img1').mouseover(function() {
-//   $('#eventdate1').css("visibility","visible");
-// });
+var loaderGif = function(selector, bool, classes){
+    if(bool) {
+        $(selector).append('<div id="loaderDiv" class="' + classes + '"></div>')
+        $('#loaderDiv').css('margin-top', '5px');
+        $('#loaderDiv').html('<center><div class="lds-hourglass"></div></center>');
+    }
+    else{
+        $(selector).find('#loaderDiv').remove();
+    }
 
-// $('#img1').mouseout(function() {
-//   $('#eventdate1').css("visibility","hidden");
-// });
-// $('#img2').mouseover(function() {
-//   $('#eventdate2').css("visibility","visible");
-// });
+}
 
-// $('#img2').mouseout(function() {
-//   $('#eventdate2').css("visibility","hidden");
 
-// $('#img3').mouseout(function() {
-//   $('#eventdate3').css("visibility","hidden");
-// });
-// $('#img4').mouseover(function() {
-//   $('#eventdate4').css("visibility","visible");
-// });
 
-// $('#img4').mouseout(function() {
-//   $('#eventdate4').css("visibility","hidden");
-// });
-// if ($(window).width() < 960) {
-//  $('#eventdate1').css("visibility","visible");
-//  $('#eventdate2').css("visibility","visible");
-//   $('#eventdate3').css("visibility","visible");
-// $('#eventdate4').css("visibility","visible");
-//   }});
-// $('#img3').mouseover(function() {
-//   $('#eventdate3').css("visibility","visible");
-// });
+
+var numberOfAlertsTriggered = 0;
+var alertLAWN = function(textOfAlert, typeOfAlert){
+    numberOfAlertsTriggered++;
+    modalID = "lawnModal"+numberOfAlertsTriggered;
+    if(typeOfAlert == 'error'){
+        var modalContent = '<div class="" role="alert" style="padding-top: 45px;padding-bottom: 20px;padding-left: 15px;font-size: 25px;">' +
+            textOfAlert +
+            '</div>';
+        $('body').append(
+            '<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
+            '  <div class="modal-dialog">' +
+            '    <!-- Modal content-->' +
+            '    <div class="modal-content">' +
+            '      <div class="modal-header" style="border-bottom: 1px solid #efefef;background: #cc525269;border-top-left-radius: 5px;border-top-right-radius: 5px;padding-bottom: 8px;">  ' +
+
+            '     <h4 class="modal-title" style="  font-size: 30px;"> Error </h4> ' +
+            '      </div>' +
+            '      <div class="modal-body" style="padding: 0;">' +
+            modalContent +
+            '      </div>' +
+            '      <div class="modal-footer" style="border: none;">' +
+            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '      </div>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>');
+        $('#'+modalID).modal('toggle');
+    }
+    else if(typeOfAlert == 'normal' || typeOfAlert == undefined){
+        var modalContent = '<div class="" role="alert" style="padding-top: 45px;padding-bottom: 20px;padding-left: 15px;font-size: 25px;">' +
+            textOfAlert +
+            '\n' +
+            '</div>\n';
+        $('body').append('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
+            '  <div class="modal-dialog">\n' +
+            '\n' +
+            '    <!-- Modal content-->\n' +
+            '    <div class="modal-content">\n' +
+            '      <div class="modal-header" style="border-bottom: 1px solid #efefef;background: #b4cc5269;border-top-left-radius: 5px;border-top-right-radius: 5px;padding-bottom: 8px;">  ' +
+            '        <h4 class="modal-title" style="  font-size: 30px;"> Warning </h4> '+
+            '      </div>\n' +
+            '      <div class="modal-body" style="padding: 0;">' +
+            modalContent +
+            '      </div>\n' +
+            '      <div class="modal-footer" style="border: none;">\n' +
+            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n' +
+            '      </div>\n' +
+            '    </div>\n' +
+            '\n' +
+            '  </div>\n' +
+            '</div>');
+        $('#'+modalID).modal('toggle');
+
+    }
+    else{
+        console.log('Not right modal trigger, you fucktard')
+    }
+
+}

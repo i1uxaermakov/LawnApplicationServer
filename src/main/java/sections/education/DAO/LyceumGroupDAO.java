@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LyceumGroupDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -45,5 +46,44 @@ public class LyceumGroupDAO {
         }
 
         return lyceumGroups;
+    }
+
+    public String getGroupNameById(Long groupId) {
+        Session hibSession = null;
+        Transaction transaction = null;
+        List<String> groupNameList = null;
+
+        try {
+            hibSession = sessionFactory.getCurrentSession();
+            transaction = hibSession.beginTransaction();
+
+            CriteriaBuilder criteriaBuilder = hibSession.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(LyceumGroup.class);
+            Root<LyceumGroup> lyceumGroupRoot = criteriaQuery.from(LyceumGroup.class);
+
+            criteriaQuery.select(
+                    lyceumGroupRoot.get(LyceumGroup_.groupName)
+//                    criteriaBuilder.construct(
+//                            LyceumGroup.class,
+//                            lyceumGroupRoot.get(LyceumGroup_.groupName)
+//                    )
+            );
+            criteriaQuery.where(criteriaBuilder.equal(lyceumGroupRoot.get(LyceumGroup_.id),groupId));
+
+            groupNameList = hibSession.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
+        }
+
+        if(Objects.isNull(groupNameList) || groupNameList.size()<1) {
+            return null;
+        }
+        else {
+            return groupNameList.get(0);
+        }
     }
 }

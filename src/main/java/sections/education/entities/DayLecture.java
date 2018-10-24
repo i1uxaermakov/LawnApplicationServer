@@ -4,6 +4,7 @@ public class DayLecture implements Comparable<DayLecture>{
     private Long id;
     private Long day;
     private Long lectureOrder;
+    private String venue;
 
     public DayLecture() {
     }
@@ -30,6 +31,14 @@ public class DayLecture implements Comparable<DayLecture>{
 
     public void setLectureOrder(Long lectureOrder) {
         this.lectureOrder = lectureOrder;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     @Override
@@ -71,7 +80,8 @@ public class DayLecture implements Comparable<DayLecture>{
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (day != null ? !day.equals(that.day) : that.day != null) return false;
-        return lectureOrder != null ? lectureOrder.equals(that.lectureOrder) : that.lectureOrder == null;
+        if (lectureOrder != null ? !lectureOrder.equals(that.lectureOrder) : that.lectureOrder != null) return false;
+        return venue != null ? venue.equals(that.venue) : that.venue == null;
     }
 
     @Override

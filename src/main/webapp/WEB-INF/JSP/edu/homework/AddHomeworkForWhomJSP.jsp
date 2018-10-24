@@ -18,7 +18,7 @@
         StringBuilder options = new StringBuilder("Custom Date");
         dayLectureSet = subjectItem.getWhenIsSubject();
 
-        for(DayLecture dayLecture: dayLectureSet) {
+        for(DayLecture dayLecture : dayLectureSet) {
             int cnt = 0;
             tempCalendar = Calendar.getInstance();
             tempCalendar.set(Calendar.DAY_OF_WEEK, (int)(dayLecture.getDay() + 1));
@@ -37,15 +37,22 @@
             options.append(";" + simpleDateFormat.format(date));
         }
 
-        dayLectureSet.clear();
+        //dayLectureSet.clear();
         dates.clear();
+
 %>
 <div class="teacher-subject-item inpopup" onclick="addItem(this)" options="<%=options%>" subjID="<%=subjectItem.getId()%>">
     <span><%=subjectItem.getName()%></span>
     <p>
         <%=("student".equals(forwhom))?subjectItem.getTeacherName():subjectItem.getGroupName()%>
         <br>
-        <%=subjectItem.getLectureHall()%>
+        <%
+            StringBuilder venues = new StringBuilder();
+            for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
+                venues.append(dayLecture.getVenue()+"/");
+            }
+        %>
+        <%=venues.substring(0,venues.length()-1)%>
     </p>
 </div>
 <%}

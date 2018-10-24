@@ -686,7 +686,7 @@ li.dropdown{
 .albumphotorow{
     border: 1px solid;
     margin: 11px;
-    padding: 15px; 
+    padding: 15px;
     position: relative;
 
 }
@@ -741,7 +741,7 @@ button{
     outline: none!important;
 }
 figure{
-    background: url("/images/");
+    background: url("https://st.hzcdn.com/simgs/7a31ae9d0e2c5c60_8-8804/contemporary-paint.jpg");
     /*#80808033*/
 }
 .lds-hourglass {

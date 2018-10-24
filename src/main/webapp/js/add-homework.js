@@ -32,7 +32,8 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
         var modalContent = '<div class="alert alert-danger" role="alert">' +
             textOfAlert +
             '</div>';
-        $('.firstcontainer').after('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
+        $('.firstcontainer').after(
+            '<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
             '  <div class="modal-dialog">' +
             '    <!-- Modal content-->' +
             '    <div class="modal-content">' +
@@ -481,7 +482,6 @@ function previewFiles() {
             },
 
         });
-
 
     };
 

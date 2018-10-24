@@ -1,7 +1,7 @@
 package sections.education.schedule;
 
 import account.entities.User;
-import sections.education.DAO.ScheduleDAO;
+import sections.education.DAO.SubjectItemDAO;
 import sections.education.entities.SubjectItem;
 
 import javax.servlet.ServletException;
@@ -14,17 +14,17 @@ import java.util.List;
 public class ScheduleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        SubjectItemDAO subjectItemDAO = new SubjectItemDAO();
         User user = (User) req.getSession().getAttribute("User");
         List<SubjectItem> subjectItemList = null;
 
 
         if(user.getPrivileges().contains("teacher")) {
-            subjectItemList = scheduleDAO.getSubjectItemsByTeacherId(user.getUserId());
+            subjectItemList = subjectItemDAO.getSubjectItemsByTeacherId(user.getUserId());
             req.setAttribute("for", "teacher");
         }
         else {
-            subjectItemList = scheduleDAO.getSubjectItemsByGroup(user.getGroupId());
+            subjectItemList = subjectItemDAO.getSubjectItemsByGroup(user.getGroupId());
             req.setAttribute("for", "student");
         }
 

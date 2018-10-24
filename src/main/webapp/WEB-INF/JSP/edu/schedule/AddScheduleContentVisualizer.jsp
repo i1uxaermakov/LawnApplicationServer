@@ -3,6 +3,7 @@
 <%@ page import="sections.education.schedule.TeacherInfo" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
+<%@ page import="sections.education.entities.DayLecture" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     class DayLectureTemp {
@@ -34,6 +35,10 @@
             return result;
         }
     }
+
+
+
+
     List<SubjectItem> subjectItems = (List<SubjectItem>) request.getAttribute("subjectItemList");
     List<TeacherInfo> teachersList = (List<TeacherInfo>) request.getAttribute("teachersList");
 
@@ -44,8 +49,8 @@
 
     Map<DayLectureTemp,List<SubjectItem>> dayToSubjectItemMap = new HashMap<>();
     for(SubjectItem subjectItem: subjectItems) {
-        for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
-            DayLectureTemp dayLectureTemp = new DayLectureTemp(dayLecture.getDay(),dayLecture.getLectureOrder());
+        for(DayLecture dayLecture : subjectItem.getWhenIsSubject()) {
+            DayLectureTemp dayLectureTemp = new DayLectureTemp(dayLecture.getDay(), dayLecture.getLectureOrder());
             if(dayToSubjectItemMap.containsKey(dayLectureTemp)) {
                 dayToSubjectItemMap.get(dayLectureTemp).add(subjectItem);
             }
@@ -76,6 +81,12 @@
                     long length = (Objects.isNull(subjectItemListLoop))?0:subjectItemListLoop.size();
                     if(Objects.nonNull(subjectItemListLoop)) {
                         for(SubjectItem subjectItem: subjectItemListLoop) {
+                            String venue = "";
+                            for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
+                                if(dayLecture.getLectureOrder()==lectureOrder && dayLecture.getDay()==dayOrder) {
+                                    venue = dayLecture.getVenue();
+                                }
+                            }
                             String subjectID = "subject" + idCounter;
                             String modalID = "modal" + idCounter;
                             idCounter++;%>
@@ -83,7 +94,7 @@
                             <div class="ordles"><%=lectureOrder%></div>
                             <div class="content-schedule">
                                 <h2><%=subjectItem.getName()%></h2>
-                                <p><%=subjectItem.getTeacherName()%> <br> <%=subjectItem.getLectureHall()%></p>
+                                <p><%=subjectItem.getTeacherName()%> <br> <%=venue%></p>
                             </div>
                         </div>
                 <%
@@ -116,6 +127,13 @@
                     //String subjectID = "subject" + idCounter;
                     String modalID = "modal" + idCounter;
                     idCounter++;
+
+                    String venue = "";
+                    for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
+                        if(dayLecture.getLectureOrder()==lectureOrder && dayLecture.getDay()==dayOrder) {
+                            venue = dayLecture.getVenue();
+                        }
+                    }
                     %>
                     <%--filled modal for adding--%>
                     <div id="<%=modalID%>" class="modal fade" role="dialog">
@@ -138,7 +156,7 @@
                                         <%}%>
                                         </select>
                                     </label><br>
-                                    <label for="">Место: <br> <input class="venue" type="text" value="<%=subjectItem.getLectureHall()%>"></label><br>
+                                    <label for="">Место: <br> <input class="venue" type="text" value="<%=venue%>"></label><br>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть без изменений</button>

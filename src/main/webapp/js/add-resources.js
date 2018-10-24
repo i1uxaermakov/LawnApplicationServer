@@ -18,6 +18,7 @@ function successShow(){
     $('#successDiv').html('<center><div class="alert alert-success"> <strong>Success!</strong> All files uploaded. Now, you will be redirected to Resources Page.</div></center>')
     window.onbeforeunload = null;
 
+
 }
 function hidePageContent(){
     $('.firstcontainer').hide();
@@ -132,7 +133,6 @@ submitCatcher.addEventListener('submit', function (evnt) {
                         //this usually happens when Content-Length isn't set
                         else {
                             $("#"+progressId+" .progress-bar").replaceWith("<h2>File is uploading, please wait</h2>");
-
                             console.log('Content Length not reported!');
                         }
                     };

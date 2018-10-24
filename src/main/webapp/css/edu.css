@@ -2,7 +2,6 @@
     font-family: 'Intro';
     src: url(../fonts/Intro-Regular.otf);
 }
-
 body {
     background: #dfead6;
     line-height: 22px;
@@ -594,4 +593,11 @@ ul.nav-tabs .plusSign a{
     top: -3px;
     height: 49px;
     right: 0;
+}
+
+.modal-body{
+    padding-bottom: 5px;
+}
+.modal .btn{
+    padding-top: 9px;
 }

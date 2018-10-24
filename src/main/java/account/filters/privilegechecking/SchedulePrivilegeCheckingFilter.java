@@ -9,12 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
-public class TeacherPrivilegeCheckingFilter implements Filter {
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
+public class SchedulePrivilegeCheckingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -23,7 +18,7 @@ public class TeacherPrivilegeCheckingFilter implements Filter {
         if((new Boolean(true)).equals(httpSession.getAttribute("Authorised"))) {
             User user = (User) httpSession.getAttribute("User");
             Set<String> userPrivileges =  user.getPrivileges();
-            if(userPrivileges.contains("teacher")) {
+            if(userPrivileges.contains("schedule")) {
                 filterChain.doFilter(servletRequest,servletResponse);
             }
             else {
@@ -33,6 +28,10 @@ public class TeacherPrivilegeCheckingFilter implements Filter {
         else {
             request.getRequestDispatcher("/signin").forward(request,servletResponse);
         }
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 

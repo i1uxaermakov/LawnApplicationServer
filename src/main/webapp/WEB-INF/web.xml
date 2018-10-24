@@ -106,6 +106,24 @@
         <url-pattern>/acc</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+
+    <filter>
+        <filter-name>HasPrivelegeScheduleFilter</filter-name>
+        <filter-class>account.filters.privilegechecking.SchedulePrivilegeCheckingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HasPrivelegeScheduleFilter</filter-name>
+        <url-pattern>/edu/sc/add/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>HasPrivelegeTeacherFilter</filter-name>
+        <filter-class>account.filters.privilegechecking.TeacherPrivilegeCheckingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HasPrivelegeTeacherFilter</filter-name>
+        <url-pattern>/edu/lib/add/*</url-pattern>
+    </filter-mapping>
     <!--end filters-->
 
     
@@ -288,12 +306,21 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AddSchedule</servlet-name>
+        <servlet-name>AddSchedulePage</servlet-name>
         <servlet-class>sections.education.schedule.AddSchedulePageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AddSchedule</servlet-name>
+        <servlet-name>AddSchedulePage</servlet-name>
         <url-pattern>/edu/sc/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddScheduleItem</servlet-name>
+        <servlet-class>sections.education.schedule.AddSubjectItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddScheduleItem</servlet-name>
+        <url-pattern>/edu/sc/add/item</url-pattern>
     </servlet-mapping>
 
     

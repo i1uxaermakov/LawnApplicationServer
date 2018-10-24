@@ -9,6 +9,7 @@
 
         <property name="day"/>
         <property name="lectureOrder"/>
+        <property name="venue" column="venue" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
 
     </class>
 </hibernate-mapping>

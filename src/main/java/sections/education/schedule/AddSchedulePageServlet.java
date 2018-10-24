@@ -3,7 +3,7 @@ package sections.education.schedule;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import sections.education.DAO.LyceumGroupDAO;
-import sections.education.DAO.ScheduleDAO;
+import sections.education.DAO.SubjectItemDAO;
 import sections.education.entities.LyceumGroup;
 import sections.education.entities.SubjectItem;
 import account.DAO.UserDAO;
@@ -23,7 +23,7 @@ public class AddSchedulePageServlet extends HttpServlet {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
         UserDAO userDAO = new UserDAO();
         LyceumGroupDAO lyceumGroupDAO = new LyceumGroupDAO();
-        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        SubjectItemDAO subjectItemDAO = new SubjectItemDAO();
 
         List<LyceumGroup> groupList = lyceumGroupDAO.getAllLyceumGroups();
 
@@ -57,7 +57,7 @@ public class AddSchedulePageServlet extends HttpServlet {
             List<TeacherInfo> teachersList = userDAO.getAllTeachers();
             req.setAttribute("teachersList", teachersList);
 
-            List<SubjectItem> subjectItemList = scheduleDAO.getSubjectItemsByGroup(groupID);
+            List<SubjectItem> subjectItemList = subjectItemDAO.getSubjectItemsByGroup(groupID);
             req.setAttribute("subjectItemList", subjectItemList);
 
             req.setAttribute("groupID", groupID);
