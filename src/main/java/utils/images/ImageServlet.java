@@ -3,6 +3,7 @@ package utils.images;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Objects;
 
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class ImageServlet extends HttpServlet {
     public static String pathToPhotos;
 

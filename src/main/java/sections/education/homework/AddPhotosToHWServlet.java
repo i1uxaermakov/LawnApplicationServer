@@ -19,7 +19,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-@MultipartConfig
+/*
+*   Maximum request size is 15 Megabytes
+*   Maximum file(photo) size is 10 Megabytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*1024*10, maxRequestSize=1024*1024*15)
 public class AddPhotosToHWServlet extends HttpServlet {
     //context init parameter
     private static String pathToPhotos;

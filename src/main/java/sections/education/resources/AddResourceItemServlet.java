@@ -21,7 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@MultipartConfig
+/*
+*   Maximum of request size is 250 Megabytes
+*   Maximum of file size is 200 Megabytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*1024*200, maxRequestSize=1024*1024*250)
 public class AddResourceItemServlet extends HttpServlet {
     //context init parameter
     private static String pathToFiles;

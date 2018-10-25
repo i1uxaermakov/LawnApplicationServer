@@ -119,6 +119,10 @@
                 </div>
 
             <%}
+                else {%>
+                <div class="urok"></div>
+            <%
+                }
             }%>
         </div>
     </div>

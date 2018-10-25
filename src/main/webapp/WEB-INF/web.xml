@@ -6,6 +6,7 @@
 
     <session-config>
         <session-timeout>60</session-timeout>
+
     </session-config>
 
     <jsp-config>
@@ -14,6 +15,7 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+
 
 
     <context-param>
@@ -90,7 +92,6 @@
     <filter-mapping>
         <filter-name>AuthorisationFilter</filter-name>
         <url-pattern>/*</url-pattern>
-
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
@@ -126,38 +127,6 @@
     </filter-mapping>
     <!--end filters-->
 
-    
-
-    <!--feed posts-->
-    <!--<servlet>-->
-        <!--<servlet-name>MultiplePostsServlet</servlet-name>-->
-        <!--<servlet-class>sections.feed.posts.MultiplePostsServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>MultiplePostsServlet</servlet-name>-->
-        <!--<url-pattern>/posts</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>SinglePostServlet</servlet-name>-->
-        <!--<servlet-class>sections.feed.posts.SinglePostServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>SinglePostServlet</servlet-name>-->
-        <!--<url-pattern>/post</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--&lt;!&ndash;end feed posts&ndash;&gt;-->
-
-
-
-    <!--<servlet>-->
-        <!--<servlet-name>MainPageServlet</servlet-name>-->
-        <!--<servlet-class>MainPageServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>MainPageServlet</servlet-name>-->
-        <!--<url-pattern>/mp</url-pattern>-->
-    <!--</servlet-mapping>-->
     
     <!--begin signin signout servlets-->
     <servlet>
@@ -224,59 +193,7 @@
 
 
 
-
-
-
-
-
-    <!--<servlet>-->
-        <!--<servlet-name>MultipleAlbumsServlet</servlet-name>-->
-        <!--<servlet-class>sections.mediaarchive.MultipleAlbumsServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>MultipleAlbumsServlet</servlet-name>-->
-        <!--<url-pattern>/albums/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-    
-    
-    
-    <!--<servlet>-->
-        <!--<servlet-name>AddPostServlet</servlet-name>-->
-        <!--<servlet-class>sections.feed.posts.AddPostServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>pathBeginningForPostFiles</param-name>-->
-            <!--<param-value>/Users/ilya_ermakov/Desktop/files</param-value>-->
-        <!--</init-param>-->
-        <!--<init-param>-->
-            <!--<param-name>pathBeginningForPostPhotos</param-name>-->
-            <!--<param-value>/Users/ilya_ermakov/Desktop/photos/posts</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>AddPostServlet</servlet-name>-->
-        <!--<url-pattern>/add/post/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>AddFiles</servlet-name>-->
-        <!--<servlet-class>sections.feed.posts.AddFilesServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>AddFiles</servlet-name>-->
-        <!--<url-pattern>/add/files</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--jsp-->
-    <!--<servlet>-->
-        <!--<servlet-name>JSP</servlet-name>-->
-        <!--<jsp-file>/JSPTemp.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>JSP</servlet-name>-->
-        <!--<url-pattern>/JSPTemp.jsp</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--education-->
+    <!--EDUCATION-->
     <servlet>
         <servlet-name>HW</servlet-name>
         <servlet-class>sections.education.homework.HomeworkByWeekDaysServlet</servlet-class>
@@ -294,7 +211,6 @@
         <servlet-name>HWbySubject</servlet-name>
         <url-pattern>/edu/hw/subject</url-pattern>
     </servlet-mapping>
-    
 
     <servlet>
         <servlet-name>Schedule</servlet-name>
@@ -332,6 +248,7 @@
         <servlet-name>ResourcesServlet</servlet-name>
         <url-pattern>/edu/lib</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>ResourcesFilesServlet</servlet-name>
         <servlet-class>sections.education.resources.ResourcesFilesServlet</servlet-class>
@@ -340,6 +257,7 @@
         <servlet-name>ResourcesFilesServlet</servlet-name>
         <url-pattern>/edu/lib/files</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>AddResourceItems</servlet-name>
         <servlet-class>sections.education.resources.AddResourceItemServlet</servlet-class>
@@ -396,41 +314,8 @@
         <servlet-name>AddPhotosToHWServlet</servlet-name>
         <url-pattern>/edu/hw/add/photos</url-pattern>
     </servlet-mapping>
+    <!--END EDUCATION-->
 
-
-    <!--end education-->
-
-    <!--error pages-->
-    <!--<error-page>-->
-        <!--<error-code>404</error-code>-->
-        <!--<location>/shiiiiit.html</location>-->
-    <!--</error-page>-->
-
-    <!--<error-page>-->
-        <!--<error-code>500</error-code>-->
-        <!--<location>/shiiiiit.html</location>-->
-    <!--</error-page>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>addPhotosServlet</servlet-name>-->
-        <!--<servlet-class>sections.feed.AddPhotosServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>pathToImageFolder</param-name>-->
-            <!--<param-value>/Users/ilya_ermakov/Desktop/images</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>addPhotosServlet</servlet-name>-->
-        <!--<url-pattern>/uploadImage</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-
-
-
-    <!--<error-page>-->
-        <!--<error-code>400</error-code>-->
-        <!--<location>/exceptionError</location>-->
-    <!--</error-page>-->
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/exceptionError</location>

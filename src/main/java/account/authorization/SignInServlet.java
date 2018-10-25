@@ -21,7 +21,10 @@ import java.util.Enumeration;
 import static org.apache.commons.text.CharacterPredicates.DIGITS;
 import static org.apache.commons.text.CharacterPredicates.LETTERS;
 
-@MultipartConfig
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class SignInServlet extends HttpServlet {
     private static String rememberMeCookieName;
     private static SessionFactory sessionFactory;

@@ -1,7 +1,7 @@
 var addsubject = function(e){
     var modalID = $(e).attr('modalID');
     var modalBody = $('#'+modalID+'Body');
-
+    var modalBodyId = "#"+modalID+"Body";
     var subject = modalBody.find('input.subject').val();
     var teacher = modalBody.find('select').find('option:selected').text();
     var teacherID = modalBody.find('select').find('option:selected').val();
@@ -15,7 +15,6 @@ var addsubject = function(e){
         nomerUroka-=8;
     }
 
-    $('#subject'+id).html('<div class="ordles">'+Math.ceil(nomerUroka/2)+'</div><div class="content-schedule"><h2>'+subject+'</h2><p>'+teacher+' <br> '+venue+'</p></div>');
 
     var formData = new FormData();
     formData.set('sname', subject);
@@ -36,13 +35,19 @@ var addsubject = function(e){
         cache: false,
         timeout: 600000,
         beforeSend: function() {
-            //todo show loader
+            $(modalBodyId + " label").hide();
+            console.log("beforesend")
+            loaderGif(modalBodyId, true, "")
         },
         success: function () {
-            //todo alertlown vse okey
+            console.log("success")
+            $('#subject'+id).html('<div class="ordles">'+Math.ceil(nomerUroka/2)+'</div><div class="content-schedule"><h2>'+subject+'</h2><p>'+teacher+' <br> '+venue+'</p></div>');
+            loaderGif(modalBodyId, false, "")
+            $(modalBodyId + " label").show();
         },
         error: function() {
-            //todo alertLAWN
+            loaderGif(modalBodyId, false, "")
+            $(modalBodyId).append('<h4>Some kind of error occurred. Fuck yourself and refresh the page</h4>>')
         }
     });
 };
@@ -51,12 +56,13 @@ var addsubject = function(e){
 var getScheduleOfAnotherGroup = function () {
     var select = $('#groupSelector');
     var selectedGroup = select.find('option:selected').val();
-    
+
     var formData = new FormData();
     formData.set('gid',selectedGroup);
+
     $.ajax({
         url:  '/edu/sc/add',
-        type: 'post',
+        type: 'get',
         processData: false,
         contentType: false,
         enctype: 'multipart/form-data',
@@ -67,6 +73,7 @@ var getScheduleOfAnotherGroup = function () {
 //todo showloader
         },
         success: function (data,textStatus,jqXHR) {
+            $('#schedule').empty();
             $('#schedule').html(data);
         },
         error: function (data,textStatus,jqXHR) {

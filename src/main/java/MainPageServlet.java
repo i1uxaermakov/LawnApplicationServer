@@ -8,6 +8,7 @@ import sections.feed.events.entities.BriefEvent;
 import org.hibernate.Session;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,10 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class MainPageServlet extends HttpServlet {
 
     @Override

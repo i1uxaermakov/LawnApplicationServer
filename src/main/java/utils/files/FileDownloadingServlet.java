@@ -5,6 +5,7 @@ import utils.HibernateUtil;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class FileDownloadingServlet extends HttpServlet {
     private static String pathToFiles;
 

@@ -21,7 +21,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-@MultipartConfig
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class AddSubjectItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -20,7 +20,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@MultipartConfig
+/*
+*   Maximum of request size is 1 Megabyte
+*   The same for maximum file size
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*1024, maxRequestSize=1024*1024)
 public class AddHomeworkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

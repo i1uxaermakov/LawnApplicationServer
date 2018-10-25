@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
-@MultipartConfig
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class ResourcesCategoriesPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

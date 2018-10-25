@@ -8,10 +8,15 @@ import org.hibernate.Session;
 import account.DAO.RememberMeCookieDAO;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Objects;
 
+/*
+*   Maximum of request size is 500 Kilobytes
+* */
+@MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class SignOutServlet extends HttpServlet {
     String rememberMeCookieName;
 
