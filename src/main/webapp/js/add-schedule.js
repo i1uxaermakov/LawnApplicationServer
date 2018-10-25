@@ -1,3 +1,17 @@
+var checkifeligible = function(element){
+    var idoftheelemt = element.attr('id').split('subject')[1];
+    if(idoftheelemt%2==0){
+        var idofprev = idoftheelemt-1;
+        if($('#subject'+idofprev).find('.ordles').length !== 0){
+        $('modal'+idoftheelemt).modal();
+        }
+       }
+    else{
+    $('modal'+idoftheelemt).modal();
+    }
+
+};
+
 var addsubject = function(e){
     var modalID = $(e).attr('modalID');
     var modalBody = $('#'+modalID+'Body');
@@ -11,9 +25,7 @@ var addsubject = function(e){
 
     var groupId = $('#groupSelector').find('option:selected').val();
 
-    while(nomerUroka-8>0) {
-        nomerUroka-=8;
-    }
+    nomerUroka%=8;
 
 
     var formData = new FormData();
@@ -40,13 +52,13 @@ var addsubject = function(e){
             loaderGif(modalBodyId, true, "")
         },
         success: function () {
-            console.log("success")
+            console.log("success");
             $('#subject'+id).html('<div class="ordles">'+Math.ceil(nomerUroka/2)+'</div><div class="content-schedule"><h2>'+subject+'</h2><p>'+teacher+' <br> '+venue+'</p></div>');
-            loaderGif(modalBodyId, false, "")
+            loaderGif(modalBodyId, false, "");
             $(modalBodyId + " label").show();
         },
         error: function() {
-            loaderGif(modalBodyId, false, "")
+            loaderGif(modalBodyId, false, "");
             $(modalBodyId).append('<h4>Some kind of error occurred. Fuck yourself and refresh the page</h4>>')
         }
     });
@@ -56,7 +68,6 @@ var addsubject = function(e){
 var getScheduleOfAnotherGroup = function () {
     var select = $('#groupSelector');
     var selectedGroup = select.find('option:selected').val();
-
     var formData = new FormData();
     formData.set('gid',selectedGroup);
 
@@ -70,14 +81,15 @@ var getScheduleOfAnotherGroup = function () {
         cache: false,
         timeout: 600000,
         beforeSend: function() {
-//todo showloader
+            $('#schedule').empty();
+            loaderGif('#schedule', true, " ")
         },
         success: function (data,textStatus,jqXHR) {
-            $('#schedule').empty();
+            loaderGif("#schedule", false, " ")
             $('#schedule').html(data);
         },
         error: function (data,textStatus,jqXHR) {
-            //todo lawn error alert
+            loaderGif("#schedule", false, " ")
         }
     });
 };
