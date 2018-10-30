@@ -107,7 +107,7 @@ submitCatcher.addEventListener('submit', function (evnt) {
             var progressId="progress"+howManyFilesSent;
 
             var formData = new FormData();
-
+            var alertTrig = 0;
             formData.set('file', file, file.name);
             formData.set("catid", categorySelectValue);
             formData.set('file', file, file.name);
@@ -157,7 +157,11 @@ submitCatcher.addEventListener('submit', function (evnt) {
                     }
                 },
                 error: function (data,textStatus,jqXHR) {
-                    alertLAWN(file.name + " not uploaded!" + "\n" + data, "error");
+                    if(alertTrig==0) {
+                        alertLAWN("There was a problem when sending the files. Please try again and refresh the page!");
+                    }
+                    alertTrig++;
+                    console.log(file.name + " not uploaded!" + "\n" + data, "error");
                 },
 
             });
