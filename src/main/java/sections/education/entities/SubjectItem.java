@@ -10,6 +10,7 @@ public class SubjectItem implements Comparable<SubjectItem> {
     private String groupName;
     private Long teacherId;
     private String teacherName;
+    private Long createdBy;
     private Set<DayLecture> whenIsSubject= new HashSet<>(0);
 
     public SubjectItem() {
@@ -71,6 +72,14 @@ public class SubjectItem implements Comparable<SubjectItem> {
         this.groupName = groupName;
     }
 
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
     @Override
     public int compareTo(SubjectItem o) {
         if(this.getId() > o.getId()) {
@@ -91,6 +100,7 @@ public class SubjectItem implements Comparable<SubjectItem> {
                 ", groupName='" + groupName + '\'' +
                 ", teacherId=" + teacherId +
                 ", teacherName='" + teacherName + '\'' +
+                ", createdBy=" + createdBy +
                 ", whenIsSubject=" + whenIsSubject +
                 '}';
     }
@@ -108,6 +118,7 @@ public class SubjectItem implements Comparable<SubjectItem> {
         if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
         if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
         if (teacherName != null ? !teacherName.equals(that.teacherName) : that.teacherName != null) return false;
+        if (createdBy != null ? !createdBy.equals(that.createdBy) : that.createdBy != null) return false;
         return whenIsSubject != null ? whenIsSubject.equals(that.whenIsSubject) : that.whenIsSubject == null;
     }
 
@@ -119,6 +130,7 @@ public class SubjectItem implements Comparable<SubjectItem> {
         result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
         result = 31 * result + (teacherId != null ? teacherId.hashCode() : 0);
         result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
+        result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
         result = 31 * result + (whenIsSubject != null ? whenIsSubject.hashCode() : 0);
         return result;
     }

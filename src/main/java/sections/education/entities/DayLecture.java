@@ -4,6 +4,7 @@ public class DayLecture implements Comparable<DayLecture>{
     private Long id;
     private Long day;
     private Long lectureOrder;
+    private Long forSubgroup;
     private String venue;
 
     public DayLecture() {
@@ -41,6 +42,14 @@ public class DayLecture implements Comparable<DayLecture>{
         this.venue = venue;
     }
 
+    public Long getForSubgroup() {
+        return forSubgroup;
+    }
+
+    public void setForSubgroup(Long forSubgroup) {
+        this.forSubgroup = forSubgroup;
+    }
+
     @Override
     public int compareTo(DayLecture o) {
         if(this.getDay() >  o.getDay()) {
@@ -57,6 +66,12 @@ public class DayLecture implements Comparable<DayLecture>{
                 return -1;
             }
             else {
+                if(this.getForSubgroup() > o.getForSubgroup()) {
+                    return 1;
+                }
+                else if(this.getForSubgroup() < o.getForSubgroup()){
+                    return -1;
+                }
                 return 0;
             }
         }

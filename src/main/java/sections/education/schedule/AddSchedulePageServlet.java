@@ -42,7 +42,7 @@ public class AddSchedulePageServlet extends HttpServlet {
             Long groupID = groupList.get(0).getId();
             String groupIDparameter = req.getParameter("gid");
             if(Objects.nonNull(groupIDparameter) && StringUtils.isNumeric(groupIDparameter)) {
-                groupID = new Long(groupIDparameter);;
+                groupID = new Long(groupIDparameter);
                 isAdditional = true;
             }
 
@@ -70,7 +70,7 @@ public class AddSchedulePageServlet extends HttpServlet {
 
         hibSession.close();
 
-        if(req.getParameter("mobile")==null && !isAdditional) {
+        if(!isAdditional) {
             req.getRequestDispatcher("/WEB-INF/JSP/edu/schedule/AddSchedulePageJSP.jsp").include(req,resp);
         }
         else {

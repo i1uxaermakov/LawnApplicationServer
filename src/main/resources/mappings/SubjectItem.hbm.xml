@@ -11,6 +11,7 @@
         <property name="teacherName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
         <property name="groupId"/>
         <property name="groupName" type="converted::utils.converters.StringToEscapedHTMLStringConverter"/>
+        <property name="createdBy"/>
 
         <set name="whenIsSubject" table="Subject_DayLecture" fetch="join" lazy="false" cascade="all">
             <key>

@@ -57,12 +57,14 @@ var getScheduleOfAnotherGroup = function () {
     var select = $('#groupSelector');
     var selectedGroup = select.find('option:selected').val();
 
+    console.log(selectedGroup);
+
     var formData = new FormData();
     formData.set('gid',selectedGroup);
 
     $.ajax({
         url:  '/edu/sc/add',
-        type: 'get',
+        type: 'post',
         processData: false,
         contentType: false,
         enctype: 'multipart/form-data',

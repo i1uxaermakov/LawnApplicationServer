@@ -2,58 +2,29 @@
 <%@ page import="sections.education.entities.DayLecture" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="sections.education.schedule.DayLectureTemp" %>
+<%@ page import="sections.education.schedule.SubjectItemTemp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    class DayLectureTemp {
-        private long day;
-        private long lecture;
-
-        public DayLectureTemp(long day, long lecture) {
-            this.day = day;
-            this.lecture = lecture;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            DayLectureTemp that = (DayLectureTemp) o;
-
-            if (day != that.day) return false;
-            if (lecture != that.lecture) return false;
-
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = (int) (day ^ (day >>> 32));
-            result = 31 * result + (int) (lecture ^ (lecture >>> 32));
-            return result;
-        }
-    }
-
-
     List<SubjectItem> subjectItemList = (List<SubjectItem>) request.getAttribute("subjectItemList");
     Boolean isMobile = (Boolean) request.getAttribute("mobile");//todo remove
     String forwhom = (String) request.getAttribute("for");
 
-    Map<DayLectureTemp,Set<SubjectItem> > map = new HashMap<>();
-    List<DayLectureTemp> dayLectureList = new ArrayList<>();
+    Map<DayLectureTemp, List<SubjectItemTemp> > map = new HashMap<>();
+//    List<DayLectureTemp> dayLectureList = new ArrayList<>();
     for(SubjectItem subjectItem: subjectItemList) {
         for(DayLecture dayLecture : subjectItem.getWhenIsSubject()) {
             DayLectureTemp dayLectureTemp = new DayLectureTemp(dayLecture.getDay(), dayLecture.getLectureOrder());
             if(map.containsKey(dayLectureTemp)) {
-                map.get(dayLectureTemp).add(subjectItem);
+                map.get(dayLectureTemp).add(new SubjectItemTemp(subjectItem, dayLecture.getForSubgroup()));
             }
             else {
-                Set<SubjectItem> set = new TreeSet<>();
-                set.add(subjectItem);
-                map.put(dayLectureTemp, set);
+                List<SubjectItemTemp> list = new ArrayList<>();
+                list.add(new SubjectItemTemp(subjectItem, dayLecture.getForSubgroup()));
+                map.put(dayLectureTemp, list);
             }
-            dayLectureList.add(dayLectureTemp);
+//            dayLectureList.add(dayLectureTemp);
         }
     }
 
@@ -83,13 +54,16 @@
     <%
             for(int lectureOrder=1; lectureOrder<=4; lectureOrder++) {
                 DayLectureTemp dayLectureTemp = new DayLectureTemp(dayOrder, lectureOrder);
-                Set<SubjectItem> subjectItemsByDayLectureTemp = map.get(dayLectureTemp);
+                List<SubjectItemTemp> subjectItemsByDayLectureTemp = map.get(dayLectureTemp);
+
 
                 if(Objects.nonNull(subjectItemsByDayLectureTemp)) {
+                    Collections.sort(subjectItemsByDayLectureTemp);
                 %>
                 <div class="urok <%=(subjectItemsByDayLectureTemp.size() != 1)?"centered":""%> u<%=lectureOrder%>">
                 <%
-                    for(SubjectItem subjectItem: subjectItemsByDayLectureTemp) {
+                    for(SubjectItemTemp subjectItemTemp: subjectItemsByDayLectureTemp) {
+                        SubjectItem subjectItem = subjectItemTemp.getSubjectItem();
                         String venue="";
                         for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
                             if(dayLecture.getDay()==dayOrder && dayLecture.getLectureOrder()==lectureOrder) {

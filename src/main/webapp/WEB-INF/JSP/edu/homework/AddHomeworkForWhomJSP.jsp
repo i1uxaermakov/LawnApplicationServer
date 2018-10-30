@@ -18,42 +18,47 @@
         StringBuilder options = new StringBuilder("Custom Date");
         dayLectureSet = subjectItem.getWhenIsSubject();
 
-        for(DayLecture dayLecture : dayLectureSet) {
-            int cnt = 0;
-            tempCalendar = Calendar.getInstance();
-            tempCalendar.set(Calendar.DAY_OF_WEEK, (int)(dayLecture.getDay() + 1));
-            while(cnt<2 || tempCalendar.getTime().compareTo(c.getTime())==-1) {
-                if(!(tempCalendar.getTime().compareTo(c.getTime())==-1)) {
-                    dates.add(tempCalendar.getTime());
-                    cnt++;
+        if(Objects.nonNull(dayLectureSet) && !dayLectureSet.isEmpty()) {
+            for(DayLecture dayLecture : dayLectureSet) {
+                int cnt = 0;
+                tempCalendar = Calendar.getInstance();
+                tempCalendar.set(Calendar.DAY_OF_WEEK, (int)(dayLecture.getDay() + 1));
+                while(cnt<2 || tempCalendar.getTime().compareTo(c.getTime())==-1) {
+                    if(!(tempCalendar.getTime().compareTo(c.getTime())==-1)) {
+                        dates.add(tempCalendar.getTime());
+                        cnt++;
+                    }
+                    tempCalendar.add(Calendar.WEEK_OF_YEAR, 1);
                 }
-                tempCalendar.add(Calendar.WEEK_OF_YEAR, 1);
             }
-        }
 
-        Collections.sort(dates, Collections.reverseOrder());
+            Collections.sort(dates, Collections.reverseOrder());
+            for(Date date: dates) {
+                options.append(";" + simpleDateFormat.format(date));
+            }
 
-        for(Date date: dates) {
-            options.append(";" + simpleDateFormat.format(date));
-        }
-
-        //dayLectureSet.clear();
-        dates.clear();
-
-%>
-<div class="teacher-subject-item inpopup" onclick="addItem(this)" options="<%=options%>" subjID="<%=subjectItem.getId()%>">
-    <span><%=subjectItem.getName()%></span>
-    <p>
-        <%=("student".equals(forwhom))?subjectItem.getTeacherName():subjectItem.getGroupName()%>
-        <br>
-        <%
             StringBuilder venues = new StringBuilder();
-            for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
-                venues.append(dayLecture.getVenue()+"/");
+            List<String> listToCheckRooms = new ArrayList<>(0);
+            for(DayLecture dayLecture: dayLectureSet) {
+                if(!listToCheckRooms.contains(dayLecture.getVenue())) {
+                    venues.append(dayLecture.getVenue() + "/");
+                    listToCheckRooms.add(dayLecture.getVenue());
+                }
             }
-        %>
-        <%=venues.substring(0,venues.length()-1)%>
-    </p>
-</div>
-<%}
+
+            //dayLectureSet.clear();
+            dates.clear();
+
+    %>
+    <div class="teacher-subject-item inpopup" onclick="addItem(this)" options="<%=options%>" subjID="<%=subjectItem.getId()%>">
+        <span><%=subjectItem.getName()%></span>
+        <p>
+            <%=("student".equals(forwhom))?subjectItem.getTeacherName():subjectItem.getGroupName()%>
+            <br>
+            <%=venues.substring(0,venues.length()-1)%>
+        </p>
+    </div>
+    <%
+        }
+    }
 %>

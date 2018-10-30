@@ -10,12 +10,16 @@ function showHomeworkBySubjectAddUp(element) {
     formData.set("purpose","add_up");
     var firstChild = ell.firstElementChild;
     if(firstChild != null) {
-        firstChild = el.first();
-        var date = firstChild.attr('lastDate');
+        //firstChild = el.first();
+        var date = firstChild.getAttribute('lastDate');
         if(date != null) {
             formData.set('date', date);
         }
+        //console.log(date);
     }
+
+
+
 
     function tackleErrorAddUp() {
         loaderGif('#'+id, false);

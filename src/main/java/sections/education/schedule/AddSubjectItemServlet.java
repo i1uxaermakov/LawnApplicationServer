@@ -41,7 +41,6 @@ public class AddSubjectItemServlet extends HttpServlet {
             resp.getWriter().println("Invalid GroupID provided!");
             return;
         }
-
         Long groupId = new Long(groupIdParameter);
         String groupName = lyceumGroupDAO.getGroupNameById(groupId);
         if(Objects.isNull(groupName)) {
@@ -100,6 +99,7 @@ public class AddSubjectItemServlet extends HttpServlet {
             resp.getWriter().println("Invalid Place On Page provided!");
             return;
         }
+        Long forSubgroupParameter = onPageId%2;
         Long dayOrder = new Long(1);
         Long lectureOrder = new Long(1);
         while(onPageId - 8 > 0) {
@@ -111,11 +111,43 @@ public class AddSubjectItemServlet extends HttpServlet {
             onPageId-=2;
         }
 
+
+        System.out.println(0);
+        System.out.println("lo"+lectureOrder);
+        System.out.println("d"+dayOrder);
+        System.out.println("for"+forSubgroupParameter);
+        boolean foundSubjectOnThisDayAndLecture = false;
+        SubjectItem subjectItemToRemoveDayLectureFrom = null;
+        DayLecture dayLectureToRemove = null;
+        List<SubjectItem> subjectItemList = subjectItemDAO.getSubjectItemsByGroup(groupId);
+        for(SubjectItem subjectItem: subjectItemList) {
+            if(Objects.nonNull(subjectItem.getWhenIsSubject())) {
+                for(DayLecture dayLecture: subjectItem.getWhenIsSubject()) {
+                    if(dayLecture.getDay().equals(dayOrder) &&
+                            dayLecture.getLectureOrder().equals(lectureOrder) &&
+                            dayLecture.getForSubgroup().equals(forSubgroupParameter)) {
+                        foundSubjectOnThisDayAndLecture = true;
+                        subjectItemToRemoveDayLectureFrom = subjectItem;
+                        dayLectureToRemove = dayLecture;
+                    }
+                }
+            }
+        }
+        if(foundSubjectOnThisDayAndLecture) {
+            System.out.println("remove");
+            subjectItemToRemoveDayLectureFrom.getWhenIsSubject().remove(dayLectureToRemove);
+            subjectItemDAO.updateSubjectItem(subjectItemToRemoveDayLectureFrom);
+        }
+
+        System.out.println(1);
+
         DayLecture dayLecture = new DayLecture();
         dayLecture.setVenue(venue);
         dayLecture.setDay(dayOrder);
         dayLecture.setLectureOrder(lectureOrder);
+        dayLecture.setForSubgroup(forSubgroupParameter);
         SubjectItem existingSubjectItem = subjectItemDAO.getSubjectItemIfExistsForAdding(teacherId,subjectName,groupId);
+        System.out.println(2);
         if(Objects.nonNull(existingSubjectItem)) {
             existingSubjectItem.getWhenIsSubject().add(dayLecture);
             subjectItemDAO.updateSubjectItem(existingSubjectItem);
