@@ -62,7 +62,11 @@
                             String subjectID = "subject" + idCounter;
                             String modalID = "modal" + idCounter;
                             idCounter++;%>
-                        <div class="subject-item pointer" data-toggle="modal" data-target="#<%=modalID%>" id="<%=subjectID%>">
+                        <div class="subject-item pointer"
+                             data-toggle="modal"
+                             <%--data-target="#<%=modalID%>"--%>
+                             onclick="checkifeligible(this)"
+                             id="<%=subjectID%>">
                             <div class="ordles"><%=lectureOrder%></div>
                             <div class="content-schedule">
                                 <h2><%=subjectItem.getName()%></h2>
@@ -77,7 +81,11 @@
                         String subjectID = "subject" + idCounter;
                         String modalID = "modal" + idCounter;
                         idCounter++;%>
-                        <div class="subject-item pointer" data-toggle="modal" data-target="#<%=modalID%>" id="<%=subjectID%>">
+                        <div class="subject-item pointer"
+                             data-toggle="modal"
+                             <%--data-target="#<%=modalID%>"--%>
+                             onclick="checkifeligible(this)"
+                             id="<%=subjectID%>">
                             <div class="plus">+</div>
                         </div>
                     <%}

@@ -265,7 +265,7 @@ function previewFiles() {
         var arrayOfValuesHWfor = "";
 
         if(!arrayHWfor) {
-            alertLAWN("Укажите, для каких групп вы отправляете домашнее задание!", 'normal');
+            alertLAWN($('#NoGroupsSpecified').html(), 'normal');
             $('#loaderDiv').remove();
             return;
         }
@@ -282,7 +282,7 @@ function previewFiles() {
                 console.log(customDateInputValue.value.length);
                 console.log(regexExp.test(customDateInputValue.value));
                 if (customDateInputValue.value.length!=10 || !regexExp.test(customDateInputValue.value)) {
-                    alertLAWN("bad date", "error");
+                    alertLAWN($('#BadDate').html(), 'normal');
                     console.log("Bad custom date");
                     return;
                 }
@@ -304,7 +304,7 @@ function previewFiles() {
                     console.log(customDateInputValue.value);
                     var regexExp = new RegExp(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
                     if (!regexExp.test(customDateInputValue.value)) {
-                        alertLAWN("BAD DATe", "error");
+                        alertLAWN($('#BadDate').html(), 'normal');
                         console.log("Bad custom Date!");
                         return;
                     }
@@ -315,7 +315,7 @@ function previewFiles() {
         formData.set('HWfor', arrayOfValuesHWfor);
         if(!(document.getElementById('hw-text').value)) {
             // todo fucking encoding problem - russian does not show properly
-            alertLAWN("Р вЂќР С•Р В±Р В°Р Р†РЎРЉРЎвЂљР Вµ РЎвЂљР ВµР С”РЎРѓРЎвЂљ Р С” Р вЂќР вЂ”. Р Р€РЎвЂЎР ВµР Р…Р С‘Р С”Р С‘ Р Р…Р Вµ Р С—Р С•Р в„–Р С�РЎС“РЎвЂљ РЎвЂЎРЎвЂљР С• Р Т‘Р ВµР В»Р В°РЎвЂљРЎРЉ РЎРѓ РЎвЂћР В°Р в„–Р В»Р В°Р С�Р С‘!", "error");
+            alertLAWN($('#NoDescription').html(), 'normal');
             return;
         }
         formData.set('hw-text', document.getElementById('hw-text').value);
@@ -371,7 +371,7 @@ function previewFiles() {
                     window.location.href = "/signin";
                 }
                 else {
-                    alertLAWN(data+ " Р СџРЎР‚Р С•Р В±Р В»Р ВµР С�Р В° Р Р…Р В° РЎРѓР ВµРЎР‚Р Р†Р ВµРЎР‚Р Вµ РЎРѓРЎС“Р С”Р В°Р В°Р В°Р В°Р В°Р В°Р В°Р В°Р В°Р В° :(", "error");
+                    alertLAWN($('#ErrorWhileSendingHW').html(), 'error');
                 }
             },
 
@@ -478,7 +478,8 @@ function previewFiles() {
                 // else {
                 //     tackleErrorAddUp();
                 // }
-                alertLAWN(file.name + " not uploaded!" + "\n" + data, "error");
+                alertLAWN($('#ErrorWhileSendingHWFiles').html(),"error");
+                //alertLAWN(file.name + " not uploaded!" + "\n" + data, "error");
             },
 
         });

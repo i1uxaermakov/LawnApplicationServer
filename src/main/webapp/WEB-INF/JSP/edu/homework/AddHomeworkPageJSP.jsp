@@ -24,10 +24,6 @@
         <title>LAWN ADDING</title>
     </head>
 
-    <%
-
-    %>
-
     <body>
         <%--begin header--%>
         <%request.setAttribute("ActiveNavBarSection", "education");%>
@@ -133,6 +129,11 @@
             </section>
         </div>
 
+        <p style="display: none" id="NoDescription">Напишите, пожалуйста, описание к домашнему заданию!</p>
+        <p style="display: none" id="BadDate">Вы неправильно указали дату для домашнего задания! Дата должна быть в формате ДД/ММ/ГГГГ.</p>
+        <p style="display: none" id="NoGroupsSpecified">Укажите, пожалуйста, для каких групп вы добавляете домашнее задание!</p>
+        <p style="display: none" id="ErrorWhileSendingHW">Произошла ошибка при отправлении домашнего задания ученикам. Попробуйте, пожалуйста, позже.</p>
+        <p style="display: none" id="ErrorWhileSendingHWFiles">Произошла ошибка при отправлении прикрепленных файлов или фотографий. Вы сможете отправить файлы позже в виде отдельного домашнего задания. Не отправляйте домашнее задание заново.</p>
 
     <script src="/js/jquery.min.js"></script>
 

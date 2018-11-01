@@ -1,15 +1,15 @@
 var checkifeligible = function(element){
-    var idoftheelemt = element.attr('id').split('subject')[1];
-    if(idoftheelemt%2==0){
+    var idoftheelemt = $(element).attr('id');
+    idoftheelemt = idoftheelemt.split('subject')[1];
+    if(idoftheelemt%2==0) {
         var idofprev = idoftheelemt-1;
         if($('#subject'+idofprev).find('.ordles').length !== 0){
-        $('modal'+idoftheelemt).modal();
+            $('#modal'+idoftheelemt).modal('show');
         }
-       }
-    else{
-    $('modal'+idoftheelemt).modal();
     }
-
+    else {
+        $('#modal'+idoftheelemt).modal('show');
+    }
 };
 
 var addsubject = function(e){
@@ -28,7 +28,6 @@ var addsubject = function(e){
     while(nomerUroka-8>0) {
         nomerUroka-=8;
     }
-
 
     var formData = new FormData();
     formData.set('sname', subject);
@@ -50,8 +49,8 @@ var addsubject = function(e){
         timeout: 600000,
         beforeSend: function() {
             $(modalBodyId + " label").hide();
-            console.log("beforesend")
-            loaderGif(modalBodyId, true, "")
+            console.log("beforesend");
+            loaderGif(modalBodyId, true, "");
         },
         success: function () {
             console.log("success");
@@ -84,14 +83,14 @@ var getScheduleOfAnotherGroup = function () {
         timeout: 600000,
         beforeSend: function() {
             $('#schedule').empty();
-            loaderGif('#schedule', true, " ")
+            loaderGif('#schedule', true, " ");
         },
         success: function (data,textStatus,jqXHR) {
-            loaderGif("#schedule", false, " ")
+            loaderGif("#schedule", false, " ");
             $('#schedule').html(data);
         },
         error: function (data,textStatus,jqXHR) {
-            loaderGif("#schedule", false, " ")
+            loaderGif("#schedule", false, " ");
         }
     });
 };
