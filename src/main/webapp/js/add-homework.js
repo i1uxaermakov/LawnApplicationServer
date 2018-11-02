@@ -24,66 +24,6 @@ function successShow(){
 }
 
 
-var numberOfAlertsTriggered = 0;
-var alertLAWN = function(textOfAlert, typeOfAlert){
-    numberOfAlertsTriggered++;
-    modalID = "lawnModal"+numberOfAlertsTriggered;
-    if(typeOfAlert == 'error'){
-        var modalContent = '<div class="alert alert-danger" role="alert">' +
-            textOfAlert +
-            '</div>';
-        $('.firstcontainer').after(
-            '<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
-            '  <div class="modal-dialog">' +
-            '    <!-- Modal content-->' +
-            '    <div class="modal-content">' +
-            '      <div class="modal-header">' +
-            '        <button type="button" class="close" data-dismiss="modal">&times;</button>' +
-            '        <h4 class="modal-title">Error</h4>' +
-            '      </div>' +
-            '      <div class="modal-body">' +
-            modalContent +
-            '      </div>' +
-            '      <div class="modal-footer">' +
-            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
-            '      </div>' +
-            '    </div>' +
-            '  </div>' +
-            '</div>');
-        $('#'+modalID).modal('toggle');
-    }
-    else if(typeOfAlert == 'normal' || typeOfAlert == undefined){
-        var modalContent = '<div class="alert alert-warning">\n' +
-            textOfAlert +
-            '\n' +
-            '</div>\n';
-        $('.firstcontainer').after('<div id="'+modalID+'" class="modal fade" role="dialog">\n' +
-            '  <div class="modal-dialog">\n' +
-            '\n' +
-            '    <!-- Modal content-->\n' +
-            '    <div class="modal-content">\n' +
-            '      <div class="modal-header">\n' +
-            '        <button type="button" class="close" data-dismiss="modal">&times;</button>\n' +
-            '        <h4 class="modal-title">Warning</h4>\n' +
-            '      </div>\n' +
-            '      <div class="modal-body">\n' +
-            modalContent +
-            '      </div>\n' +
-            '      <div class="modal-footer">\n' +
-            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n' +
-            '      </div>\n' +
-            '    </div>\n' +
-            '\n' +
-            '  </div>\n' +
-            '</div>');
-        $('#'+modalID).modal('toggle');
-
-    }
-    else{
-        console.log('Not right modal trigger, you fucktard')
-    }
-
-}
 
 var emptyPageContent = function(){
     $('.firstcontainer').hide();
