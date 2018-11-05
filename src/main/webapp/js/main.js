@@ -283,7 +283,7 @@ var alertLAWN = function(textOfAlert, typeOfAlert){
             modalContent +
             '      </div>' +
             '      <div class="modal-footer" style="border: none;">' +
-            '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '        <button type="button" class="btn btn-default" onclick="function(){location.href = "/edu";}" data-dismiss="modal">Close</button>' +
             '      </div>' +
             '    </div>' +
             '  </div>' +
