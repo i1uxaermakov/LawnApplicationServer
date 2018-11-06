@@ -20,7 +20,7 @@
 
     </div>
     <a type="button" class="btn btn-lg btn-block accountPageButton" style="color: black" href="/files/fav">Favorite Files</a>
-    <a type="button" class="btn btn-lg btn-block accountPageButton" style="color: black" href="">Change Password</a>
+    <span type="button" class="btn btn-lg btn-block accountPageButton" style="color: black"  data-toggle="modal" data-target="#myModal">Change Password</span>
     <a type="button" class="btn btn-lg btn-block accountPageButton" style="color: black" href="/signout">Sign Out</a>
     <%--<div class="alert alert-success" role="alert" style="margin-top: 5px;margin-bottom: 0;">--%>
     <%--<h4 class="alert-heading">Contact us if</h4>--%>
@@ -28,115 +28,86 @@
     <%--<hr>--%>
     <%--<p class="mb-0"><a href="http:/t.me/lawn">Telegram</a></p>--%>
     <%--</div>--%>
-    <div class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Change Password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
                 </div>
                 <div class="modal-body">
-
                     <div class="row">
-                        <div class="col-sm-12">
-                            <h1>Change Password</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
+                        <div class="col-xs-12">
                             <p class="text-center">Use the form below to change your password. Your password cannot be the same as your username.</p>
                             <form method="post" id="passwordForm">
-                                <input type="password" class="input-lg form-control" name="oldpass" id="oldpass" placeholder="New Password" autocomplete="off">
+                                <input type="password" class="input-lg form-control" name="oldpass" id="oldpass" placeholder="Old Password" autocomplete="off">
 
                                 <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Characters Long<br>
-                                        <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Uppercase Letter
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Lowercase Letter<br>
-                                        <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Number
-                                    </div>
-                                </div>
+                                <%--<div class="row">--%>
+                                <%--<div class="col-sm-6">--%>
+                                <%--<span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Characters Long<br>--%>
+                                <%--<span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Uppercase Letter--%>
+                                <%--</div>--%>
+                                <%--<div class="col-sm-6">--%>
+                                <%--<span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Lowercase Letter<br>--%>
+                                <%--<span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Number--%>
+                                <%--</div>--%>
+                                <%--</div>--%>
                                 <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
-                                    </div>
-                                </div>
-                                <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password">
-                            </form>
+                                <%--<div class="row">--%>
+                                <%--<div class="col-sm-12">--%>
+                                <%--<span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match--%>
+                                <%--</div>--%>
+                                <%--</div>--%>
+                             </form>
                         </div><!--/col-sm-6-->
                     </div><!--/row-->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="changePass()" modalid="modal1" id="saveButton">Сохранить</button>
                 </div>
+
             </div>
+
         </div>
     </div>
+
+
 
 </div>
 
 <script>
+    var equalPass = false;
     $("input[type=password]").keyup(function(){
         var ucase = new RegExp("[A-Z]+");
         var lcase = new RegExp("[a-z]+");
         var num = new RegExp("[0-9]+");
 
-        if($("#password1").val().length >= 8){
-            $("#8char").removeClass("glyphicon-remove");
-            $("#8char").addClass("glyphicon-ok");
-            $("#8char").css("color","#00A41E");
-        }else{
-            $("#8char").removeClass("glyphicon-ok");
-            $("#8char").addClass("glyphicon-remove");
-            $("#8char").css("color","#FF0004");
-        }
-
-        if(ucase.test($("#password1").val())){
-            $("#ucase").removeClass("glyphicon-remove");
-            $("#ucase").addClass("glyphicon-ok");
-            $("#ucase").css("color","#00A41E");
-        }else{
-            $("#ucase").removeClass("glyphicon-ok");
-            $("#ucase").addClass("glyphicon-remove");
-            $("#ucase").css("color","#FF0004");
-        }
-
-        if(lcase.test($("#password1").val())){
-            $("#lcase").removeClass("glyphicon-remove");
-            $("#lcase").addClass("glyphicon-ok");
-            $("#lcase").css("color","#00A41E");
-        }else{
-            $("#lcase").removeClass("glyphicon-ok");
-            $("#lcase").addClass("glyphicon-remove");
-            $("#lcase").css("color","#FF0004");
-        }
-
-        if(num.test($("#password1").val())){
-            $("#num").removeClass("glyphicon-remove");
-            $("#num").addClass("glyphicon-ok");
-            $("#num").css("color","#00A41E");
-        }else{
-            $("#num").removeClass("glyphicon-ok");
-            $("#num").addClass("glyphicon-remove");
-            $("#num").css("color","#FF0004");
-        }
-
         if($("#password1").val() == $("#password2").val()){
-            $("#pwmatch").removeClass("glyphicon-remove");
-            $("#pwmatch").addClass("glyphicon-ok");
-            $("#pwmatch").css("color","#00A41E");
-        }else{
-            $("#pwmatch").removeClass("glyphicon-ok");
-            $("#pwmatch").addClass("glyphicon-remove");
-            $("#pwmatch").css("color","#FF0004");
+
+         equalPass = true;
+
         }
+//        else{
+//            $("#pwmatch").removeClass("glyphicon-ok");
+//            $("#pwmatch").addClass("glyphicon-remove");
+//            $("#pwmatch").css("color","#FF0004");
+//        }
+
+    });
+
+    $('#saveButton').click(function () {
+       if(equalPass){
+
+           $("#myModal").modal("hide");
+
+       }
+       else{
+           alert("Passwords are not equal");
+       }
     });
 </script>

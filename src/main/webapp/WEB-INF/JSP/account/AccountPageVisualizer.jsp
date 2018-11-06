@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="/css/photoswipe.css">
     <link rel="stylesheet" href="/css/default-skin/default-skin.css">
     <link rel="stylesheet" href="/css/gallery.css">
+    <style>
+        form input{
+            margin-bottom: 5px;
+        }
+    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
