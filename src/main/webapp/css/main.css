@@ -33,7 +33,7 @@ footer {
     padding-top: 12px;
 }
 span, h1, h2, h3, h4, p{
-    word-break: break-all;
+    /*word-break: break-all;*/
 }
 footer p{
     color: #69a03c;
@@ -44,6 +44,32 @@ footer a{
 footer a:hover{
     color: #69a03c;
 }
+
+
+
+.subject-item .content-schedule{
+
+    height: 70px;
+    overflow: hidden;
+
+}
+
+.subject-item  h2{
+
+    height: 23px;
+    overflow: hidden;
+    padding-top: 1px;
+
+}
+
+
+.subject-item p{
+
+    height: 43px;
+    overflow: hidden;
+
+}
+
 
 
 ul.navbar-right {

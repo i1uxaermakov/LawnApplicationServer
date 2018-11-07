@@ -58,7 +58,7 @@ section.blocks{
     border-bottom: 1px solid #aeaeae;
     border-top: 1px solid #aeaeae;
     padding-top: 5px;
-    /*    margin-bottom: 7px;*/
+    /*margin-bottom: 7px;*/
     word-spacing: 15px;
     font-weight: 400;
     background: #eaefe6;
@@ -68,7 +68,12 @@ section.blocks{
 .firstdate1 {
     border-top: none;
 }
-
+.subject-item p {
+    font-size: 21px;
+    height:21px;
+    overflow: hidden;
+    margin:0;
+}
 .ordles {
     float: left;
     font-size: 90px;
@@ -78,6 +83,7 @@ section.blocks{
 
 .content-schedule {
     margin-left: 70px;
+    overflow-x: hidden;
 }
 
 .urok a {
@@ -93,7 +99,7 @@ section.blocks{
 }
 
 .urok h2 {
-    margin: 0;
+    margin: 1px;
     font-size: 26px;
     color: #69a03c;
     line-height: 22px;
@@ -115,8 +121,8 @@ section.blocks{
     border-right: none;
 }
 
-.urok p {
-    margin-top: 3px;
+.content-schedule:first-child {
+    margin-top: 4px;
     color: #3f3f3f;
     font-size: 20px;
 }
@@ -138,6 +144,7 @@ section.blocks{
     }
     .content-schedule {
         margin-left: 65px;
+        overflow-x: hidden;
     }
     .urok {
         font-size: 25px;
@@ -452,10 +459,11 @@ top: 30%;
 }
 .double-pair .subject-item:first-child{
     border-bottom: 1px solid #aeaeae;
-    padding-top: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
 }
 .double-pair .subject-item:only-child{
-    padding-bottom: 0;
+    padding-bottom: 5px;
     border-top: 1px solid #aeaeae;
     margin-top: 46px;
 }
