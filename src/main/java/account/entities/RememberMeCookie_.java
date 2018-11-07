@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 @StaticMetamodel(RememberMeCookie.class)
 public class RememberMeCookie_ {
-    public static volatile SingularAttribute<RememberMeCookie,Long> id;
+    public static volatile SingularAttribute<RememberMeCookie,Long> cookieID;
     public static volatile SingularAttribute<RememberMeCookie,Long> userId;
     public static volatile SingularAttribute<RememberMeCookie,String> selector;
     public static volatile SingularAttribute<RememberMeCookie,String> hashedValidator;
@@ -14,7 +14,7 @@ public class RememberMeCookie_ {
 }
 
 /*
-    private Long id;
+    private Long cookieID;
     private Long userId;
     private String selector;
     private String hashedValidator;

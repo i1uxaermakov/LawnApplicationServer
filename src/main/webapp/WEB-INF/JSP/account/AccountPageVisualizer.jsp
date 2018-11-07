@@ -61,6 +61,72 @@
     <script src="/js/edu.js"></script>
     <script src="/js/photoswipe.min.js"></script>
     <script src="/js/photoswipe-ui-default.min.js"></script>
+
+    <script>
+        var equalPass = false;
+        $("input[type=password]").keyup(function(){
+
+            $("#password1").css("border-color","black");
+            $("#password2").css("border-color","black");
+
+            var oldpass = $('#oldpass').val();
+            var password1 = $("#password1").val();
+            var password2 = $("#password2").val();
+
+            if(oldpass!="" && password1!="" && password2!="" && password1===password2){
+                equalPass = true;
+            }
+//        else{
+//            $("#pwmatch").removeClass("glyphicon-ok");
+//            $("#pwmatch").addClass("glyphicon-remove");
+//            $("#pwmatch").css("color","#FF0004");
+//        }
+
+        });
+
+        $('#saveButton').click(function () {
+            if(equalPass){
+//                var oldpass = $('#oldpass').val();
+//                var password1 = $("#password1").val();
+//                var password2 = $("#password2").val();
+                var formData = new FormData();
+                formData.set('oldpass', $('#oldpass').val());
+                formData.set('newpass', $('#password1').val());
+
+                console.log($('#oldpass').val());
+                console.log($('#password1').val());
+
+                $.ajax({
+                    url:  '/acc/changepassword',
+                    type: 'post',
+                    processData: false,
+                    contentType: false,
+                    enctype: 'multipart/form-data',
+                    data: formData,
+                    cache: false,
+                    timeout: 600000,
+                    //before while the request is in process, show spinner
+                    success : function () {
+                        // when password is changed, I invalidate current session and delete all RememberMeCookies from Database
+                        // Redirect page to /signin
+                    },
+                    error : function () {
+                        // error 403 - when oldpassword is incorrect
+                        // any other error - show the response (in response there will be html page with error information)
+                    }
+                });
+
+
+
+                $("#myModal").modal("hide");
+            }
+            else{
+                $("#password1").css("border-color","red");
+                $("#password2").css("border-color","red");
+
+            }
+        });
+    </script>
 </body>
 
 </html>

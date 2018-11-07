@@ -13,13 +13,14 @@ public class User_ {
         public static volatile SingularAttribute<User, String> lyceumId;
         public static volatile SingularAttribute<User, String> password;
         public static volatile SingularAttribute<User, String> groupName;
+        public static volatile SingularAttribute<User, Long> level;
         public static volatile SingularAttribute<User, String> firstName;
         public static volatile SingularAttribute<User, String> lastName;
         public static volatile SingularAttribute<User, String> fathersName;
         public static volatile SingularAttribute<User, Timestamp> lastLoginDate;
         public static volatile SingularAttribute<User, Long> groupId;
         public static volatile SetAttribute<User, String> privileges;
-        public static volatile SetAttribute<User,File> favoriteFiles;
+        public static volatile SetAttribute<User,File> favouriteFiles;
 }
 /*
     private Long userId; //internal

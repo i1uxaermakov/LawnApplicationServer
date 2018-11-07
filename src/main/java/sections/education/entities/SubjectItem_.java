@@ -12,7 +12,7 @@ public class SubjectItem_ {
     public static volatile SingularAttribute<SubjectItem,String> groupName;
     public static volatile SingularAttribute<SubjectItem,Long> teacherId;
     public static volatile SingularAttribute<SubjectItem,String> teacherName;
-    public static volatile SingularAttribute<SubjectItem,String> lectureHall;
+    public static volatile SingularAttribute<SubjectItem,Long> createdBy;
 
     public static volatile SetAttribute<SubjectItem,DayLecture> whenIsSubject;
 }
@@ -20,9 +20,10 @@ public class SubjectItem_ {
     private Long id;
     private String name;
     private Long groupId;
+    private String groupName;
     private Long teacherId;
     private String teacherName;
-    private String lectureHall;
+    private Long createdBy;
     private Set<DayLecture> whenIsSubject= new HashSet<>(0);
 
 

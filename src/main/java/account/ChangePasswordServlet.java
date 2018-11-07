@@ -1,7 +1,9 @@
 package account;
 
+import account.DAO.RememberMeCookieDAO;
 import account.DAO.UserDAO;
 import account.authorization.UpdatableBCrypt;
+import account.entities.RememberMeCookie;
 import account.entities.User;
 import org.hibernate.Session;
 import utils.HibernateUtil;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 /*
@@ -35,9 +38,19 @@ public class ChangePasswordServlet extends HttpServlet {
         if(updatableBCrypt.verifyHash(oldPasswordParameter, user.getPassword())) {
             user.setPassword(updatableBCrypt.hash(newPasswordParameter));
             Session hibSession = HibernateUtil.getSessionFactory().openSession();
+
             UserDAO userDAO = new UserDAO();
             userDAO.updateUser(user);
+
+            RememberMeCookieDAO rememberMeCookieDAO = new RememberMeCookieDAO();
+            List<RememberMeCookie> rememberMeCookieList = rememberMeCookieDAO.getAllRememberMeCookiesOfUser(user.getUserId());
+            for(RememberMeCookie rememberMeCookie: rememberMeCookieList) {
+                rememberMeCookieDAO.deleteRememberMeCookie(rememberMeCookie);
+            }
+
             hibSession.close();
+
+            resp.sendRedirect("/signout");
         }
         else {
             resp.setStatus(403);

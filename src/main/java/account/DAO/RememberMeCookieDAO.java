@@ -84,4 +84,30 @@ public class RememberMeCookieDAO {
             e.printStackTrace();
         }
     }
+
+    public List<RememberMeCookie> getAllRememberMeCookiesOfUser(Long userId) {
+        Session hibSession = null;
+        Transaction transaction = null;
+        List<RememberMeCookie> rememberMeCookieList = new ArrayList<>(0);
+
+        try{
+            hibSession = sessionFactory.getCurrentSession();
+            transaction = hibSession.beginTransaction();
+            CriteriaBuilder criteriaBuilder = hibSession.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(RememberMeCookie.class);
+            Root<RememberMeCookie> rememberMeCookieRoot = criteriaQuery.from(RememberMeCookie.class);
+
+            criteriaQuery.where(criteriaBuilder.equal(rememberMeCookieRoot.get(RememberMeCookie_.userId), userId));
+
+            rememberMeCookieList = hibSession.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
+        }
+
+        return rememberMeCookieList;
+    }
 }
