@@ -29,7 +29,9 @@ var addsubject = function(e){
     alert("Not sufficient info")
     }
     else{
-        nomerUroka %= 8;
+        while(nomerUroka-8>0) {
+            nomerUroka-=8;
+        }
 
         var formData = new FormData();
         formData.set('sname', subject);
@@ -56,7 +58,7 @@ var addsubject = function(e){
             },
             success: function () {
                 console.log("success");
-                $('#subject' + id).html('<div class="ordles">' + Math.ceil(nomerUroka / 2) + '</div><div class="content-schedule"><h2>' + subject + '</h2><p>' + teacher + ' <br> ' + venue + '</p></div>');
+                $('#subject' + id).html('<div class="ordles">' + Math.ceil(nomerUroka / 2) + '</div><div class="content-schedule"><h2>' + subject + '</h2><p>' + teacher + '</p><p>' + venue + '</p></div>');
                 loaderGif(modalBodyId, false, "");
                 $(modalBodyId + " label").show();
             },

@@ -82,9 +82,8 @@
                             <div class="ordles"><%=lectureOrder%></div>
                             <div class="content-schedule">
                                 <h2><%=subjectItem.getName()%></h2>
-                                    <p><%=("student".equals(forwhom))?subjectItem.getTeacherName():subjectItem.getGroupName()%></p>
-
-                                    <p><%=venue%></p>
+                                <p><%=("student".equals(forwhom))?subjectItem.getTeacherName():subjectItem.getGroupName()%></p>
+                                <p><%=venue%></p>
                                 <%--subjectItem.getLectureHall()--%>
                             </div>
                         </a>
@@ -96,7 +95,7 @@
 
             <%}
                 else {%>
-                <div class="urok"></div>
+                <div class="urok u<%=lectureOrder%>"></div>
             <%
                 }
             }%>

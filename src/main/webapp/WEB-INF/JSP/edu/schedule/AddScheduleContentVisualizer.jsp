@@ -70,7 +70,8 @@
                             <div class="ordles"><%=lectureOrder%></div>
                             <div class="content-schedule">
                                 <h2><%=subjectItem.getName()%></h2>
-                                <p><%=subjectItem.getTeacherName()%> <br> <%=venue%></p>
+                                <p><%=(subjectItem.getTeacherName())%></p>
+                                <p><%=venue%></p>
                             </div>
                         </div>
                 <%
