@@ -37,7 +37,7 @@ public class SignInServlet extends HttpServlet {
         rememberMeCookieName = getServletContext().getInitParameter("RememberMeCookieName");
         sessionFactory = HibernateUtil.getSessionFactory();
 
-        addTeachers();
+        //addTeachers();
     }
 
 
