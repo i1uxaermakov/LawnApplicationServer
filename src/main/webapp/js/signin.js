@@ -5,12 +5,12 @@ document.getElementById("SignInForm").addEventListener("submit", function(event)
     var login = $("#login").val();
     console.log(login + "login");
     var password = $("#password").val();
-    var rememberme = $("#rememberme").is(":checked");
+    //var rememberme = $("#rememberme").is(":checked");
 
     var formData = new FormData();
     formData.set("login", login);
     formData.set("password", password);
-    formData.set("rememberme", rememberme);
+    //formData.set("rememberme", rememberme);
 
     $.ajax({
         url:  '/signin',

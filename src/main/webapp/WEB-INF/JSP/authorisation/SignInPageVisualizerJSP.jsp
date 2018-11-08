@@ -135,9 +135,9 @@
                     <center id="loader" style="display: none"><div class="lds-hourglass"></div></center>
                     <input class="textinput" type="text" placeholder="ID" name="login" id="login" autocomplete="off"/>
                     <input class="textinput" type="password" placeholder="Password" name="password" id="password" autocomplete="off"/>
-                    <div class="checkbox text-left">
-                        <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
-                    </div>
+                    <%--<div class="checkbox text-left">--%>
+                        <%--<label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>--%>
+                    <%--</div>--%>
                     <button>SIGN IN</button>
                 </form>
             </div>

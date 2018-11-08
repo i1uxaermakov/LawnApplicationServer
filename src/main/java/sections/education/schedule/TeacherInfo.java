@@ -1,5 +1,7 @@
 package sections.education.schedule;
 
+import java.util.Objects;
+
 public class TeacherInfo {
     private Long teacherUserID;
     private String firstName;
@@ -55,7 +57,9 @@ public class TeacherInfo {
     }
 
     public String getFullName() {
-        return lastName + " " + firstName.substring(0,1) + "." + fathersName.substring(0,1) + ".";
+        String fullName = lastName + " " + firstName.substring(0,1) + ".";
+        if(Objects.nonNull(fathersName) && fathersName.length()>1) fullName = fullName + fathersName.substring(0,1) + ".";
+        return fullName;
     }
 
     @Override

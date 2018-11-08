@@ -14,9 +14,11 @@ import org.hibernate.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.apache.commons.text.CharacterPredicates.DIGITS;
 import static org.apache.commons.text.CharacterPredicates.LETTERS;
@@ -34,6 +36,8 @@ public class SignInServlet extends HttpServlet {
         super.init();
         rememberMeCookieName = getServletContext().getInitParameter("RememberMeCookieName");
         sessionFactory = HibernateUtil.getSessionFactory();
+
+        addTeachers();
     }
 
 
@@ -93,28 +97,30 @@ public class SignInServlet extends HttpServlet {
                 UpdatableBCrypt bCrypt = new UpdatableBCrypt(12);
                 if(bCrypt.verifyHash(password, userLoginInfo.getPassword())) {
                     User user = userDAO.getUserById(userLoginInfo.getUserId());
-                    if("true".equals(rememberme)) {
-                        RandomStringGenerator generator = new RandomStringGenerator.Builder()
-                                .withinRange('0', 'z')
-                                .filteredBy(LETTERS, DIGITS)
-                                .build();
 
-                        String selector = generator.generate(12), validator = generator.generate(64);
+                    //if("true".equals(rememberme)) {
+                    RandomStringGenerator generator = new RandomStringGenerator.Builder()
+                            .withinRange('0', 'z')
+                            .filteredBy(LETTERS, DIGITS)
+                            .build();
 
-                        RememberMeCookie rememberMeCookie = new RememberMeCookie();
-                        rememberMeCookie.setUserId(user.getUserId());
-                        rememberMeCookie.setExpiresDate(new Timestamp(System.currentTimeMillis() + 31556952000L)); //1 year in milliseconds
-                        rememberMeCookie.setSelector(selector);
-                        rememberMeCookie.setHashedValidator(DigestUtils.sha256Hex(validator));
+                    String selector = generator.generate(12), validator = generator.generate(64);
 
-                        RememberMeCookieDAO cookieDAO = new RememberMeCookieDAO();
-                        cookieDAO.persistRememberMeCookie(rememberMeCookie);
+                    RememberMeCookie rememberMeCookie = new RememberMeCookie();
+                    rememberMeCookie.setUserId(user.getUserId());
+                    rememberMeCookie.setExpiresDate(new Timestamp(System.currentTimeMillis() + 31556952000L)); //1 year in milliseconds
+                    rememberMeCookie.setSelector(selector);
+                    rememberMeCookie.setHashedValidator(DigestUtils.sha256Hex(validator));
 
-                        Cookie cookie = new Cookie(rememberMeCookieName, selector+":"+validator);
-                        cookie.setMaxAge(31556952); //1 year
-                        cookie.setHttpOnly(true);
-                        response.addCookie(cookie);
-                    }
+                    RememberMeCookieDAO cookieDAO = new RememberMeCookieDAO();
+                    cookieDAO.persistRememberMeCookie(rememberMeCookie);
+
+                    Cookie cookie = new Cookie(rememberMeCookieName, selector+":"+validator);
+                    cookie.setMaxAge(31556952); //1 year
+                    cookie.setHttpOnly(true);
+                    response.addCookie(cookie);
+                    //}
+
                     session.close();
 
                     httpSession.setAttribute("User", user);
@@ -127,6 +133,57 @@ public class SignInServlet extends HttpServlet {
             session.close();
         }
         return false;
+    }
+
+    public void addTeachers() {
+        String fileName = "/Users/ilya_ermakov/Desktop/files/teachers.txt";
+        try {
+            String line = null;
+            Reader fileReader = new InputStreamReader(new FileInputStream(fileName), "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            UserDAO userDAO = new UserDAO();
+            RandomStringGenerator generator = new RandomStringGenerator.Builder()
+                    .withinRange('0', 'z')
+                    .filteredBy(LETTERS, DIGITS)
+                    .build();
+            UpdatableBCrypt updatableBCrypt = new UpdatableBCrypt(12);
+
+            Long teacherId = new Long(1);
+            while((line = bufferedReader.readLine()) != null) {
+                String[] arr = line.split(" ");
+
+                User user = new User();
+                user.setLastName(arr[0]);
+                user.setFirstName(arr[1]);
+                if(arr.length > 2) {
+                    user.setFathersName(arr[2]);
+                }
+                else {
+                    user.setFathersName("");
+                }
+                user.setLyceumId("t"+teacherId);                user.setGroupId((long) 7);
+                user.setLevel((long) 1);
+                user.setGroupName("Teachers");
+
+                String password = generator.generate(8);
+                user.setPassword(updatableBCrypt.hash(password));
+                System.out.println(user.getLyceumId() + ": " + password);
+
+                Set<String> privileges = new HashSet<>(0);
+                privileges.add("teacher");
+                privileges.add("schedule");
+                user.setPrivileges(privileges);
+
+                userDAO.persistNewUser(user);
+                teacherId++;
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

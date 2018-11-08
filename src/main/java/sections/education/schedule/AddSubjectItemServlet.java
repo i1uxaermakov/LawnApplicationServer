@@ -112,10 +112,10 @@ public class AddSubjectItemServlet extends HttpServlet {
         }
 
 
-        System.out.println(0);
-        System.out.println("lo"+lectureOrder);
-        System.out.println("d"+dayOrder);
-        System.out.println("for"+forSubgroupParameter);
+//        System.out.println(0);
+//        System.out.println("lo"+lectureOrder);
+//        System.out.println("d"+dayOrder);
+//        System.out.println("for"+forSubgroupParameter);
         boolean foundSubjectOnThisDayAndLecture = false;
         SubjectItem subjectItemToRemoveDayLectureFrom = null;
         DayLecture dayLectureToRemove = null;
@@ -134,20 +134,20 @@ public class AddSubjectItemServlet extends HttpServlet {
             }
         }
         if(foundSubjectOnThisDayAndLecture) {
-            System.out.println("remove");
+//            System.out.println("remove");
             subjectItemToRemoveDayLectureFrom.getWhenIsSubject().remove(dayLectureToRemove);
             subjectItemDAO.updateSubjectItem(subjectItemToRemoveDayLectureFrom);
         }
 
-        System.out.println(1);
+//        System.out.println(1);
 
         DayLecture dayLecture = new DayLecture();
-        dayLecture.setVenue(venue);
+        dayLecture.setVenue("Room " + venue);
         dayLecture.setDay(dayOrder);
         dayLecture.setLectureOrder(lectureOrder);
         dayLecture.setForSubgroup(forSubgroupParameter);
         SubjectItem existingSubjectItem = subjectItemDAO.getSubjectItemIfExistsForAdding(teacherId,subjectName,groupId);
-        System.out.println(2);
+//        System.out.println(2);
         if(Objects.nonNull(existingSubjectItem)) {
             existingSubjectItem.getWhenIsSubject().add(dayLecture);
             subjectItemDAO.updateSubjectItem(existingSubjectItem);

@@ -129,4 +129,21 @@ public class UserDAO {
 
         return teacherInfoList;
     }
+
+    public void persistNewUser(User user) {
+        Session hibSession = null;
+        Transaction transaction = null;
+
+        try {
+            hibSession = sessionFactory.getCurrentSession();
+            transaction = hibSession.beginTransaction();
+            hibSession.save(user);
+            transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
+        }
+    }
 }

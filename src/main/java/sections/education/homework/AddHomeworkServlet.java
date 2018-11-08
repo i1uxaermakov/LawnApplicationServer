@@ -128,6 +128,7 @@ public class AddHomeworkServlet extends HttpServlet {
 
             homeworkItem.setAddedById(user.getUserId());
             homeworkItem.setGroupId(subjectItem.getGroupId());
+            homeworkItem.setGroupName(subjectItem.getGroupName());
             homeworkItem.setSubjectId(subjectItem.getId());
             homeworkItem.setSubjectName(subjectItem.getName());
             homeworkItem.setTeacherName(subjectItem.getTeacherName());

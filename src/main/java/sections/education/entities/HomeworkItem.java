@@ -12,6 +12,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
     private Long addedById;
     private Long teacherId;
     private Long groupId;
+    private String groupName;
     private Long subjectId;
     private String subjectName;
     private String teacherName;
@@ -120,27 +121,17 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         this.teacherId = teacherId;
     }
 
-    @Override
-    public int compareTo(HomeworkItem o) {
-        return this.getDeadlineDate().compareTo(o.getDeadlineDate());
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override
-    public String toString() {
-        return "HomeworkItem{" +
-                "hw_id=" + hw_id +
-                ", addedById=" + addedById +
-                ", teacherId=" + teacherId +
-                ", groupId=" + groupId +
-                ", subjectId=" + subjectId +
-                ", subjectName='" + subjectName + '\'' +
-                ", teacherName='" + teacherName + '\'' +
-                ", description='" + description + '\'' +
-                ", publishDate=" + publishDate +
-                ", deadlineDate=" + deadlineDate +
-                ", files=" + files +
-                ", photos=" + photos +
-                '}';
+    public int compareTo(HomeworkItem o) {
+        return this.getDeadlineDate().compareTo(o.getDeadlineDate());
     }
 
     @Override
@@ -154,6 +145,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         if (addedById != null ? !addedById.equals(that.addedById) : that.addedById != null) return false;
         if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
         if (groupId != null ? !groupId.equals(that.groupId) : that.groupId != null) return false;
+        if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
         if (subjectId != null ? !subjectId.equals(that.subjectId) : that.subjectId != null) return false;
         if (subjectName != null ? !subjectName.equals(that.subjectName) : that.subjectName != null) return false;
         if (teacherName != null ? !teacherName.equals(that.teacherName) : that.teacherName != null) return false;
@@ -170,6 +162,7 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         result = 31 * result + (addedById != null ? addedById.hashCode() : 0);
         result = 31 * result + (teacherId != null ? teacherId.hashCode() : 0);
         result = 31 * result + (groupId != null ? groupId.hashCode() : 0);
+        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
         result = 31 * result + (subjectId != null ? subjectId.hashCode() : 0);
         result = 31 * result + (subjectName != null ? subjectName.hashCode() : 0);
         result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
@@ -179,5 +172,24 @@ public class HomeworkItem implements Comparable<HomeworkItem> {
         result = 31 * result + (files != null ? files.hashCode() : 0);
         result = 31 * result + (photos != null ? photos.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "HomeworkItem{" +
+                "hw_id=" + hw_id +
+                ", addedById=" + addedById +
+                ", teacherId=" + teacherId +
+                ", groupId=" + groupId +
+                ", groupName=" + groupName +
+                ", subjectId=" + subjectId +
+                ", subjectName='" + subjectName + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", description='" + description + '\'' +
+                ", publishDate=" + publishDate +
+                ", deadlineDate=" + deadlineDate +
+                ", files=" + files +
+                ", photos=" + photos +
+                '}';
     }
 }

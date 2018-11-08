@@ -5,8 +5,10 @@
 <%@ page import="utils.files.File" %>
 <%@ page import="java.text.ParseException" %>
 <%@ page import="java.sql.Timestamp" %>
+<%@ page import="account.entities.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    User user = (User) request.getSession().getAttribute("User");
     List<HomeworkItem> homeworkItemList = (List<HomeworkItem>) request.getAttribute("homeworkItemList");
     if(homeworkItemList==null || homeworkItemList.size() == 0) {
         %>
@@ -103,7 +105,7 @@
                                 <div class="news">
                                     <div class="newsbegin">
                                         <div class="l2-homework">
-                                            <span class="post-publishers-name"><%=hwi.getSubjectName() + " - " + hwi.getTeacherName()%></span> <!--History - Ramis Sattarov-->
+                                            <span class="post-publishers-name"><%=hwi.getSubjectName() + " - " + ((user.getPrivileges().contains("teacher"))?hwi.getGroupName():hwi.getTeacherName())%></span> <!--History - Ramis Sattarov-->
                                             <br>
                                             <span class="item-date">Deadline: <%=hwDeadlineDateFormat.format(deadlineDate)%></span> <br>
                                             <span class="item-date">Uploaded: <%=hwUploadDateFormat.format(hwi.getPublishDate())%></span>

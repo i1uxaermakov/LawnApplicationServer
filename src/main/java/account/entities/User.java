@@ -5,6 +5,7 @@ import utils.files.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class User implements Serializable {
@@ -105,7 +106,9 @@ public class User implements Serializable {
     }
 
     public String getFullName() {
-        return this.firstName + " " + this.lastName;
+        String fullName = lastName + " " + firstName.substring(0,1) + ".";
+        if(Objects.nonNull(fathersName) && fathersName.length()>1) fullName = fullName + fathersName.substring(0,1) + ".";
+        return fullName;
     }
 
     public Set<File> getFavouriteFiles() {

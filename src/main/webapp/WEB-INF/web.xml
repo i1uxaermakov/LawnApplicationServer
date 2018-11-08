@@ -104,7 +104,7 @@
         <!--<url-pattern>/add/*</url-pattern>-->
         <url-pattern>/edu/*</url-pattern>
         <url-pattern>/files/fav</url-pattern>
-        <url-pattern>/acc</url-pattern>
+        <url-pattern>/acc/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
