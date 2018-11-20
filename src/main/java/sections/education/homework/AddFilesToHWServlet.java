@@ -41,7 +41,7 @@ public class AddFilesToHWServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("User");
         String hwIDs = req.getParameter("hw_id");
         if(Objects.isNull(hwIDs)) {
-            resp.setStatus(404);
+            resp.setStatus(400);
             resp.getWriter().write("Whom is homework for?");
             return;
         }

@@ -63,7 +63,7 @@ public class FileDownloadingServlet extends HttpServlet {
             outStream.close();
         }
         else {
-            response.setStatus(404);
+            response.sendError(404);
         }
     }
 

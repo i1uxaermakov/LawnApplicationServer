@@ -18,6 +18,27 @@
 
 
 
+
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/exceptionError</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error-pages/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error-pages/403.html</location>
+    </error-page>
+
+
+
+
+
     <context-param>
         <param-name>pathToPhotos</param-name>
         <param-value>/Users/ilya_ermakov/Desktop/images</param-value>
@@ -90,7 +111,7 @@
         </init-param>
         <init-param>
             <param-name>StaticFilesStringPatterns</param-name>
-            <param-value>/js;/css;/webfonts;/fonts;/html</param-value>
+            <param-value>/js;/css;/webfonts;/fonts;/html;/error-pages</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -338,9 +359,5 @@
     </servlet-mapping>
     <!--END EDUCATION-->
 
-    <error-page>
-        <exception-type>java.lang.Throwable</exception-type>
-        <location>/exceptionError</location>
-    </error-page>
 
 </web-app>

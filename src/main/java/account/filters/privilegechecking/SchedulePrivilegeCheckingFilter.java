@@ -22,7 +22,7 @@ public class SchedulePrivilegeCheckingFilter implements Filter {
                 filterChain.doFilter(servletRequest,servletResponse);
             }
             else {
-                response.setStatus(403);
+                response.sendError(403);
             }
         }
         else {
