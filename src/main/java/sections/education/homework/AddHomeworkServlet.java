@@ -1,6 +1,8 @@
 package sections.education.homework;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
 import sections.education.DAO.SubjectItemDAO;
@@ -26,6 +28,8 @@ import java.util.*;
 * */
 @MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*1024, maxRequestSize=1024*1024)
 public class AddHomeworkServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(AddHomeworkServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("User");
@@ -143,6 +147,7 @@ public class AddHomeworkServlet extends HttpServlet {
             Long res = homeworkItemDAO.persistHomeworkItem(homeworkItemList.get(i));
             coma = (i != homeworkItemList.size()-1)?";":"";
             idealResponse = idealResponse + res + coma;
+            logger.info("User(userID="+user.getUserId()+") added HomeworkItem(hwID="+homeworkItemList.get(i).getHw_id()+").");
         }
         hibSession.close();
 

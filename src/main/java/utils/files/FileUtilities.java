@@ -70,10 +70,6 @@ public class FileUtilities {
         file.setAuthor(user.getFullName());
         file.setPublishDate(new Timestamp(System.currentTimeMillis()));
 
-        System.out.println(fileName);
-        System.out.println(System.currentTimeMillis());
-        System.out.println(file.getPublishDate());
-
         return file;
     }
 }

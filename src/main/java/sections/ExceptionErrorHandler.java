@@ -1,5 +1,8 @@
 package sections;
 
+import org.hibernate.SessionFactory;
+import utils.HibernateUtil;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 

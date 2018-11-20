@@ -89,7 +89,7 @@
             <ul class="nav nav-tabs">
                 <li class="active first"><a   href="/edu/sc">Schedule</a></li>
                 <li><a href="/edu/hw">Homework</a></li>
-                <li><a href="/edu/lib">Recources</a></li>
+                <li><a href="/edu/lib">Resources</a></li>
             </ul>
         </section>
 

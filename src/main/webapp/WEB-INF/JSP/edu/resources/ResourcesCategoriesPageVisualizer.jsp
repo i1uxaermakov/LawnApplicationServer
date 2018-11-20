@@ -45,7 +45,7 @@
         <ul class="nav nav-tabs">
             <li class="first"><a   href="/edu/sc">Schedule</a></li>
             <li><a href="/edu/hw">Homework</a></li>
-            <li class="active"><a href="/edu/lib">Recources</a></li>
+            <li class="active"><a href="/edu/lib">Resources</a></li>
             <%
                 User user = (User) request.getSession().getAttribute("User");
                 if(user.getPrivileges().contains("teacher")) {%>

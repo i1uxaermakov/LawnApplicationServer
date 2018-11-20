@@ -2,6 +2,7 @@ package account.authorization;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.text.RandomStringGenerator;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import account.DAO.RememberMeCookieDAO;
 import account.DAO.UserDAO;
@@ -10,6 +11,8 @@ import account.entities.RememberMeCookie;
 import account.entities.User;
 import account.entities.UserLoginInfo;
 import org.hibernate.Session;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -30,13 +33,16 @@ import static org.apache.commons.text.CharacterPredicates.LETTERS;
 public class SignInServlet extends HttpServlet {
     private static String rememberMeCookieName;
     private static SessionFactory sessionFactory;
+    private static final Logger logger = LogManager.getLogger("");
 
     @Override
     public void init() throws ServletException {
         super.init();
+        logger.info("\n\n\nServer turned on! Alhamdulillah!");
         rememberMeCookieName = getServletContext().getInitParameter("RememberMeCookieName");
         sessionFactory = HibernateUtil.getSessionFactory();
 
+        //t14 YXBG6lGB
         //addTeachers();
     }
 
@@ -49,6 +55,7 @@ public class SignInServlet extends HttpServlet {
         else {
             resp.setStatus(401);
             req.getRequestDispatcher("/WEB-INF/JSP/authorisation/SignInPageVisualizerJSP.jsp").include(req, resp);
+            //throw new HibernateException("beach");
         }
     }
 
@@ -75,9 +82,9 @@ public class SignInServlet extends HttpServlet {
             else if(parameterName.equals("password")) {
                 password = request.getParameter(parameterName);
             }
-            else if(parameterName.equals("rememberme")) {
-                rememberme = request.getParameter("rememberme");
-            }
+//            else if(parameterName.equals("rememberme")) {
+//                rememberme = request.getParameter("rememberme");
+//            }
         }
 
         if(lyceumId==null || password==null || "".equals(lyceumId) || "".equals(password)) {

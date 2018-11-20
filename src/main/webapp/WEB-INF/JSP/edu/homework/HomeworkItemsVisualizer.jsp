@@ -71,7 +71,9 @@
 
     boolean isExpandedFirst = true;
     Calendar calendarForWeekNUmberSection = Calendar.getInstance();
-    for(Integer weekNumber: weekDaysCorrelationMap.keySet()) {
+    List<Integer> weekNumberList = new ArrayList<>(weekDaysCorrelationMap.keySet());
+    Collections.sort(weekNumberList);
+    for(Integer weekNumber: weekNumberList) {
         List<Timestamp> weeksDates = weekDaysCorrelationMap.get(weekNumber);
         calendarForWeekNUmberSection.setTime(weeksDates.get(0));
         calendarForWeekNUmberSection.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);

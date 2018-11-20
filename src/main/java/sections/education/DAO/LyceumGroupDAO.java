@@ -1,5 +1,7 @@
 package sections.education.DAO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +19,7 @@ import java.util.Objects;
 
 public class LyceumGroupDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(LyceumGroupDAO.class);
 
     public List<LyceumGroup> getAllLyceumGroups() {
         Session hibSession = null;
@@ -40,6 +43,7 @@ public class LyceumGroupDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting all LyceumGroups for adding page!", e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -74,6 +78,7 @@ public class LyceumGroupDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting LyceumGroup by ID. GroupID="+groupId,e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();

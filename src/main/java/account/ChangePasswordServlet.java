@@ -5,6 +5,8 @@ import account.DAO.UserDAO;
 import account.authorization.UpdatableBCrypt;
 import account.entities.RememberMeCookie;
 import account.entities.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import utils.HibernateUtil;
 
@@ -22,6 +24,8 @@ import java.util.Objects;
 * */
 @MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class ChangePasswordServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(ChangePasswordServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("User");
@@ -47,7 +51,7 @@ public class ChangePasswordServlet extends HttpServlet {
             for(RememberMeCookie rememberMeCookie: rememberMeCookieList) {
                 rememberMeCookieDAO.deleteRememberMeCookie(rememberMeCookie);
             }
-
+            logger.info("Password of user "+ user.getUserId() + " was changed!");
             hibSession.close();
 
             resp.sendRedirect("/signout");

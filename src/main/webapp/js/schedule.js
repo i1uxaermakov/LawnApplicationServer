@@ -46,6 +46,7 @@ function showHomeworkBySubjectAddUp(element) {
             loaderGif("#"+id, false, " ");
             el.prepend(data);
             initPhotoSwipeFromDOM('.my-gallery');
+            filefavInitialize();
         },
         error: function (data,textStatus,jqXHR) {
             if(jqXHR.status===401) {
@@ -97,9 +98,11 @@ function showHomeworkBySubjectAddDown(element) {
         cache: false,
         timeout: 600000,
         success: function (data,textStatus,jqXHR) {
+            $('.warn').remove();
             loaderGif('#'+id, false);
             el.append(data);
             initPhotoSwipeFromDOM('.my-gallery');
+            filefavInitialize();
         },
         error: function (data,textStatus,jqXHR) {
             if(jqXHR.status===401) {

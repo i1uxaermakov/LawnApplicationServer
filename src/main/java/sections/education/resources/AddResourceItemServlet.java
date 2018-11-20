@@ -1,11 +1,14 @@
 package sections.education.resources;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import sections.education.DAO.SubjectCategoryDAO;
 import sections.education.entities.ResourceItem;
 import sections.education.entities.SubjectResourceCategory;
 import account.entities.User;
+import sections.education.homework.AddPhotosToHWServlet;
 import utils.HibernateUtil;
 import utils.files.File;
 import utils.files.FileUtilities;
@@ -31,6 +34,8 @@ public class AddResourceItemServlet extends HttpServlet {
     private static String pathToFiles;
     //servlet init parameter
     private static String pathSuffixForResourceFiles;
+    //class logger
+    private static final Logger logger = LogManager.getLogger(AddResourceItemServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -108,6 +113,8 @@ public class AddResourceItemServlet extends HttpServlet {
         else {
             category.getResourceItems().add(resourceItem);
             subjectCategoryDAO.updateSubjectResourceCategory(category);
+            logger.info("User(userID="+user.getUserId()+") added ResourceItem(id="+
+                    resourceItem.getResourceItemId()+") to SubjectCategory(categoryID="+categoryId+").");
         }
 
         hibSession.close();

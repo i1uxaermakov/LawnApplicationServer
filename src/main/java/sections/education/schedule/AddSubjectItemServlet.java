@@ -3,11 +3,14 @@ package sections.education.schedule;
 import account.DAO.UserDAO;
 import account.entities.User;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import sections.education.DAO.LyceumGroupDAO;
 import sections.education.DAO.SubjectItemDAO;
 import sections.education.entities.DayLecture;
 import sections.education.entities.SubjectItem;
+import sections.education.homework.AddPhotosToHWServlet;
 import utils.HibernateUtil;
 
 import javax.servlet.ServletException;
@@ -26,6 +29,8 @@ import java.util.Set;
 * */
 @MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class AddSubjectItemServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(AddSubjectItemServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session hibSession = HibernateUtil.getSessionFactory().openSession();
@@ -112,10 +117,6 @@ public class AddSubjectItemServlet extends HttpServlet {
         }
 
 
-//        System.out.println(0);
-//        System.out.println("lo"+lectureOrder);
-//        System.out.println("d"+dayOrder);
-//        System.out.println("for"+forSubgroupParameter);
         boolean foundSubjectOnThisDayAndLecture = false;
         SubjectItem subjectItemToRemoveDayLectureFrom = null;
         DayLecture dayLectureToRemove = null;
@@ -137,6 +138,7 @@ public class AddSubjectItemServlet extends HttpServlet {
 //            System.out.println("remove");
             subjectItemToRemoveDayLectureFrom.getWhenIsSubject().remove(dayLectureToRemove);
             subjectItemDAO.updateSubjectItem(subjectItemToRemoveDayLectureFrom);
+            logger.info("User(userID="+user.getUserId()+") deleted SubjectItem("+dayLectureToRemove.getId()+").");
         }
 
 //        System.out.println(1);
@@ -151,6 +153,7 @@ public class AddSubjectItemServlet extends HttpServlet {
         if(Objects.nonNull(existingSubjectItem)) {
             existingSubjectItem.getWhenIsSubject().add(dayLecture);
             subjectItemDAO.updateSubjectItem(existingSubjectItem);
+            logger.info("User(userID="+user.getUserId()+") updated SubjectItem("+existingSubjectItem+").");
         }
         else {
             SubjectItem newSubjectItem = new SubjectItem();
@@ -165,6 +168,7 @@ public class AddSubjectItemServlet extends HttpServlet {
             newSubjectItem.setWhenIsSubject(whenIsSubject);
 
             subjectItemDAO.persistSubjectItem(newSubjectItem);
+            logger.info("User(userID="+user.getUserId()+") added SubjectItem("+newSubjectItem.getId()+").");
         }
         hibSession.close();
     }

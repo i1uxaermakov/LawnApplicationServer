@@ -1,6 +1,9 @@
 package account.DAO;
 
 
+import account.authorization.SignInServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import account.entities.RememberMeCookie;
 import org.hibernate.Session;
@@ -17,6 +20,7 @@ import java.util.List;
 
 public class RememberMeCookieDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(RememberMeCookieDAO.class);
 
     public RememberMeCookie getRememberMeCookieBySelector(String selector) {
         Session hibSession = null;
@@ -36,7 +40,9 @@ public class RememberMeCookieDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception while getting RememberMeCookie By Selector. Selector="+selector+"\n", e);
             transaction.rollback();
+
             hibSession.close();
             e.printStackTrace();
         }
@@ -61,6 +67,7 @@ public class RememberMeCookieDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception while persisting RememberMeCookie! RememberMeCookie="+rememberMeCookie, e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -79,6 +86,7 @@ public class RememberMeCookieDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception while deleting RememberMeCookie. RememberMeCookie="+rememberMeCookie, e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -103,6 +111,7 @@ public class RememberMeCookieDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception while getting all RememberMeCookies of the user. UserId="+userId, e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();

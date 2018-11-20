@@ -1,5 +1,7 @@
 package sections.education.DAO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class SubjectCategoryDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(SubjectCategoryDAO.class);
 
     public List<SubjectResourceCategory> getSubjectCategoriesByLevel(Long level) {
         List<SubjectResourceCategory> categories = new ArrayList<>(0);
@@ -39,6 +42,7 @@ public class SubjectCategoryDAO {
             transaction.commit();
         }
         catch(HibernateException e) {
+            logger.error("Exception was thrown while getting SubjectCategories by Level. Level="+level, e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -67,6 +71,8 @@ public class SubjectCategoryDAO {
             transaction.commit();
         }
         catch(HibernateException e) {
+            logger.error("Exception was thrown while getting SubjectCategories By Level and Date. " +
+                    "Level="+level+"; lastSavedDate="+lastSavedDate);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -90,6 +96,7 @@ public class SubjectCategoryDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting all SubjectCategories.",e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -109,6 +116,7 @@ public class SubjectCategoryDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting SubjectCategory by ID. ID="+categoryID,e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -128,6 +136,7 @@ public class SubjectCategoryDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while updating SubjectCategory! SubjectCategory="+category,e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();

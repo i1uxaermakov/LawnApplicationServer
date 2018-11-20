@@ -1,5 +1,7 @@
 package sections.education.DAO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import sections.education.entities.HomeworkItem;
 import utils.HibernateUtil;
@@ -18,6 +20,7 @@ import java.util.Objects;
 
 public class SubjectItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(SubjectItemDAO.class);
 
     public List<SubjectItem> getSubjectItemsByGroup(Long groupId) {
         List<SubjectItem> subjectItemList = new ArrayList<>(0);
@@ -36,8 +39,10 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error("Exception was thrown while getting SubjectItems by groupID. GroupID="+groupId,e);
             transaction.rollback();
+            hibSession.close();
+            e.printStackTrace();
         }
 
         return  subjectItemList;
@@ -60,8 +65,10 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error("Exception was thrown while getting SubjectItems by teacherID. TeacherID="+ teacherId,e);
             transaction.rollback();
+            session.close();
+            e.printStackTrace();
         }
 
         return  subjectItemList;
@@ -88,8 +95,10 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error("Exception was thrown while getting SubjectItems IDs by groupID and teacherID. GroupID="+groupId+"; teacherID="+teacherId,e);
             transaction.rollback();
+            session.close();
+            e.printStackTrace();
         }
 
         return list;
@@ -107,7 +116,9 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting SubjectItem by subjectID. subjectID="+id,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
 
@@ -135,7 +146,9 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch(HibernateException e) {
+            logger.error("Exception was thrown while getting SubjectItems by groupID. GroupID="+groupId,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
 
@@ -158,7 +171,9 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch(HibernateException e) {
+            logger.error("Exception was thrown while updating SubjectItem. SubjectItem="+subjectItem,e);
             transaction.rollback();
+            hibSession.close();
             e.printStackTrace();
         }
     }
@@ -174,7 +189,9 @@ public class SubjectItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while persisting SubjectItem. SubjectItem="+subjectItem,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
     }

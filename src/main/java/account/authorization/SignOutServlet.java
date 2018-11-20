@@ -1,6 +1,8 @@
 package account.authorization;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utils.HibernateUtil;
 import account.entities.RememberMeCookie;
 import account.entities.User;
@@ -19,6 +21,7 @@ import java.util.Objects;
 @MultipartConfig(fileSizeThreshold=0, maxFileSize=1024*500, maxRequestSize=1024*500)
 public class SignOutServlet extends HttpServlet {
     String rememberMeCookieName;
+    private static final Logger logger = LogManager.getLogger(SignOutServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -56,6 +59,7 @@ public class SignOutServlet extends HttpServlet {
 
                 session.close();
             }
+
             httpSession.invalidate();
         }
         resp.sendRedirect("/");

@@ -1,8 +1,11 @@
 package sections.education.homework;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import sections.education.DAO.HomeworkItemDAO;
+import sections.education.DAO.SubjectItemDAO;
 import sections.education.entities.HomeworkItem;
 import account.entities.User;
 import utils.HibernateUtil;
@@ -29,6 +32,8 @@ public class AddFilesToHWServlet extends HttpServlet {
     private static String pathToFiles;
     //servlet init parameter
     private static String pathSuffixForHWfiles;
+    //class logger
+    private static final Logger logger = LogManager.getLogger(AddFilesToHWServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -74,7 +79,7 @@ public class AddFilesToHWServlet extends HttpServlet {
         if(!isOK) {
             resp.setStatus(400);
         }
-
+        logger.info("User(userID="+user.getUserId()+") attached File(fileID="+file.getId()+") to HomeworkItems("+hwIDs.trim()+").");
         hibSession.close();
     }
 

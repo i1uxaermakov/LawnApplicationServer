@@ -39,6 +39,7 @@ function getResourceItemsByCategoryIdAddUp(element) {
         },
         success: function (data,textStatus,jqXHR) {
             modalBody.prepend(data);
+            filefavInitialize();
         },
         error: function (data,textStatus,jqXHR) {
             if(jqXHR.status===401) {
@@ -84,7 +85,8 @@ function getResourceItemsByCategoryIdAddDown(element) {
         cache: false,
         timeout: 600000,
         success: function (data,textStatus,jqXHR) {
-                modalBody.append(data)
+            modalBody.append(data);
+            filefavInitialize();
         },
         error: function (data,textStatus,jqXHR) {
             if(jqXHR.status===401) {

@@ -35,6 +35,10 @@
         <param-value>RMC</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>/WEB-INF/log4j.xml</param-value>
+    </context-param>
 
     <!--<servlet-mapping>-->
         <!--<servlet-name>default</servlet-name>-->

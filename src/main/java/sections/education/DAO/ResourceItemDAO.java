@@ -1,5 +1,7 @@
 package sections.education.DAO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,6 +20,7 @@ import java.util.List;
 
 public class ResourceItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(ResourceItemDAO.class);
 
     public List<ResourceItem> getResourceItemsByCategoryAddUp(Timestamp lastSavedHWDate, Long categoryId, String purpose) {
 //        purpose - add_up_to_empty
@@ -52,7 +55,10 @@ public class ResourceItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting ResourceItems by Category(Add Up)! LastSavedDate="+
+                    lastSavedHWDate + "; categoryID="+categoryId + "; purpose="+purpose,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return resourceItemList;
@@ -81,7 +87,10 @@ public class ResourceItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting ResourceItems by Category(Add Down)! LastSavedDate="+
+                    lastSavedHWDate + "; categoryID="+categoryId,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemList;

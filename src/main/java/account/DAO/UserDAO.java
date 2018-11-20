@@ -1,6 +1,9 @@
 package account.DAO;
 
 
+import account.authorization.SignOutServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import sections.education.schedule.TeacherInfo;
 import account.entities.User;
@@ -18,6 +21,7 @@ import java.util.Objects;
 
 public class UserDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(UserDAO.class);
 
     public UserLoginInfo getUserSignInfoByLyceumId(String lyceumId) {
         Session session = null;
@@ -45,6 +49,7 @@ public class UserDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting User's SignIn Info by lyceumId. LyceumId="+lyceumId, e);
             transaction.rollback();
             session.close();
             e.printStackTrace();
@@ -69,6 +74,7 @@ public class UserDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting User by ID. UserID="+userId, e);
             transaction.rollback();
             session.close();
             e.printStackTrace();
@@ -88,6 +94,7 @@ public class UserDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while updating User. User="+user, e);
             transaction.rollback();
             session.close();
             e.printStackTrace();
@@ -122,6 +129,7 @@ public class UserDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting all Teachers for Adding Subjects.", e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();
@@ -141,6 +149,7 @@ public class UserDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while persisting a new User. User="+user, e);
             transaction.rollback();
             hibSession.close();
             e.printStackTrace();

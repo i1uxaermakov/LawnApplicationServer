@@ -1,5 +1,8 @@
 package sections.education.DAO;
 
+import account.ChangePasswordServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import utils.HibernateUtil;
 import org.hibernate.Session;
@@ -19,6 +22,7 @@ import java.util.List;
 
 public class HomeworkItemDAO {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final Logger logger = LogManager.getLogger(HomeworkItemDAO.class);
     
     public List<HomeworkItem> getHomeworkItemsForHomeworkPageForStudent(Timestamp todayDate, Long groupId) throws SQLException {
         Session session = null;
@@ -40,7 +44,10 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting HomeworkItems for student's HW Page! Timestamp="+
+                    todayDate + "; groupID="+groupId,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemList;
@@ -66,7 +73,10 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting HomeworkItems for teacher's HW Page! Timestamp="+
+                    todayDate + "; userID="+userId,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemList;
@@ -105,7 +115,10 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting HomeworkItems by Subject(Add Up)! LastSavedDate="+
+                    lastSavedHWDate + "; subjectID="+subjectId + "; purpose="+purpose,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemList;
@@ -133,7 +146,10 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting HomeworkItems by Subject(Add Down)! LastSavedDate="+
+                    lastSavedHWDate + "; subjectID="+subjectId,e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemList;
@@ -151,7 +167,9 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was throw while persisting HomeworkItem! HomeworkItem="+homeworkItem, e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemId;
@@ -179,7 +197,9 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while getting HomeworkItems for adding files and photos! hwIDs="+hwIDs, e);
             transaction.rollback();
+            session.close();
             e.printStackTrace();
         }
         return homeworkItemList;
@@ -206,6 +226,8 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while adding File to HomeworkItems! " +
+                    "HomeworkItemsList="+homeworkItems+"; File="+file + "; UserID="+userID, e);
             transaction.rollback();
             session.close();
             e.printStackTrace();
@@ -234,6 +256,8 @@ public class HomeworkItemDAO {
             transaction.commit();
         }
         catch (HibernateException e) {
+            logger.error("Exception was thrown while adding File to HomeworkItems! " +
+                    "HomeworkItemsList="+homeworkItems+"; Photo="+photo + "; UserID="+userID, e);
             transaction.rollback();
             session.close();
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package sections.education.homework;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utils.images.Photo;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
@@ -29,6 +31,8 @@ public class AddPhotosToHWServlet extends HttpServlet {
     private static String pathToPhotos;
     //servlet init parameter
     private static String pathSuffixForHWphotos;
+    //class logger
+    private static final Logger logger = LogManager.getLogger(AddPhotosToHWServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,7 +70,9 @@ public class AddPhotosToHWServlet extends HttpServlet {
         if(!isOK) {
             resp.setStatus(400);
             hibSession.close();
+            return;
         }
+        logger.info("User(userID="+user.getUserId()+") attached Photo(photoID="+photo.getId()+") to HomeworkItems("+hwIDs.trim()+").");
         hibSession.close();
     }
 

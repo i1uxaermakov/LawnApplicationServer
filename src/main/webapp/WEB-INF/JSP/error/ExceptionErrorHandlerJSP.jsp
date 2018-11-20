@@ -42,6 +42,23 @@
             color: #78993e;
 
         }
+        button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #69a03c;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+        button:hover,.form button:active,.form button:focus {
+            background: #43A047;
+        }
     </style>
 
 
@@ -69,15 +86,17 @@
                 <section class="sectionafterheader container">
 
                     <div class="whiteBox">
-                        <h1 class="text-center">Server-side Error(Exception) Occurred</h1>
+                        <h1 class="text-center">Server-side Error Occurred</h1>
                         <p class="text-center">
+                            Please make a screenshot of this message and send it to LAWN developers. We'll do our best to solve this problem!
                             Servlet Name: <%=servletName%> <br>
                             Exception Name: <%=throwable.getClass().getName()%> <br>
                             Requested URI: <%=requestUri%> <br>
                             Exception Message: <%=throwable.getMessage()%> <br>
                         </p>
+                        <a href="/edu/sc"><button>Перейти на страницу Расписания</button></a>
+                        <%--<a href="/edu/sc"><button>Перейти на страницу Расписания</button></a>--%>
                     </div>
-
                 </section>
             <%}
             else {%>
@@ -86,7 +105,7 @@
                     <div class="whiteBox">
                         <h1 class="text-center">Error <%=statusCode%></h1>
                         <p class="text-center">
-                            <strong>Error Details</strong>
+                            <%--<strong>Error Details</strong>--%>
                             <%
                                 if(statusCode==403) {%>
                                     У вас нет разрешения использовать запрошенный ресурс. Обратитесь к разработчикам, если такого быть не должно.
@@ -100,12 +119,13 @@
                                 <%}
                             %>
                         </p>
+                        <a href="/edu/sc"><button>Перейти на страницу Расписания</button></a>
+                        <%--<a href="/edu/sc"><button>Перейти на страницу Расписания</button></a>--%>
                     </div>
 
                 </section>
             <%}
         %>
-        <a href="/edu/sc"><button>Перейти на страницу Расписания</button></a>
 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
