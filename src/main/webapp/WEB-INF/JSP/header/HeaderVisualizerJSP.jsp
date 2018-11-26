@@ -61,7 +61,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/files/fav">Favorite Files</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <%--<li><a href="#">FAQ</a></li>--%>
                             <li><a href="/signout">Sign Out</a></li>
                             <%--<li><a href="#">My organizations</a></li>--%>
                             <%--<li><a href="#">Liked posts</a></li>--%>

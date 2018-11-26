@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String fathersName;
-    private Long groupId;//??? do i need it
+    private Long groupId;
     private String groupName;
     private Long level;
     private Timestamp lastLoginDate;
