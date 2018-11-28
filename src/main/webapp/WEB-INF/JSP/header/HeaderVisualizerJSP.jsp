@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">LAWN</a>
+                <a class="navbar-brand" href="/" style="padding-left: 12px; padding-top: 12px;"><img src="/logo/logo-green-wspace.png" height="23px"></a>
                 <a class="myacc visible-xs" href="<%=(authorised)?"/acc":"/signin"%>">
                     <i class="fas fa-user-circle"></i>
                 </a>
