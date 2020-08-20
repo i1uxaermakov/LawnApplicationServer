@@ -18,5 +18,5 @@ If you tap a particular subject, homework for that subject will appear. It is so
 3. **Resources**. Teachers can upload slides, e-books and other materials for students. Materials sorted by subjects and by studying levels (e.g. grades). A tap on subjcts expands the list of materials. Any file can be added to Favorites by tapping a green star and be easily accessed later in Favorite Files section.</br>
 ![Image of Yaktocat](https://github.com/i1uxaermakov/LawnApplicationServer/blob/master/readme_files/Picture5.png) </br> </br>
 
-The platform is available on mobile devices and on desktops. </br>
+The platform is available on mobile devices and desktops. </br>
 ![Image of Yaktocat](https://github.com/i1uxaermakov/LawnApplicationServer/blob/master/readme_files/Picture6.png)
